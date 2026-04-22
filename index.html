@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio | Michito Diseñador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="index.html" aria-label="Volver al inicio">
+                    <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito">
+                </a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
 
+        <section class="hero">
+            <h1>Diseñador Gráfico e Ilustrador</h1>
+            <p>Creando experiencias visuales únicas con pasión y creatividad. Especializado en Branding y Social Media Graphics</p>
+            <nav>
+                <a href="portfolio.html" class="btn">Ver Proyectos</a>
+                <a href="about.html" class="btn btn-secondary">Sobre Mí</a>
+                <a href="contac.html" class="btn btn-tertiary">Contacto</a>
+            </nav>
+        </section>
+
+        <section id="projects">
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--secondary);">Mis Trabajos</h2>
+            <div class="projects" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
+                <div class="project-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; overflow: hidden; transition: transform 0.3s;">
+                    <img src="aessets/portfolio/La Maclovia - Social Media_Mesa de trabajo 1 copia 16.png" alt="Proyecto 1" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div class="project-info" style="padding: 1.5rem;">
+                        <h3 style="color: var(--primary);">Social Media Content</h3>
+                        <p>¡Echa un vistazo a mis últimos trabajos como creador de contenido!</p>
+                    </div>
+                </div>
+                <div class="project-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; overflow: hidden; transition: transform 0.3s;">
+                    <img src="aessets/portfolio/CACOMIXTLE.png" alt="Proyecto 2" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div class="project-info" style="padding: 1.5rem;">
+                        <h3 style="color: var(--primary);">Ilustración Digital</h3>
+                        <p>¿Te gustan los personajes adorables y el anime? Estás en el lugar correcto.</p>
+                    </div>
+                </div>
+                <div class="project-card" style="background: rgba(255, 255, 255, 0.05); border-radius: 10px; overflow: hidden; transition: transform 0.3s;">
+                    <img src="aessets/portfolio/camion.png" alt="Proyecto 3" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div class="project-info" style="padding: 1.5rem;">
+                        <h3 style="color: var(--primary);">Foto Montaje</h3>
+                        <p>Necesitas darle estilo a tus fotografías.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="social-links">
+                <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

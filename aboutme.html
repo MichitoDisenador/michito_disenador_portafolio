@@ -1,1 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Mí | Michito Diseñador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos específicos de about.html */
+        .about-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin: 4rem 0;
+        }
 
+        @media (max-width: 768px) {
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .about-image {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        .about-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .about-content h2 {
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--secondary);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-tag {
+            background: rgba(255, 212, 30, 0.2);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        body.light-mode .skill-tag {
+            background: rgba(255, 212, 30, 0.3);
+        }
+
+        .timeline {
+            margin: 3rem 0;
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-date {
+            min-width: 120px;
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .timeline-content {
+            border-left: 2px solid var(--primary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: "";
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .timeline-content li {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="index.html" aria-label="Volver al inicio">
+                    <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito">
+                </a>
+            </div>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main>
+            <section class="about-section">
+                <div class="about-image hidden delay-1">
+                    <img src="aessets/about/DSC00262-Mejorado-NR.png" alt="Foto de perfil">
+                </div>
+                <div class="about-content hidden delay-2">
+                    <h1>Hola, soy Pao ✧</h1>
+                    <p>Diseñadora gráfica e ilustradora con +5 años de experiencia creando identidades visuales memorables y soluciones creativas para marcas a nivel local.</p>
+                    
+                    <h2>Mi Enfoque</h2>
+                    <p>Creo diseños que no solo son estéticamente impactantes, sino también estratégicamente efectivos que causen impacto visual y sean agradables al público. Mi trabajo fusiona ilustración tradicional con técnicas digitales para resultados únicos. Aún así, abrazo la tecnología en sus diferentes formas, las inteligencias artificiales me ayudan a optimizar procesos y mejorar día a día mi desempeño.</p>
+                    
+                    <h2>Habilidades</h2>
+                    <div class="skills">
+                        <span class="skill-tag">Illustrator</span>
+                        <span class="skill-tag">Photoshop</span>
+                        <span class="skill-tag">Branding</span>
+                        <span class="skill-tag">Adobe Creative Suite</span>
+                        <span class="skill-tag">Ilustración Digital</span>
+                        <span class="skill-tag">Diseño UI/UX</span>
+                        <span class="skill-tag">After Effects</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="timeline">
+                <h2 class="hidden delay-1">Experiencia</h2>
+
+                <div class="timeline-item hidden delay-2">
+                    <div class="timeline-date">2020 - Presente</div>
+                    <div class="timeline-content">
+                        <h3>Astros Marketing</h3>
+                        <p>Como parte del equipo creativo de Astros Marketing, mi rol se centra en el desarrollo de soluciones visuales estratégicas para marcas locales. Mis responsabilidades incluyen:</p>
+                        <ul>
+                            <li><strong>Dirección creativa y diseño de campañas publicitarias:</strong> Conceptualización y ejecución de piezas gráficas para medios tradicionales y digitales.</li>
+                            <li><strong>Contenido para redes sociales:</strong> Producción de gráficos optimizados para engagement y conversión.</li>
+                            <li><strong>Identidad visual:</strong> Diseño de sistemas de marca que fortalecen el reconocimiento.</li>
+                            <li><strong>Enfoque local:</strong> Diseño estratégico adaptado a lo cultural y comercial.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item hidden delay-3">
+                    <div class="timeline-date">2018 - Presente</div>
+                    <div class="timeline-content">
+                        <h3>Michito Diseñador</h3>
+                        <p>Diseñador Gráfico y Animador Freelance. Experiencia en:</p>
+                        <ul>
+                            <li><strong>Branding:</strong> Logotipos, manuales de marca, papelería profesional y material promocional.</li>
+                            <li><strong>Contenido digital:</strong> Diseño para redes, edición de fotografía y animación 2D.</li>
+                            <li><strong>Diseño web:</strong> Elementos UI/UX, landing pages, edición básica de video.</li>
+                            <li><strong>Especialidades:</strong> Ilustración infantil, motion graphics, diseño multiplataforma.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section id="contact">
+            <div class="social-links">
+                <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

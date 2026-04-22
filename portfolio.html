@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio | Michito Diseñador</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos específicos de portfolio.html */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
 
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+            padding: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .portfolio-info {
+            transform: translateY(0);
+        }
+
+        .portfolio-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-info p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <a href="index.html" aria-label="Volver al inicio">
+                    <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito">
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="about.html">Sobre mí</a>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <main>
+            <section class="hero">
+                <h1 data-animate>Mi Portafolio</h1>
+                <p data-animate>Proyectos seleccionados de diseño gráfico e ilustración</p>
+            </section>
+
+            <section class="portfolio-grid">
+                <div class="portfolio-item" data-animate>
+                    <img src="aessets/portfolio/ejemplo 1.webp" alt="Social Media Graphics">
+                    <div class="portfolio-info">
+                        <h3>Social Media Graphics</h3>
+                        <p>Para impulsar tu marca al siguiente nivel</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-animate>
+                    <img src="aessets/portfolio/GirqDRMXEAAWxnB.webp" alt="Ilustración Digital">
+                    <div class="portfolio-info">
+                        <h3>Ilustración Digital</h3>
+                        <p>¡Echa un vistazo a mis últimas ilustraciones!</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-animate>
+                    <img src="aessets/portfolio/editor-de-fotos-1.jpg" alt="Edición de Fotografía">
+                    <div class="portfolio-info">
+                        <h3>Edición de Fotografía</h3>
+                        <p>Edición profesional y fotomontaje</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-animate>
+                    <img src="aessets/portfolio/original-fddafaf6c7b41ce89e2600c2fdfa00e1.webp" alt="Branding">
+                    <div class="portfolio-info">
+                        <h3>Branding</h3>
+                        <p>Diseño de identidad para marcas</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-animate>
+                    <img src="aessets/portfolio/vsdc_programa-edicion-de-video-gratis.jpg" alt="Edición de Video">
+                    <div class="portfolio-info">
+                        <h3>Edición de Video</h3>
+                        <p>Checa mis últimos proyectos audiovisuales</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-animate>
+                    <img src="aessets/portfolio/istockphoto-1208843679-612x612.jpg" alt="Fotografía">
+                    <div class="portfolio-info">
+                        <h3>Fotografía</h3>
+                        <p>Trabajos fotográficos profesionales</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer data-animate>
+            <div class="social-links">
+                <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+        </footer>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

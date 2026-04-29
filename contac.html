@@ -42,7 +42,7 @@
             scroll-behavior: smooth;
         }
 
-        /* HEADER FIJO (mismo estilo que index y about) */
+        /* HEADER FIJO */
         .glass-header {
             position: fixed;
             top: 0;
@@ -61,6 +61,10 @@
         body.light-mode .glass-header {
             background: rgba(254, 252, 245, 0.85);
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-area a {
+            text-decoration: none;
         }
 
         .logo-area img {
@@ -189,7 +193,7 @@
             background: #ffe44d;
         }
 
-        /* ICONOS DE REDES SOCIALES (mismo estilo que index y about) */
+        /* ICONOS DE REDES SOCIALES - SIN SUBRAYADO */
         .contact-social {
             display: flex;
             justify-content: center;
@@ -198,10 +202,10 @@
             flex-wrap: wrap;
         }
         .contact-social a {
+            text-decoration: none;  /* ← QUITA EL SUBRAYADO */
             color: var(--text-light);
             font-size: 2rem;
             transition: all 0.3s ease;
-            display: inline-block;
             background: rgba(255, 215, 0, 0.05);
             width: 65px;
             height: 65px;
@@ -222,7 +226,7 @@
             background: rgba(255, 215, 0, 0.2);
         }
 
-        /* FOOTER (consistente) */
+        /* FOOTER */
         footer {
             text-align: center;
             padding: 2rem;
@@ -263,7 +267,7 @@
         </div>
     </div>
 
-    <!-- FORMULARIO CON BORDE BRILLANTE -->
+    <!-- FORMULARIO -->
     <div class="scroll-reveal">
         <div class="contact-form">
             <form id="contactForm" action="https://formspree.io/f/mnnvldov" method="POST">
@@ -292,7 +296,7 @@
         </div>
     </div>
 
-    <!-- ICONOS SOCIALES (mismo diseño que index/about: github, dribbble, linkedin, facebook, mail) -->
+    <!-- ICONOS SOCIALES -->
     <div class="scroll-reveal">
         <div class="contact-social">
             <a href="https://github.com/MichitoDisenador" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
@@ -309,7 +313,6 @@
 </main>
 
 <script>
-    // MODO NOCTURNO/CLARO (consistente con index y about)
     const toggle = document.getElementById('darkToggle');
     const body = document.body;
     const stored = localStorage.getItem('theme');
@@ -345,7 +348,6 @@
         });
     }
 
-    // SCROLL REVEAL (aparición al bajar)
     const revealItems = document.querySelectorAll('.scroll-reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

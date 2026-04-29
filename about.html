@@ -2,23 +2,122 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sobre Mí | Michito Diseñador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Sobre Mí | Paola Herrera</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Estilos específicos de about.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FFD700;
+            --secondary: #b0c4d3;
+            --bg-dark: #0A0C10;
+            --surface-dark: #161A22;
+            --text-light: #F5F5F7;
+            --text-muted: #A0A4B0;
+        }
+
+        body.light-mode {
+            --bg-dark: #FEFCF5;
+            --surface-dark: #FFFFFF;
+            --text-light: #121212;
+            --text-muted: #5A5E6E;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            transition: background-color 0.4s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER FIJO (igual que index) */
+        .glass-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(10, 12, 16, 0.75);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        body.light-mode .glass-header {
+            background: rgba(254, 252, 245, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .logo-area img {
+            height: 70px;
+            width: auto;
+            display: block;
+            transition: transform 0.2s;
+        }
+        .logo-area img:hover { transform: scale(0.97); opacity: 0.9; }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-light);
+            width: 46px;
+            height: 46px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.05);
+            transition: 0.2s;
+        }
+        .theme-toggle:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
+
+        main {
+            padding-top: 96px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        /* SECCIONES CON ANIMACIÓN AL SCROLL */
+        .scroll-reveal {
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ABOUT SECTION */
         .about-section {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
             align-items: center;
-            margin: 4rem 0;
+            margin: 2rem 0 4rem;
         }
 
         @media (max-width: 768px) {
             .about-section {
                 grid-template-columns: 1fr;
+            }
+            main {
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
         }
 
@@ -63,19 +162,25 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 600;
+            transition: 0.2s;
         }
-
         body.light-mode .skill-tag {
             background: rgba(255, 212, 30, 0.3);
         }
 
         .timeline {
-            margin: 3rem 0;
+            margin: 4rem 0;
+        }
+        .timeline h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
         }
 
         .timeline-item {
             display: flex;
             margin-bottom: 2rem;
+            flex-wrap: wrap;
         }
 
         .timeline-date {
@@ -88,6 +193,7 @@
             border-left: 2px solid var(--primary);
             padding-left: 1.5rem;
             position: relative;
+            flex: 1;
         }
 
         .timeline-content::before {
@@ -101,98 +207,317 @@
             background: var(--primary);
         }
 
-        .timeline-content li {
+        .timeline-content ul {
             margin-left: 1.5rem;
             margin-top: 0.5rem;
+        }
+        .timeline-content li {
+            margin: 0.5rem 0;
+        }
+
+        /* SECCIÓN PERSONAL */
+        .personal-section, .servicios-section, .cta-section, .marcas-section {
+            margin: 4rem 0;
+        }
+        .personal-section h2, .servicios-section h2, .cta-section h2, .marcas-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        .personal-section p, .cta-section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        /* LOGOS CLIENTES */
+        .logos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+            margin: 2rem 0;
+        }
+        .logo-item {
+            background: var(--surface-dark);
+            padding: 1.2rem;
+            border-radius: 20px;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            cursor: default;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .logo-item img {
+            max-width: 100%;
+            max-height: 80px;
+            filter: grayscale(0.2);
+            transition: all 0.3s ease;
+        }
+        .logo-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            background: var(--primary);
+        }
+        .logo-item:hover img {
+            filter: brightness(0) invert(1);
+            transform: scale(1.02);
+        }
+        body.light-mode .logo-item:hover {
+            background: var(--primary);
+        }
+
+        /* BOTÓN CELESTE */
+        .btn-celeste {
+            display: inline-block;
+            background: #b0c4d3;
+            color: #0A0C10;
+            font-weight: bold;
+            font-size: 1.2rem;
+            padding: 0.9rem 2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        .btn-celeste:hover {
+            transform: scale(1.02);
+            background: #9bb7c7;
+            box-shadow: 0 8px 20px rgba(176,196,211,0.4);
+        }
+
+        /* REDES SOCIALES Y FOOTER */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 3rem 0 1.5rem;
+        }
+        .social-links a {
+            color: var(--text-light);
+            font-size: 1.8rem;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255,215,0,0.2);
+            margin-top: 2rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 760px) {
+            .glass-header { padding: 0.7rem 1rem; }
+            .logo-area img { height: 52px; }
+            .timeline-item { flex-direction: column; }
+            .timeline-date { margin-bottom: 0.5rem; }
+            .logos-grid { gap: 1rem; }
+            .logo-item { width: 110px; height: 110px; padding: 0.8rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <a href="index.html" aria-label="Volver al inicio">
-                    <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito">
-                </a>
+
+<!-- HEADER FIJO IGUAL QUE INDEX -->
+<header class="glass-header">
+    <div class="logo-area">
+        <a href="index.html">
+            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.src='https://placehold.co/200x70?text=Logo'">
+        </a>
+    </div>
+    <button class="theme-toggle" id="darkToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+</header>
+
+<main>
+    <!-- SECCIÓN SOBRE MÍ (presentación) -->
+    <div class="scroll-reveal">
+        <div class="about-section">
+            <div class="about-image">
+                <img src="aessets/about/DSC00262-Mejorado-NR.png" alt="Foto de perfil" onerror="this.src='https://placehold.co/600x600/1E2129/FFD700?text=Pao'">
             </div>
-            <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon"></i>
-            </button>
-        </header>
-
-        <main>
-            <section class="about-section">
-                <div class="about-image hidden delay-1">
-                    <img src="aessets/about/DSC00262-Mejorado-NR.png" alt="Foto de perfil">
+            <div class="about-content">
+                <h1>Hola, soy Pao ✧</h1>
+                <p>Diseñadora gráfica e ilustradora con 10 años de experiencia creando identidades visuales memorables y soluciones creativas para marcas a nivel local.</p>
+                
+                <h2>Mi Enfoque</h2>
+                <p>Creo diseños que no solo son estéticamente impactantes, sino también estratégicamente efectivos que causen impacto visual y sean agradables al público. Mi trabajo fusiona ilustración tradicional con técnicas digitales para resultados únicos. Aún así, abrazo la tecnología en sus diferentes formas, las inteligencias artificiales me ayudan a optimizar procesos y mejorar día a día mi desempeño.</p>
+                
+                <h2>Habilidades</h2>
+                <div class="skills">
+                    <span class="skill-tag">Illustrator</span>
+                    <span class="skill-tag">Photoshop</span>
+                    <span class="skill-tag">Branding</span>
+                    <span class="skill-tag">Adobe Creative Suite</span>
+                    <span class="skill-tag">Ilustración Digital</span>
+                    <span class="skill-tag">Diseño UI/UX</span>
+                    <span class="skill-tag">After Effects</span>
                 </div>
-                <div class="about-content hidden delay-2">
-                    <h1>Hola, soy Pao ✧</h1>
-                    <p>Diseñadora gráfica e ilustradora con +5 años de experiencia creando identidades visuales memorables y soluciones creativas para marcas a nivel local.</p>
-                    
-                    <h2>Mi Enfoque</h2>
-                    <p>Creo diseños que no solo son estéticamente impactantes, sino también estratégicamente efectivos que causen impacto visual y sean agradables al público. Mi trabajo fusiona ilustración tradicional con técnicas digitales para resultados únicos. Aún así, abrazo la tecnología en sus diferentes formas, las inteligencias artificiales me ayudan a optimizar procesos y mejorar día a día mi desempeño.</p>
-                    
-                    <h2>Habilidades</h2>
-                    <div class="skills">
-                        <span class="skill-tag">Illustrator</span>
-                        <span class="skill-tag">Photoshop</span>
-                        <span class="skill-tag">Branding</span>
-                        <span class="skill-tag">Adobe Creative Suite</span>
-                        <span class="skill-tag">Ilustración Digital</span>
-                        <span class="skill-tag">Diseño UI/UX</span>
-                        <span class="skill-tag">After Effects</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="timeline">
-                <h2 class="hidden delay-1">Experiencia</h2>
-
-                <div class="timeline-item hidden delay-2">
-                    <div class="timeline-date">2020 - Presente</div>
-                    <div class="timeline-content">
-                        <h3>Astros Marketing</h3>
-                        <p>Como parte del equipo creativo de Astros Marketing, mi rol se centra en el desarrollo de soluciones visuales estratégicas para marcas locales. Mis responsabilidades incluyen:</p>
-                        <ul>
-                            <li><strong>Dirección creativa y diseño de campañas publicitarias:</strong> Conceptualización y ejecución de piezas gráficas para medios tradicionales y digitales.</li>
-                            <li><strong>Contenido para redes sociales:</strong> Producción de gráficos optimizados para engagement y conversión.</li>
-                            <li><strong>Identidad visual:</strong> Diseño de sistemas de marca que fortalecen el reconocimiento.</li>
-                            <li><strong>Enfoque local:</strong> Diseño estratégico adaptado a lo cultural y comercial.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="timeline-item hidden delay-3">
-                    <div class="timeline-date">2018 - Presente</div>
-                    <div class="timeline-content">
-                        <h3>Michito Diseñador</h3>
-                        <p>Diseñador Gráfico y Animador Freelance. Experiencia en:</p>
-                        <ul>
-                            <li><strong>Branding:</strong> Logotipos, manuales de marca, papelería profesional y material promocional.</li>
-                            <li><strong>Contenido digital:</strong> Diseño para redes, edición de fotografía y animación 2D.</li>
-                            <li><strong>Diseño web:</strong> Elementos UI/UX, landing pages, edición básica de video.</li>
-                            <li><strong>Especialidades:</strong> Ilustración infantil, motion graphics, diseño multiplataforma.</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <section id="contact">
-            <div class="social-links">
-                <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
-        </footer>
+        </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- EXPERIENCIA (timeline) -->
+    <div class="scroll-reveal">
+        <div class="timeline">
+            <h2>Experiencia</h2>
+            <div class="timeline-item">
+                <div class="timeline-date">2020 - 2026</div>
+                <div class="timeline-content">
+                    <h3>Astros Marketing</h3>
+                    <p>Como parte del equipo creativo de Astros Marketing, mi rol se centra en el desarrollo de soluciones visuales estratégicas para marcas locales. Mis responsabilidades incluyen:</p>
+                    <ul>
+                        <li><strong>Dirección creativa y diseño de campañas publicitarias:</strong> Conceptualización y ejecución de piezas gráficas para medios tradicionales y digitales.</li>
+                        <li><strong>Contenido para redes sociales:</strong> Producción de gráficos optimizados para engagement y conversión.</li>
+                        <li><strong>Identidad visual:</strong> Diseño de sistemas de marca que fortalecen el reconocimiento.</li>
+                        <li><strong>Enfoque local:</strong> Diseño estratégico adaptado a lo cultural y comercial.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2016 - Presente</div>
+                <div class="timeline-content">
+                    <h3>Michito Diseñador</h3>
+                    <p>Diseñador Gráfico y Animador Freelance. Experiencia en:</p>
+                    <ul>
+                        <li><strong>Branding:</strong> Logotipos, manuales de marca, papelería profesional y material promocional.</li>
+                        <li><strong>Contenido digital:</strong> Diseño para redes, edición de fotografía y animación 2D.</li>
+                        <li><strong>Diseño web:</strong> Elementos UI/UX, landing pages, edición básica de video.</li>
+                        <li><strong>Especialidades:</strong> Ilustración infantil, motion graphics, diseño multiplataforma.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NUEVA SECCIÓN: MÁS ALLÁ DEL DISEÑO -->
+    <div class="scroll-reveal">
+        <div class="personal-section">
+            <h2>Más allá del diseño</h2>
+            <p>Cuando no estoy diseñando, probablemente estoy dibujando, leyendo novelas de acción y drama, escuchando música. Creo que toda disciplina artística y personal termina reflejándose en la forma en que diseñamos.</p>
+        </div>
+    </div>
+
+    <!-- SECCIÓN SERVICIOS (botones decorativos) -->
+    <div class="scroll-reveal">
+        <div class="servicios-section">
+            <h2>Servicios</h2>
+            <div class="skills">
+                <span class="skill-tag">Branding</span>
+                <span class="skill-tag">Social Media</span>
+                <span class="skill-tag">Diseño Editorial</span>
+                <span class="skill-tag">Packaging</span>
+                <span class="skill-tag">Motion Graphics</span>
+                <span class="skill-tag">Diseño Web</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN CTA -->
+    <div class="scroll-reveal">
+        <div class="cta-section">
+            <h2>Trabajemos juntos</h2>
+            <p>Si tienes una idea, una marca o un proyecto que necesita identidad visual y estrategia creativa, estaré encantada de ayudarte a construirlo.</p>
+            <a href="portfolio.html" class="btn-celeste">Ver Portafolio →</a>
+        </div>
+    </div>
+
+    <!-- SECCIÓN MARCAS (logos con animación hover) -->
+    <div class="scroll-reveal">
+        <div class="marcas-section">
+            <h2>Marcas que confían en mí</h2>
+            <div class="logos-grid">
+                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo1" alt="Marca 1" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
+                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo2" alt="Marca 2" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
+                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo3" alt="Marca 3" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
+                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo4" alt="Marca 4" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
+                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo5" alt="Marca 5" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
+            </div>
+            <p style="text-align: center; margin-top: 1rem; color: var(--text-muted);">* Colaboraciones reales y proyectos conjuntos</p>
+        </div>
+    </div>
+
+    <!-- SOCIAL LINKS y FOOTER -->
+    <div class="social-links">
+        <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+    </footer>
+</main>
+
+<script>
+    // MODO OSCURO/CLARO (misma funcionalidad que index)
+    const toggle = document.getElementById('darkToggle');
+    const body = document.body;
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        body.classList.add('light-mode');
+        if(toggle) {
+            const icon = toggle.querySelector('i');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
+    } else {
+        body.classList.remove('light-mode');
+        if(toggle) {
+            const icon = toggle.querySelector('i');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
+    }
+
+    if(toggle) {
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = toggle.querySelector('i');
+            if(body.classList.contains('light-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
+
+    // SCROLL REVEAL (aparición al bajar)
+    const revealItems = document.querySelectorAll('.scroll-reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
+    
+    revealItems.forEach(el => observer.observe(el));
+    
+    window.addEventListener('load', () => {
+        revealItems.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if(rect.top < window.innerHeight - 80) {
+                el.classList.add('revealed');
+                observer.unobserve(el);
+            }
+        });
+    });
+</script>
 </body>
 </html>

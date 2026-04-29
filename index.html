@@ -87,36 +87,91 @@
             padding-top: 96px;
         }
 
-        .fadein-banner {
-            width: 100%;
-            opacity: 0;
-            animation: gentleFade 1.4s ease-out forwards;
-        }
-        @keyframes gentleFade {
-            0% { opacity: 0; transform: scale(0.98); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .full-img {
-            position: relative;
-            width: 100%;
-            line-height: 0;
-        }
-        .full-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .ombre-grad {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 55%;
-            background: var(--ombre-dark);
-            pointer-events: none;
-            z-index: 2;
+        /* SECCIÓN BIENVENIDA REDISEÑADA: LADO IZQUIERDO (texto) / LADO DERECHO (imagen animada) */
+        .welcome-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 2rem auto 4rem auto;
+            padding: 0 2rem;
         }
 
+        .welcome-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .welcome-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .welcome-sub {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 1.8rem;
+            border-left: 3px solid var(--primary);
+            padding-left: 1rem;
+        }
+
+        .botones-decorativos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1rem 0 0.5rem;
+        }
+
+        .nav-badge {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            padding: 0.6rem 1.4rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(2px);
+            display: inline-block;
+        }
+        .nav-badge:hover {
+            background: var(--primary);
+            color: #0A0C10;
+            transform: translateY(-3px);
+        }
+
+        /* Lado derecho: imagen con animación */
+        .welcome-media {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .animated-tablet {
+            width: 100%;
+            max-width: 440px;
+            border-radius: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            animation: floatTablet 3s ease-in-out infinite;
+            filter: drop-shadow(0 12px 20px rgba(0,0,0,0.3));
+        }
+        @keyframes floatTablet {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(1deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animated-tablet:hover {
+            animation-play-state: paused;
+            transform: scale(1.02);
+        }
+
+        /* Scroll reveal mantiene estilo original */
         .scroll-reveal {
             transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
             opacity: 0;
@@ -153,12 +208,6 @@
             border-left: 3px solid var(--primary);
             padding-left: 1rem;
         }
-        .botones-decorativos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin: 1.5rem 0 0.5rem;
-        }
         .badge-deco {
             background: transparent;
             border: 1.5px solid var(--primary);
@@ -172,26 +221,6 @@
             backdrop-filter: blur(2px);
         }
         .badge-deco:hover {
-            background: var(--primary);
-            color: #0A0C10;
-            transform: translateY(-3px);
-        }
-
-        /* Botones de navegación interna (scroll suave) */
-        .nav-badge {
-            background: transparent;
-            border: 1.5px solid var(--primary);
-            color: var(--primary);
-            padding: 0.6rem 1.4rem;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.2s;
-            backdrop-filter: blur(2px);
-            display: inline-block;
-        }
-        .nav-badge:hover {
             background: var(--primary);
             color: #0A0C10;
             transform: translateY(-3px);
@@ -263,13 +292,30 @@
             color: var(--text-muted);
         }
 
+        /* Responsive: en móviles la cuadrícula se apila */
         @media (max-width: 760px) {
             .glass-header { padding: 0.7rem 1rem; }
             .logo-area img { height: 52px; }
+            .welcome-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+                padding: 0 1.5rem;
+            }
+            .welcome-sub {
+                border-left: none;
+                padding-left: 0;
+                border-bottom: 2px solid var(--primary);
+                display: inline-block;
+                padding-bottom: 0.5rem;
+            }
+            .botones-decorativos {
+                justify-content: center;
+            }
             .section-title { font-size: 2rem; }
             .section-block { padding: 1rem; margin: 3rem auto; }
-            .badge-deco { padding: 0.4rem 1rem; font-size: 0.8rem; }
-            .nav-badge { padding: 0.4rem 1rem; font-size: 0.8rem; }
+            .badge-deco, .nav-badge { padding: 0.4rem 1rem; font-size: 0.8rem; }
+            .animated-tablet { max-width: 280px; }
         }
     </style>
 </head>
@@ -285,26 +331,27 @@
 </header>
 
 <main>
-    <!-- IMAGEN PRINCIPAL buntatablet.png -->
-    <div class="fadein-banner">
-        <div class="full-img">
-            <img src="aessets/buntatablet.png" alt="banner principal" onerror="this.src='https://placehold.co/1600x600/1E2129/FFD700?text=buntatablet.png'">
-            <div class="ombre-grad"></div>
-        </div>
-    </div>
-
-    <!-- SECCIÓN BIENVENIDA - Botones clickeables que llevan a secciones internas -->
-    <div class="scroll-reveal">
-        <div class="section-block">
-            <a href="index.html" class="section-title" style="display: inline-block; text-decoration: none;">¡Bienvenido!</a>
-            <p class="section-sub">Lo que hago, bien contado:</p>
+    <!-- NUEVA SECCIÓN BIENVENIDA: IZQUIERDA TEXTO + BOTONES, DERECHA IMAGEN ANIMADA -->
+    <div class="welcome-grid">
+        <!-- Columna izquierda: texto y botones -->
+        <div class="welcome-text">
+            <div class="welcome-title">¡Bienvenido!</div>
+            <div class="welcome-sub">Lo que hago, bien contado:</div>
             <div class="botones-decorativos">
                 <span class="nav-badge" data-target="sobreMiSeccion">Sobre Mi</span>
                 <span class="nav-badge" data-target="portafolioSeccion">Portafolio</span>
                 <span class="nav-badge" data-target="contactoSeccion">Contacto</span>
             </div>
         </div>
+        <!-- Columna derecha: buntatablet.png con animación flotante -->
+        <div class="welcome-media">
+            <img class="animated-tablet" src="aessets/buntatablet.png" alt="banner principal tablet" onerror="this.src='https://placehold.co/500x500/1E2129/FFD700?text=buntatablet.png'">
+        </div>
     </div>
+
+    <!-- ESPACIO VACÍO (lo dejamos implícitamente respetado, pero añadimos un pequeño margen natural manteniendo el flujo) -->
+
+    <!-- A partir de aquí TODO IGUAL QUE ANTES, conservando cada sección con sus imágenes, reveal, estilos y funcionalidad -->
 
     <!-- IMAGEN 1 - sobremi.png -->
     <div class="scroll-reveal full-cover-img">
@@ -416,7 +463,7 @@
         });
     }
 
-    // ----- SCROLL REVEAL (aparición al bajar) -----
+    // ----- SCROLL REVEAL (aparición al bajar) manteniendo el mismo comportamiento -----
     const revealItems = document.querySelectorAll('.scroll-reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -455,7 +502,7 @@
         }
     }
 
-    // Asignar evento click a los botones de navegación interna
+    // Asignar evento click a los botones de navegación interna (tanto del nuevo bloque como si hubiera más)
     const navButtons = document.querySelectorAll('.nav-badge');
     navButtons.forEach(button => {
         button.addEventListener('click', (e) => {

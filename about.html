@@ -46,7 +46,7 @@
             transition: background-color 0.3s ease, color 0.2s ease;
         }
 
-        /* HEADER minimalista (igual que el mood "aire limpio") */
+        /* HEADER minimalista */
         .glass-header {
             position: fixed;
             top: 0;
@@ -104,7 +104,7 @@
             transform: translateY(0);
         }
 
-        /* LAYOUT MODERNO: ABOUT con mucho espacio */
+        /* LAYOUT MODERNO: ABOUT */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -192,7 +192,7 @@
             transform: translateY(-2px);
         }
 
-        /* TARJETAS DE ESPECIALIDADES (estilo servicio simplificado, como el portfolio de Laura pero con paleta oscura) */
+        /* TARJETAS DE ESPECIALIDADES */
         .specialties {
             margin: 5rem 0;
         }
@@ -230,7 +230,6 @@
         .spec-icon {
             font-size: 2.4rem;
             margin-bottom: 1.2rem;
-            display: inline-block;
             background: rgba(255,215,0,0.1);
             width: 58px;
             height: 58px;
@@ -251,7 +250,7 @@
             line-height: 1.5;
         }
 
-        /* TIMELINE (más minimalista y con aire) */
+        /* TIMELINE */
         .timeline-modern {
             margin: 5rem 0;
         }
@@ -318,7 +317,7 @@
             margin: 0 auto;
         }
 
-        /* SECCIÓN CLIENTES (logos más limpios, con elegancia) */
+        /* SECCIÓN CLIENTES - LOGOS SIN CAJAS, TAMAÑO CONTROLABLE */
         .clients-section {
             margin: 5rem 0;
         }
@@ -326,35 +325,44 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2.2rem;
+            align-items: center;
+            gap: 3rem;
             margin: 2rem 0;
         }
+        /* Logo individual - SIN caja, solo la imagen */
         .client-logo {
-            background: var(--surface);
-            border-radius: 24px;
-            padding: 1rem 2rem;
-            min-width: 130px;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
-            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+            cursor: default;
         }
+        /* Controla el tamaño de los logos - modifica este valor */
         .client-logo img {
-            max-height: 55px;
+            height: 60px;      /* ← Cambia este valor para controlar el tamaño de TODOS los logos */
             width: auto;
-            filter: saturate(0.8) brightness(0.9);
-            transition: 0.2s;
+            max-width: 140px;
+            object-fit: contain;
+            filter: saturate(0.85) brightness(0.95);
+            transition: all 0.25s ease;
         }
-        body.light-mode .client-logo img {
-            filter: brightness(0.1) contrast(0.8);
-        }
-        .client-logo:hover {
-            border-color: var(--gold);
-            transform: translateY(-5px);
-        }
+        /* Efecto hover sutil, sin caja */
         .client-logo:hover img {
             filter: saturate(1) brightness(1.1);
+            transform: translateY(-3px);
+        }
+        /* Para modo claro, ajuste de contraste */
+        body.light-mode .client-logo img {
+            filter: brightness(0.85) contrast(0.9);
+        }
+        body.light-mode .client-logo:hover img {
+            filter: brightness(1) contrast(1);
+        }
+        /* Tamaños responsive */
+        @media (max-width: 680px) {
+            .client-logo img {
+                height: 48px;
+            }
         }
 
         /* CTA minimalista */
@@ -424,6 +432,7 @@
             .glass-header { padding: 0.8rem 1.2rem; }
             .about-text h1 { font-size: 2.2rem; }
             .quote-block p { font-size: 1.2rem; }
+            .clients-flex { gap: 2rem; }
         }
     </style>
 </head>
@@ -432,7 +441,6 @@
 <header class="glass-header">
     <div class="logo-area">
         <a href="index.html">
-            <!-- Se respeta tu logo original con fallback -->
             <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito" onerror="this.src='https://placehold.co/160x56/1F222A/FFD700?text=MICHITO'">
         </a>
     </div>
@@ -442,7 +450,7 @@
 </header>
 
 <main>
-    <!-- SECCIÓN HERO / ABOUT (más aire, minimalista) -->
+    <!-- SECCIÓN HERO / ABOUT -->
     <div class="about-grid fade-up">
         <div class="image-frame">
             <img src="aessets/about/DSC00262-Mejorado-NR.png" alt="Paola Herrera diseñadora" onerror="this.src='https://placehold.co/600x600/10131C/FFD700?text=PAO'">
@@ -459,7 +467,7 @@
         </div>
     </div>
 
-    <!-- LO QUE ME ESPECIALIZO (la sección "I specialize in" VERSIÓN LIMPIA) -->
+    <!-- ESPECIALIDADES -->
     <div class="specialties fade-up">
         <div class="section-subtitle">Lo que hago mejor</div>
         <h2>Especialidades</h2>
@@ -482,7 +490,7 @@
         </div>
     </div>
 
-    <!-- EXPERIENCIA (timeline moderno + limpio) -->
+    <!-- EXPERIENCIA (timeline) -->
     <div class="timeline-modern fade-up">
         <div class="section-subtitle">Trayectoria</div>
         <h2>Experiencia profesional</h2>
@@ -490,7 +498,7 @@
             <div class="timeline-row">
                 <div class="timeline-year">2020 — 2026</div>
                 <div class="timeline-info">
-                    <h3>Astros Marketing · Diseñador Gráfico Digital </h3>
+                    <h3>Astros Marketing · Diseñador Gráfico Digital</h3>
                     <p>Desarrollo de proyectos visuales para marcas locales, campañas publicitarias y contenido digital de alto impacto.</p>
                     <ul>
                         <li>Branding estratégico.</li>
@@ -515,14 +523,14 @@
         </div>
     </div>
 
-    <!-- CITA / FRASE para darle calidez y ese "toque humano" -->
+    <!-- CITA / FRASE -->
     <div class="quote-block fade-up">
         <i class="fa-regular fa-comment-dots"></i>
         <p>“Un diseño no está terminado hasta que alguien lo usa.”</p>
         <div style="margin-top: 1.4rem; font-weight: 300;">— Brenda Laurel</div>
     </div>
 
-    <!-- Más allá del diseño (sección personal con estilo integrado) -->
+    <!-- Más allá del diseño -->
     <div class="fade-up" style="margin: 4rem 0;">
         <div class="section-subtitle">inside the studio</div>
         <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
@@ -537,18 +545,25 @@
         </div>
     </div>
 
-    <!-- Marcas que confían -->
+    <!-- MARCAS QUE CONFÍAN - LOGOS SIN CAJAS, LIMPIOS -->
     <div class="clients-section fade-up">
         <div class="section-subtitle">Colaboraciones reales</div>
         <h2>Marcas que confían en mí</h2>
         <div class="clients-flex">
-            <div class="client-logo"><img src="aessets/Arcangel-Uriel-Bazar.png" alt="ArcangeUriel" onerror="this.src='https://placehold.co/600x600/10131C/FFD700?text=Uriel'">
-            <div class="client-logo"><img src="aessets/MXSIG-Antonio.png" alt="MXSIG" onerror="this.src='https://placehold.co/600x600/10131C/FFD700?text='"></div>
-            <div class="client-logo"><img src="aessets/AJ-DIGITAL-ART.png" alt="AJDIGITALART" onerror="this.src='https://placehold.co/600x600/10131C/FFD700?text='"></div>
+            <div class="client-logo">
+                <img src="aessets/Arcangel-Uriel-Bazar.png" alt="Arcangel Uriel" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Arcangel+Uriel'">
+            </div>
+            <div class="client-logo">
+                <img src="aessets/MXSIG-Antonio.png" alt="MXSIG" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=MXSIG'">
+            </div>
+            <div class="client-logo">
+                <img src="aessets/AJ-DIGITAL-ART.png" alt="AJ DIGITAL ART" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=AJ+Digital+Art'">
+            </div>
         </div>
+        <p style="text-align: center; font-size: 0.85rem; margin-top: 2rem; color: var(--text-secondary); opacity: 0.8;">Proyectos reales · confianza mutua</p>
     </div>
 
-    <!-- CTA final - riesgo cero -->
+    <!-- CTA final -->
     <div class="cta-minimal fade-up">
         <div style="max-width: 600px; margin: 0 auto;">
             <span style="background: rgba(255,215,0,0.2); padding: 0.2rem 1rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px;">COMPROMISO</span>
@@ -570,7 +585,7 @@
         <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
     <div class="copyright">
-       <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+        <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--gold);">Paola Herrera Sol</span></p>
     </div>
 </main>
 
@@ -609,7 +624,7 @@
         });
     }
 
-    // Intersection Observer para el fade-up (aparición al hacer scroll)
+    // Intersection Observer para fade-up
     const fadeElements = document.querySelectorAll('.fade-up');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -622,7 +637,6 @@
     
     fadeElements.forEach(el => observer.observe(el));
     
-    // Forzar visibilidad si ya están visibles al cargar
     window.addEventListener('load', () => {
         fadeElements.forEach(el => {
             const rect = el.getBoundingClientRect();

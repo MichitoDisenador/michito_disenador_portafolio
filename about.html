@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Sobre Mí | Paola Herrera</title>
+    <title>Paola Herrera · Diseño con esencia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fuentes modernas: Inter + espacio limpio -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,34 +15,38 @@
         }
 
         :root {
-            --primary: #FFD700;
-            --secondary: #b0c4d3;
-            --bg-dark: #0A0C10;
-            --surface-dark: #161A22;
-            --text-light: #F5F5F7;
-            --text-muted: #A0A4B0;
+            --bg: #05070A;
+            --surface: #0F1219;
+            --card-bg: rgba(18, 22, 30, 0.7);
+            --border: rgba(255, 215, 0, 0.12);
+            --gold: #FFD700;
+            --gold-soft: #FFDE4D;
+            --text-primary: #F0F2F8;
+            --text-secondary: #9CA3AF;
+            --accent-blue: #7AC7E0;
+            --hover-glow: rgba(255, 215, 0, 0.2);
         }
 
         body.light-mode {
-            --bg-dark: #FEFCF5;
-            --surface-dark: #FFFFFF;
-            --text-light: #121212;
-            --text-muted: #5A5E6E;
+            --bg: #F9F7F2;
+            --surface: #FFFFFF;
+            --card-bg: #FFFFFF;
+            --border: rgba(0, 0, 0, 0.08);
+            --text-primary: #1A1E2C;
+            --text-secondary: #4B5563;
+            --gold: #D4AF37;
+            --gold-soft: #EBC45E;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            transition: background-color 0.4s ease, color 0.3s ease;
-            overflow-x: hidden;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.2s ease;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* HEADER FIJO (igual que index) */
+        /* HEADER minimalista (igual que el mood "aire limpio") */
         .glass-header {
             position: fixed;
             top: 0;
@@ -49,472 +55,581 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
-            background: rgba(10, 12, 16, 0.75);
+            padding: 1.2rem 2.5rem;
+            background: rgba(5, 7, 10, 0.7);
             backdrop-filter: blur(12px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 1100;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.2s;
         }
-
         body.light-mode .glass-header {
-            background: rgba(254, 252, 245, 0.85);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(249, 247, 242, 0.85);
         }
-
         .logo-area img {
-            height: 70px;
+            height: 56px;
             width: auto;
-            display: block;
-            transition: transform 0.2s;
+            transition: opacity 0.2s;
         }
-        .logo-area img:hover { transform: scale(0.97); opacity: 0.9; }
-
         .theme-toggle {
             background: none;
             border: none;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            color: var(--text-light);
-            width: 46px;
-            height: 46px;
+            color: var(--text-primary);
+            width: 42px;
+            height: 42px;
             border-radius: 100px;
-            background: rgba(255,255,255,0.05);
-            transition: 0.2s;
+            background: rgba(255,255,240,0.05);
+            transition: all 0.2s;
         }
-        .theme-toggle:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
+        .theme-toggle:hover {
+            background: var(--hover-glow);
+            color: var(--gold);
+        }
 
         main {
-            padding-top: 96px;
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding: 120px 2rem 4rem;
         }
 
-        /* SECCIONES CON ANIMACIÓN AL SCROLL */
-        .scroll-reveal {
-            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+        /* ANIMACIONES SUAVES */
+        .fade-up {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(32px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
         }
-        .scroll-reveal.revealed {
+        .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* ABOUT SECTION */
-        .about-section {
+        /* LAYOUT MODERNO: ABOUT con mucho espacio */
+        .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-            margin: 2rem 0 4rem;
+            gap: 4rem;
+            margin-bottom: 6rem;
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            main { padding: 110px 1.5rem 3rem; }
         }
 
-        @media (max-width: 768px) {
-            .about-section {
-                grid-template-columns: 1fr;
-            }
-            main {
-                padding-left: 1rem;
-                padding-right: 1rem;
-            }
+        .image-frame {
+            position: relative;
         }
-
-        .about-image {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .about-image img {
+        .image-frame img {
             width: 100%;
-            transition: transform 0.5s ease;
+            border-radius: 32px;
+            object-fit: cover;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
+            transition: transform 0.4s ease;
+        }
+        .image-frame:hover img {
+            transform: scale(1.01);
+        }
+        .badge-years {
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            background: var(--gold);
+            color: #0A0C10;
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 18px rgba(0,0,0,0.2);
         }
 
-        .about-image:hover img {
-            transform: scale(1.03);
+        .about-text h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold-soft) 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1.2rem;
         }
-
-        .about-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
+        .about-text .lead {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+            border-left: 3px solid var(--gold);
+            padding-left: 1.2rem;
         }
-
-        .about-content h2 {
-            font-size: 1.5rem;
-            margin: 1.5rem 0 1rem;
-            color: var(--secondary);
+        .desc-text {
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            line-height: 1.6;
         }
-
-        .skills {
+        .skill-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            margin: 1.5rem 0;
+            gap: 0.7rem;
+            margin: 2rem 0 1rem;
         }
-
-        .skill-tag {
-            background: rgba(255, 212, 30, 0.2);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 600;
+        .skill-pills span {
+            background: rgba(255, 215, 0, 0.08);
+            backdrop-filter: blur(2px);
+            border: 1px solid var(--border);
+            padding: 0.45rem 1.1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--gold-soft);
             transition: 0.2s;
         }
-        body.light-mode .skill-tag {
-            background: rgba(255, 212, 30, 0.3);
+        body.light-mode .skill-pills span {
+            background: rgba(212, 175, 55, 0.1);
+            color: #b47c00;
+        }
+        .skill-pills span:hover {
+            background: rgba(255, 215, 0, 0.25);
+            transform: translateY(-2px);
         }
 
-        .timeline {
-            margin: 4rem 0;
+        /* TARJETAS DE ESPECIALIDADES (estilo servicio simplificado, como el portfolio de Laura pero con paleta oscura) */
+        .specialties {
+            margin: 5rem 0;
         }
-        .timeline h2 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--primary);
-        }
-
-        .timeline-item {
-            display: flex;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .timeline-date {
-            min-width: 120px;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-
-        .timeline-content {
-            border-left: 2px solid var(--primary);
-            padding-left: 1.5rem;
-            position: relative;
-            flex: 1;
-        }
-
-        .timeline-content::before {
-            content: "";
-            position: absolute;
-            left: -8px;
-            top: 5px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-        }
-
-        .timeline-content ul {
-            margin-left: 1.5rem;
-            margin-top: 0.5rem;
-        }
-        .timeline-content li {
-            margin: 0.5rem 0;
-        }
-
-        /* SECCIÓN PERSONAL */
-        .personal-section, .servicios-section, .cta-section, .marcas-section {
-            margin: 4rem 0;
-        }
-        .personal-section h2, .servicios-section h2, .cta-section h2, .marcas-section h2 {
-            font-size: 2rem;
+        .section-subtitle {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
             margin-bottom: 1rem;
-            color: var(--primary);
         }
-        .personal-section p, .cta-section p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            color: var(--text-muted);
+        .specialties h2, .timeline-modern h2, .quote-block h2 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
         }
-
-        /* LOGOS CLIENTES */
-        .logos-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-            margin: 2rem 0;
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
         }
-        .logo-item {
-            background: var(--surface-dark);
-            padding: 1.2rem;
-            border-radius: 20px;
-            width: 140px;
-            height: 140px;
+        .spec-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(4px);
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            padding: 2rem 1.8rem;
+            transition: all 0.3s ease;
+        }
+        .spec-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.3);
+        }
+        .spec-icon {
+            font-size: 2.4rem;
+            margin-bottom: 1.2rem;
+            display: inline-block;
+            background: rgba(255,215,0,0.1);
+            width: 58px;
+            height: 58px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
-            cursor: default;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            color: var(--gold);
         }
-        .logo-item img {
-            max-width: 100%;
-            max-height: 80px;
-            filter: grayscale(0.2);
-            transition: all 0.3s ease;
+        .spec-card h3 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            margin: 0.5rem 0 0.8rem;
         }
-        .logo-item:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
-            background: var(--primary);
-        }
-        .logo-item:hover img {
-            filter: brightness(0) invert(1);
-            transform: scale(1.02);
-        }
-        body.light-mode .logo-item:hover {
-            background: var(--primary);
+        .spec-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        /* BOTÓN CELESTE */
-        .btn-celeste {
+        /* TIMELINE (más minimalista y con aire) */
+        .timeline-modern {
+            margin: 5rem 0;
+        }
+        .timeline-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .timeline-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: 2rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 2rem;
+        }
+        @media (max-width: 680px) {
+            .timeline-row {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+        .timeline-year {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--gold);
+        }
+        .timeline-info h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+        .timeline-info p {
+            color: var(--text-secondary);
+            margin-bottom: 0.8rem;
+        }
+        .timeline-info ul {
+            padding-left: 1.3rem;
+            color: var(--text-secondary);
+        }
+        .timeline-info li {
+            margin: 0.4rem 0;
+        }
+
+        /* CITA / FRASE */
+        .quote-block {
+            margin: 5rem 0;
+            text-align: center;
+            background: var(--card-bg);
+            border-radius: 48px;
+            padding: 3rem 2rem;
+            border: 1px solid var(--border);
+        }
+        .quote-block i {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        .quote-block p {
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1.35;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* SECCIÓN CLIENTES (logos más limpios, con elegancia) */
+        .clients-section {
+            margin: 5rem 0;
+        }
+        .clients-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.2rem;
+            margin: 2rem 0;
+        }
+        .client-logo {
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 1rem 2rem;
+            min-width: 130px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            border: 1px solid var(--border);
+        }
+        .client-logo img {
+            max-height: 55px;
+            width: auto;
+            filter: saturate(0.8) brightness(0.9);
+            transition: 0.2s;
+        }
+        body.light-mode .client-logo img {
+            filter: brightness(0.1) contrast(0.8);
+        }
+        .client-logo:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+        }
+        .client-logo:hover img {
+            filter: saturate(1) brightness(1.1);
+        }
+
+        /* CTA minimalista */
+        .cta-minimal {
+            margin: 6rem 0 3rem;
+            text-align: center;
+        }
+        .btn-outline {
             display: inline-block;
-            background: #b0c4d3;
-            color: #0A0C10;
-            font-weight: bold;
-            font-size: 1.2rem;
-            padding: 0.9rem 2rem;
+            background: transparent;
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.8rem 2rem;
             border-radius: 60px;
             text-decoration: none;
-            transition: all 0.3s;
-            margin-top: 1rem;
+            transition: all 0.25s;
+            margin: 1rem 0.5rem;
         }
-        .btn-celeste:hover {
-            transform: scale(1.02);
-            background: #9bb7c7;
-            box-shadow: 0 8px 20px rgba(176,196,211,0.4);
+        .btn-outline:hover {
+            background: var(--gold);
+            color: #0F1219;
+            box-shadow: 0 6px 14px rgba(255,215,0,0.3);
+        }
+        .btn-solid {
+            background: var(--gold);
+            color: #0A0C10;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+        }
+        .btn-solid:hover {
+            background: #FFDE4D;
+            transform: translateY(-3px);
         }
 
-        /* REDES SOCIALES Y FOOTER */
-        .social-links {
+        /* SOCIAL Y FOOTER */
+        .social-footer {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            margin: 3rem 0 1.5rem;
+            margin: 4rem 0 1.5rem;
         }
-        .social-links a {
-            color: var(--text-light);
-            font-size: 1.8rem;
-            transition: 0.2s;
+        .social-footer a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: all 0.2s;
         }
-        .social-links a:hover {
-            color: var(--primary);
+        .social-footer a:hover {
+            color: var(--gold);
             transform: translateY(-4px);
         }
-        footer {
+        .copyright {
             text-align: center;
-            padding: 2rem;
-            border-top: 1px solid rgba(255,215,0,0.2);
-            margin-top: 2rem;
-            color: var(--text-muted);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
         }
 
-        @media (max-width: 760px) {
-            .glass-header { padding: 0.7rem 1rem; }
-            .logo-area img { height: 52px; }
-            .timeline-item { flex-direction: column; }
-            .timeline-date { margin-bottom: 0.5rem; }
-            .logos-grid { gap: 1rem; }
-            .logo-item { width: 110px; height: 110px; padding: 0.8rem; }
+        @media (max-width: 580px) {
+            .glass-header { padding: 0.8rem 1.2rem; }
+            .about-text h1 { font-size: 2.2rem; }
+            .quote-block p { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- HEADER FIJO IGUAL QUE INDEX -->
 <header class="glass-header">
     <div class="logo-area">
         <a href="index.html">
-            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.src='https://placehold.co/200x70?text=Logo'">
+            <!-- Se respeta tu logo original con fallback -->
+            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito" onerror="this.src='https://placehold.co/160x56/1F222A/FFD700?text=MICHITO'">
         </a>
     </div>
-    <button class="theme-toggle" id="darkToggle">
+    <button class="theme-toggle" id="themeToggleBtn" aria-label="Modo claro/oscuro">
         <i class="fas fa-moon"></i>
     </button>
 </header>
 
 <main>
-    <!-- SECCIÓN SOBRE MÍ (presentación) -->
-    <div class="scroll-reveal">
-        <div class="about-section">
-            <div class="about-image">
-                <img src="aessets/about/DSC00262-Mejorado-NR.png" alt="Foto de perfil" onerror="this.src='https://placehold.co/600x600/1E2129/FFD700?text=Pao'">
-            </div>
-            <div class="about-content">
-                <h1>Hola, soy Pao ✧</h1>
-                <p>Diseñadora gráfica e ilustradora con 10 años de experiencia creando identidades visuales memorables y soluciones creativas para marcas a nivel local.</p>
-                
-                <h2>Mi Enfoque</h2>
-                <p>Creo diseños que no solo son estéticamente impactantes, sino también estratégicamente efectivos que causen impacto visual y sean agradables al público. Mi trabajo fusiona ilustración tradicional con técnicas digitales para resultados únicos. Aún así, abrazo la tecnología en sus diferentes formas, las inteligencias artificiales me ayudan a optimizar procesos y mejorar día a día mi desempeño.</p>
-                
-                <h2>Habilidades</h2>
-                <div class="skills">
-                    <span class="skill-tag">Illustrator</span>
-                    <span class="skill-tag">Photoshop</span>
-                    <span class="skill-tag">Branding</span>
-                    <span class="skill-tag">Adobe Creative Suite</span>
-                    <span class="skill-tag">Ilustración Digital</span>
-                    <span class="skill-tag">Diseño UI/UX</span>
-                    <span class="skill-tag">After Effects</span>
-                </div>
+    <!-- SECCIÓN HERO / ABOUT (más aire, minimalista) -->
+    <div class="about-grid fade-up">
+        <div class="image-frame">
+            <img src="aessets/about/DSC00262-Mejorado-NR.png" alt="Paola Herrera diseñadora" onerror="this.src='https://placehold.co/600x600/10131C/FFD700?text=PAO'">
+            <div class="badge-years">+10 años</div>
+        </div>
+        <div class="about-text">
+            <h1>Diseño con propósito<br>y personalidad ✦</h1>
+            <div class="lead">Branding, ilustración & creatividad estratégica</div>
+            <p class="desc-text">Soy Pao, diseñadora gráfica e ilustradora. Durante más de una década he ayudado a marcas a conectar visualmente con su audiencia a través de identidades memorables, diseño emocional y detalles que cuentan historias.</p>
+            <p class="desc-text">Me encanta fusionar técnicas tradicionales con lo digital, y sí, también uso inteligencia artificial como aliada para potenciar el proceso creativo, no para reemplazar la emoción humana.</p>
+            <div class="skill-pills">
+                <span>Branding</span><span>Ilustración</span><span>Motion Graphics</span><span>UI/UX</span><span>After Effects</span><span>Dirección creativa</span>
             </div>
         </div>
     </div>
 
-    <!-- EXPERIENCIA (timeline) -->
-    <div class="scroll-reveal">
-        <div class="timeline">
-            <h2>Experiencia</h2>
-            <div class="timeline-item">
-                <div class="timeline-date">2020 - 2026</div>
-                <div class="timeline-content">
-                    <h3>Astros Marketing</h3>
-                    <p>Como parte del equipo creativo de Astros Marketing, mi rol se centra en el desarrollo de soluciones visuales estratégicas para marcas locales. Mis responsabilidades incluyen:</p>
+    <!-- LO QUE ME ESPECIALIZO (la sección "I specialize in" VERSIÓN LIMPIA) -->
+    <div class="specialties fade-up">
+        <div class="section-subtitle">Lo que hago mejor</div>
+        <h2>Especialidades</h2>
+        <div class="cards-grid">
+            <div class="spec-card">
+                <div class="spec-icon"><i class="fa-brands fa-figma"></i></div>
+                <h3>Identidad & Branding</h3>
+                <p>Construyo sistemas visuales sólidos, desde el naming hasta manuales de marca que aseguran coherencia en cualquier soporte.</p>
+            </div>
+            <div class="spec-card">
+                <div class="spec-icon"><i class="fa-solid fa-pen-fancy"></i></div>
+                <h3>Ilustración digital</h3>
+                <p>Estilo fresco y versátil: ilustración infantil, retratos, arte conceptual y piezas únicas para campañas.</p>
+            </div>
+            <div class="spec-card">
+                <div class="spec-icon"><i class="fa-solid fa-chart-line"></i></div>
+                <h3>Estrategia visual</h3>
+                <p>Más allá de lo estético: cada color, tipografía y forma pensado para conectar con tu audiencia.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPERIENCIA (timeline moderno + limpio) -->
+    <div class="timeline-modern fade-up">
+        <div class="section-subtitle">Trayectoria</div>
+        <h2>Experiencia profesional</h2>
+        <div class="timeline-list">
+            <div class="timeline-row">
+                <div class="timeline-year">2020 — 2026</div>
+                <div class="timeline-info">
+                    <h3>Astros Marketing · Directora creativa</h3>
+                    <p>Liderazgo de proyectos visuales para marcas locales, campañas publicitarias y contenido digital de alto impacto.</p>
                     <ul>
-                        <li><strong>Dirección creativa y diseño de campañas publicitarias:</strong> Conceptualización y ejecución de piezas gráficas para medios tradicionales y digitales.</li>
-                        <li><strong>Contenido para redes sociales:</strong> Producción de gráficos optimizados para engagement y conversión.</li>
-                        <li><strong>Identidad visual:</strong> Diseño de sistemas de marca que fortalecen el reconocimiento.</li>
-                        <li><strong>Enfoque local:</strong> Diseño estratégico adaptado a lo cultural y comercial.</li>
+                        <li>Dirección de arte y branding estratégico.</li>
+                        <li>Gestión de equipos creativos y producción gráfica.</li>
+                        <li>Diseño de piezas para medios tradicionales y digitales.</li>
                     </ul>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-date">2016 - Presente</div>
-                <div class="timeline-content">
-                    <h3>Michito Diseñador</h3>
-                    <p>Diseñador Gráfico y Animador Freelance. Experiencia en:</p>
+            <div class="timeline-row">
+                <div class="timeline-year">2016 — Presente</div>
+                <div class="timeline-info">
+                    <h3>Michito Diseñador · Freelance senior</h3>
+                    <p>Proyectos de branding integral, ilustración personalizada y motion graphics para startups, agencias y editoriales.</p>
                     <ul>
-                        <li><strong>Branding:</strong> Logotipos, manuales de marca, papelería profesional y material promocional.</li>
-                        <li><strong>Contenido digital:</strong> Diseño para redes, edición de fotografía y animación 2D.</li>
-                        <li><strong>Diseño web:</strong> Elementos UI/UX, landing pages, edición básica de video.</li>
-                        <li><strong>Especialidades:</strong> Ilustración infantil, motion graphics, diseño multiplataforma.</li>
+                        <li>Más de 80 identidades de marca creadas.</li>
+                        <li>Animación 2D para redes y vídeos promocionales.</li>
+                        <li>Consultoría de diseño web UI/UX.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- NUEVA SECCIÓN: MÁS ALLÁ DEL DISEÑO -->
-    <div class="scroll-reveal">
-        <div class="personal-section">
-            <h2>Más allá del diseño</h2>
-            <p>Cuando no estoy diseñando, probablemente estoy dibujando, leyendo novelas de acción y drama, escuchando música. Creo que toda disciplina artística y personal termina reflejándose en la forma en que diseñamos.</p>
-        </div>
+    <!-- CITA / FRASE para darle calidez y ese "toque humano" -->
+    <div class="quote-block fade-up">
+        <i class="fa-regular fa-comment-dots"></i>
+        <p>“El diseño es tan poderoso como honesto. Trabajo para que cada proyecto refleje la esencia real de quienes confían en mí.”</p>
+        <div style="margin-top: 1.4rem; font-weight: 300;">— Paola Herrera</div>
     </div>
 
-    <!-- SECCIÓN SERVICIOS (botones decorativos) -->
-    <div class="scroll-reveal">
-        <div class="servicios-section">
-            <h2>Servicios</h2>
-            <div class="skills">
-                <span class="skill-tag">Branding</span>
-                <span class="skill-tag">Social Media</span>
-                <span class="skill-tag">Ilustración</span>
-                <span class="skill-tag">Fotografía</span>
-                <span class="skill-tag">Motion Graphics</span>
-                <span class="skill-tag">Diseño Web</span>
-                  <span class="skill-tag">Video</span>
+    <!-- Más allá del diseño (sección personal con estilo integrado) -->
+    <div class="fade-up" style="margin: 4rem 0;">
+        <div class="section-subtitle">inside the studio</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: space-between; align-items: center;">
+            <div style="flex:1">
+                <h2 style="font-size: 1.9rem; font-weight: 500;">Más allá del diseño</h2>
+                <p style="color: var(--text-secondary); margin-top: 1rem;">Cuando no estoy creando identidades visuales, me encontrarás dibujando en mi cuaderno Moleskine, leyendo novelas de intriga o explorando cafeterías con música en vinilo. Esa curiosidad nutre mi mirada creativa y mis ganas de experimentar.</p>
+            </div>
+            <div style="background: var(--card-bg); border-radius: 40px; padding: 1.5rem 2rem; border:1px solid var(--border); flex:0.8">
+                <i class="fa-regular fa-heart" style="color: var(--gold); font-size: 1.8rem;"></i>
+                <p style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary)">“Entender otras disciplinas me permite diseñar con más empatía visual.”</p>
             </div>
         </div>
     </div>
 
-    <!-- SECCIÓN CTA -->
-    <div class="scroll-reveal">
-        <div class="cta-section">
-            <h2>Trabajemos juntos</h2>
-            <p>Si tienes una idea, una marca o un proyecto que necesita identidad visual y estrategia creativa, estaré encantada de ayudarte a construirlo.</p>
-            <a href="portfolio.html" class="btn-celeste">Ver Portafolio →</a>
+    <!-- Marcas que confían (Logos hover limpios, como el portfolio original de Laura pero sin estridencias)-->
+    <div class="clients-section fade-up">
+        <div class="section-subtitle">Colaboraciones reales</div>
+        <h2>Marcas que confían en mí</h2>
+        <div class="clients-flex">
+            <div class="client-logo"><img src="https://placehold.co/130x55/2C2F36/FFD700?text=ASTROS" alt="Astros Marketing" onerror="this.src='https://placehold.co/130x55/CCCCCC/666?text=Astros'"></div>
+            <div class="client-logo"><img src="https://placehold.co/130x55/2C2F36/FFD700?text=CREA+LAB" alt="CreaLab" onerror="this.src='https://placehold.co/130x55/CCCCCC/666?text=CREA'"></div>
+            <div class="client-logo"><img src="https://placehold.co/130x55/2C2F36/FFD700?text=EDITORIAL" alt="Editorial Alma" onerror="this.src='https://placehold.co/130x55/CCCCCC/666?text=Ed'"></div>
+            <div class="client-logo"><img src="https://placehold.co/130x55/2C2F36/FFD700?text=HONEY" alt="Honey Agency" onerror="this.src='https://placehold.co/130x55/CCCCCC/666?text=Honey'"></div>
+            <div class="client-logo"><img src="https://placehold.co/130x55/2C2F36/FFD700?text=VOYAGE" alt="Voyage Studio" onerror="this.src='https://placehold.co/130x55/CCCCCC/666?text=Voyage'"></div>
         </div>
+        <p style="text-align: center; font-size: 0.8rem; margin-top: 1rem; color: var(--text-secondary);">* Algunos de los proyectos destacados.</p>
     </div>
 
-    <!-- SECCIÓN MARCAS (logos con animación hover) -->
-    <div class="scroll-reveal">
-        <div class="marcas-section">
-            <h2>Marcas que confían en mí</h2>
-            <div class="logos-grid">
-                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo1" alt="Marca 1" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
-                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo2" alt="Marca 2" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
-                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo3" alt="Marca 3" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
-                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo4" alt="Marca 4" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
-                <div class="logo-item"><img src="https://placehold.co/100x60/2C2F36/FFD700?text=Logo5" alt="Marca 5" onerror="this.src='https://placehold.co/100x60/DDDDDD/666?text=Brand'"></div>
+    <!-- CTA final - riesgo cero / garantía sutil (inspirado en el mensaje de "Try me out, risk free" pero sutil) -->
+    <div class="cta-minimal fade-up">
+        <div style="max-width: 600px; margin: 0 auto;">
+            <span style="background: rgba(255,215,0,0.2); padding: 0.2rem 1rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px;">COMPROMISO</span>
+            <h3 style="font-size: 1.9rem; margin: 1rem 0;">Probá mi trabajo sin riesgos</h3>
+            <p style="color: var(--text-secondary);">Si después del primer borrador no estás 100% convencido, te devuelvo el depósito. Sin preguntas, sin excusas.</p>
+            <div>
+                <a href="portfolio.html" class="btn-solid">Ver portafolio →</a>
+                <a href="contacto.html" class="btn-outline">Contactar →</a>
             </div>
-            <p style="text-align: center; margin-top: 1rem; color: var(--text-muted);">* Colaboraciones reales y proyectos conjuntos</p>
         </div>
     </div>
 
-    <!-- SOCIAL LINKS y FOOTER -->
-    <div class="social-links">
+    <!-- SOCIAL LINKS & FOOTER -->
+    <div class="social-footer">
         <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
         <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
         <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
         <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
-
-    <footer>
-        <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
-    </footer>
+    <div class="copyright">
+       <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+    </div>
 </main>
 
 <script>
-    // MODO OSCURO/CLARO (misma funcionalidad que index)
-    const toggle = document.getElementById('darkToggle');
-    const body = document.body;
-    const stored = localStorage.getItem('theme');
-    if (stored === 'light') {
-        body.classList.add('light-mode');
-        if(toggle) {
-            const icon = toggle.querySelector('i');
+    // Toggle modo claro/oscuro + persistencia
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const bodyEl = document.body;
+    const storedTheme = localStorage.getItem('theme');
+
+    function updateThemeIcon() {
+        if(!themeBtn) return;
+        const icon = themeBtn.querySelector('i');
+        if(bodyEl.classList.contains('light-mode')) {
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
-        }
-    } else {
-        body.classList.remove('light-mode');
-        if(toggle) {
-            const icon = toggle.querySelector('i');
+        } else {
             icon.classList.remove('fa-sun');
             icon.classList.add('fa-moon');
         }
     }
 
-    if(toggle) {
-        toggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const icon = toggle.querySelector('i');
-            if(body.classList.contains('light-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-                localStorage.setItem('theme', 'light');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-                localStorage.setItem('theme', 'dark');
-            }
+    if(storedTheme === 'light') {
+        bodyEl.classList.add('light-mode');
+        updateThemeIcon();
+    } else {
+        bodyEl.classList.remove('light-mode');
+        updateThemeIcon();
+    }
+
+    if(themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            bodyEl.classList.toggle('light-mode');
+            const isLight = bodyEl.classList.contains('light-mode');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            updateThemeIcon();
         });
     }
 
-    // SCROLL REVEAL (aparición al bajar)
-    const revealItems = document.querySelectorAll('.scroll-reveal');
+    // Intersection Observer para el fade-up (aparición al hacer scroll)
+    const fadeElements = document.querySelectorAll('.fade-up');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if(entry.isIntersecting) {
-                entry.target.classList.add('revealed');
+                entry.target.classList.add('visible');
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.2, rootMargin: "0px 0px -20px 0px" });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
     
-    revealItems.forEach(el => observer.observe(el));
+    fadeElements.forEach(el => observer.observe(el));
     
+    // Forzar visibilidad si ya están visibles al cargar
     window.addEventListener('load', () => {
-        revealItems.forEach(el => {
+        fadeElements.forEach(el => {
             const rect = el.getBoundingClientRect();
-            if(rect.top < window.innerHeight - 80) {
-                el.classList.add('revealed');
+            if(rect.top < window.innerHeight - 100) {
+                el.classList.add('visible');
                 observer.unobserve(el);
             }
         });

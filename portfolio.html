@@ -2,175 +2,568 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portafolio | Michito Diseñador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Paola Herrera | Portafolio 2026</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Estilos específicos de portfolio.html */
-        .hero {
-            text-align: center;
-            padding: 4rem 0;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        :root {
+            --primary: #FFD700;
+            --accent-soft: #b0c4d3;
+            --bg-dark: #0A0C10;
+            --surface-dark: #161A22;
+            --text-light: #F5F5F7;
+            --text-muted: #9CA3AF;
+            --card-bg: rgba(22, 26, 34, 0.6);
+            --border-glow: rgba(176, 196, 211, 0.2);
+            --icon-filter: brightness(0) invert(1);
+        }
+
+        body.light-mode {
+            --bg-dark: #FEFCF5;
+            --surface-dark: #FFFFFF;
+            --text-light: #1F2937;
+            --text-muted: #6B7280;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border-glow: rgba(176, 196, 211, 0.4);
+            --icon-filter: brightness(0) saturate(100%) invert(0);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            transition: background-color 0.4s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* HEADER FIJO */
+        .glass-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-glow);
+        }
+
+        body.light-mode .glass-header {
+            background: rgba(254, 252, 245, 0.9);
+        }
+
+        .logo-area img {
+            height: 65px;
+            width: auto;
+            display: block;
+            transition: transform 0.2s;
+        }
+        .logo-area img:hover { transform: scale(0.97); opacity: 0.9; }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: var(--text-light);
+            width: 46px;
+            height: 46px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.05);
+            transition: 0.2s;
+        }
+        .theme-toggle:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 52px;
+            height: 52px;
+            background: var(--accent-soft);
+            color: #0A0C10;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 1.8rem;
+        }
+        .scroll-top.show { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-5px); background: var(--primary); }
+
+        main {
+            padding-top: 96px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .scroll-reveal {
+            transition: opacity 0.7s ease, transform 0.7s ease;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+
+        /* Títulos con amarillo moderado */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-light);
+            letter-spacing: -0.3px;
+        }
+        .section-title span {
             color: var(--primary);
         }
 
-        .portfolio-grid {
+        .project-badge {
+            display: inline-block;
+            background: rgba(176, 196, 211, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent-soft);
+            letter-spacing: 0.3px;
+            margin-bottom: 0.8rem;
+            border: 0.5px solid rgba(176,196,211,0.3);
+        }
+
+        /* ANVA - SIN MÁRGENES */
+        .branding-full {
+            background: var(--surface-dark);
+            width: calc(100% + 4rem);
+            margin-left: -2rem;
+            margin-right: -2rem;
+            padding: 2rem 2rem;
+            border-radius: 0;
+        }
+        @media (max-width: 760px) {
+            .branding-full { width: calc(100% + 2rem); margin-left: -1rem; margin-right: -1rem; padding: 1.5rem; }
+            main { padding-left: 1rem; padding-right: 1rem; }
+        }
+        .branding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .branding-logo img {
+            max-width: 220px;
+            height: auto;
+        }
+        .tools-icons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .tools-icons img {
+            width: 40px;
+            height: 40px;
+            filter: var(--icon-filter);
+            transition: transform 0.2s;
+        }
+        .tools-icons img:hover {
+            transform: translateY(-3px);
+        }
+        .mockup-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
         }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            aspect-ratio: 4/3;
-            cursor: pointer;
-        }
-
-        .portfolio-item img {
+        .mockup-grid img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            border-radius: 20px;
+            transition: transform 0.3s;
+            border: 1px solid var(--border-glow);
+        }
+        .mockup-grid img:hover { transform: scale(1.02); }
+
+        /* SOCIAL ROW */
+        .social-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+        }
+        .phone-mockup {
+            background: var(--card-bg);
+            border-radius: 48px;
+            padding: 0.8rem;
+            max-width: 320px;
+            margin: 0;
+            border: 1px solid var(--border-glow);
+        }
+        .phone-screen {
+            background: #111;
+            border-radius: 32px;
+            overflow: hidden;
+            aspect-ratio: 9 / 19;
+            position: relative;
+        }
+        .carousel-slides {
+            display: flex;
             transition: transform 0.5s ease;
+            height: 100%;
         }
-
-        .portfolio-item:hover img {
-            transform: scale(1.05);
+        .carousel-slides img {
+            width: 100%;
+            flex-shrink: 0;
+            object-fit: cover;
+            height: 100%;
         }
-
-        .portfolio-info {
+        .carousel-btn {
             position: absolute;
-            bottom: 0;
+            bottom: 10px;
             left: 0;
             right: 0;
-            background: linear-gradient(0deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
-            padding: 1.5rem;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            background: rgba(0,0,0,0.5);
+            width: fit-content;
+            margin: 0 auto;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
         }
-
-        .portfolio-item:hover .portfolio-info {
-            transform: translateY(0);
+        .carousel-btn button {
+            background: var(--accent-soft);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #0A0C10;
         }
-
-        .portfolio-info h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+        .tools-side {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            background: var(--surface-dark);
+            padding: 1rem;
+            border-radius: 28px;
+            border: 1px solid var(--border-glow);
         }
-
-        .portfolio-info p {
+        .tools-side span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .tools-side img {
+            width: 28px;
+            height: 28px;
+            filter: var(--icon-filter);
+        }
+
+        /* ilustración grid */
+        .illustration-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+        .illustration-card {
+            background: var(--surface-dark);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: 0.3s;
+            border: 1px solid var(--border-glow);
+        }
+        .illustration-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .illustration-card p {
+            padding: 1rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Galería de fotografía */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.6rem;
+            margin: 2rem 0;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: 0.2s;
+        }
+        .photo-gallery img:hover {
+            transform: scale(0.98);
             opacity: 0.9;
         }
 
-        .nav-links {
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--border-glow);
+            margin-top: 3rem;
+        }
+        .social-footer {
             display: flex;
-            gap: 1.5rem;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
         }
-
-        .nav-links a {
-            color: var(--secondary);
+        .social-footer a {
+            color: var(--text-light);
+            font-size: 1.5rem;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: 0.2s;
         }
+        .social-footer a:hover { color: var(--primary); transform: translateY(-3px); }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        @media (max-width: 760px) {
+            .tools-icons img { width: 32px; height: 32px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <a href="index.html" aria-label="Volver al inicio">
-                    <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito">
-                </a>
-            </div>
-            <div class="nav-links">
-                <a href="about.html">Sobre mí</a>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
-        </header>
 
-        <main>
-            <section class="hero">
-                <h1 data-animate>Mi Portafolio</h1>
-                <p data-animate>Proyectos seleccionados de diseño gráfico e ilustración</p>
-            </section>
+<header class="glass-header">
+    <div class="logo-area">
+        <a href="index.html">
+            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo">
+        </a>
+    </div>
+    <button class="theme-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
+</header>
+<button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
-            <section class="portfolio-grid">
-                <div class="portfolio-item" data-animate>
-                    <img src="aessets/portfolio/ejemplo 1.webp" alt="Social Media Graphics">
-                    <div class="portfolio-info">
-                        <h3>Social Media Graphics</h3>
-                        <p>Para impulsar tu marca al siguiente nivel</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-animate>
-                    <img src="aessets/portfolio/GirqDRMXEAAWxnB.webp" alt="Ilustración Digital">
-                    <div class="portfolio-info">
-                        <h3>Ilustración Digital</h3>
-                        <p>¡Echa un vistazo a mis últimas ilustraciones!</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-animate>
-                    <img src="aessets/portfolio/editor-de-fotos-1.jpg" alt="Edición de Fotografía">
-                    <div class="portfolio-info">
-                        <h3>Edición de Fotografía</h3>
-                        <p>Edición profesional y fotomontaje</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-animate>
-                    <img src="aessets/portfolio/original-fddafaf6c7b41ce89e2600c2fdfa00e1.webp" alt="Branding">
-                    <div class="portfolio-info">
-                        <h3>Branding</h3>
-                        <p>Diseño de identidad para marcas</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-animate>
-                    <img src="aessets/portfolio/vsdc_programa-edicion-de-video-gratis.jpg" alt="Edición de Video">
-                    <div class="portfolio-info">
-                        <h3>Edición de Video</h3>
-                        <p>Checa mis últimos proyectos audiovisuales</p>
-                    </div>
-                </div>
-
-                <div class="portfolio-item" data-animate>
-                    <img src="aessets/portfolio/istockphoto-1208843679-612x612.jpg" alt="Fotografía">
-                    <div class="portfolio-info">
-                        <h3>Fotografía</h3>
-                        <p>Trabajos fotográficos profesionales</p>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <footer data-animate>
-            <div class="social-links">
-                <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p>&copy; 2025 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
-        </footer>
+<main>
+    <!-- HERO -->
+    <div class="scroll-reveal" style="text-align: center; margin-bottom: 2.5rem;">
+        <h1 style="font-size: 3rem; font-weight: 600; color: var(--text-light);">Portafolio <span style="color: var(--primary);">2026</span></h1>
+        <p style="color: var(--text-muted); margin-top: 0.5rem;">Proyectos reales · Diseño con propósito</p>
     </div>
 
-    <script src="js/main.js"></script>
+    <!-- 1. ANVA - SIN MÁRGENES, íconos SVG -->
+    <div class="scroll-reveal">
+        <div class="branding-full">
+            <div class="branding-header">
+                <div class="branding-logo">
+                    <img src="aessets/Portafolio/anva_logo.png" alt="Anva Logo" onerror="this.src='https://placehold.co/300x100/FFFFFF/0A0C10?text=ANVA'">
+                </div>
+                <div class="tools-icons">
+                    <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" title="Photoshop">
+                    <img src="aessets/Portafolio/ilustrator.svg" alt="Illustrator" title="Illustrator">
+                </div>
+            </div>
+            <div><span class="project-badge">Branding + Identidad Visual</span></div>
+            <div class="mockup-grid">
+                <img src="aessets/Portafolio/anva_mockup1.jpg" alt="mockup" onerror="this.src='https://placehold.co/500x400/1E2129/b0c4d3?text=Mockup+Anva'">
+                <img src="aessets/Portafolio/anva_mockup2.jpg" alt="mockup" onerror="this.src='https://placehold.co/500x400/1E2129/b0c4d3?text=Tarjeta'">
+                <img src="aessets/Portafolio/anva_mockup3.jpg" alt="mockup" onerror="this.src='https://placehold.co/500x400/1E2129/b0c4d3?text=Merch'">
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. KRAFTOMEX: slider + herramientas SVG -->
+    <div class="scroll-reveal">
+        <div style="margin: 2rem 0 0.5rem;"><span class="project-badge">Social Media + Campañas</span></div>
+        <h2 class="section-title">Kraftomex</h2>
+        <div class="social-row">
+            <div class="phone-mockup">
+                <div class="phone-screen" id="kraftomexSlider">
+                    <div class="carousel-slides" id="kraftomexSlides">
+                        <img src="aessets/Portafolio/iphone.png" alt="Kraftomex 1" onerror="this.src='https://placehold.co/400x800/2C2F36/b0c4d3?text=Kraftomex+1'">
+                        <img src="https://placehold.co/400x800/2C2F36/b0c4d3?text=Kraftomex+2" alt="slide2">
+                        <img src="https://placehold.co/400x800/2C2F36/b0c4d3?text=Kraftomex+3" alt="slide3">
+                    </div>
+                    <div class="carousel-btn">
+                        <button onclick="prevSlide('kraftomex')">◀</button>
+                        <button onclick="nextSlide('kraftomex')">▶</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tools-side">
+                <span><img src="aessets/Portafolio/photoshop.svg" alt="ps"> Photoshop</span>
+                <span><img src="aessets/Portafolio/ilustrator.svg" alt="ai"> Illustrator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. KENNEL -->
+    <div class="scroll-reveal">
+        <div style="margin: 2rem 0 0.5rem;"><span class="project-badge">Social Media + Publicidad Visual</span></div>
+        <h2 class="section-title">Kennel</h2>
+        <div class="social-row">
+            <div class="phone-mockup">
+                <div class="phone-screen" id="kennelSlider">
+                    <div class="carousel-slides" id="kennelSlides">
+                        <img src="aessets/Portafolio/iphone.png" alt="Kennel 1" onerror="this.src='https://placehold.co/400x800/1E2129/b0c4d3?text=Kennel+1'">
+                        <img src="https://placehold.co/400x800/1E2129/b0c4d3?text=Kennel+2" alt="kennel2">
+                        <img src="https://placehold.co/400x800/1E2129/b0c4d3?text=Kennel+3" alt="kennel3">
+                    </div>
+                    <div class="carousel-btn">
+                        <button onclick="prevSlide('kennel')">◀</button>
+                        <button onclick="nextSlide('kennel')">▶</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tools-side">
+                <span><img src="aessets/Portafolio/photoshop.svg" alt="ps"> Photoshop</span>
+                <span><img src="aessets/Portafolio/ilustrator.svg" alt="ai"> Illustrator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. ARCÁNGEL URIEL con herramientas SVG -->
+    <div class="scroll-reveal">
+        <div style="margin: 2rem 0 0.5rem;"><span class="project-badge">Ilustración + Merch Design</span></div>
+        <h2 class="section-title">Arcángel Uriel</h2>
+        <div class="social-row" style="justify-content: space-between; flex-wrap: wrap;">
+            <div class="illustration-grid" style="flex:2; min-width: 260px;">
+                <div class="illustration-card"><img src="aessets/Portafolio/uriel_ilustracion1.png" alt="Uriel 1" onerror="this.src='https://placehold.co/500x600/1E2129/b0c4d3?text=Arcangel+Uriel'"><p>Personaje principal</p></div>
+                <div class="illustration-card"><img src="aessets/Portafolio/uriel_ilustracion2.png" alt="Uriel 2" onerror="this.src='https://placehold.co/500x600/1E2129/b0c4d3?text=Merch+Design'"><p>Aplicación merch</p></div>
+                <div class="illustration-card"><img src="aessets/Portafolio/uriel_ilustracion3.png" alt="Uriel 3" onerror="this.src='https://placehold.co/500x600/1E2129/b0c4d3?text=Bazar+local'"><p>Material promocional</p></div>
+            </div>
+            <div class="tools-side" style="min-width: 200px;">
+                <span><img src="aessets/Portafolio/photoshop.svg" alt="ps"> Photoshop</span>
+                <span><img src="aessets/Portafolio/clip-estudio-paint.svg" alt="clip"> Clip Studio Paint</span>
+                <span><img src="aessets/Portafolio/sketchbook-pro.svg" alt="sketch"> Sketchbook Pro</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. FOTOGRAFÍA -->
+    <div class="scroll-reveal">
+        <h2 class="section-title">Fotografía</h2>
+        <div class="photo-gallery" id="photoGallery">
+            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+1" alt="foto">
+            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+2" alt="foto">
+            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+3" alt="foto">
+            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+4" alt="foto">
+            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+5" alt="foto">
+            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+6" alt="foto">
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="social-footer">
+            <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>© 2026 | Con ❤️ y mucha actitud por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+    </footer>
+</main>
+
+<script>
+    // Modo oscuro/claro
+    const toggle = document.getElementById('darkToggle');
+    const body = document.body;
+    const stored = localStorage.getItem('theme');
+    if (stored === 'light') {
+        body.classList.add('light-mode');
+        if(toggle) toggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+    } else {
+        body.classList.remove('light-mode');
+        if(toggle) toggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+    }
+    if(toggle) {
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            const icon = toggle.querySelector('i');
+            if(body.classList.contains('light-mode')) {
+                icon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'light');
+            } else {
+                icon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
+
+    // Scroll reveal
+    const revealItems = document.querySelectorAll('.scroll-reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.2 });
+    revealItems.forEach(el => observer.observe(el));
+    window.addEventListener('load', () => {
+        revealItems.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('revealed'); });
+    });
+
+    // Scroll top
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 400));
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // Sliders
+    window.slidesState = { kraftomex: 0, kennel: 0 };
+    window.totalSlides = { kraftomex: 3, kennel: 3 };
+
+    function updateSlider(project) {
+        const slidesContainer = document.getElementById(`${project}Slides`);
+        if(!slidesContainer) return;
+        slidesContainer.style.transform = `translateX(-${window.slidesState[project] * 100}%)`;
+    }
+    window.nextSlide = (project) => {
+        if(window.slidesState[project] < window.totalSlides[project] - 1)
+            window.slidesState[project]++;
+        else window.slidesState[project] = 0;
+        updateSlider(project);
+    };
+    window.prevSlide = (project) => {
+        if(window.slidesState[project] > 0)
+            window.slidesState[project]--;
+        else window.slidesState[project] = window.totalSlides[project] - 1;
+        updateSlider(project);
+    };
+    document.querySelectorAll('.carousel-slides').forEach(slide => {
+        slide.style.display = 'flex';
+        slide.style.width = '100%';
+        slide.style.height = '100%';
+        for(let img of slide.children) {
+            img.style.width = '100%';
+            img.style.flexShrink = '0';
+            img.style.objectFit = 'cover';
+        }
+    });
+    updateSlider('kraftomex');
+    updateSlider('kennel');
+</script>
 </body>
 </html>

@@ -177,6 +177,26 @@
             transform: translateY(-3px);
         }
 
+        /* Botones de navegación interna (scroll suave) */
+        .nav-badge {
+            background: transparent;
+            border: 1.5px solid var(--primary);
+            color: var(--primary);
+            padding: 0.6rem 1.4rem;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.2s;
+            backdrop-filter: blur(2px);
+            display: inline-block;
+        }
+        .nav-badge:hover {
+            background: var(--primary);
+            color: #0A0C10;
+            transform: translateY(-3px);
+        }
+
         .full-cover-img {
             width: 100%;
             position: relative;
@@ -249,6 +269,7 @@
             .section-title { font-size: 2rem; }
             .section-block { padding: 1rem; margin: 3rem auto; }
             .badge-deco { padding: 0.4rem 1rem; font-size: 0.8rem; }
+            .nav-badge { padding: 0.4rem 1rem; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -264,7 +285,7 @@
 </header>
 
 <main>
-    <!-- IMAGEN PRINCIPAL -->
+    <!-- IMAGEN PRINCIPAL buntatablet.png -->
     <div class="fadein-banner">
         <div class="full-img">
             <img src="aessets/buntatablet.png" alt="banner principal" onerror="this.src='https://placehold.co/1600x600/1E2129/FFD700?text=buntatablet.png'">
@@ -272,26 +293,27 @@
         </div>
     </div>
 
-     <div class="scroll-reveal">
+    <!-- SECCIÓN BIENVENIDA - Botones clickeables que llevan a secciones internas -->
+    <div class="scroll-reveal">
         <div class="section-block">
             <a href="index.html" class="section-title" style="display: inline-block; text-decoration: none;">¡Bienvenido!</a>
             <p class="section-sub">Lo que hago, bien contado:</p>
             <div class="botones-decorativos">
-                <span class="badge-deco">Sobre Mi</span>
-                <span class="badge-deco">Portafolio</span>
-                <span class="badge-deco">Contacto</span>
+                <span class="nav-badge" data-target="sobreMiSeccion">Sobre Mi</span>
+                <span class="nav-badge" data-target="portafolioSeccion">Portafolio</span>
+                <span class="nav-badge" data-target="contactoSeccion">Contacto</span>
             </div>
         </div>
     </div>
 
-     <!-- IMAGEN 2 - sobremi.png -->
+    <!-- IMAGEN 1 - sobremi.png -->
     <div class="scroll-reveal full-cover-img">
         <img src="aessets/sobremi.png" alt="sobre mi imagen" onerror="this.src='https://placehold.co/1600x500/23272F/FFD700?text=sobremi.png'">
         <div class="ombre-cover"></div>
     </div>
 
-    <!-- SOBRE MÍ - el título es un enlace a about.html -->
-    <div class="scroll-reveal">
+    <!-- SOBRE MÍ (ID agregado para scroll interno) -->
+    <div id="sobreMiSeccion" class="scroll-reveal">
         <div class="section-block">
             <a href="about.html" class="section-title" style="display: inline-block; text-decoration: none;">Sobre mí</a>
             <p class="section-sub">Información sobre mi carrera como diseñadora gráfica:</p>
@@ -305,14 +327,14 @@
         </div>
     </div>
 
-    <!-- IMAGEN 3 - portafolio.png -->
+    <!-- IMAGEN 2 - portafolio.png -->
     <div class="scroll-reveal full-cover-img">
-        <img src="aessets/portafolio.png" alt="portafolio imagen" onerror="this.src='https://placehold.co/1600x500/23272F/FFD700?text=sobremi.png'">
+        <img src="aessets/portafolio.png" alt="portafolio imagen" onerror="this.src='https://placehold.co/1600x500/23272F/FFD700?text=portafolio.png'">
         <div class="ombre-cover"></div>
     </div>
 
-    <!-- PORTAFOLIO - el título es un enlace a portfolio.html -->
-    <div class="scroll-reveal">
+    <!-- PORTAFOLIO (ID agregado para scroll interno) -->
+    <div id="portafolioSeccion" class="scroll-reveal">
         <div class="section-block">
             <a href="portfolio.html" class="section-title" style="display: inline-block; text-decoration: none;">Portafolio</a>
             <p class="section-sub">Una visita guiada por mis trabajos:</p>
@@ -326,17 +348,17 @@
         </div>
     </div>
 
-   <!-- IMAGEN 4 - contacto.png -->
+    <!-- IMAGEN 3 - contacto.png -->
     <div class="scroll-reveal full-cover-img">
-        <img src="aessets/contacto.png" alt="contacto imagen" onerror="this.src='https://placehold.co/1600x500/23272F/FFD700?text=sobremi.png'">
+        <img src="aessets/contacto.png" alt="contacto imagen" onerror="this.src='https://placehold.co/1600x500/23272F/FFD700?text=contacto.png'">
         <div class="ombre-cover"></div>
     </div>
     
-    <!-- CONTACTO -->
-    <div class="scroll-reveal">
+    <!-- CONTACTO (ID agregado para scroll interno) -->
+    <div id="contactoSeccion" class="scroll-reveal">
         <div class="section-block">
             <h2 class="section-title">Contacto</h2>
-            <p class="section-sub">Vamos a hablar sobre tu proyecto, envíame un mensaje</p>
+            <p class="section-sub">Vamos a hablar sobre tu proyecto, envíame un mensaje:</p>
             <div class="contact-link-box">
                 <a href="contac.html" class="btn-yellow">Ir a contacto →</a>
             </div>
@@ -358,6 +380,7 @@
 </main>
 
 <script>
+    // ----- MODO OSCURO/CLARO -----
     const toggle = document.getElementById('darkToggle');
     const body = document.body;
     const stored = localStorage.getItem('theme');
@@ -393,6 +416,7 @@
         });
     }
 
+    // ----- SCROLL REVEAL (aparición al bajar) -----
     const revealItems = document.querySelectorAll('.scroll-reveal');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -411,6 +435,33 @@
             if(rect.top < window.innerHeight - 80) {
                 el.classList.add('revealed');
                 observer.unobserve(el);
+            }
+        });
+    });
+
+    // ----- FUNCIÓN DE SCROLL SUAVE (para botones "Sobre Mi", "Portafolio", "Contacto" de bienvenida) -----
+    function smoothScrollToElement(targetId) {
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // offset para compensar el header fijo (96px aproximadamente)
+            const headerOffset = 100;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        }
+    }
+
+    // Asignar evento click a los botones de navegación interna
+    const navButtons = document.querySelectorAll('.nav-badge');
+    navButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            const targetId = button.getAttribute('data-target');
+            if (targetId) {
+                smoothScrollToElement(targetId);
             }
         });
     });

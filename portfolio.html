@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Paola Herrera | Portafolio 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -14,32 +17,26 @@
 
         :root {
             --primary: #FFD700;
-            --accent-soft: #b0c4d3;
-            --bg-dark: #0A0C10;
-            --surface-dark: #161A22;
-            --text-light: #F5F5F7;
-            --text-muted: #9CA3AF;
-            --card-bg: rgba(22, 26, 34, 0.6);
-            --border-glow: rgba(176, 196, 211, 0.2);
-            --icon-filter: brightness(0) invert(1);
-        }
-
-        body.light-mode {
-            --bg-dark: #FEFCF5;
-            --surface-dark: #FFFFFF;
-            --text-light: #1F2937;
-            --text-muted: #6B7280;
-            --card-bg: rgba(255, 255, 255, 0.8);
-            --border-glow: rgba(176, 196, 211, 0.4);
-            --icon-filter: brightness(0) saturate(100%) invert(0);
+            --primary-glow: rgba(255, 215, 0, 0.4);
+            --dark-bg: #0A0C10;
+            --dark-surface: #0A0C10;
+            --light-bg: #F8F6F0;
+            --text-dark: #1A1D24;
+            --text-light: #E8E9F0;
+            --text-muted-light: #9CA3AF;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
             font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-            transition: background-color 0.4s ease, color 0.3s ease;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            transition: background-color 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             overflow-x: hidden;
+        }
+
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
         }
 
         html {
@@ -55,46 +52,50 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1.2rem 2.5rem;
             background: rgba(10, 12, 16, 0.85);
             backdrop-filter: blur(12px);
             z-index: 1000;
-            border-bottom: 1px solid var(--border-glow);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            transition: background 0.3s;
         }
 
         body.light-mode .glass-header {
-            background: rgba(254, 252, 245, 0.9);
+            background: rgba(248, 246, 240, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .logo-area img {
-            height: 65px;
+            height: 55px;
             width: auto;
             display: block;
-            transition: transform 0.2s;
         }
-        .logo-area img:hover { transform: scale(0.97); opacity: 0.9; }
 
         .theme-toggle {
             background: none;
             border: none;
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-light);
-            width: 46px;
-            height: 46px;
-            border-radius: 100px;
-            background: rgba(255,255,255,0.05);
+            color: currentColor;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: 0.2s;
         }
-        .theme-toggle:hover { background: rgba(255,215,0,0.15); transform: scale(1.02); }
+        .theme-toggle:hover {
+            background: rgba(255, 215, 0, 0.15);
+        }
 
         .scroll-top {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
-            width: 52px;
-            height: 52px;
-            background: var(--accent-soft);
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
             color: #0A0C10;
             border-radius: 50%;
             display: flex;
@@ -104,255 +105,180 @@
             z-index: 99;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             border: none;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         .scroll-top.show { opacity: 1; visibility: visible; }
-        .scroll-top:hover { transform: translateY(-5px); background: var(--primary); }
+        .scroll-top:hover { transform: translateY(-4px); background: #ffe44d; }
 
         main {
-            padding-top: 96px;
+            padding-top: 100px;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(255,215,0,0.08) 0%, transparent 70%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            font-size: 7rem;
+            font-weight: 700;
+            letter-spacing: -3px;
+            background: linear-gradient(135deg, var(--primary) 0%, #FFF5C4 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px var(--primary-glow);
+            margin-bottom: 1rem;
+        }
+        .year-badge {
+            margin-top: 0.5rem;
+        }
+        .year-badge span {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 3rem;
+            font-weight: 400;
+            color: white;
+            background: transparent;
+            padding: 0;
+            letter-spacing: 2px;
+        }
+        body.light-mode .year-badge span {
+            color: #1A1D24;
+        }
+        .deco-dots {
+            position: absolute;
+            top: -20px;
+            right: -30px;
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle, var(--primary) 2px, transparent 2px);
+            background-size: 12px 12px;
+            opacity: 0.5;
+        }
+        .deco-dots-left {
+            position: absolute;
+            bottom: -20px;
+            left: -30px;
+            width: 50px;
+            height: 50px;
+            background: radial-gradient(circle, var(--primary) 2px, transparent 2px);
+            background-size: 10px 10px;
+            opacity: 0.4;
+        }
+
+        /* SECCIONES GENERALES */
+        .project-section {
+            padding: 5rem 2rem;
+            transition: background-color 0.6s ease;
+        }
+        .project-section.dark-bg {
+            background-color: #0A0C10;
+        }
+        body.light-mode .project-section.dark-bg {
+            background-color: #F8F6F0;
+        }
+        .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding-left: 2rem;
-            padding-right: 2rem;
         }
-
-        .scroll-reveal {
-            transition: opacity 0.7s ease, transform 0.7s ease;
-            opacity: 0;
-            transform: translateY(40px);
-        }
-        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
-
-        /* Títulos con amarillo moderado */
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin: 2rem 0 1rem;
-            color: var(--text-light);
-            letter-spacing: -0.3px;
-        }
-        .section-title span {
-            color: var(--primary);
-        }
-
-        .project-badge {
-            display: inline-block;
-            background: rgba(176, 196, 211, 0.15);
-            backdrop-filter: blur(4px);
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--accent-soft);
-            letter-spacing: 0.3px;
-            margin-bottom: 0.8rem;
-            border: 0.5px solid rgba(176,196,211,0.3);
-        }
-
-        /* ANVA - SIN MÁRGENES */
-        .branding-full {
-            background: var(--surface-dark);
-            width: calc(100% + 4rem);
-            margin-left: -2rem;
-            margin-right: -2rem;
-            padding: 2rem 2rem;
-            border-radius: 0;
-        }
-        @media (max-width: 760px) {
-            .branding-full { width: calc(100% + 2rem); margin-left: -1rem; margin-right: -1rem; padding: 1.5rem; }
-            main { padding-left: 1rem; padding-right: 1rem; }
-        }
-        .branding-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
+        .project-header {
             margin-bottom: 2rem;
+            text-align: left;
         }
-        .branding-logo img {
-            max-width: 220px;
-            height: auto;
+        .project-title {
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
         }
-        .tools-icons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        .tools-icons img {
-            width: 40px;
-            height: 40px;
-            filter: var(--icon-filter);
-            transition: transform 0.2s;
-        }
-        .tools-icons img:hover {
-            transform: translateY(-3px);
-        }
-        .mockup-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-        .mockup-grid img {
-            width: 100%;
-            border-radius: 20px;
-            transition: transform 0.3s;
-            border: 1px solid var(--border-glow);
-        }
-        .mockup-grid img:hover { transform: scale(1.02); }
-
-        /* SOCIAL ROW */
-        .social-row {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin: 1.5rem 0;
-        }
-        .phone-mockup {
-            background: var(--card-bg);
-            border-radius: 48px;
-            padding: 0.8rem;
-            max-width: 320px;
-            margin: 0;
-            border: 1px solid var(--border-glow);
-        }
-        .phone-screen {
-            background: #111;
-            border-radius: 32px;
-            overflow: hidden;
-            aspect-ratio: 9 / 19;
-            position: relative;
-        }
-        .carousel-slides {
-            display: flex;
-            transition: transform 0.5s ease;
-            height: 100%;
-        }
-        .carousel-slides img {
-            width: 100%;
-            flex-shrink: 0;
-            object-fit: cover;
-            height: 100%;
-        }
-        .carousel-btn {
-            position: absolute;
-            bottom: 10px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            gap: 0.8rem;
-            background: rgba(0,0,0,0.5);
-            width: fit-content;
-            margin: 0 auto;
+        .project-sub {
+            font-size: 1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            background: rgba(255,215,0,0.12);
+            display: inline-block;
             padding: 0.2rem 1rem;
             border-radius: 30px;
         }
-        .carousel-btn button {
-            background: var(--accent-soft);
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            cursor: pointer;
-            font-weight: bold;
-            color: #0A0C10;
-        }
-        .tools-side {
+        .tools-row {
             display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-            background: var(--surface-dark);
-            padding: 1rem;
-            border-radius: 28px;
-            border: 1px solid var(--border-glow);
-        }
-        .tools-side span {
-            display: flex;
+            gap: 1rem;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            margin: 1rem 0 1.5rem;
         }
-        .tools-side img {
-            width: 28px;
-            height: 28px;
-            filter: var(--icon-filter);
+        .tools-row img {
+            width: 36px;
+            height: 36px;
+            filter: brightness(0) invert(1);
+            transition: transform 0.2s;
+        }
+        body.light-mode .tools-row img {
+            filter: brightness(0) saturate(100%) invert(0);
+        }
+        .tools-row img:hover {
+            transform: translateY(-3px);
         }
 
-        /* ilustración grid */
-        .illustration-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.8rem;
-            margin: 2rem 0;
+        /* IMAGEN FULL WIDTH (tamaño de pantalla) */
+        .full-width-image {
+            width: 100%;
+            margin: 2rem 0 3rem;
+            line-height: 0;
         }
-        .illustration-card {
-            background: var(--surface-dark);
-            border-radius: 24px;
-            overflow: hidden;
-            transition: 0.3s;
-            border: 1px solid var(--border-glow);
-        }
-        .illustration-card img {
+        .full-width-image img {
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 0;
+            box-shadow: none;
         }
-        .illustration-card p {
-            padding: 1rem;
-            text-align: center;
-            color: var(--text-muted);
+
+        /* Nota de autoría */
+        .autor-note {
+            background: rgba(255,215,0,0.05);
+            padding: 1.2rem 1.8rem;
+            border-radius: 20px;
+            margin-top: 2.5rem;
             font-size: 0.85rem;
+            color: var(--text-muted-light);
+            border-left: 3px solid var(--primary);
+            max-width: 800px;
+        }
+        body.light-mode .autor-note {
+            background: #f0f0ea;
         }
 
-        /* Galería de fotografía */
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 0.6rem;
-            margin: 2rem 0;
-        }
-        .photo-gallery img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            transition: 0.2s;
-        }
-        .photo-gallery img:hover {
-            transform: scale(0.98);
-            opacity: 0.9;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            border-top: 1px solid var(--border-glow);
-            margin-top: 3rem;
-        }
-        .social-footer {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
             margin: 1rem 0;
         }
-        .social-footer a {
-            color: var(--text-light);
-            font-size: 1.5rem;
-            text-decoration: none;
-            transition: 0.2s;
-        }
-        .social-footer a:hover { color: var(--primary); transform: translateY(-3px); }
 
-        @media (max-width: 760px) {
-            .tools-icons img { width: 32px; height: 32px; }
+        /* Responsive */
+        @media (max-width: 860px) {
+            .hero h1 { font-size: 4rem; }
+            .project-title { font-size: 2.8rem; }
+            .glass-header { padding: 1rem; }
+            .project-section { padding: 3rem 1rem; }
+            .year-badge span { font-size: 2.2rem; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 3rem; }
         }
     </style>
 </head>
@@ -360,210 +286,220 @@
 
 <header class="glass-header">
     <div class="logo-area">
-        <a href="index.html">
-            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo">
-        </a>
+        <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.src='https://placehold.co/200x60/FFD700/0A0C10?text=MICHITO'">
     </div>
-    <button class="theme-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
+    <button class="theme-toggle" id="darkToggle" aria-label="Modo oscuro/claro">
+        <i class="fas fa-moon"></i>
+    </button>
 </header>
+
 <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
 <main>
     <!-- HERO -->
-    <div class="scroll-reveal" style="text-align: center; margin-bottom: 2.5rem;">
-        <h1 style="font-size: 3rem; font-weight: 600; color: var(--text-light);">Portafolio <span style="color: var(--primary);">2026</span></h1>
-        <p style="color: var(--text-muted); margin-top: 0.5rem;">Proyectos reales · Diseño con propósito</p>
-    </div>
-
-    <!-- 1. ANVA - SIN MÁRGENES, íconos SVG -->
-    <div class="scroll-reveal">
-        <div class="branding-full">
-            <div class="branding-header">
-                <div class="branding-logo">
-                    <img src="aessets/Portafolio/anva_logo.png" alt="Anva Logo" onerror="this.src='https://placehold.co/300x100/FFFFFF/0A0C10?text=ANVA'">
-                </div>
-                <div class="tools-icons">
-                    <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" title="Photoshop">
-                    <img src="aessets/Portafolio/ilustrator.svg" alt="Illustrator" title="Illustrator">
-                </div>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="deco-dots"></div>
+            <div class="deco-dots-left"></div>
+            <h1 class="glow-text">Portafolio</h1>
+            <div class="year-badge">
+                <span>2026</span>
             </div>
-            <div><span class="project-badge">Branding + Identidad Visual</span></div>
-            <div class="mockup-grid">
-                <img src="aessets/Portafolio/anva_mockup1.jpg" alt="mockup" onerror="this.src='https://placehold.co/500x400/1E2129/b0c4d3?text=Mockup+Anva'">
-                <img src="aessets/Portafolio/anva_mockup2.jpg" alt="mockup" onerror="this.src='https://placehold.co/500x400/1E2129/b0c4d3?text=Tarjeta'">
-                <img src="aessets/Portafolio/anva_mockup3.jpg" alt="mockup" onerror="this.src='https://placehold.co/500x400/1E2129/b0c4d3?text=Merch'">
+            <div style="margin-top: 2rem;">
+                <div style="width: 40px; height: 2px; background: var(--primary); margin: 0 auto;"></div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 2. KRAFTOMEX: slider + herramientas SVG -->
-    <div class="scroll-reveal">
-        <div style="margin: 2rem 0 0.5rem;"><span class="project-badge">Social Media + Campañas</span></div>
-        <h2 class="section-title">Kraftomex</h2>
-        <div class="social-row">
-            <div class="phone-mockup">
-                <div class="phone-screen" id="kraftomexSlider">
-                    <div class="carousel-slides" id="kraftomexSlides">
-                        <img src="aessets/Portafolio/iphone.png" alt="Kraftomex 1" onerror="this.src='https://placehold.co/400x800/2C2F36/b0c4d3?text=Kraftomex+1'">
-                        <img src="https://placehold.co/400x800/2C2F36/b0c4d3?text=Kraftomex+2" alt="slide2">
-                        <img src="https://placehold.co/400x800/2C2F36/b0c4d3?text=Kraftomex+3" alt="slide3">
-                    </div>
-                    <div class="carousel-btn">
-                        <button onclick="prevSlide('kraftomex')">◀</button>
-                        <button onclick="nextSlide('kraftomex')">▶</button>
-                    </div>
+    <!-- PROYECTO 1: ANTHMAC (Fondo negro / oscuro) -->
+    <section class="project-section dark-bg" id="anthmac-section">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Anthmac</h2>
+                <div class="project-sub">Branding + Identidad Visual</div>
+                <div class="tools-row">
+                    <img src="aessets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
                 </div>
             </div>
-            <div class="tools-side">
-                <span><img src="aessets/Portafolio/photoshop.svg" alt="ps"> Photoshop</span>
-                <span><img src="aessets/Portafolio/ilustrator.svg" alt="ai"> Illustrator</span>
+
+            <!-- IMAGEN FULL ANCHO: ANTHMAC-15.png -->
+            <div class="full-width-image">
+                <img src="aessets/Portafolio/ANTHMAC-15.png" alt="Anthmac presentación" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=ANTHMAC-15.png'">
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 3. KENNEL -->
-    <div class="scroll-reveal">
-        <div style="margin: 2rem 0 0.5rem;"><span class="project-badge">Social Media + Publicidad Visual</span></div>
-        <h2 class="section-title">Kennel</h2>
-        <div class="social-row">
-            <div class="phone-mockup">
-                <div class="phone-screen" id="kennelSlider">
-                    <div class="carousel-slides" id="kennelSlides">
-                        <img src="aessets/Portafolio/iphone.png" alt="Kennel 1" onerror="this.src='https://placehold.co/400x800/1E2129/b0c4d3?text=Kennel+1'">
-                        <img src="https://placehold.co/400x800/1E2129/b0c4d3?text=Kennel+2" alt="kennel2">
-                        <img src="https://placehold.co/400x800/1E2129/b0c4d3?text=Kennel+3" alt="kennel3">
-                    </div>
-                    <div class="carousel-btn">
-                        <button onclick="prevSlide('kennel')">◀</button>
-                        <button onclick="nextSlide('kennel')">▶</button>
-                    </div>
+    <!-- PROYECTO 2: KRAFTOMEX (Fondo claro/transición al hacer scroll - se maneja con observer) -->
+    <section class="project-section" id="kraftomex-section" style="background-color: var(--light-bg); transition: background-color 0.6s ease;">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2>
+                <div class="project-sub">Campañas + Social Media</div>
+                <div class="tools-row">
+                    <img src="aessets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
                 </div>
             </div>
-            <div class="tools-side">
-                <span><img src="aessets/Portafolio/photoshop.svg" alt="ps"> Photoshop</span>
-                <span><img src="aessets/Portafolio/ilustrator.svg" alt="ai"> Illustrator</span>
+
+            <!-- IMAGEN FULL ANCHO: KRAFTOMEX-SM-ASTROS-PAOLA.png -->
+            <div class="full-width-image">
+                <img src="aessets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex social media" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=KRAFTOMEX-SM'">
+            </div>
+
+            <!-- Nota de autoría -->
+            <div class="autor-note">
+                📌 Nota de Autoría: El proyecto de social media para Kraftomex fue desarrollado como una colaboración creativa junto a Eduardo Alfonso López. Este trabajo no corresponde a un cliente directo.
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- 4. ARCÁNGEL URIEL con herramientas SVG -->
-    <div class="scroll-reveal">
-        <div style="margin: 2rem 0 0.5rem;"><span class="project-badge">Ilustración + Merch Design</span></div>
-        <h2 class="section-title">Arcángel Uriel</h2>
-        <div class="social-row" style="justify-content: space-between; flex-wrap: wrap;">
-            <div class="illustration-grid" style="flex:2; min-width: 260px;">
-                <div class="illustration-card"><img src="aessets/Portafolio/uriel_ilustracion1.png" alt="Uriel 1" onerror="this.src='https://placehold.co/500x600/1E2129/b0c4d3?text=Arcangel+Uriel'"><p>Personaje principal</p></div>
-                <div class="illustration-card"><img src="aessets/Portafolio/uriel_ilustracion2.png" alt="Uriel 2" onerror="this.src='https://placehold.co/500x600/1E2129/b0c4d3?text=Merch+Design'"><p>Aplicación merch</p></div>
-                <div class="illustration-card"><img src="aessets/Portafolio/uriel_ilustracion3.png" alt="Uriel 3" onerror="this.src='https://placehold.co/500x600/1E2129/b0c4d3?text=Bazar+local'"><p>Material promocional</p></div>
-            </div>
-            <div class="tools-side" style="min-width: 200px;">
-                <span><img src="aessets/Portafolio/photoshop.svg" alt="ps"> Photoshop</span>
-                <span><img src="aessets/Portafolio/clip-estudio-paint.svg" alt="clip"> Clip Studio Paint</span>
-                <span><img src="aessets/Portafolio/sketchbook-pro.svg" alt="sketch"> Sketchbook Pro</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- 5. FOTOGRAFÍA -->
-    <div class="scroll-reveal">
-        <h2 class="section-title">Fotografía</h2>
-        <div class="photo-gallery" id="photoGallery">
-            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+1" alt="foto">
-            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+2" alt="foto">
-            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+3" alt="foto">
-            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+4" alt="foto">
-            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+5" alt="foto">
-            <img src="https://placehold.co/600x800/2C2F36/b0c4d3?text=Foto+6" alt="foto">
-        </div>
-
-    </div>
-
-    <footer>
-        <div class="social-footer">
-            <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p>© 2026 | Con ❤️ y mucha actitud por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
-    </footer>
+    <div style="height: 4rem;"></div>
 </main>
 
+<footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,215,0,0.2); margin-top: 1rem;">
+    <p>© 2026 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+</footer>
+
 <script>
-    // Modo oscuro/claro
-    const toggle = document.getElementById('darkToggle');
+    // MODO CLARO / OSCURO (manual)
+    const toggleBtn = document.getElementById('darkToggle');
     const body = document.body;
-    const stored = localStorage.getItem('theme');
-    if (stored === 'light') {
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'light') {
         body.classList.add('light-mode');
-        if(toggle) toggle.querySelector('i').classList.replace('fa-moon', 'fa-sun');
+        if(toggleBtn) {
+            const icon = toggleBtn.querySelector('i');
+            icon.classList.remove('fa-moon');
+            icon.classList.add('fa-sun');
+        }
     } else {
         body.classList.remove('light-mode');
-        if(toggle) toggle.querySelector('i').classList.replace('fa-sun', 'fa-moon');
+        if(toggleBtn) {
+            const icon = toggleBtn.querySelector('i');
+            icon.classList.remove('fa-sun');
+            icon.classList.add('fa-moon');
+        }
     }
-    if(toggle) {
-        toggle.addEventListener('click', () => {
+
+    if(toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
             body.classList.toggle('light-mode');
-            const icon = toggle.querySelector('i');
+            const icon = toggleBtn.querySelector('i');
             if(body.classList.contains('light-mode')) {
-                icon.classList.replace('fa-moon', 'fa-sun');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
                 localStorage.setItem('theme', 'light');
             } else {
-                icon.classList.replace('fa-sun', 'fa-moon');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
                 localStorage.setItem('theme', 'dark');
             }
         });
     }
 
-    // Scroll reveal
-    const revealItems = document.querySelectorAll('.scroll-reveal');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if(entry.isIntersecting) { entry.target.classList.add('revealed'); observer.unobserve(entry.target); } });
-    }, { threshold: 0.2 });
-    revealItems.forEach(el => observer.observe(el));
-    window.addEventListener('load', () => {
-        revealItems.forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight - 80) el.classList.add('revealed'); });
-    });
-
-    // Scroll top
+    // SCROLL TOP BUTTON
     const scrollBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 400));
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) scrollBtn.classList.add('show');
+        else scrollBtn.classList.remove('show');
+    });
     scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Sliders
-    window.slidesState = { kraftomex: 0, kennel: 0 };
-    window.totalSlides = { kraftomex: 3, kennel: 3 };
+    // EFECTO DE CAMBIO DE FONDO AL HACER SCROLL:
+    // Cuando la sección de Kraftomex entra en vista, cambiamos el fondo a claro (light-bg)
+    // y cuando salimos hacia arriba recuperamos el fondo oscuro
+    const kraftomexSection = document.getElementById('kraftomex-section');
+    const anthmacSection = document.getElementById('anthmac-section');
+    const bodyElement = document.body;
 
-    function updateSlider(project) {
-        const slidesContainer = document.getElementById(`${project}Slides`);
-        if(!slidesContainer) return;
-        slidesContainer.style.transform = `translateX(-${window.slidesState[project] * 100}%)`;
-    }
-    window.nextSlide = (project) => {
-        if(window.slidesState[project] < window.totalSlides[project] - 1)
-            window.slidesState[project]++;
-        else window.slidesState[project] = 0;
-        updateSlider(project);
-    };
-    window.prevSlide = (project) => {
-        if(window.slidesState[project] > 0)
-            window.slidesState[project]--;
-        else window.slidesState[project] = window.totalSlides[project] - 1;
-        updateSlider(project);
-    };
-    document.querySelectorAll('.carousel-slides').forEach(slide => {
-        slide.style.display = 'flex';
-        slide.style.width = '100%';
-        slide.style.height = '100%';
-        for(let img of slide.children) {
-            img.style.width = '100%';
-            img.style.flexShrink = '0';
-            img.style.objectFit = 'cover';
+    // Configuración inicial: la página empieza en modo oscuro (si no está light-mode activado manualmente)
+    // pero el efecto de scroll es independiente del toggle: queremos que al bajar a Kraftomex, 
+    // el fondo de TODA la página se vuelva blanco (o color claro), y al subir a Anthmac vuelva a negro.
+    // Vamos a aplicar una clase al body para manejar el "scroll-state"
+    
+    // Función para verificar qué sección es predominante en viewport
+    function handleScrollBackground() {
+        const kraftRect = kraftomexSection.getBoundingClientRect();
+        const anthRect = anthmacSection.getBoundingClientRect();
+        // Si la sección Kraftomex está visible (especialmente si su parte superior está relativamente cerca)
+        // y además estamos pasando el umbral de la mitad de la pantalla
+        const viewportMiddle = window.innerHeight / 2;
+        const kraftTop = kraftRect.top;
+        const anthBottom = anthRect.bottom;
+        
+        // Si el top de Kraftomex está por debajo de la mitad o ya está visible en su mayoría
+        if (kraftTop < viewportMiddle && kraftRect.bottom > 100) {
+            // Estamos en la zona de Kraftomex: cambiar fondo a claro (si no está ya en light-mode por toggle)
+            // Pero respetamos el toggle: el color debe ser el fondo claro base
+            if (!bodyElement.classList.contains('light-mode')) {
+                // Sin embargo, queremos fondo #F8F6F0 sin activar el modo claro global de textos
+                // La mejor manera: agregar una clase temporal que overridée el bg
+                bodyElement.style.backgroundColor = "#F8F6F0";
+                kraftomexSection.style.backgroundColor = "#F8F6F0";
+                anthmacSection.style.backgroundColor = "#0A0C10";
+            } else {
+                // Si ya está en light-mode, aseguramos consistencia visual
+                bodyElement.style.backgroundColor = "#F8F6F0";
+                kraftomexSection.style.backgroundColor = "#F8F6F0";
+                anthmacSection.style.backgroundColor = "#0A0C10";
+            }
+        } else {
+            // Zona de Anthmac o parte superior: fondo oscuro
+            if (!bodyElement.classList.contains('light-mode')) {
+                bodyElement.style.backgroundColor = "#0A0C10";
+                anthmacSection.style.backgroundColor = "#0A0C10";
+                kraftomexSection.style.backgroundColor = "#F8F6F0";
+            } else {
+                bodyElement.style.backgroundColor = "#F8F6F0";
+                anthmacSection.style.backgroundColor = "#0A0C10";
+                kraftomexSection.style.backgroundColor = "#F8F6F0";
+            }
         }
-    });
-    updateSlider('kraftomex');
-    updateSlider('kennel');
+    }
+    
+    // Escuchar scroll y ejecutar
+    window.addEventListener('scroll', handleScrollBackground);
+    window.addEventListener('resize', handleScrollBackground);
+    handleScrollBackground(); // ejecutar al inicio
+    
+    // También queremos que al hacer clic en el toggle, los fondos se ajusten para no romper la experiencia
+    const originalToggle = toggleBtn.click;
+    if(toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            setTimeout(() => {
+                handleScrollBackground();
+                // forzar estilos de secciones adicionales
+                if(body.classList.contains('light-mode')) {
+                    kraftomexSection.style.backgroundColor = "#F8F6F0";
+                    anthmacSection.style.backgroundColor = "#0A0C10";
+                } else {
+                    // reiniciar la lógica de scroll
+                    handleScrollBackground();
+                }
+            }, 20);
+        });
+    }
+    
 </script>
+
+<!-- INSTRUCCIONES DE USO (solo comentario) 
+     ========================================
+     IMÁGENES REQUERIDAS (colocar dentro de aessets/Portafolio/):
+     
+     1. ANTHMAC-15.png       → imagen principal del proyecto Anthmac (tamaño completo)
+     2. KRAFTOMEX-SM-ASTROS-PAOLA.png → imagen principal Kraftomex (tamaño completo)
+     3. illustrator.svg y photoshop.svg (ya los tienes en tu repositorio)
+     
+     Además, el logo se carga desde aessets/about/MICHITO_MEMBRETADA-04.webp
+     
+     El efecto de scroll: al bajar hasta Kraftomex, el fondo se vuelve blanco/beige,
+     al subir regresa a negro automáticamente. El modo oscuro/claro manual sigue funcionando
+     y respeta la experiencia.
+     
+     Fuente "Shadows Into Light" aplicada solo al año 2026, color blanco sin fondo ni círculo.
+     
+     Todo listo para que brilles.
+     ======================================== -->
 </body>
 </html>

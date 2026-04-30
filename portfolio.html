@@ -43,7 +43,6 @@
             scroll-behavior: smooth;
         }
 
-        /* HEADER FIJO */
         .glass-header {
             position: fixed;
             top: 0;
@@ -117,7 +116,6 @@
             padding-top: 100px;
         }
 
-        /* HERO SECTION */
         .hero {
             min-height: 85vh;
             display: flex;
@@ -178,7 +176,6 @@
             opacity: 0.4;
         }
 
-        /* SECCIONES GENERALES */
         .project-section {
             padding: 5rem 2rem;
             transition: background-color 0.6s ease;
@@ -186,7 +183,13 @@
         .project-section.dark-bg {
             background-color: #0A0C10;
         }
+        .project-section.light-bg {
+            background-color: #F8F6F0;
+        }
         body.light-mode .project-section.dark-bg {
+            background-color: #F8F6F0;
+        }
+        body.light-mode .project-section.light-bg {
             background-color: #F8F6F0;
         }
         .container {
@@ -233,7 +236,6 @@
             transform: translateY(-3px);
         }
 
-        /* IMAGEN FULL WIDTH (tamaño de pantalla) */
         .full-width-image {
             width: 100%;
             margin: 2rem 0 3rem;
@@ -247,7 +249,25 @@
             box-shadow: none;
         }
 
-        /* Nota de autoría */
+        /* Galería de fotos (pegadas unas con otras) */
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 0;
+            margin: 2rem 0;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .photo-gallery img:hover {
+            transform: scale(0.98);
+            filter: brightness(1.02);
+        }
+
         .autor-note {
             background: rgba(255,215,0,0.05);
             padding: 1.2rem 1.8rem;
@@ -269,7 +289,6 @@
             margin: 1rem 0;
         }
 
-        /* Responsive */
         @media (max-width: 860px) {
             .hero h1 { font-size: 4rem; }
             .project-title { font-size: 2.8rem; }
@@ -279,6 +298,7 @@
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 3rem; }
+            .photo-gallery { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -311,7 +331,7 @@
         </div>
     </section>
 
-    <!-- PROYECTO 1: ANTHMAC (Fondo negro / oscuro) -->
+    <!-- 1. ANTHMAC -->
     <section class="project-section dark-bg" id="anthmac-section">
         <div class="container">
             <div class="project-header">
@@ -322,16 +342,14 @@
                     <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
                 </div>
             </div>
-
-            <!-- IMAGEN FULL ANCHO: ANTHMAC-15.png -->
             <div class="full-width-image">
                 <img src="aessets/Portafolio/ANTHMAC-15.png" alt="Anthmac presentación" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=ANTHMAC-15.png'">
             </div>
         </div>
     </section>
 
-    <!-- PROYECTO 2: KRAFTOMEX (Fondo claro/transición al hacer scroll - se maneja con observer) -->
-    <section class="project-section" id="kraftomex-section" style="background-color: var(--light-bg); transition: background-color 0.6s ease;">
+    <!-- 2. KRAFTOMEX -->
+    <section class="project-section light-bg" id="kraftomex-section">
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2>
@@ -341,20 +359,91 @@
                     <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
                 </div>
             </div>
-
-            <!-- IMAGEN FULL ANCHO: KRAFTOMEX-SM-ASTROS-PAOLA.png -->
             <div class="full-width-image">
                 <img src="aessets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex social media" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=KRAFTOMEX-SM'">
             </div>
-
-            <!-- Nota de autoría -->
             <div class="autor-note">
                 📌 Nota de Autoría: El proyecto de social media para Kraftomex fue desarrollado como una colaboración creativa junto a Eduardo Alfonso López. Este trabajo no corresponde a un cliente directo.
             </div>
         </div>
     </section>
 
-    <div style="height: 4rem;"></div>
+    <!-- 3. KENNEL -->
+    <section class="project-section dark-bg" id="kennel-section">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Kennel</h2>
+                <div class="project-sub">Campañas + Social Media</div>
+                <div class="tools-row">
+                    <img src="aessets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="aessets/Portafolio/KENNEL-SM-ASTROS-PAOLA-19.png" alt="Kennel social media" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=KENNEL-19.png'">
+            </div>
+            <div class="autor-note">
+                📌 Nota de Autoría: El proyecto de social media para Kennel fue desarrollado como una colaboración creativa junto a Eduardo Alfonso López. Este trabajo no corresponde a un cliente directo.
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. ARCÁNGEL URIEL -->
+    <section class="project-section light-bg" id="arcangel-section">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title" style="color: var(--text-dark);">Arcángel Uriel</h2>
+                <div class="project-sub">Ilustración + Merch Design</div>
+                <div class="tools-row">
+                    <img src="aessets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="aessets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
+                    <img src="aessets/Portafolio/sketchbook-pro.svg" alt="Sketchbook" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Sketch'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="aessets/Portafolio/au-portafolio-2026-20.png" alt="Arcángel Uriel portafolio" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=Arcangel+Uriel'">
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. ILUSTRACIONES + MERCH -->
+    <section class="project-section dark-bg" id="ilustraciones-section">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Ilustraciones + Merch</h2>
+                <div class="project-sub">Exploración Visual · Arte Digital</div>
+                <div class="tools-row">
+                    <img src="aessets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                    <img src="aessets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
+                    <img src="aessets/Portafolio/sketchbook-pro.svg" alt="Sketchbook" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Sketch'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="aessets/Portafolio/ilustraciones-galería-21.png" alt="Galería ilustraciones" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=Ilustraciones+y+Merch'">
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. GALERÍA DE FOTOGRAFÍAS -->
+    <section class="project-section dark-bg" id="fotografia-section">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Fotografía</h2>
+                <div class="project-sub">Imágenes · Narrativa Visual</div>
+            </div>
+            <div class="photo-gallery">
+                <!-- reemplazar los placeholders con tus imágenes de fotografía -->
+                <img src="aessets/Portafolio/foto-1.jpg" alt="fotografía 1" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+1'">
+                <img src="aessets/Portafolio/foto-2.jpg" alt="fotografía 2" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+2'">
+                <img src="aessets/Portafolio/foto-3.jpg" alt="fotografía 3" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+3'">
+                <img src="aessets/Portafolio/foto-4.jpg" alt="fotografía 4" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+4'">
+                <img src="aessets/Portafolio/foto-5.jpg" alt="fotografía 5" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+5'">
+                <img src="aessets/Portafolio/foto-6.jpg" alt="fotografía 6" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+6'">
+            </div>
+        </div>
+    </section>
+
+    <div style="height: 2rem;"></div>
 </main>
 
 <footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,215,0,0.2); margin-top: 1rem;">
@@ -362,7 +451,7 @@
 </footer>
 
 <script>
-    // MODO CLARO / OSCURO (manual)
+    // MODO CLARO / OSCURO
     const toggleBtn = document.getElementById('darkToggle');
     const body = document.body;
     const storedTheme = localStorage.getItem('theme');
@@ -398,91 +487,15 @@
         });
     }
 
-    // SCROLL TOP BUTTON
+    // SCROLL TOP
     const scrollBtn = document.getElementById('scrollTopBtn');
     window.addEventListener('scroll', () => {
         if(window.scrollY > 500) scrollBtn.classList.add('show');
         else scrollBtn.classList.remove('show');
     });
     scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // EFECTO DE CAMBIO DE FONDO AL HACER SCROLL:
-    // Cuando la sección de Kraftomex entra en vista, cambiamos el fondo a claro (light-bg)
-    // y cuando salimos hacia arriba recuperamos el fondo oscuro
-    const kraftomexSection = document.getElementById('kraftomex-section');
-    const anthmacSection = document.getElementById('anthmac-section');
-    const bodyElement = document.body;
-
-    // Configuración inicial: la página empieza en modo oscuro (si no está light-mode activado manualmente)
-    // pero el efecto de scroll es independiente del toggle: queremos que al bajar a Kraftomex, 
-    // el fondo de TODA la página se vuelva blanco (o color claro), y al subir a Anthmac vuelva a negro.
-    // Vamos a aplicar una clase al body para manejar el "scroll-state"
-    
-    // Función para verificar qué sección es predominante en viewport
-    function handleScrollBackground() {
-        const kraftRect = kraftomexSection.getBoundingClientRect();
-        const anthRect = anthmacSection.getBoundingClientRect();
-        // Si la sección Kraftomex está visible (especialmente si su parte superior está relativamente cerca)
-        // y además estamos pasando el umbral de la mitad de la pantalla
-        const viewportMiddle = window.innerHeight / 2;
-        const kraftTop = kraftRect.top;
-        const anthBottom = anthRect.bottom;
-        
-        // Si el top de Kraftomex está por debajo de la mitad o ya está visible en su mayoría
-        if (kraftTop < viewportMiddle && kraftRect.bottom > 100) {
-            // Estamos en la zona de Kraftomex: cambiar fondo a claro (si no está ya en light-mode por toggle)
-            // Pero respetamos el toggle: el color debe ser el fondo claro base
-            if (!bodyElement.classList.contains('light-mode')) {
-                // Sin embargo, queremos fondo #F8F6F0 sin activar el modo claro global de textos
-                // La mejor manera: agregar una clase temporal que overridée el bg
-                bodyElement.style.backgroundColor = "#F8F6F0";
-                kraftomexSection.style.backgroundColor = "#F8F6F0";
-                anthmacSection.style.backgroundColor = "#0A0C10";
-            } else {
-                // Si ya está en light-mode, aseguramos consistencia visual
-                bodyElement.style.backgroundColor = "#F8F6F0";
-                kraftomexSection.style.backgroundColor = "#F8F6F0";
-                anthmacSection.style.backgroundColor = "#0A0C10";
-            }
-        } else {
-            // Zona de Anthmac o parte superior: fondo oscuro
-            if (!bodyElement.classList.contains('light-mode')) {
-                bodyElement.style.backgroundColor = "#0A0C10";
-                anthmacSection.style.backgroundColor = "#0A0C10";
-                kraftomexSection.style.backgroundColor = "#F8F6F0";
-            } else {
-                bodyElement.style.backgroundColor = "#F8F6F0";
-                anthmacSection.style.backgroundColor = "#0A0C10";
-                kraftomexSection.style.backgroundColor = "#F8F6F0";
-            }
-        }
-    }
-    
-    // Escuchar scroll y ejecutar
-    window.addEventListener('scroll', handleScrollBackground);
-    window.addEventListener('resize', handleScrollBackground);
-    handleScrollBackground(); // ejecutar al inicio
-    
-    // También queremos que al hacer clic en el toggle, los fondos se ajusten para no romper la experiencia
-    const originalToggle = toggleBtn.click;
-    if(toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            setTimeout(() => {
-                handleScrollBackground();
-                // forzar estilos de secciones adicionales
-                if(body.classList.contains('light-mode')) {
-                    kraftomexSection.style.backgroundColor = "#F8F6F0";
-                    anthmacSection.style.backgroundColor = "#0A0C10";
-                } else {
-                    // reiniciar la lógica de scroll
-                    handleScrollBackground();
-                }
-            }, 20);
-        });
-    }
-    
 </script>
-     Todo listo para que brilles.
-     ======================================== -->
+
+
 </body>
 </html>

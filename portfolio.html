@@ -43,6 +43,7 @@
             scroll-behavior: smooth;
         }
 
+        /* HEADER FIJO */
         .glass-header {
             position: fixed;
             top: 0;
@@ -64,10 +65,18 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
+        .logo-area {
+            display: inline-block;
+        }
         .logo-area img {
             height: 55px;
             width: auto;
             display: block;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+        .logo-area img:hover {
+            transform: scale(0.97);
+            opacity: 0.9;
         }
 
         .theme-toggle {
@@ -116,6 +125,7 @@
             padding-top: 100px;
         }
 
+        /* HERO SECTION */
         .hero {
             min-height: 85vh;
             display: flex;
@@ -176,6 +186,7 @@
             opacity: 0.4;
         }
 
+        /* SECCIONES GENERALES */
         .project-section {
             padding: 5rem 2rem;
             transition: background-color 0.6s ease;
@@ -268,6 +279,7 @@
             filter: brightness(1.02);
         }
 
+        /* NOTA DE AUTORÍA CENTRADA */
         .autor-note {
             background: rgba(255,215,0,0.05);
             padding: 1.2rem 1.8rem;
@@ -277,9 +289,48 @@
             color: var(--text-muted-light);
             border-left: 3px solid var(--primary);
             max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
         }
         body.light-mode .autor-note {
             background: #f0f0ea;
+        }
+
+        /* REDES SOCIALES - MISMO ESTILO QUE INDEX */
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0 1rem;
+            flex-wrap: wrap;
+        }
+        .social-footer a {
+            color: var(--text-light);
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            background: rgba(255, 215, 0, 0.05);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        .social-footer a:hover {
+            color: var(--primary);
+            transform: translateY(-5px) scale(1.1);
+            background: rgba(255, 215, 0, 0.15);
+        }
+        body.light-mode .social-footer a {
+            background: rgba(0, 0, 0, 0.03);
+            color: var(--text-dark);
+        }
+        body.light-mode .social-footer a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: var(--primary);
         }
 
         hr {
@@ -289,12 +340,20 @@
             margin: 1rem 0;
         }
 
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(255,215,0,0.2);
+            margin-top: 1rem;
+        }
+
         @media (max-width: 860px) {
             .hero h1 { font-size: 4rem; }
             .project-title { font-size: 2.8rem; }
             .glass-header { padding: 1rem; }
             .project-section { padding: 3rem 1rem; }
             .year-badge span { font-size: 2.2rem; }
+            .social-footer a { width: 50px; height: 50px; font-size: 1.5rem; }
         }
         @media (max-width: 480px) {
             .hero h1 { font-size: 3rem; }
@@ -303,10 +362,11 @@
     </style>
 </head>
 <body>
- <header class="glass-header">
+
+<header class="glass-header">
     <div class="logo-area">
         <a href="index.html">
-            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito" onerror="this.src='https://placehold.co/160x56/1F222A/FFD700?text=MICHITO'">
+            <img src="aessets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.src='https://placehold.co/200x60/FFD700/0A0C10?text=MICHITO'">
         </a>
     </div>
     <button class="theme-toggle" id="darkToggle" aria-label="Modo oscuro/claro">
@@ -332,7 +392,7 @@
         </div>
     </section>
 
-    <!-- 1. ANTHMAC -->
+    <!-- 1. ANTHMAC (fondo oscuro) -->
     <section class="project-section dark-bg" id="anthmac-section">
         <div class="container">
             <div class="project-header">
@@ -349,7 +409,7 @@
         </div>
     </section>
 
-    <!-- 2. KRAFTOMEX -->
+    <!-- 2. KRAFTOMEX (fondo claro) -->
     <section class="project-section light-bg" id="kraftomex-section">
         <div class="container">
             <div class="project-header">
@@ -369,7 +429,7 @@
         </div>
     </section>
 
-    <!-- 3. KENNEL -->
+    <!-- 3. KENNEL (fondo oscuro) -->
     <section class="project-section dark-bg" id="kennel-section">
         <div class="container">
             <div class="project-header">
@@ -389,7 +449,7 @@
         </div>
     </section>
 
-    <!-- 4. ARCÁNGEL URIEL -->
+    <!-- 4. ARCÁNGEL URIEL (fondo claro) -->
     <section class="project-section light-bg" id="arcangel-section">
         <div class="container">
             <div class="project-header">
@@ -407,7 +467,7 @@
         </div>
     </section>
 
-    <!-- 5. ILUSTRACIONES + MERCH -->
+    <!-- 5. ILUSTRACIONES + MERCH (fondo oscuro) -->
     <section class="project-section dark-bg" id="ilustraciones-section">
         <div class="container">
             <div class="project-header">
@@ -420,12 +480,12 @@
                 </div>
             </div>
             <div class="full-width-image">
-                <img src="aessets/Portafolio/ilustraciones-galeria-21.png" alt="Galería ilustraciones" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=Ilustraciones+y+Merch'">
+                <img src="aessets/Portafolio/ilustraciones-galería-21.png" alt="Galería ilustraciones" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=Ilustraciones+y+Merch'">
             </div>
         </div>
     </section>
 
-    <!-- 6. GALERÍA DE FOTOGRAFÍAS -->
+    <!-- 6. GALERÍA DE FOTOGRAFÍAS (fondo oscuro) -->
     <section class="project-section dark-bg" id="fotografia-section">
         <div class="container">
             <div class="project-header">
@@ -433,7 +493,6 @@
                 <div class="project-sub">Imágenes · Narrativa Visual</div>
             </div>
             <div class="photo-gallery">
-                <!-- reemplazar los placeholders con tus imágenes de fotografía -->
                 <img src="aessets/Portafolio/foto-1.jpg" alt="fotografía 1" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+1'">
                 <img src="aessets/Portafolio/foto-2.jpg" alt="fotografía 2" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+2'">
                 <img src="aessets/Portafolio/foto-3.jpg" alt="fotografía 3" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=Foto+3'">
@@ -447,13 +506,13 @@
     <div style="height: 2rem;"></div>
 </main>
 
-<footer style="text-align: center; padding: 2rem; border-top: 1px solid rgba(255,215,0,0.2); margin-top: 1rem;">
-           <!-- SOCIAL LINKS & FOOTER -->
+<!-- REDES SOCIALES (mismo estilo que index) y FOOTER -->
+<footer>
     <div class="social-footer">
-        <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-        <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://github.com/MichitoDisenador" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+        <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noopener"><i class="fab fa-dribbble"></i></a>
+        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
         <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
     </div>
     <p>© 2026 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
@@ -504,7 +563,6 @@
     });
     scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 </script>
-
 
 </body>
 </html>

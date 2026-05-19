@@ -33,15 +33,6 @@
             overflow-x: hidden;
         }
 
-        body.light-mode {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
         /* Fade al aparecer */
         .fade-on-scroll {
             opacity: 0;
@@ -73,11 +64,7 @@
                 padding: 1.2rem 2.5rem;
             }
         }
-        body.light-mode .glass-header {
-            background: rgba(248, 246, 240, 0.9);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
+    
         .logo-area img {
             height: 45px;
             width: auto;
@@ -261,14 +248,7 @@
             border-radius: 30px;
             color: #000000 !important;
         }
-        .light-bg .project-sub {
-            background: rgba(0,0,0,0.12);
-            color: #1f1e1a !important;
-        }
-        
-        .light-bg .project-title {
-            color: var(--text-dark);
-        }
+     
         
         /* SVG CON ANIMACIÓN HOVER - SUBEN 5px */
         .tools-row {
@@ -277,8 +257,8 @@
             margin: 0.8rem 0 1rem;
         }
         .tools-row img {
-            width: 28px;
-            height: 28px;
+            width: 44px;
+            height: 44px;
             transition: transform 0.2s ease;
             filter: brightness(0) invert(1);
         }
@@ -442,13 +422,13 @@
     overflow: hidden;
 }
 
-/* Si quieres que el Reel no ocupe todo el ancho en pantallas gigantes, limitamos las verticales */
+/* responsive */
 .video-card.vertical {
     max-width: 340px; 
-    justify-self: center; /* Lo centra en su columna */
+    justify-self: center;
 }
 
-/* El truco de la proporción automática */
+/* proporción automática */
 .video-wrapper {
     position: relative;
     width: 100%;
@@ -566,7 +546,6 @@
     </div>
     <div class="header-right">
         <a href="about.html" class="sobre-mi-link">Sobre Mí</a>
-        <button class="theme-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
     </div>
 </header>
 <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
@@ -723,7 +702,7 @@
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/pUmL2K3Kz08" title="YouTube video" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div class="video-label">Motion Graphics</div>
+                <div class="video-label">Animación con IA</div>
             </div>
 
             <!-- Video 3: Reel de Facebook (Vertical) -->
@@ -806,27 +785,10 @@
 </footer>
 
 <script>
-    // MODO CLARO/OSCURO
-    const toggleBtn = document.getElementById('darkToggle');
-    const body = document.body;
-    const storedTheme = localStorage.getItem('theme');
-    if (storedTheme === 'light') {
-        body.classList.add('light-mode');
-        if(toggleBtn) toggleBtn.querySelector('i').className = 'fas fa-sun';
-    } else {
-        if(toggleBtn) toggleBtn.querySelector('i').className = 'fas fa-moon';
-    }
-    if(toggleBtn) toggleBtn.addEventListener('click', () => {
-        body.classList.toggle('light-mode');
-        const icon = toggleBtn.querySelector('i');
-        if(body.classList.contains('light-mode')) {
-            icon.className = 'fas fa-sun';
-            localStorage.setItem('theme', 'light');
-        } else {
-            icon.className = 'fas fa-moon';
-            localStorage.setItem('theme', 'dark');
-        }
-    });
+    // FORZAR MODO OSCURO SIEMPRE
+const body = document.body;
+body.classList.remove('light-mode');
+localStorage.setItem('theme', 'dark');
 
     // SCROLL TOP
     const scrollBtn = document.getElementById('scrollTopBtn');

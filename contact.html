@@ -501,5 +501,63 @@
         });
     });
 </script>
+    <!-- POPUP DE ÉXITO -->
+<div id="successPopup" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 9999; display: none; align-items: center; justify-content: center;">
+    <div style="background: #161A22; border-radius: 32px; padding: 2rem; max-width: 350px; width: 90%; text-align: center; border: 2px solid #FFD700; box-shadow: 0 0 40px rgba(255,215,0,0.4);">
+        <div style="font-size: 4rem; color: #4CAF50; margin-bottom: 1rem;">✓</div>
+        <h3 style="color: #FFD700; margin-bottom: 0.8rem;">¡Mensaje enviado!</h3>
+        <p style="color: #A0A4B0; margin-bottom: 1.5rem;">Gracias por contactarme. Te responderé en menos de 24 horas.</p>
+        <button id="closePopupBtn" style="background: #FFD700; color: #0A0C10; border: none; padding: 0.6rem 1.8rem; border-radius: 40px; font-weight: 600; cursor: pointer;">Cerrar</button>
+    </div>
+</div>
+
+<script>
+    // POPUP PARA EL FORMULARIO
+    const popup = document.getElementById('successPopup');
+    const formContacto = document.getElementById('contactForm');
+    
+    if (formContacto) {
+        formContacto.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const datos = new FormData(formContacto);
+            
+            try {
+                const respuesta = await fetch(formContacto.action, {
+                    method: 'POST',
+                    body: datos,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (respuesta.ok) {
+                    // Mostrar popup
+                    popup.style.display = 'flex';
+                    formContacto.reset();
+                    
+                    // Ocultar después de 4 segundos
+                    setTimeout(() => {
+                        popup.style.display = 'none';
+                    }, 4000);
+                } else {
+                    alert('Error al enviar. Por favor, intenta de nuevo.');
+                }
+            } catch (error) {
+                alert('Error de conexión. Verifica tu internet.');
+            }
+        });
+    }
+    
+    // Cerrar popup con el botón
+    document.getElementById('closePopupBtn')?.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
+    
+    // Cerrar popup haciendo clic fuera
+    popup?.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>

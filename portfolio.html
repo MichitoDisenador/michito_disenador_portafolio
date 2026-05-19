@@ -78,29 +78,59 @@
             align-items: center;
             gap: 1rem;
         }
-        .sobre-mi-link {
-            color: #b0c4d3;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.85rem;
-            transition: color 0.2s;
-        }
-        .sobre-mi-link:hover { color: var(--primary); }
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.3rem;
-            cursor: pointer;
-            color: currentColor;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .theme-toggle:hover { background: rgba(255, 215, 0, 0.15); }
+       .sobre-mi-link {
+    color: #b0c4d3;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+    margin-right: 0.5rem;
+}
 
+.sobre-mi-link:hover {
+    color: var(--primary);
+}
+
+/* Avatar / Foto de perfil */
+.avatar-link {
+    display: block;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+    margin-left: 0.5rem;
+}
+
+.nav-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.avatar-link:hover {
+    transform: scale(1.05);
+    border-color: var(--primary);
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
+}
+
+.avatar-link:hover .nav-avatar {
+    transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+    .avatar-link {
+        width: 48px;
+        height: 48px;
+    }
+    .sobre-mi-link {
+        font-size: 0.95rem;
+    }
+}
         .scroll-top {
             position: fixed;
             bottom: 1.5rem;
@@ -545,8 +575,10 @@
         <a href="#"><img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.src='https://placehold.co/200x60/FFD700/0A0C10?text=MICHITO'"></a>
     </div>
     <div class="header-right">
-        <a href="about.html" class="sobre-mi-link">Sobre Mí</a>
-    </div>
+       <a href="about.html" class="sobre-mi-link">Sobre Mí</a>
+    <a href="about.html" class="avatar-link">
+        <img src="assets/Portafolio/paola-perfil.webp" alt="Paola Herrera" class="nav-avatar">
+    </a>
 </header>
 <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
@@ -565,7 +597,7 @@
         <div class="about-mini fade-on-scroll">
             <div class="about-inner">
                 <div class="about-avatar">
-                    <img src="assets/about/paola-perfil.webp" alt="Paola Herrera" onerror="this.src='https://placehold.co/300x300/FFD700/0A0C10?text=PH'">
+                    <img src="assets/Portafolio/paola-perfil.webp" alt="Paola Herrera" onerror="this.src='https://placehold.co/300x300/FFD700/0A0C10?text=PH'">
                 </div>
                 <div class="about-text">
                     <h3>Paola Herrera <span style="color:var(--primary);">Sol</span></h3>

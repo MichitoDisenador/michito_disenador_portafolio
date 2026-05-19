@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#FFD700">
-    <title>Sobre Mí | Paola Herrera</title>
+    <title>Contacto | Paola Herrera</title>
     
     <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
@@ -24,21 +24,21 @@
             --bg: #05070A;
             --surface: #0F1219;
             --card-bg: rgba(18, 22, 30, 0.7);
-            --border: rgba(255, 215, 0, 0.12);
+            --border: rgba(255, 215, 0, 0.15);
             --gold: #FFD700;
             --gold-soft: #FFDE4D;
             --text-primary: #F0F2F8;
             --text-secondary: #9CA3AF;
             --hover-glow: rgba(255, 215, 0, 0.2);
             --radius-lg: 32px;
-            --radius-md: 28px;
+            --radius-md: 24px;
         }
 
         body.light-mode {
             --bg: #F9F7F2;
             --surface: #FFFFFF;
             --card-bg: #FFFFFF;
-            --border: rgba(214, 175, 55, 0.2);
+            --border: rgba(212, 175, 55, 0.2);
             --text-primary: #1A1E2C;
             --text-secondary: #4B5563;
             --gold: #D4AF37;
@@ -50,7 +50,7 @@
             background-color: var(--bg);
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
-            line-height: 1.5;
+            line-height: 1.6;
             transition: background-color 0.3s ease, color 0.2s ease;
         }
 
@@ -72,17 +72,14 @@
         body.light-mode .glass-header {
             background: rgba(249, 247, 242, 0.85);
         }
-        
-        /* LOGO REGLAMENTARIO */
         .logo-area img {
-            height: 45px;
+            height: 56px;
             width: auto;
             transition: transform 0.2s;
         }
         .logo-area img:hover {
-            transform: scale(1.05);
+            transform: scale(1.03);
         }
-
         .theme-toggle {
             background: none;
             border: none;
@@ -94,6 +91,9 @@
             border-radius: 100px;
             background: rgba(255,255,240,0.05);
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .theme-toggle:hover {
             background: var(--hover-glow);
@@ -101,7 +101,7 @@
         }
 
         main {
-            max-width: 1280px;
+            max-width: 1120px;
             margin: 0 auto;
             padding: 140px 2rem 4rem;
         }
@@ -117,9 +117,9 @@
             transform: translateY(0);
         }
 
-        /* SECCIONES COMPARTIDAS */
+        /* SECCIONES */
         section {
-            margin-bottom: 6rem;
+            margin-bottom: 7rem;
         }
         .section-subtitle {
             font-size: 0.85rem;
@@ -127,20 +127,21 @@
             letter-spacing: 3px;
             color: var(--gold);
             margin-bottom: 1rem;
+            font-weight: 600;
         }
         h2.section-title {
             font-size: 2.2rem;
             font-weight: 500;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             letter-spacing: -0.01em;
         }
 
         /* HERO / ABOUT GRID */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1.1fr;
             gap: 4rem;
-            align-items: start;
+            align-items: center;
         }
         .image-frame {
             position: relative;
@@ -151,14 +152,16 @@
             object-fit: cover;
             aspect-ratio: 1 / 1;
             box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
-            transition: transform 0.4s ease;
+            filter: grayscale(20%);
+            transition: all 0.5s ease;
         }
         .image-frame:hover img {
+            filter: grayscale(0%);
             transform: scale(1.01);
         }
         .badge-years {
             position: absolute;
-            bottom: -20px;
+            bottom: -15px;
             right: 20px;
             background: var(--gold);
             color: #0A0C10;
@@ -170,7 +173,7 @@
         }
 
         .about-text h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 600;
             letter-spacing: -0.02em;
             background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold-soft) 80%);
@@ -178,6 +181,7 @@
             -webkit-background-clip: text;
             color: transparent;
             margin-bottom: 1.2rem;
+            line-height: 1.2;
         }
         .about-text .lead {
             font-size: 1.25rem;
@@ -185,19 +189,20 @@
             margin-bottom: 1.8rem;
             border-left: 3px solid var(--gold);
             padding-left: 1.2rem;
+            font-weight: 500;
         }
         .desc-text {
             color: var(--text-secondary);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             line-height: 1.6;
         }
-
-        /* HABILIDADES BOTÓN BRILLANTE (CON NUEVAS SKILLS) */
+        
+        /* SKILL PILLS (Botones brillantes) */
         .skill-pills {
             display: flex;
             flex-wrap: wrap;
             gap: 0.7rem;
-            margin: 2rem 0 1rem;
+            margin-top: 2rem;
         }
         .skill-pills span {
             background: rgba(255, 215, 0, 0.08);
@@ -208,7 +213,7 @@
             font-size: 0.85rem;
             font-weight: 500;
             color: var(--gold-soft);
-            transition: all 0.2s;
+            transition: 0.2s;
         }
         body.light-mode .skill-pills span {
             background: rgba(212, 175, 55, 0.1);
@@ -218,10 +223,9 @@
             background: rgba(255, 215, 0, 0.25);
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
-            color: var(--gold);
         }
 
-        /* ESPECIALIDADES (CON ICONOS ENCIENDEN EN ORO Y CENTRADOS) */
+        /* ESPECIALIDADES */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -232,7 +236,7 @@
             backdrop-filter: blur(4px);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 2rem 1.8rem;
+            padding: 2.5rem 2rem;
             transition: all 0.3s ease;
         }
         .spec-card:hover {
@@ -240,11 +244,9 @@
             transform: translateY(-6px);
             box-shadow: 0 20px 30px -12px rgba(0,0,0,0.3);
         }
-        
-        /* ICONOS CENTRADOS QUE ENCIENDEN EN ORO */
         .spec-icon {
             font-size: 2.4rem;
-            margin: 0 auto 1.2rem auto;
+            margin: 0 auto 1.5rem auto; /* Centrado automático horizontal */
             background: rgba(255,215,0,0.1);
             width: 58px;
             height: 58px;
@@ -253,38 +255,32 @@
             justify-content: center;
             border-radius: 20px;
             color: var(--gold);
-            transition: all 0.3s ease;
         }
-        .spec-card:hover .spec-icon {
-            background: var(--gold);
-            color: #0A0C10;
-            box-shadow: 0 0 15px var(--hover-glow);
+        .spec-card h3, .spec-card p {
+            text-align: center; /* Centra textos de las tarjetas */
         }
-
         .spec-card h3 {
-            font-size: 1.7rem;
+            font-size: 1.5rem;
             font-weight: 500;
-            margin: 0.5rem 0 0.8rem;
-            text-align: center;
+            margin-bottom: 0.8rem;
         }
         .spec-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
-            line-height: 1.5;
         }
 
         /* TIMELINE */
         .timeline-list {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
+            gap: 2.5rem;
         }
         .timeline-row {
             display: grid;
-            grid-template-columns: 140px 1fr;
+            grid-template-columns: 160px 1fr;
             gap: 2rem;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 2rem;
+            padding-bottom: 2.5rem;
         }
         .timeline-year {
             font-weight: 700;
@@ -308,75 +304,50 @@
             margin: 0.4rem 0;
         }
 
-        /* CITA / FRASE */
-        .quote-block {
-            text-align: center;
-            background: var(--card-bg);
-            border-radius: 48px;
-            padding: 3rem 2rem;
-            border: 1px solid var(--border);
-        }
-        .quote-block i {
-            font-size: 2.2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            opacity: 0.7;
-        }
-        .quote-block p {
-            font-size: 1.6rem;
-            font-weight: 400;
-            line-height: 1.35;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* STUDIO GRID CORREGIDO */
+        /* SECCIÓN INSIDE / STUDIO (Sin vinilos) */
         .studio-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: space-between;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
             align-items: center;
         }
-        .studio-text {
-            flex: 1;
-            min-width: 300px;
-        }
-        .studio-card {
+        .studio-quote {
             background: var(--card-bg);
-            border-radius: 40px;
-            padding: 1.5rem 2rem;
+            border-radius: var(--radius-md);
+            padding: 2rem;
             border: 1px solid var(--border);
-            flex: 0.8;
-            min-width: 280px;
+            position: relative;
+        }
+        .studio-quote i {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .studio-quote p {
+            font-style: italic;
+            color: var(--text-secondary);
         }
 
-        /* COLABORACIONES / LOGOS EN DESKTOP OPTIMIZADOS */
+        /* COLABORACIONES / LOGOS (Corregidos para Desktop y Mobile) */
         .clients-flex {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Forzado a 4 columnas simétricas en escritorio */
+            gap: 2rem;
             align-items: center;
-            gap: 4.5rem; /* Más espacio y presencia en Desktop */
+            justify-items: center;
             margin: 3rem 0;
         }
-        .client-logo {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
         .client-logo img {
-            height: 75px; /* Tamaño realzado para Desktop */
-            width: auto;
-            max-width: 180px;
+            height: auto;
+            width: 100%;
+            max-width: 160px; /* Tamaño ideal y visible en desktop */
             object-fit: contain;
             filter: saturate(0.85) brightness(0.95);
             transition: all 0.25s ease;
         }
         .client-logo:hover img {
             filter: saturate(1) brightness(1.2);
-            transform: translateY(-4px);
+            transform: translateY(-3px);
         }
         body.light-mode .client-logo img {
             filter: brightness(0.85) contrast(0.9);
@@ -385,9 +356,63 @@
             filter: brightness(1) contrast(1);
         }
 
-        /* CTA FINALES */
+        /* CITA GRAN BLOCK */
+        .quote-block {
+            text-align: center;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 3.5rem 2rem;
+            border: 1px solid var(--border);
+            margin: 6rem 0;
+        }
+        .quote-block i {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+        .quote-block p {
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 800px;
+            margin: 0 auto 1.4rem;
+        }
+
+        /* CTA SECCIÓN */
         .cta-minimal {
             text-align: center;
+            max-width: 600px;
+            margin: 6rem auto 4rem;
+        }
+        .cta-tag {
+            background: rgba(255,215,0,0.15);
+            color: var(--gold);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+        }
+        .cta-minimal h3 {
+            font-size: 2rem;
+            margin: 1.5rem 0 1rem;
+        }
+        .btn-solid {
+            background: var(--gold);
+            color: #0A0C10;
+            padding: 0.8rem 2rem;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: 0.2s;
+            display: inline-block;
+            margin: 1rem 0.5rem;
+        }
+        .btn-solid:hover {
+            background: #FFDE4D;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(255,215,0,0.2);
         }
         .btn-outline {
             display: inline-block;
@@ -407,36 +432,21 @@
             color: #0F1219;
             box-shadow: 0 6px 14px rgba(255,215,0,0.3);
         }
-        .btn-solid {
-            background: var(--gold);
-            color: #0A0C10;
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: 0.2s;
-            display: inline-block;
-            margin: 1rem 0.5rem;
-        }
-        .btn-solid:hover {
-            background: #FFDE4D;
-            transform: translateY(-3px);
-        }
 
-        /* LÍNEA REGLAMENTARIA AMARILLA, FOOTER Y SOCIAL LINKS ANIMADOS */
+        /* LINEA REGLAMENTARIA AMARILLA Y FOOTER */
         .copyright {
             text-align: center;
             font-size: 0.85rem;
             color: var(--text-secondary);
-            padding: 3rem 0 2rem;
-            border-top: 2px solid var(--gold); /* Línea reglamentaria dorada */
+            padding: 2.5rem 0;
+            border-top: 1.5px solid var(--gold); /* Línea reglamentaria estrictamente amarilla/oro */
+            margin-top: 4rem;
         }
-        
         .social-footer {
             display: flex;
             justify-content: center;
-            gap: 2.5rem;
-            margin-bottom: 2rem; /* Posicionados exactamente bajo las secciones y antes del texto final */
+            gap: 2rem;
+            margin-bottom: 1.5rem; /* Posicionado perfectamente abajo de la estructura antes del texto final */
         }
         .social-footer a {
             color: var(--text-secondary);
@@ -444,27 +454,24 @@
             transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
             display: inline-block;
         }
-        /* Animación hacia arriba y brillo amarillo */
         .social-footer a:hover {
-            color: var(--gold);
-            transform: translateY(-6px);
+            color: var(--gold); /* Enciende en oro al pasar el cursor */
+            transform: translateY(-5px); /* Animación suave hacia arriba */
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
         }
 
-        /* RESPONSIVE AJUSTES */
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .about-grid, .studio-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .glass-header { padding: 1rem 1.5rem; }
             main { padding: 110px 1.5rem 3rem; }
-            .clients-flex { gap: 2.5rem; }
-            .client-logo img { height: 50px; }
-        }
-        @media (max-width: 680px) {
             .timeline-row { grid-template-columns: 1fr; gap: 0.5rem; }
-        }
-        @media (max-width: 580px) {
-            .glass-header { padding: 0.8rem 1.2rem; }
+            .clients-flex { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
             .about-text h1 { font-size: 2.2rem; }
-            .quote-block p { font-size: 1.2rem; }
+            .quote-block p { font-size: 1.3rem; }
         }
     </style>
 </head>
@@ -489,83 +496,84 @@
         </div>
         <div class="about-text">
             <h1>Diseño con propósito<br>y personalidad ✦</h1>
-            <div class="lead">UI/UX · Branding · Ilustración digital</div>
-            <p class="desc-text">Soy Pao, diseñadora gráfica e ilustradora enfocada en el ecosistema digital y UI/UX. Durante más de una década he ayudado a marcas a conectar visualmente con su audiencia a través de identidades memorables, diseño emocional y estructuras de interfaz intuitivas.</p>
-            <p class="desc-text">Me encanta fusionar técnicas tradicionales con lo digital, usando flujos de trabajo avanzados e inteligencia artificial como aliada para potenciar el proceso creativo, acelerar iteraciones y robustecer la estrategia visual sin reemplazar la emoción humana.</p>
+            <div class="lead">Branding, ilustración & creatividad estratégica</div>
+            <p class="desc-text">Soy Pao, diseñadora gráfica e ilustradora. Durante más de una década he ayudado a marcas a conectar visualmente con su audiencia a través de identidades memorables, diseño emocional y detalles que cuentan historias.</p>
+            <p class="desc-text">Me encanta fusionar técnicas tradicionales con lo digital, y sí, también uso inteligencia artificial como aliada para potenciar el proceso creativo, no para reemplazar la emoción humana.</p>
             <div class="skill-pills">
-                <span>UI/UX</span><span>Figma</span><span>Branding</span><span>Ilustración</span><span>Motion Graphics</span><span>Photoshop</span><span>Illustrator</span><span>Clip Studio</span><span>After Effects</span><span>Klaviyo</span><span>Chat GPT</span><span>Gemini</span><span>Claude</span><span>Dirección creativa</span>
+                <span>Branding</span><span>Ilustración</span><span>UI/UX</span><span>Motion Graphics</span><span>Photoshop</span><span>Illustrator</span><span>After Effects</span><span>Clip Studio</span><span>Klaviyo</span><span>Chat GPT</span><span>Gemini</span><span>Claude</span><span>Dirección creativa</span>
             </div>
         </div>
     </section>
 
     <section class="specialties fade-up">
-        <div class="section-subtitle">Lo que hago mejor</div>
-        <h2>Especialidades</h2>
+        <div class="section-subtitle" style="text-align: center;">Lo que hago mejor</div>
+        <h2 class="section-title" style="text-align: center;">Especialidades</h2>
         <div class="cards-grid">
             <div class="spec-card">
                 <div class="spec-icon"><i class="fa-brands fa-figma"></i></div>
-                <h3>UI/UX & Figma</h3>
-                <p>Construyo interfaces de usuario intuitivas, prototipos navegables y sistemas de diseño consistentes que optimizan la experiencia digital del producto.</p>
+                <h3>Identidad & Branding</h3>
+                <p>Construyo sistemas visuales sólidos, desde el naming hasta manuales de marca que aseguran coherencia en cualquier soporte.</p>
             </div>
             <div class="spec-card">
                 <div class="spec-icon"><i class="fa-solid fa-pen-fancy"></i></div>
-                <h3>Identidad & Branding</h3>
-                <p>Sistemas visuales completos: desde el concepto de marca hasta manuales de identidad normativos que aseguran coherencia en entornos web y físicos.</p>
+                <h3>Ilustración digital</h3>
+                <p>Estilo fresco y versátil: ilustración infantil, retratos, arte conceptual y piezas únicas para campañas.</p>
             </div>
             <div class="spec-card">
                 <div class="spec-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3>Ilustración & Dirección</h3>
-                <p>Estilo fresco y versátil enfocado en enriquecer productos interactivos, piezas conceptuales para campañas, empaque y assets de marca únicos.</p>
+                <h3>Estrategia visual</h3>
+                <p>Más allá de lo estético: cada color, tipografía y forma pensado para conectar con tu audiencia.</p>
             </div>
         </div>
     </section>
 
     <section class="timeline-modern fade-up">
         <div class="section-subtitle">Trayectoria</div>
-        <h2>Experiencia profesional</h2>
+        <h2 class="section-title">Experiencia profesional</h2>
         <div class="timeline-list">
             <div class="timeline-row">
                 <div class="timeline-year">2020 — 2026</div>
                 <div class="timeline-info">
-                    <h3>Astros Marketing · Diseñador Gráfico Digital Senior</h3>
-                    <p>Desarrollo de proyectos visuales cross-media para marcas comerciales, campañas publicitarias interactivas y dirección creativa de contenidos digitales.</p>
+                    <h3>Astros Marketing · Diseñador Gráfico Digital</h3>
+                    <p>Desarrollo de proyectos visuales para marcas locales, campañas publicitarias y contenido digital de alto impacto.</p>
                     <ul>
-                        <li>Branding estratégico y optimización de activos digitales.</li>
-                        <li>Gestión de flujos de producción gráfica y diseño de interfaces comerciales.</li>
+                        <li>Branding estratégico.</li>
+                        <li>Gestión de equipos creativos y producción gráfica.</li>
+                        <li>Diseño de piezas para medios tradicionales y digitales.</li>
                     </ul>
                 </div>
             </div>
             <div class="timeline-row">
                 <div class="timeline-year">2016 — Presente</div>
                 <div class="timeline-info">
-                    <h3>Michito Diseñador · Freelance Senior / Consultora</h3>
-                    <p>Estrategias de identidad integral, diseño UI/UX a medida, ilustración corporativa y motion graphics aplicados a startups y agencias creativas.</p>
+                    <h3>Michito Diseñador · Freelance senior</h3>
+                    <p>Proyectos de branding integral, ilustración personalizada y motion graphics para startups, agencias y editoriales.</p>
                     <ul>
-                        <li>Diseño e iteración web responsiva enfocado en conversión.</li>
-                        <li>Animación 2D y assets gráficos personalizados para entornos interactivos.</li>
+                        <li>Branding y Social Media para cuentas locales.</li>
+                        <li>Animación 2D para redes y vídeos promocionales.</li>
+                        <li>Ilustración digital y tradicional</li>
+                        <li>Diseño web UI/UX.</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="quote-block fade-up">
+    <div class="quote-block fade-up">
         <i class="fa-regular fa-comment-dots"></i>
         <p>“Un diseño no está terminado hasta que alguien lo usa.”</p>
-        <div style="margin-top: 1.4rem; font-weight: 300;">— Brenda Laurel</div>
-    </section>
+        <div class="quote-author">— Brenda Laurel</div>
+    </div>
 
-    <section class="fade-up">
-        <div class="section-subtitle">inside the studio</div>
-        <div class="studio-grid">
-            <div class="studio-text">
-                <h2>Más allá del diseño</h2>
-                <p class="desc-text" style="margin-top: 1rem;">Cuando apago las pantallas y dejo descansar a Figma, me encontrarás explorando libretas de dibujo en sucio, analizando composición artística o sumergiéndome en la lectura de novelas de intriga. Mantener viva la curiosidad en otras disciplinas creativas es lo que realmente nutre mi mirada y me permite experimentar en la interfaz.</p>
-            </div>
-            <div class="studio-card">
-                <i class="fa-regular fa-heart" style="color: var(--gold); font-size: 1.8rem;"></i>
-                <p style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary)">“Entender la narrativa gráfica me permite diseñar interfaces con mayor empatía y claridad visual.”</p>
-            </div>
+    <section class="studio-grid fade-up">
+        <div>
+            <div class="section-subtitle">inside the studio</div>
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">Más allá del diseño</h2>
+            <p class="desc-text">Cuando no estoy creando identidades visuales, me encontrarás dibujando en mi cuaderno, leyendo novelas de intriga o explorando cafeterías con una atmósfera inspiradora. Esa curiosidad nutre mi mirada creativa y mis ganas de experimentar.</p>
+        </div>
+        <div class="studio-quote">
+            <i class="fa-regular fa-heart"></i>
+            <p>“Entender otras disciplinas me permite diseñar con más empatía visual.”</p>
         </div>
     </section>
 
@@ -574,102 +582,16 @@
         <h2>Marcas que confían en mí</h2>
         <div class="clients-flex">
             <div class="client-logo">
-                <img src="assets/Arcangel-Uriel-Bazar.png" alt="Arcangel Uriel" onerror="this.src='https://placehold.co/180x80/1A1E2C/FFD700?text=Arcangel+Uriel'">
+                <img src="assets/Arcangel-Uriel-Bazar.png" alt="Arcangel Uriel" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Arcangel+Uriel'">
             </div>
             <div class="client-logo">
-                <img src="assets/MXSIG-Antonio.png" alt="MXSIG" onerror="this.src='https://placehold.co/180x80/1A1E2C/FFD700?text=MXSIG'">
+                <img src="assets/MXSIG-Antonio.png" alt="MXSIG" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=MXSIG'">
             </div>
             <div class="client-logo">
-                <img src="assets/Astros-Marketing.png" alt="Astros Marketing" onerror="this.src='https://placehold.co/180x80/1A1E2C/FFD700?text=Astros'">
+                <img src="assets/Astros-Marketing.png" alt="Astros Marketing" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Astros'">
             </div>
             <div class="client-logo">
-                <img src="assets/AJ-DIGITAL-ART.png" alt="AJ DIGITAL ART" onerror="this.src='https://placehold.co/180x80/1A1E2C/FFD700?text=AJ+Digital+Art'">
+                <img src="assets/AJ-DIGITAL-ART.png" alt="AJ DIGITAL ART" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=AJ+Digital+Art'">
             </div>
         </div>
-        <p style="text-align: center; font-size: 0.85rem; margin-top: 2rem; color: var(--text-secondary); opacity: 0.8;">Proyectos reales · confianza mutua</p>
-    </section>
-
-    <section class="cta-minimal fade-up">
-        <div style="max-width: 600px; margin: 0 auto;">
-            <span style="background: rgba(255,215,0,0.2); padding: 0.2rem 1rem; border-radius: 40px; font-size: 0.7rem; font-weight: 600; letter-spacing: 1px; color: var(--gold);">COMPROMISO</span>
-            <h3 style="font-size: 1.9rem; margin: 1rem 0;">Prueba mi trabajo sin riesgos</h3>
-            <p style="color: var(--text-secondary);">Hacemos una prueba real con el primer encargo. Si el borrador no te sirve, lo retrabajamos sin cargo. Tu único riesgo es dedicar 15 minutos a darme feedback.</p>
-            <div>
-                <a href="portfolio.html" class="btn-solid">Ver portafolio →</a>
-                <a href="contact.html" class="btn-outline">Contactar →</a>
-            </div>
-        </div>
-    </section>
-
-    <div class="copyright">
-        <div class="social-footer">
-            <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p>&copy; 2026 | Diseñado con ❤️ por <span style="color: var(--gold);">Paola Herrera Sol</span></p>
-    </div>
-</main>
-
-<script>
-    // Toggle modo claro/oscuro + persistencia
-    const themeBtn = document.getElementById('themeToggleBtn');
-    const bodyEl = document.body;
-    const storedTheme = localStorage.getItem('theme');
-
-    function updateThemeIcon() {
-        if(!themeBtn) return;
-        const icon = themeBtn.querySelector('i');
-        if(bodyEl.classList.contains('light-mode')) {
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-        } else {
-            icon.classList.remove('fa-sun');
-            icon.classList.add('fa-moon');
-        }
-    }
-
-    if(storedTheme === 'light') {
-        bodyEl.classList.add('light-mode');
-        updateThemeIcon();
-    } else {
-        bodyEl.classList.remove('light-mode');
-        updateThemeIcon();
-    }
-
-    if(themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            bodyEl.classList.toggle('light-mode');
-            const isLight = bodyEl.classList.contains('light-mode');
-            localStorage.setItem('theme', isLight ? 'light' : 'dark');
-            updateThemeIcon();
-        });
-    }
-
-    // Intersection Observer para fade-up
-    const fadeElements = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-    
-    fadeElements.forEach(el => observer.observe(el));
-    
-    window.addEventListener('load', () => {
-        fadeElements.forEach(el => {
-            const rect = el.getBoundingClientRect();
-            if(rect.top < window.innerHeight - 100) {
-                el.classList.add('visible');
-                observer.unobserve(el);
-            }
-        });
-    });
-</script>
-</body>
-</html>
+        <p style="text-align: center; font-size: 0.85rem; margin-top: 1rem; color: var(--text-secondary); opacity: 0.8;">Proyectos reales · confianza mutua</p>

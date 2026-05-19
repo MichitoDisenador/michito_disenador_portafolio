@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#FFD700">
-    <title>Sobre Mí | Paola Herrera</title>
+    <title>Sobre Mi | Paola Herrera</title>
     
     <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
@@ -23,27 +23,27 @@
         :root {
             --bg: #05070A;
             --surface: #0F1219;
-            --card-bg: rgba(18, 22, 30, 0.7);
-            --border: rgba(255, 215, 0, 0.15);
+            --card-bg: rgba(15, 18, 25, 0.4);
+            --border: rgba(255, 215, 0, 0.08);
             --gold: #FFD700;
             --gold-soft: #FFDE4D;
             --text-primary: #F0F2F8;
-            --text-secondary: #9CA3AF;
-            --hover-glow: rgba(255, 215, 0, 0.2);
-            --radius-lg: 32px;
-            --radius-md: 24px;
+            --text-secondary: #8E96A5;
+            --hover-glow: rgba(255, 215, 0, 0.15);
+            --radius-lg: 24px;
+            --radius-md: 16px;
         }
 
         body.light-mode {
             --bg: #F9F7F2;
             --surface: #FFFFFF;
-            --card-bg: #FFFFFF;
-            --border: rgba(212, 175, 55, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --border: rgba(212, 175, 55, 0.15);
             --text-primary: #1A1E2C;
-            --text-secondary: #4B5563;
+            --text-secondary: #6B7280;
             --gold: #D4AF37;
             --gold-soft: #EBC45E;
-            --hover-glow: rgba(212, 175, 55, 0.15);
+            --hover-glow: rgba(212, 175, 55, 0.1);
         }
 
         body {
@@ -51,10 +51,11 @@
             color: var(--text-primary);
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
             transition: background-color 0.3s ease, color 0.2s ease;
         }
 
-        /* HEADER */
+        /* HEADER REGLAMENTARIO */
         .glass-header {
             position: fixed;
             top: 0;
@@ -83,17 +84,17 @@
         .theme-toggle {
             background: none;
             border: none;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             cursor: pointer;
             color: var(--text-primary);
-            width: 42px;
-            height: 42px;
-            border-radius: 100px;
-            background: rgba(255,255,240,0.05);
-            transition: all 0.2s;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.03);
             display: flex;
             align-items: center;
             justify-content: center;
+            transition: all 0.2s;
         }
         .theme-toggle:hover {
             background: var(--hover-glow);
@@ -109,8 +110,8 @@
         /* ANIMACIONES */
         .fade-up {
             opacity: 0;
-            transform: translateY(32px);
-            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .fade-up.visible {
             opacity: 1;
@@ -119,192 +120,235 @@
 
         /* SECCIONES */
         section {
-            margin-bottom: 7rem;
+            margin-bottom: 7.5rem;
         }
         .section-subtitle {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 2.5px;
             color: var(--gold);
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             font-weight: 600;
         }
         h2.section-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 500;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             letter-spacing: -0.01em;
         }
 
-        /* HERO / ABOUT GRID */
+        /* HERO / ABOUT GRID (Efectos y tamaño de foto de mi diseño) */
         .about-grid {
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 4rem;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 5rem;
             align-items: center;
         }
         .image-frame {
             position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            background: #0A0D14;
         }
         .image-frame img {
             width: 100%;
-            border-radius: var(--radius-lg);
+            display: block;
+            aspect-ratio: 4 / 5;
             object-fit: cover;
-            aspect-ratio: 1 / 1;
-            box-shadow: 0 25px 40px -15px rgba(0,0,0,0.5);
-            filter: grayscale(20%);
-            transition: all 0.5s ease;
+            filter: grayscale(100%) contrast(1.05) brightness(0.95);
+            mix-blend-mode: luminosity;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .image-frame::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 7, 10, 0.4), transparent);
+            pointer-events: none;
         }
         .image-frame:hover img {
-            filter: grayscale(0%);
-            transform: scale(1.01);
+            filter: grayscale(0%) contrast(1) brightness(1);
+            mix-blend-mode: normal;
+            transform: scale(1.02);
         }
         .badge-years {
             position: absolute;
-            bottom: -15px;
+            bottom: 20px;
             right: 20px;
-            background: var(--gold);
-            color: #0A0C10;
-            padding: 0.6rem 1.2rem;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 10px 18px rgba(0,0,0,0.2);
+            background: rgba(15, 18, 25, 0.65);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--gold);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            z-index: 2;
         }
 
         .about-text h1 {
-            font-size: 2.8rem;
+            font-size: 2.75rem;
             font-weight: 600;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--gold-soft) 80%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            margin-bottom: 1.2rem;
-            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            line-height: 1.15;
         }
         .about-text .lead {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
+            font-size: 1.15rem;
+            color: var(--gold);
             margin-bottom: 1.8rem;
-            border-left: 3px solid var(--gold);
-            padding-left: 1.2rem;
             font-weight: 500;
         }
         .desc-text {
             color: var(--text-secondary);
             margin-bottom: 1.2rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
         }
         
-        /* SKILL PILLS (Botones brillantes) */
+        /* SKILL PILLS (Botones Brillantes) */
         .skill-pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.7rem;
+            gap: 0.6rem;
             margin-top: 2rem;
         }
         .skill-pills span {
-            background: rgba(255, 215, 0, 0.08);
-            backdrop-filter: blur(2px);
+            background: rgba(255, 215, 0, 0.04);
             border: 1px solid var(--border);
-            padding: 0.45rem 1.1rem;
+            padding: 0.4rem 1rem;
             border-radius: 40px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            color: var(--gold-soft);
-            transition: 0.2s;
-        }
-        body.light-mode .skill-pills span {
-            background: rgba(212, 175, 55, 0.1);
-            color: #b47c00;
+            color: var(--text-primary);
+            transition: all 0.2s ease;
         }
         .skill-pills span:hover {
-            background: rgba(255, 215, 0, 0.25);
+            background: rgba(255, 215, 0, 0.12);
+            border-color: var(--gold);
+            color: var(--gold-soft);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
         }
 
-        /* ESPECIALIDADES */
+        /* ESPECIALIDADES CURADAS (Estilo minimalista de mi diseño, textos centrados) */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
         }
         .spec-card {
             background: var(--card-bg);
-            backdrop-filter: blur(4px);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 2.5rem 2rem;
-            transition: all 0.3s ease;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .spec-card:hover {
-            border-color: var(--gold);
-            transform: translateY(-6px);
-            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.3);
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(15, 18, 25, 0.6);
+            transform: translateY(-4px);
         }
         .spec-icon {
-            font-size: 2.4rem;
-            margin: 0 auto 1.5rem auto; /* Centrado automático horizontal */
-            background: rgba(255,215,0,0.1);
-            width: 58px;
-            height: 58px;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin: 0 auto 1.25rem auto;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
-            color: var(--gold);
+            transition: transform 0.3s ease;
         }
-        .spec-card h3, .spec-card p {
-            text-align: center; /* Centra textos de las tarjetas */
+        .spec-card:hover .spec-icon {
+            transform: scale(1.1);
         }
         .spec-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 500;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
         }
         .spec-card p {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
-        /* TIMELINE */
+        /* TIMELINE CONTEMPORÁNEO */
         .timeline-list {
             display: flex;
             flex-direction: column;
-            gap: 2.5rem;
+            gap: 2rem;
         }
         .timeline-row {
             display: grid;
-            grid-template-columns: 160px 1fr;
-            gap: 2rem;
+            grid-template-columns: 180px 1fr;
+            gap: 3rem;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 2.5rem;
+            padding-bottom: 2rem;
         }
         .timeline-year {
-            font-weight: 700;
-            font-size: 1.25rem;
+            font-size: 0.9rem;
             color: var(--gold);
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
         .timeline-info h3 {
-            font-size: 1.35rem;
-            font-weight: 600;
-            margin-bottom: 0.6rem;
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
         }
         .timeline-info p {
             color: var(--text-secondary);
-            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
         }
         .timeline-info ul {
-            padding-left: 1.3rem;
+            padding-left: 1.1rem;
             color: var(--text-secondary);
+            font-size: 0.85rem;
         }
         .timeline-info li {
-            margin: 0.4rem 0;
+            margin: 0.3rem 0;
         }
 
-        /* SECCIÓN INSIDE / STUDIO (Sin vinilos) */
+        /* COLABORACIONES / GRID DE CLIENTES */
+        .clients-flex {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            align-items: center;
+            margin: 2.5rem 0;
+        }
+        .client-logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+        }
+        .client-logo img {
+            width: 100%;
+            max-width: 140px;
+            height: auto;
+            object-fit: contain;
+            filter: grayscale(100%) opacity(0.5);
+            transition: all 0.3s ease;
+        }
+        .client-logo:hover img {
+            filter: grayscale(0%) opacity(1);
+            transform: translateY(-2px);
+        }
+        body.light-mode .client-logo img {
+            filter: grayscale(100%) opacity(0.6) brightness(0.2);
+        }
+        body.light-mode .client-logo:hover img {
+            filter: grayscale(0%) opacity(1) brightness(1);
+        }
+
+        /* MÁS ALLÁ DEL DISEÑO (Estructura original estilizada, texto corregido sin vinilos) */
         .studio-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -312,166 +356,122 @@
             align-items: center;
         }
         .studio-quote {
-            background: var(--card-bg);
-            border-radius: var(--radius-md);
-            padding: 2rem;
-            border: 1px solid var(--border);
-            position: relative;
-        }
-        .studio-quote i {
-            color: var(--gold);
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
+            border-left: 2px solid var(--gold);
+            padding: 1rem 0 1rem 2rem;
         }
         .studio-quote p {
+            font-size: 1.1rem;
             font-style: italic;
-            color: var(--text-secondary);
+            color: var(--text-primary);
+            line-height: 1.5;
         }
 
-        /* COLABORACIONES / LOGOS (Corregidos para Desktop y Mobile) */
-        .clients-flex {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Forzado a 4 columnas simétricas en escritorio */
-            gap: 2rem;
-            align-items: center;
-            justify-items: center;
-            margin: 3rem 0;
-        }
-        .client-logo img {
-            height: auto;
-            width: 100%;
-            max-width: 160px; /* Tamaño ideal y visible en desktop */
-            object-fit: contain;
-            filter: saturate(0.85) brightness(0.95);
-            transition: all 0.25s ease;
-        }
-        .client-logo:hover img {
-            filter: saturate(1) brightness(1.2);
-            transform: translateY(-3px);
-        }
-        body.light-mode .client-logo img {
-            filter: brightness(0.85) contrast(0.9);
-        }
-        body.light-mode .client-logo:hover img {
-            filter: brightness(1) contrast(1);
-        }
-
-        /* CITA GRAN BLOCK */
+        /* FRASE DE BRENDA LAUREL (Reposicionada después de los clientes de mi versión previa) */
         .quote-block {
             text-align: center;
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            padding: 3.5rem 2rem;
-            border: 1px solid var(--border);
-            margin: 6rem 0;
-        }
-        .quote-block i {
-            font-size: 2.2rem;
-            color: var(--gold);
-            margin-bottom: 1rem;
-            opacity: 0.8;
+            max-width: 760px;
+            margin: 8rem auto 4rem auto;
+            padding: 0 1rem;
         }
         .quote-block p {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 400;
             line-height: 1.4;
-            max-width: 800px;
-            margin: 0 auto 1.4rem;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+        .quote-author {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gold);
+            font-weight: 600;
         }
 
-        /* CTA SECCIÓN */
+        /* CTA FINAL */
         .cta-minimal {
             text-align: center;
-            max-width: 600px;
-            margin: 6rem auto 4rem;
-        }
-        .cta-tag {
-            background: rgba(255,215,0,0.15);
-            color: var(--gold);
-            padding: 0.3rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 1.5px;
+            max-width: 550px;
+            margin: 7rem auto 5rem;
         }
         .cta-minimal h3 {
-            font-size: 2rem;
-            margin: 1.5rem 0 1rem;
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin: 1rem 0;
+            letter-spacing: -0.01em;
         }
         .btn-solid {
             background: var(--gold);
-            color: #0A0C10;
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
+            color: #05070A;
+            padding: 0.75rem 1.75rem;
+            border-radius: 40px;
             font-weight: 600;
+            font-size: 0.9rem;
             text-decoration: none;
-            transition: 0.2s;
+            transition: all 0.2s;
             display: inline-block;
-            margin: 1rem 0.5rem;
+            margin: 0.5rem;
         }
         .btn-solid:hover {
-            background: #FFDE4D;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 14px rgba(255,215,0,0.2);
+            background: var(--gold-soft);
+            transform: translateY(-2px);
         }
         .btn-outline {
             display: inline-block;
             background: transparent;
-            border: 1.5px solid var(--gold);
+            border: 1px solid var(--gold);
             color: var(--gold);
-            font-weight: 600;
-            font-size: 1.1rem;
-            padding: 0.8rem 2rem;
-            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.75rem 1.75rem;
+            border-radius: 40px;
             text-decoration: none;
-            transition: all 0.25s;
-            margin: 1rem 0.5rem;
+            transition: all 0.2s;
+            margin: 0.5rem;
         }
         .btn-outline:hover {
-            background: var(--gold);
-            color: #0F1219;
-            box-shadow: 0 6px 14px rgba(255,215,0,0.3);
+            background: rgba(255, 215, 0, 0.05);
+            transform: translateY(-2px);
         }
 
-        /* LINEA REGLAMENTARIA AMARILLA Y FOOTER */
+        /* FOOTER CON BARRA DORADA SUTIL (0.5px / 1px) */
         .copyright {
             text-align: center;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            padding: 2.5rem 0;
-            border-top: 1.5px solid var(--gold); /* Línea reglamentaria estrictamente amarilla/oro */
-            margin-top: 4rem;
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.3); /* Barra dorada sutil y elegante */
+            margin-top: 5rem;
         }
         .social-footer {
             display: flex;
             justify-content: center;
-            gap: 2rem;
-            margin-bottom: 1.5rem; /* Posicionado perfectamente abajo de la estructura antes del texto final */
+            gap: 1.75rem;
+            margin-bottom: 1.5rem;
         }
         .social-footer a {
             color: var(--text-secondary);
-            font-size: 1.6rem;
-            transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+            font-size: 1.35rem;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-block;
         }
         .social-footer a:hover {
-            color: var(--gold); /* Enciende en oro al pasar el cursor */
-            transform: translateY(-5px); /* Animación suave hacia arriba */
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            color: var(--gold); /* Enciende en oro */
+            transform: translateY(-4px); /* Animación limpia hacia arriba */
         }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .about-grid, .studio-grid {
                 grid-template-columns: 1fr;
-                gap: 2.5rem;
+                gap: 3rem;
             }
-            .glass-header { padding: 1rem 1.5rem; }
             main { padding: 110px 1.5rem 3rem; }
-            .timeline-row { grid-template-columns: 1fr; gap: 0.5rem; }
-            .clients-flex { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .timeline-row { grid-template-columns: 1fr; gap: 0.75rem; }
+            .clients-flex { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .about-text h1 { font-size: 2.2rem; }
-            .quote-block p { font-size: 1.3rem; }
+            .quote-block p { font-size: 1.25rem; }
         }
     </style>
 </head>
@@ -491,8 +491,8 @@
 <main>
     <section class="about-grid fade-up">
         <div class="image-frame">
-            <img src="assets/about/DSC00262-Mejorado-NR.png" alt="Paola Herrera diseñadora" onerror="this.src='https://placehold.co/600x600/10131C/FFD700?text=PAO'">
-            <div class="badge-years">+10 años</div>
+            <img src="assets/about/DSC00262-Mejorado-NR.png" alt="Paola Herrera" onerror="this.src='https://placehold.co/600x750/10131C/FFD700?text=PAO'">
+            <div class="badge-years">+10 años de experiencia</div>
         </div>
         <div class="about-text">
             <h1>Diseño con propósito<br>y personalidad ✦</h1>
@@ -506,7 +506,7 @@
     </section>
 
     <section class="specialties fade-up">
-        <div class="section-subtitle" style="text-align: center;">Lo que hago mejor</div>
+        <div class="section-subtitle" style="text-align: center;">Core Capabilities</div>
         <h2 class="section-title" style="text-align: center;">Especialidades</h2>
         <div class="cards-grid">
             <div class="spec-card">
@@ -551,7 +551,7 @@
                     <ul>
                         <li>Branding y Social Media para cuentas locales.</li>
                         <li>Animación 2D para redes y vídeos promocionales.</li>
-                        <li>Ilustración digital y tradicional</li>
+                        <li>Ilustración digital y tradicional.</li>
                         <li>Diseño web UI/UX.</li>
                     </ul>
                 </div>
@@ -559,27 +559,9 @@
         </div>
     </section>
 
-    <div class="quote-block fade-up">
-        <i class="fa-regular fa-comment-dots"></i>
-        <p>“Un diseño no está terminado hasta que alguien lo usa.”</p>
-        <div class="quote-author">— Brenda Laurel</div>
-    </div>
-
-    <section class="studio-grid fade-up">
-        <div>
-            <div class="section-subtitle">inside the studio</div>
-            <h2 class="section-title" style="margin-bottom: 1.5rem;">Más allá del diseño</h2>
-            <p class="desc-text">Cuando no estoy creando identidades visuales, me encontrarás dibujando en mi cuaderno, leyendo novelas de intriga o explorando cafeterías con una atmósfera inspiradora. Esa curiosidad nutre mi mirada creativa y mis ganas de experimentar.</p>
-        </div>
-        <div class="studio-quote">
-            <i class="fa-regular fa-heart"></i>
-            <p>“Entender otras disciplinas me permite diseñar con más empatía visual.”</p>
-        </div>
-    </section>
-
     <section class="clients-section fade-up">
         <div class="section-subtitle">Colaboraciones reales</div>
-        <h2>Marcas que confían en mí</h2>
+        <h2 class="section-title">Marcas que confían en mí</h2>
         <div class="clients-flex">
             <div class="client-logo">
                 <img src="assets/Arcangel-Uriel-Bazar.png" alt="Arcangel Uriel" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Arcangel+Uriel'">
@@ -594,16 +576,30 @@
                 <img src="assets/AJ-DIGITAL-ART.png" alt="AJ DIGITAL ART" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=AJ+Digital+Art'">
             </div>
         </div>
-        <p style="text-align: center; font-size: 0.85rem; margin-top: 1rem; color: var(--text-secondary); opacity: 0.8;">Proyectos reales · confianza mutua</p>
+    </section>
+
+    <div class="quote-block fade-up">
+        <p>“Un diseño no está terminado hasta que alguien lo usa.”</p>
+        <div class="quote-author">— Brenda Laurel</div>
+    </div>
+
+    <section class="studio-grid fade-up">
+        <div>
+            <div class="section-subtitle">Inside the studio</div>
+            <h2 class="section-title" style="margin-bottom: 1.5rem;">Más allá del diseño</h2>
+            <p class="desc-text">Cuando me alejo de los píxeles y Figma, exploro universos narrativos complejos mediante la lectura de novelas de misterio, el análisis de composición o sumergiéndome en proyectos de ilustración experimental. Creo firmemente que la curiosidad multidisciplinaria alimenta la intuición y la sensibilidad visual necesarias para resolver problemas de diseño complejos.</p>
+        </div>
+        <div class="studio-quote">
+            <p>“La curiosidad nutre la mirada creativa y las ganas de experimentar.”</p>
+        </div>
     </section>
 
     <section class="cta-minimal fade-up">
-        <span class="cta-tag">COMPROMISO</span>
         <h3>Prueba mi trabajo sin riesgos</h3>
-        <p style="color: var(--text-secondary); margin-top: 1rem;">Hacemos una prueba real con el primer encargo. Si el borrador no te sirve, lo retrabajamos sin cargo. Tu único riesgo es dedicar 15 minutos a darme feedback.</p>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem;">Hacemos una prueba real con el primer encargo. Si el borrador no te sirve, lo retrabajamos sin cargo. Tu único riesgo es dedicar 15 minutos a darme feedback.</p>
         <div>
-            <a href="portfolio.html" class="btn-solid">Ver portafolio →</a>
-            <a href="contact.html" class="btn-outline">Contactar →</a>
+            <a href="portfolio.html" class="btn-solid">Ver portafolio</a>
+            <a href="contact.html" class="btn-outline">Contactar</a>
         </div>
     </section>
 
@@ -615,7 +611,7 @@
             <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
-        <p>&copy; 2026 | Diseñado con ❤️ por <span style="color: var(--gold); font-weight: 500;">Paola Herrera Sol</span></p>
+        <p>&copy; 2026 | Diseñado con ❤️ por <span style="color: var(--text-primary); font-weight: 500;">Paola Herrera Sol</span></p>
     </div>
 </main>
 
@@ -648,7 +644,7 @@
         });
     }
 
-    // Intersection Observer Animaciones
+    // Intersection Observer
     const fadeElements = document.querySelectorAll('.fade-up');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -657,7 +653,7 @@
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.1 });
     
     fadeElements.forEach(el => observer.observe(el));
 </script>

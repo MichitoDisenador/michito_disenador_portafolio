@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#FFD700">
-    <title>Contacto | Paola Herrera</title>
+    <title>Sobre Mí | Paola Herrera</title>
     
     <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
@@ -73,7 +73,7 @@
             background: rgba(249, 247, 242, 0.85);
         }
         .logo-area img {
-            height: 56px;
+            height: 45px;
             width: auto;
             transition: transform 0.2s;
         }
@@ -595,3 +595,71 @@
             </div>
         </div>
         <p style="text-align: center; font-size: 0.85rem; margin-top: 1rem; color: var(--text-secondary); opacity: 0.8;">Proyectos reales · confianza mutua</p>
+    </section>
+
+    <section class="cta-minimal fade-up">
+        <span class="cta-tag">COMPROMISO</span>
+        <h3>Prueba mi trabajo sin riesgos</h3>
+        <p style="color: var(--text-secondary); margin-top: 1rem;">Hacemos una prueba real con el primer encargo. Si el borrador no te sirve, lo retrabajamos sin cargo. Tu único riesgo es dedicar 15 minutos a darme feedback.</p>
+        <div>
+            <a href="portfolio.html" class="btn-solid">Ver portafolio →</a>
+            <a href="contact.html" class="btn-outline">Contactar →</a>
+        </div>
+    </section>
+
+    <div class="copyright">
+        <div class="social-footer">
+            <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2026 | Diseñado con ❤️ por <span style="color: var(--gold); font-weight: 500;">Paola Herrera Sol</span></p>
+    </div>
+</main>
+
+<script>
+    // Control Modo Claro/Oscuro
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const bodyEl = document.body;
+
+    function updateThemeIcon() {
+        if(!themeBtn) return;
+        const icon = themeBtn.querySelector('i');
+        if(bodyEl.classList.contains('light-mode')) {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
+    }
+
+    const storedTheme = localStorage.getItem('theme');
+    if(storedTheme === 'light') {
+        bodyEl.classList.add('light-mode');
+    }
+    updateThemeIcon();
+
+    if(themeBtn) {
+        themeBtn.addEventListener('click', () => {
+            bodyEl.classList.toggle('light-mode');
+            localStorage.setItem('theme', bodyEl.classList.contains('light-mode') ? 'light' : 'dark');
+            updateThemeIcon();
+        });
+    }
+
+    // Intersection Observer Animaciones
+    const fadeElements = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+    
+    fadeElements.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

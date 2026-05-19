@@ -53,7 +53,7 @@
             transform: translateY(0);
         }
 
-        /* HEADER */
+        /* HEADER FIJO */
         .glass-header {
             position: fixed;
             top: 0;
@@ -318,19 +318,20 @@
             transform: scale(0.98);
         }
         
+        /* NOTAS DE AUTORÍA - FONDO NEGRO PURO */
         .autor-note {
-            background: rgba(255,215,0,0.05);
+            background: #000000;
             padding: 1rem;
             border-radius: 16px;
             font-size: 0.75rem;
             border-left: 3px solid var(--primary);
             text-align: center;
             margin-top: 1.5rem;
-            color: var(--text-light);
+            color: #E8E9F0;
         }
         body.light-mode .autor-note {
-            color: var(--text-dark);
-            background: rgba(0,0,0,0.05);
+            background: #1a1a1a;
+            color: #E8E9F0;
         }
 
         /* SOBRE MÍ */
@@ -525,6 +526,11 @@
         }
         footer p { font-size: 0.75rem; color: var(--text-muted-light); }
         body.light-mode footer p { color: var(--text-muted-light); }
+
+        @media (max-width: 768px) {
+            .mockup-desktop { width: 100%; max-width: 500px; }
+            .mockup-tablet { width: 280px; }
+        }
     </style>
 </head>
 <body>
@@ -583,66 +589,156 @@
     <!-- PROYECTOS -->
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title">Anthmac</h2><div class="project-sub">Branding + Identidad Visual</div><div class="tools-row"><img src="assets/Portafolio/ilustrator.svg" alt="Ai"><img src="assets/Portafolio/photoshop.svg" alt="Ps"></div></div>
-            <div class="full-width-image"><img src="assets/Portafolio/ANTHMAC-15.png" alt="Anthmac" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=ANTHMAC'"></div>
+            <div class="project-header">
+                <h2 class="project-title">Anthmac</h2>
+                <div class="project-sub">Branding + Identidad Visual</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/ANTHMAC-15.png" alt="Anthmac" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=ANTHMAC'">
+            </div>
         </div>
     </section>
 
     <section class="project-section light-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2><div class="project-sub">Campañas + Social Media</div><div class="tools-row"><img src="assets/Portafolio/ilustrator.svg" alt="Ai"><img src="assets/Portafolio/photoshop.svg" alt="Ps"></div></div>
-            <div class="full-width-image"><img src="assets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex"></div>
-            <div class="autor-note">📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.</div>
+            <div class="project-header">
+                <h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2>
+                <div class="project-sub">Campañas + Social Media</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=KRAFTOMEX-SM'">
+            </div>
+            <div class="autor-note">
+                📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
+            </div>
         </div>
     </section>
 
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title">Kennel</h2><div class="project-sub">Campañas + Social Media</div><div class="tools-row"><img src="assets/Portafolio/ilustrator.svg" alt="Ai"><img src="assets/Portafolio/photoshop.svg" alt="Ps"></div></div>
-            <div class="full-width-image"><img src="assets/Portafolio/KENNEL-SM-ASTROS-PAOLA-19.png" alt="Kennel"></div>
-            <div class="autor-note">📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.</div>
+            <div class="project-header">
+                <h2 class="project-title">Kennel</h2>
+                <div class="project-sub">Campañas + Social Media</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/KENNEL-SM-ASTROS-PAOLA-19.png" alt="Kennel" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=KENNEL'">
+            </div>
+            <div class="autor-note">
+                📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
+            </div>
         </div>
     </section>
 
     <section class="project-section light-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title" style="color: var(--text-dark);">Arcángel Uriel</h2><div class="project-sub">Ilustración + Merch Design</div><div class="tools-row"><img src="assets/Portafolio/ilustrator.svg" alt="Ai"><img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip"><img src="assets/Portafolio/sketchbook-pro.svg" alt="Sketch"></div></div>
-            <div class="full-width-image"><img src="assets/Portafolio/au-portafolio-2026-20.png" alt="Arcángel Uriel"></div>
+            <div class="project-header">
+                <h2 class="project-title" style="color: var(--text-dark);">Arcángel Uriel</h2>
+                <div class="project-sub">Ilustración + Merch Design</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
+                    <img src="assets/Portafolio/sketchbook-pro.svg" alt="Sketchbook" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Sketch'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/au-portafolio-2026-20.png" alt="Arcángel Uriel" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=Arcangel+Uriel'">
+            </div>
         </div>
     </section>
 
     <!-- DESDE AQUÍ TODO OSCURO -->
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title">Ilustraciones + Merch</h2><div class="project-sub">Exploración Visual · Arte Digital</div><div class="tools-row"><img src="assets/Portafolio/photoshop.svg" alt="Ps"><img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip"></div></div>
-            <div class="full-width-image"><img src="assets/Portafolio/gatoyanime.png" alt="Ilustración"></div>
+            <div class="project-header">
+                <h2 class="project-title">Ilustraciones + Merch</h2>
+                <div class="project-sub">Exploración Visual · Arte Digital</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                    <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/gatoyanime.png" alt="Ilustración" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=Ilustraciones'">
+            </div>
         </div>
     </section>
 
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title">🎬 Cinesthesia · Video Lab</h2><div class="project-sub">Cámara · Edición · Narrativa</div></div>
+            <div class="project-header">
+                <h2 class="project-title">🎬 Cinesthesia · Video Lab</h2>
+                <div class="project-sub">Cámara · Edición · Narrativa</div>
+            </div>
             <div class="video-grid-raw">
-                <div class="video-card-yt"><iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" frameborder="0" allowfullscreen></iframe><div class="video-label">Operación de cámara</div></div>
-                <div class="video-card-yt"><iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" title="Video 2" frameborder="0" allowfullscreen></iframe><div class="video-label">Motion Graphics</div></div>
+                <div class="video-card-yt">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-label">🎥 Operación de cámara</div>
+                </div>
+                <div class="video-card-yt">
+                    <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" title="Video 2" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-label">🎞️ Motion Graphics</div>
+                </div>
+                <div class="video-card-yt">
+                    <iframe src="https://www.youtube.com/embed/OPf0YbXqDm0" title="Video 3" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-label">📽️ Reel creativo</div>
+                </div>
+            </div>
+            <div class="autor-note">
+                🎬 Reemplaza los src de los iframes con tus enlaces de YouTube.
             </div>
         </div>
     </section>
 
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title">✉️ Email Design</h2><div class="project-sub">Newsletter · Email Marketing</div></div>
+            <div class="project-header">
+                <h2 class="project-title">✉️ Email Design</h2>
+                <div class="project-sub">Newsletter · Email Marketing</div>
+            </div>
             <div class="email-mockup-showcase">
-                <div class="mockup-device mockup-phone"><div class="device-screen"><img src="https://placehold.co/400x700/F8F6F0/FFD700?text=Mobile+Email" alt="mobile"></div><div class="mockup-caption">📱 Móvil</div></div>
-                <div class="mockup-device mockup-tablet"><div class="device-screen"><img src="https://placehold.co/800x1000/F8F6F0/FFD700?text=Tablet+Email" alt="tablet"></div><div class="mockup-caption">📟 Tablet</div></div>
-                <div class="mockup-device mockup-desktop"><div class="device-screen"><img src="https://placehold.co/1200x800/F8F6F0/FFD700?text=Desktop+Email" alt="desktop"></div><div class="mockup-caption">🖥️ Escritorio</div></div>
+                <div class="mockup-device mockup-phone">
+                    <div class="device-screen">
+                        <img src="https://placehold.co/400x700/F8F6F0/FFD700?text=Mobile+Email" alt="mobile">
+                    </div>
+                    <div class="mockup-caption">📱 Vista Móvil</div>
+                </div>
+                <div class="mockup-device mockup-tablet">
+                    <div class="device-screen">
+                        <img src="https://placehold.co/800x1000/F8F6F0/FFD700?text=Tablet+Email" alt="tablet">
+                    </div>
+                    <div class="mockup-caption">📟 Tablet</div>
+                </div>
+                <div class="mockup-device mockup-desktop">
+                    <div class="device-screen">
+                        <img src="https://placehold.co/1200x800/F8F6F0/FFD700?text=Desktop+Email" alt="desktop">
+                    </div>
+                    <div class="mockup-caption">🖥️ Escritorio</div>
+                </div>
+            </div>
+            <div class="autor-note">
+                📬 Mockups de campañas de email: diseño adaptativo para dispositivos.
             </div>
         </div>
     </section>
 
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
-            <div class="project-header"><h2 class="project-title">Fotografía & Motion</h2><div class="project-sub">Narrativa + Animación</div></div>
+            <div class="project-header">
+                <h2 class="project-title">Fotografía & Motion</h2>
+                <div class="project-sub">Narrativa + Animación</div>
+            </div>
             <div class="photo-gallery">
                 <img src="assets/Portafolio/galeria/FOTO-1.gif" alt="foto1" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=1'">
                 <img src="assets/Portafolio/galeria/FOTO-2.png" alt="foto2" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=2'">
@@ -673,6 +769,7 @@
 </footer>
 
 <script>
+    // MODO CLARO/OSCURO
     const toggleBtn = document.getElementById('darkToggle');
     const body = document.body;
     const storedTheme = localStorage.getItem('theme');
@@ -693,12 +790,830 @@
             localStorage.setItem('theme', 'dark');
         }
     });
+
+    // SCROLL TOP
     const scrollBtn = document.getElementById('scrollTopBtn');
     window.addEventListener('scroll', () => {
         if(window.scrollY > 500) scrollBtn.classList.add('show');
         else scrollBtn.classList.remove('show');
     });
     scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // FADE AL APARECER
+    const fadeElements = document.querySelectorAll('.fade-on-scroll');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    fadeElements.forEach(el => observer.observe(el));
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Paola Herrera | Portafolio 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FFD700;
+            --primary-glow: rgba(255, 215, 0, 0.6);
+            --dark-bg: #0A0C10;
+            --light-bg: #F8F6F0;
+            --text-dark: #1A1D24;
+            --text-light: #E8E9F0;
+            --text-muted-light: #9CA3AF;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            transition: background-color 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            overflow-x: hidden;
+        }
+
+        body.light-mode {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Fade al aparecer */
+        .fade-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+        }
+        .fade-on-scroll.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* HEADER FIJO */
+        .glass-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            background: rgba(10, 12, 16, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+        }
+        @media (min-width: 768px) {
+            .glass-header {
+                padding: 1.2rem 2.5rem;
+            }
+        }
+        body.light-mode .glass-header {
+            background: rgba(248, 246, 240, 0.9);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-area img {
+            height: 45px;
+            width: auto;
+            transition: transform 0.2s;
+        }
+        @media (min-width: 768px) { .logo-area img { height: 55px; } }
+        .logo-area img:hover { transform: scale(0.97); opacity: 0.9; }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .sobre-mi-link {
+            color: #b0c4d3;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+        .sobre-mi-link:hover { color: var(--primary); }
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: currentColor;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle:hover { background: rgba(255, 215, 0, 0.15); }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: #0A0C10;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            border: none;
+            font-size: 1.2rem;
+        }
+        .scroll-top.show { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-4px); background: #ffe44d; }
+
+        main { padding-top: 80px; }
+        @media (min-width: 768px) { main { padding-top: 100px; } }
+
+        /* HERO */
+        .hero {
+            min-height: 70vh;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 30% 15%, rgba(255,215,0,0.08) 0%, transparent 70%);
+            padding: 2rem 1rem;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, var(--primary) 0%, #FFF5C4 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 30px var(--primary-glow);
+        }
+        @media (min-width: 768px) { .hero h1 { font-size: 5rem; } }
+        @media (min-width: 1024px) { .hero h1 { font-size: 7rem; } }
+        .year-badge span {
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 2rem;
+            color: white;
+        }
+        body.light-mode .year-badge span { color: #1A1D24; }
+
+        /* SKILLS - LETRAS CON RESPLANDOR Y MOVIMIENTO */
+        .skills-glow-section {
+            background: #0A0C10;
+            margin: 1rem 0 2.5rem 0;
+            padding: 2rem 1rem;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+        body.light-mode .skills-glow-section {
+            background: #14161c;
+        }
+        .marquee-skills {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 1.2rem 0;
+        }
+        .marquee-track {
+            display: inline-block;
+            animation: scrollMarquee 28s linear infinite;
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .marquee-track span {
+            display: inline-block;
+            margin: 0 1.2rem;
+            text-shadow: 0 0 12px var(--primary), 0 0 25px #ffd966;
+            color: #FFE484;
+        }
+        @keyframes scrollMarquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-50%); }
+        }
+        .marquee-track:hover { animation-play-state: paused; }
+        .skills-sub {
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+        }
+
+        /* SECCIONES PROYECTOS FULL WIDTH */
+        .project-section {
+            padding: 3rem 0;
+            transition: background-color 0.6s ease;
+            width: 100%;
+        }
+        @media (min-width: 768px) {
+            .project-section {
+                padding: 5rem 0;
+            }
+        }
+        
+        .dark-bg { background-color: #0A0C10; }
+        .light-bg { background-color: #F8F6F0; }
+        body.light-mode .dark-bg { background-color: #0A0C10; }
+        body.light-mode .light-bg { background-color: #F8F6F0; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .container { padding: 0 2rem; }
+        }
+        
+        .project-header { margin-bottom: 1.5rem; }
+        .project-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        @media (min-width: 768px) {
+            .project-title { font-size: 3rem; }
+        }
+        
+        /* SUBTÍTULOS - MÁS OSCUROS EN FONDO CLARO */
+        .project-sub {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            background: rgba(255,215,0,0.2);
+            display: inline-block;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            color: #000000 !important;
+        }
+        .light-bg .project-sub {
+            background: rgba(0,0,0,0.12);
+            color: #1f1e1a !important;
+        }
+        
+        .light-bg .project-title {
+            color: var(--text-dark);
+        }
+        
+        /* SVG CON ANIMACIÓN HOVER - SUBEN 5px */
+        .tools-row {
+            display: flex;
+            gap: 0.8rem;
+            margin: 0.8rem 0 1rem;
+        }
+        .tools-row img {
+            width: 28px;
+            height: 28px;
+            transition: transform 0.2s ease;
+            filter: brightness(0) invert(1);
+        }
+        .tools-row img:hover {
+            transform: translateY(-5px);
+        }
+        .light-bg .tools-row img {
+            filter: brightness(0) saturate(100%) invert(0) !important;
+        }
+        .light-bg .tools-row img:hover {
+            transform: translateY(-5px);
+        }
+        
+        .full-width-image {
+            width: 100%;
+            margin: 1rem 0 2rem;
+        }
+        .full-width-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 0.5rem;
+            margin: 2rem 0;
+        }
+        .photo-gallery img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .photo-gallery img:hover {
+            transform: scale(0.98);
+        }
+        
+        /* NOTAS DE AUTORÍA - FONDO NEGRO PURO */
+        .autor-note {
+            background: #000000;
+            padding: 1rem;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            border-left: 3px solid var(--primary);
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #E8E9F0;
+        }
+        body.light-mode .autor-note {
+            background: #1a1a1a;
+            color: #E8E9F0;
+        }
+
+        /* SOBRE MÍ */
+        .about-mini {
+            background: linear-gradient(145deg, #0f1118 0%, #090b10 100%);
+            border-radius: 48px;
+            margin: 2rem 1rem 3rem 1rem;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+        }
+        body.light-mode .about-mini {
+            background: #ffffffea;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+        .about-inner {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .about-avatar {
+            flex: 0 0 140px;
+        }
+        .about-avatar img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 4px rgba(255,215,0,0.2);
+            transition: transform 0.2s;
+        }
+        .about-avatar img:hover {
+            transform: scale(1.02);
+        }
+        .about-text {
+            flex: 2;
+            min-width: 220px;
+        }
+        .about-text h3 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.35rem;
+        }
+        .about-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.2);
+            padding: 0.2rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+        }
+        .about-text p {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin: 0.6rem 0;
+            opacity: 0.85;
+        }
+        .about-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: #0A0C10;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.6rem 1.4rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+            margin-top: 0.4rem;
+        }
+        .about-btn:hover {
+            background: #ffe45c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(255,215,0,0.3);
+        }
+        .about-btn:hover i {
+            transform: translateX(4px);
+        }
+        body.light-mode .about-btn {
+            background: #000;
+            color: #FFD700;
+        }
+
+        /* VIDEO GRID */
+        .video-grid-raw {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.8rem;
+            margin-top: 2rem;
+        }
+        .video-card-yt {
+            background: rgba(0,0,0,0.3);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .video-card-yt:hover {
+            transform: scale(1.01);
+            box-shadow: 0 20px 30px rgba(0,0,0,0.4);
+        }
+        .video-card-yt iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+            display: block;
+        }
+        .video-label {
+            padding: 0.7rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            background: rgba(0,0,0,0.6);
+            text-align: center;
+        }
+
+        /* EMAIL MOCKUPS */
+        .email-mockup-showcase {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .mockup-device {
+            background: #1a1c22;
+            border-radius: 32px;
+            padding: 1rem;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+        }
+        body.light-mode .mockup-device {
+            background: #ecece4;
+        }
+        .mockup-phone { width: 220px; }
+        .mockup-tablet { width: 340px; }
+        .mockup-desktop { width: 500px; }
+        .device-screen {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .device-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .mockup-caption {
+            text-align: center;
+            margin-top: 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        /* SOCIAL + FOOTER */
+        .social-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
+        }
+        .social-footer a {
+            color: var(--text-light);
+            font-size: 1.3rem;
+            background: rgba(255, 215, 0, 0.05);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        body.light-mode .social-footer a { color: var(--text-dark); }
+        .social-footer a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+            background: rgba(255, 215, 0, 0.2);
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-top: 1px solid rgba(255,215,0,0.2);
+        }
+        footer p { font-size: 0.75rem; color: var(--text-muted-light); }
+        body.light-mode footer p { color: var(--text-muted-light); }
+
+        @media (max-width: 768px) {
+            .mockup-desktop { width: 100%; max-width: 500px; }
+            .mockup-tablet { width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="glass-header">
+    <div class="logo-area">
+        <a href="#"><img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.src='https://placehold.co/200x60/FFD700/0A0C10?text=MICHITO'"></a>
+    </div>
+    <div class="header-right">
+        <a href="about.html" class="sobre-mi-link">Sobre Mí</a>
+        <button class="theme-toggle" id="darkToggle"><i class="fas fa-moon"></i></button>
+    </div>
+</header>
+<button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
+
+<main>
+    <!-- HERO -->
+    <section class="hero fade-on-scroll">
+        <div class="hero-content">
+            <h1>Portafolio</h1>
+            <div class="year-badge"><span>2026</span></div>
+            <div style="margin-top: 1rem;"><div style="width: 40px; height: 2px; background: var(--primary); margin: 0 auto;"></div></div>
+        </div>
+    </section>
+
+    <!-- SOBRE MÍ -->
+    <div class="container">
+        <div class="about-mini fade-on-scroll">
+            <div class="about-inner">
+                <div class="about-avatar">
+                    <img src="assets/about/paola-perfil.webp" alt="Paola Herrera" onerror="this.src='https://placehold.co/300x300/FFD700/0A0C10?text=PH'">
+                </div>
+                <div class="about-text">
+                    <h3>Paola Herrera <span style="color:var(--primary);">Sol</span></h3>
+                    <div class="about-badge">✨ Senior Graphic Designer & Brand Designer ✨</div>
+                    <p>Diseñadora visual especializada en branding y comunicación cross-media. Desarrollo identidades y piezas visuales que conectan distintos formatos y plataformas: Digital, impreso, motion, social media y contenido audiovisual. Mi enfoque combina dirección de arte, narrativa visual e ilustración para construir marcas con personalidad y consistencia.</p>
+                    <a href="about.html" class="about-btn">Conoce más sobre mí <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HABILIDADES - LETRAS EN MOVIMIENTO -->
+    <div class="container">
+        <div class="skills-glow-section fade-on-scroll">
+            <div class="marquee-skills">
+                <div class="marquee-track">
+                    <span>✦ ILLUSTRATOR ✦</span> <span>✦ PHOTOSHOP ✦</span> <span>✦ CLIP STUDIO ✦</span> <span>✦ AFTER EFFECTS ✦</span> <span>✦ PREMIERE PRO ✦</span> <span>✦ SKETCHBOOK ✦</span> <span>✦ EMAIL DESIGN ✦</span> <span>✦ CÁMARA / VIDEO ✦</span>
+                    <span>✦ ILLUSTRATOR ✦</span> <span>✦ PHOTOSHOP ✦</span> <span>✦ CLIP STUDIO ✦</span> <span>✦ AFTER EFFECTS ✦</span> <span>✦ PREMIERE PRO ✦</span> <span>✦ SKETCHBOOK ✦</span> <span>✦ EMAIL DESIGN ✦</span> <span>✦ CÁMARA / VIDEO ✦</span>
+                </div>
+            </div>
+            <div class="skills-sub">⟡ Habilidades Técnicas ⟡</div>
+        </div>
+    </div>
+
+    <!-- PROYECTOS -->
+    <section class="project-section dark-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Anthmac</h2>
+                <div class="project-sub">Branding + Identidad Visual</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/ANTHMAC-15.png" alt="Anthmac" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=ANTHMAC'">
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section light-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2>
+                <div class="project-sub">Campañas + Social Media</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=KRAFTOMEX-SM'">
+            </div>
+            <div class="autor-note">
+                📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section dark-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Kennel</h2>
+                <div class="project-sub">Campañas + Social Media</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/KENNEL-SM-ASTROS-PAOLA-19.png" alt="Kennel" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=KENNEL'">
+            </div>
+            <div class="autor-note">
+                📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section light-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title" style="color: var(--text-dark);">Arcángel Uriel</h2>
+                <div class="project-sub">Ilustración + Merch Design</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
+                    <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
+                    <img src="assets/Portafolio/sketchbook-pro.svg" alt="Sketchbook" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Sketch'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/au-portafolio-2026-20.png" alt="Arcángel Uriel" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=Arcangel+Uriel'">
+            </div>
+        </div>
+    </section>
+
+    <!-- DESDE AQUÍ TODO OSCURO -->
+    <section class="project-section dark-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Ilustraciones + Merch</h2>
+                <div class="project-sub">Exploración Visual · Arte Digital</div>
+                <div class="tools-row">
+                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
+                    <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
+                </div>
+            </div>
+            <div class="full-width-image">
+                <img src="assets/Portafolio/gatoyanime.png" alt="Ilustración" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=Ilustraciones'">
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section dark-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">🎬 Cinesthesia · Video Lab</h2>
+                <div class="project-sub">Cámara · Edición · Narrativa</div>
+            </div>
+            <div class="video-grid-raw">
+                <div class="video-card-yt">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Video 1" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-label">🎥 Operación de cámara</div>
+                </div>
+                <div class="video-card-yt">
+                    <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" title="Video 2" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-label">🎞️ Motion Graphics</div>
+                </div>
+                <div class="video-card-yt">
+                    <iframe src="https://www.youtube.com/embed/OPf0YbXqDm0" title="Video 3" frameborder="0" allowfullscreen></iframe>
+                    <div class="video-label">📽️ Reel creativo</div>
+                </div>
+            </div>
+            <div class="autor-note">
+                🎬 Reemplaza los src de los iframes con tus enlaces de YouTube.
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section dark-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">✉️ Email Design</h2>
+                <div class="project-sub">Newsletter · Email Marketing</div>
+            </div>
+            <div class="email-mockup-showcase">
+                <div class="mockup-device mockup-phone">
+                    <div class="device-screen">
+                        <img src="https://placehold.co/400x700/F8F6F0/FFD700?text=Mobile+Email" alt="mobile">
+                    </div>
+                    <div class="mockup-caption">📱 Vista Móvil</div>
+                </div>
+                <div class="mockup-device mockup-tablet">
+                    <div class="device-screen">
+                        <img src="https://placehold.co/800x1000/F8F6F0/FFD700?text=Tablet+Email" alt="tablet">
+                    </div>
+                    <div class="mockup-caption">📟 Tablet</div>
+                </div>
+                <div class="mockup-device mockup-desktop">
+                    <div class="device-screen">
+                        <img src="https://placehold.co/1200x800/F8F6F0/FFD700?text=Desktop+Email" alt="desktop">
+                    </div>
+                    <div class="mockup-caption">🖥️ Escritorio</div>
+                </div>
+            </div>
+            <div class="autor-note">
+                📬 Mockups de campañas de email: diseño adaptativo para dispositivos.
+            </div>
+        </div>
+    </section>
+
+    <section class="project-section dark-bg fade-on-scroll">
+        <div class="container">
+            <div class="project-header">
+                <h2 class="project-title">Fotografía & Motion</h2>
+                <div class="project-sub">Narrativa + Animación</div>
+            </div>
+            <div class="photo-gallery">
+                <img src="assets/Portafolio/galeria/FOTO-1.gif" alt="foto1" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=1'">
+                <img src="assets/Portafolio/galeria/FOTO-2.png" alt="foto2" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=2'">
+                <img src="assets/Portafolio/galeria/FOTO-3.gif" alt="foto3" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=3'">
+                <img src="assets/Portafolio/galeria/FOTO-5.png" alt="foto5" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=4'">
+                <img src="assets/Portafolio/galeria/FOTO-4.gif" alt="foto4" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=5'">
+                <img src="assets/Portafolio/galeria/FOTO-8.png" alt="foto8" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=6'">
+                <img src="assets/Portafolio/galeria/FOTO-7-2.png" alt="foto7" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=7'">
+                <img src="assets/Portafolio/galeria/FOTO-6.gif" alt="foto6" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=8'">
+                <img src="assets/Portafolio/galeria/FOTO-9.gif" alt="foto9" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=9'">
+                <img src="assets/Portafolio/galeria/FOTO-10.png" alt="foto10" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=10'">
+                <img src="assets/Portafolio/galeria/FOTO-11.gif" alt="foto11" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=11'">
+                <img src="assets/Portafolio/galeria/FOTO-12.jpeg" alt="foto12" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=12'">
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="social-footer">
+        <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p>© 2026 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+</footer>
+
+<script>
+    // MODO CLARO/OSCURO
+    const toggleBtn = document.getElementById('darkToggle');
+    const body = document.body;
+    const storedTheme = localStorage.getItem('theme');
+    if (storedTheme === 'light') {
+        body.classList.add('light-mode');
+        if(toggleBtn) toggleBtn.querySelector('i').className = 'fas fa-sun';
+    } else {
+        if(toggleBtn) toggleBtn.querySelector('i').className = 'fas fa-moon';
+    }
+    if(toggleBtn) toggleBtn.addEventListener('click', () => {
+        body.classList.toggle('light-mode');
+        const icon = toggleBtn.querySelector('i');
+        if(body.classList.contains('light-mode')) {
+            icon.className = 'fas fa-sun';
+            localStorage.setItem('theme', 'light');
+        } else {
+            icon.className = 'fas fa-moon';
+            localStorage.setItem('theme', 'dark');
+        }
+    });
+
+    // SCROLL TOP
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    window.addEventListener('scroll', () => {
+        if(window.scrollY > 500) scrollBtn.classList.add('show');
+        else scrollBtn.classList.remove('show');
+    });
+    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // FADE AL APARECER
     const fadeElements = document.querySelectorAll('.fade-on-scroll');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

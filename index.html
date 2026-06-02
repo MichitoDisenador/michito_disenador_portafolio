@@ -24,8 +24,8 @@
     --card:rgba(255,255,255,.12);
     --social:#1E1E1E;
     --copy-gray:#666666;
-    --name-color:#1E1E1E;  /* Nombre en negro para modo claro */
-    --logo-filter: none;    /* Logo normal en modo claro */
+    --name-color:#1E1E1E;      /* Nombre en negro para modo claro */
+    --logo-filter: brightness(0) invert(0);  /* Logo negro en modo claro (fondo amarillo) */
 }
 
 body.dark-mode{
@@ -35,8 +35,8 @@ body.dark-mode{
     --card:rgba(255,215,0,.08);
     --social:#FFFFFF;
     --copy-gray:#888888;
-    --name-color:#FFD93D;   /* Nombre en amarillo para modo oscuro */
-    --logo-filter: brightness(0) invert(1);  /* Logo blanco en modo oscuro */
+    --name-color:#FFD93D;       /* Nombre en amarillo para modo oscuro */
+    --logo-filter: none;        /* Logo con su color original en modo oscuro */
 }
 
 *{
@@ -160,7 +160,12 @@ header{
 .logo img{
     height:75px;
     filter: var(--logo-filter);
-    transition: filter 0.3s ease;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Animación del logo al pasar el mouse: se hace más pequeño */
+.logo img:hover {
+    transform: scale(0.9);
 }
 
 .theme-toggle{
@@ -199,7 +204,7 @@ main{
     transform: scale(1.02);
 }
 
-/* NAV - Botones SIN contorno con ANIMACIONES */
+/* NAV - Botones SIN líneas, solo animación del círculo/ripple */
 .main-nav{
     display:flex;
     gap:2rem;
@@ -223,22 +228,7 @@ main{
     overflow: hidden;
 }
 
-/* Animación de hover para los botones */
-.nav-btn::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background: var(--accent);
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-.nav-btn:hover::before {
-    width: 80%;
-}
+/* ELIMINADA la línea amarilla que salía debajo (ya no hay ::before) */
 
 .nav-btn:hover {
     transform: translateY(-4px) scale(1.05);
@@ -253,12 +243,12 @@ main{
     transform: translateX(5px);
 }
 
-/* Animación de clic para los botones */
+/* Animación de clic para los botones (efecto círculo/ripple) */
 .nav-btn:active {
     transform: translateY(2px) scale(0.98);
 }
 
-/* Animación específica para cada botón */
+/* Animación específica para cada botón - bounce en el icono */
 .nav-btn:nth-child(1):hover i {
     animation: bounce 0.5s ease;
 }
@@ -440,6 +430,7 @@ footer{
 <header>
 
     <div class="logo fade-item">
+        <!-- ⭐⭐⭐ MODIFICA LA RUTA DE LA IMAGEN DEL LOGO AQUÍ ⭐⭐⭐ -->
         <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Michito Diseñador">
     </div>
 
@@ -451,6 +442,7 @@ footer{
 
 <main>
 
+    <!-- ⭐⭐⭐ MODIFICA LA RUTA DE LA IMAGEN "MICHITO DISEÑADOR" AQUÍ ⭐⭐⭐ -->
     <img
         class="michito fade-item"
         src="assets/michito-home.webp"
@@ -572,15 +564,10 @@ function preloadImages() {
 
 preloadImages();
 
-// ========== ANIMACIONES ADICIONALES CON INTERSECTION OBSERVER ==========
-// Esta función agrega efectos de scroll si la página tuviera scroll
-// Pero como es una página estática, mantenemos las animaciones de entrada
-
-// Agregar efecto de onda al hacer clic en los botones
+// ========== ANIMACIÓN DEL CÍRCULO (RIPPLE) AL HACER CLIC ==========
 const navButtons = document.querySelectorAll('.nav-btn');
 navButtons.forEach(button => {
     button.addEventListener('click', function(e) {
-        // Crear efecto ripple
         const ripple = document.createElement('span');
         ripple.classList.add('ripple');
         this.appendChild(ripple);
@@ -597,9 +584,8 @@ navButtons.forEach(button => {
     });
 });
 
-// Agregar estilo para el efecto ripple
-const style = document.createElement('style');
-style.textContent = `
+const styleRipple = document.createElement('style');
+styleRipple.textContent = `
     .nav-btn {
         position: relative;
         overflow: hidden;
@@ -608,7 +594,7 @@ style.textContent = `
     .ripple {
         position: absolute;
         border-radius: 50%;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(0, 0, 0, 0.3);
         width: 100px;
         height: 100px;
         margin-top: -50px;
@@ -632,7 +618,7 @@ style.textContent = `
         background-color: rgba(255, 217, 61, 0.3);
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleRipple);
 
 </script>
 

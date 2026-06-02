@@ -24,7 +24,8 @@
     --card:rgba(255,255,255,.12);
     --social:#1E1E1E;
     --copy-gray:#666666;
-    --name-yellow:#FFD93D;
+    --name-color:#1E1E1E;  /* Nombre en negro para modo claro */
+    --logo-filter: none;    /* Logo normal en modo claro */
 }
 
 body.dark-mode{
@@ -34,7 +35,8 @@ body.dark-mode{
     --card:rgba(255,215,0,.08);
     --social:#FFFFFF;
     --copy-gray:#888888;
-    --name-yellow:#FFD93D;
+    --name-color:#FFD93D;   /* Nombre en amarillo para modo oscuro */
+    --logo-filter: brightness(0) invert(1);  /* Logo blanco en modo oscuro */
 }
 
 *{
@@ -157,6 +159,8 @@ header{
 
 .logo img{
     height:75px;
+    filter: var(--logo-filter);
+    transition: filter 0.3s ease;
 }
 
 .theme-toggle{
@@ -165,6 +169,11 @@ header{
     color:var(--accent);
     font-size:2rem;
     cursor:pointer;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg);
 }
 
 /* MAIN */
@@ -183,9 +192,14 @@ main{
     max-height:45vh;
     object-fit:contain;
     margin-bottom:2rem;
+    transition: transform 0.3s ease;
 }
 
-/* NAV - Botones SIN contorno */
+.michito:hover {
+    transform: scale(1.02);
+}
+
+/* NAV - Botones SIN contorno con ANIMACIONES */
 .main-nav{
     display:flex;
     gap:2rem;
@@ -202,14 +216,115 @@ main{
     font-size:1.6rem;
     font-weight:600;
     padding:1rem 1.8rem;
-    border: none;  /* SIN CONTORNO */
+    border: none;
     background: transparent;
-    transition:.25s;
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    overflow: hidden;
 }
 
-.nav-btn:hover{
-    transform:translateY(-4px);
-    opacity: 0.8;
+/* Animación de hover para los botones */
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.nav-btn:hover::before {
+    width: 80%;
+}
+
+.nav-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    gap: 1.2rem;
+}
+
+.nav-btn i {
+    transition: transform 0.3s ease;
+}
+
+.nav-btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Animación de clic para los botones */
+.nav-btn:active {
+    transform: translateY(2px) scale(0.98);
+}
+
+/* Animación específica para cada botón */
+.nav-btn:nth-child(1):hover i {
+    animation: bounce 0.5s ease;
+}
+
+.nav-btn:nth-child(2):hover i {
+    animation: bounce 0.5s ease 0.1s;
+}
+
+.nav-btn:nth-child(3):hover i {
+    animation: bounce 0.5s ease 0.2s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(8px);
+    }
+}
+
+/* Animación de entrada para los botones */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animaciones diferentes para cada botón al cargar */
+.page.loaded .nav-btn:nth-child(1) {
+    animation: slideInLeft 0.6s ease forwards;
+}
+
+.page.loaded .nav-btn:nth-child(2) {
+    animation: slideInUp 0.6s ease forwards;
+}
+
+.page.loaded .nav-btn:nth-child(3) {
+    animation: slideInRight 0.6s ease forwards;
 }
 
 /* FOOTER */
@@ -226,27 +341,42 @@ footer{
 }
 
 .social a{
-    color:var(--social);  /* BLANCO en modo oscuro, negro en modo claro */
+    color:var(--social);
     font-size:1.5rem;
-    transition:.2s;
+    transition: all 0.3s ease;
+    display: inline-block;
 }
 
-.social a:hover{
-    transform:translateY(-3px);
-    opacity: 0.8;
+.social a:hover {
+    transform: translateY(-5px) scale(1.2);
+    animation: socialPop 0.3s ease;
 }
 
-/* Texto del copy en GRIS */
+@keyframes socialPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Texto del copyright en GRIS */
 .copy{
     font-size:.9rem;
     opacity:1;
     color: var(--copy-gray);
+    transition: color 0.3s ease;
 }
 
-/* "Paola Herrera Sol" en AMARILLO */
-.copy .name-yellow {
-    color: var(--name-yellow);
+/* "Paola Herrera Sol" cambia de color según el tema */
+.copy .name-color {
+    color: var(--name-color);
     font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 /* MOBILE */
@@ -268,6 +398,29 @@ footer{
     .nav-btn{
         justify-content:center;
         width:100%;
+    }
+    
+    /* Ajuste de animaciones para móvil */
+    @keyframes slideInLeft {
+        from {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 }
 
@@ -302,8 +455,6 @@ footer{
         class="michito fade-item"
         src="assets/michito-home.webp"
         alt="Michito Diseñador">
-
-    <!-- TÍTULO Y SUBTÍTULO ELIMINADOS -->
 
     <nav class="main-nav">
 
@@ -353,7 +504,7 @@ footer{
     </div>
 
     <div class="copy fade-item">
-        © 2026 | Diseñado con ❤️ por <span class="name-yellow">Paola Herrera Sol</span>
+        © 2026 | Diseñado con ❤️ por <span class="name-color">Paola Herrera Sol</span>
     </div>
 
 </footer>
@@ -420,6 +571,68 @@ function preloadImages() {
 }
 
 preloadImages();
+
+// ========== ANIMACIONES ADICIONALES CON INTERSECTION OBSERVER ==========
+// Esta función agrega efectos de scroll si la página tuviera scroll
+// Pero como es una página estática, mantenemos las animaciones de entrada
+
+// Agregar efecto de onda al hacer clic en los botones
+const navButtons = document.querySelectorAll('.nav-btn');
+navButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        // Crear efecto ripple
+        const ripple = document.createElement('span');
+        ripple.classList.add('ripple');
+        this.appendChild(ripple);
+        
+        const x = e.clientX - e.target.offsetLeft;
+        const y = e.clientY - e.target.offsetTop;
+        
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 600);
+    });
+});
+
+// Agregar estilo para el efecto ripple
+const style = document.createElement('style');
+style.textContent = `
+    .nav-btn {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.6);
+        width: 100px;
+        height: 100px;
+        margin-top: -50px;
+        margin-left: -50px;
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+    }
+    
+    @keyframes ripple {
+        0% {
+            transform: scale(0);
+            opacity: 0.6;
+        }
+        100% {
+            transform: scale(4);
+            opacity: 0;
+        }
+    }
+    
+    body.dark-mode .ripple {
+        background-color: rgba(255, 217, 61, 0.3);
+    }
+`;
+document.head.appendChild(style);
 
 </script>
 

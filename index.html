@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Paola Herrera | Diseño Gráfico</title>
+    <title>Paola Herrera Sol | Diseño Gráfico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -286,17 +286,28 @@
             gap: clamp(1rem, 3vh, 1.8rem);
         }
 
-        .michito {
-            width: min(300px, 58vw);
-            max-height: 34vh;
+        .hero-gato {
+            width: min(320px, 60vw);
+            max-height: 38vh;
             object-fit: contain;
             filter: drop-shadow(0 22px 34px var(--shadow));
             transform: translateY(18px) scale(.96);
             opacity: 0;
+            animation: floatGato 3s ease-in-out infinite;
         }
 
-        .page.loaded .michito {
-            animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
+        .page.loaded .hero-gato {
+            animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards, floatGato 3s ease-in-out infinite;
+        }
+
+        @keyframes floatGato {
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-10px) scale(1.02);
+            }
         }
 
         .hero-text {
@@ -325,21 +336,7 @@
             font-weight: 900;
             line-height: .9;
             letter-spacing: 0;
-        }
-
-        h1::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -.12em;
-            width: 0;
-            height: .08em;
-            border-radius: 999px;
-            background: var(--accent);
-        }
-
-        .page.loaded h1::after {
-            animation: lineGrow .55s .95s cubic-bezier(.22, 1, .36, 1) forwards;
+            color: var(--accent);
         }
 
         .rotating-wrap {
@@ -404,7 +401,6 @@
             width: calc(100% - 1.15em);
         }
 
-        /* FOOTER CORREGIDO CON ÍCONOS FLAT */
         footer {
             display: grid;
             gap: .75rem;
@@ -482,12 +478,6 @@
             }
         }
 
-        @keyframes lineGrow {
-            to {
-                width: 100%;
-            }
-        }
-
         @keyframes blink {
             50% {
                 opacity: 0;
@@ -543,6 +533,11 @@
                 height: 44px;
                 font-size: 1.1rem;
             }
+
+            .hero-gato {
+                width: min(220px, 50vw);
+                max-height: 28vh;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -562,7 +557,7 @@
     <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
     <div class="loader-screen" id="loaderScreen">
-        <div class="loader-name" id="loaderName" aria-label="Paola Herrera"></div>
+        <div class="loader-name" id="loaderName" aria-label="Paola Herrera Sol"></div>
         <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
     </div>
 
@@ -592,11 +587,11 @@
 
         <main>
             <section class="hero" aria-labelledby="heroTitle">
-                <img class="michito" src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Michito diseñador">
+                <img class="hero-gato" src="assets/gato_animado.svg" alt="Gato animado">
 
                 <div class="hero-text">
                     <p class="hero-role" data-i18n="role">Diseñadora gráfica y creativa</p>
-                    <h1 id="heroTitle">Paola Herrera</h1>
+                    <h1 id="heroTitle">Paola Herrera Sol</h1>
                     <div class="rotating-wrap">
                         <span data-i18n="specialist">Especialista en</span>
                         <span class="rotating-text" id="rotatingText"></span>
@@ -687,7 +682,8 @@
         let typeTimer = 0;
 
         function buildLoader() {
-            [..."Paola Herrera"].forEach((letter, index) => {
+            const name = "Paola Herrera Sol";
+            [...name].forEach((letter, index) => {
                 const span = document.createElement("span");
                 span.textContent = letter === " " ? "\u00A0" : letter;
                 span.style.animationDelay = `${index * .05}s`;

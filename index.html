@@ -1,880 +1,885 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paola Herrera | Diseño Gráfico</title>
-  <style>
-    :root {
-      --bg: #ffd93d;
-      --bg-soft: #ffe875;
-      --text: #1e1e1e;
-      --muted: #525252;
-      --accent: #1e1e1e;
-      --line: rgba(30, 30, 30, .22);
-      --shadow: rgba(30, 30, 30, .18);
-      --cursor: #1e1e1e;
-    }
-
-    body.dark-mode {
-      --bg: #0b0b0b;
-      --bg-soft: #161616;
-      --text: #ffd93d;
-      --muted: #c9bb68;
-      --accent: #ffd93d;
-      --line: rgba(255, 217, 61, .28);
-      --shadow: rgba(255, 217, 61, .12);
-      --cursor: #ffd93d;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      min-height: 100%;
-      margin: 0;
-    }
-
-    body {
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 20% 15%, var(--bg-soft), transparent 28rem),
-        linear-gradient(135deg, var(--bg), var(--bg));
-      color: var(--text);
-      cursor: none;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      transition: background .35s ease, color .35s ease;
-    }
-
-    button,
-    a {
-      cursor: none;
-    }
-
-    #cursor {
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 50;
-      width: 12px;
-      height: 12px;
-      border-radius: 999px;
-      background: var(--cursor);
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      transition: transform .12s ease, opacity .2s ease, background .2s ease;
-      mix-blend-mode: multiply;
-    }
-
-    body.dark-mode #cursor {
-      mix-blend-mode: normal;
-    }
-
-    #cursor.grow {
-      opacity: .35;
-      transform: translate(-50%, -50%) scale(4);
-    }
-
-    #particleCanvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      width: 100%;
-      height: 100%;
-      opacity: .42;
-      pointer-events: none;
-    }
-
-    .loader-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 30;
-      display: grid;
-      place-items: center;
-      gap: 1.25rem;
-      align-content: center;
-      background: var(--bg);
-      transition: opacity .45s ease, visibility .45s ease;
-    }
-
-    .loader-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .loader-name {
-      overflow: hidden;
-      font-family: "Space Grotesk", Inter, "Segoe UI", Arial, sans-serif;
-      font-size: clamp(2.1rem, 8vw, 5rem);
-      font-weight: 800;
-      line-height: .95;
-    }
-
-    .loader-name span {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(100%);
-      animation: charReveal .12s ease forwards;
-    }
-
-    .loader-bar-wrap {
-      width: min(220px, 48vw);
-      height: 3px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: var(--line);
-    }
-
-    .loader-bar {
-      width: 0;
-      height: 100%;
-      border-radius: inherit;
-      background: var(--accent);
-      animation: loadBar 1s ease forwards;
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      min-height: 100vh;
-      opacity: 0;
-      transition: opacity .45s ease;
-    }
-
-    .page.loaded {
-      opacity: 1;
-    }
-
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 5vw, 3.5rem);
-    }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: .75rem;
-      color: var(--text);
-      text-decoration: none;
-    }
-
-    .logo-mark {
-      display: grid;
-      place-items: center;
-      width: 52px;
-      height: 52px;
-      border: 2px solid var(--accent);
-      border-radius: 50%;
-      font-family: "Space Grotesk", Inter, sans-serif;
-      font-size: 1.2rem;
-      font-weight: 800;
-      letter-spacing: 0;
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: .1rem;
-      font-size: .76rem;
-      letter-spacing: .11em;
-      text-transform: uppercase;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
-    }
-
-    .lang-picker {
-      position: relative;
-    }
-
-    .pill-button,
-    .theme-toggle {
-      min-height: 40px;
-      border: 1.5px solid var(--accent);
-      background: transparent;
-      color: var(--accent);
-      font: 800 .78rem/1 Inter, "Segoe UI", Arial, sans-serif;
-      transition: transform .2s ease, background .2s ease, color .2s ease;
-    }
-
-    .pill-button {
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      padding: .65rem .9rem;
-      border-radius: 999px;
-      letter-spacing: .08em;
-    }
-
-    .theme-toggle {
-      width: 40px;
-      border-radius: 50%;
-      font-size: 1rem;
-    }
-
-    .pill-button:hover,
-    .theme-toggle:hover,
-    .pill-button[aria-expanded="true"] {
-      background: var(--accent);
-      color: var(--bg);
-      transform: translateY(-2px);
-    }
-
-    .lang-dropdown {
-      position: absolute;
-      top: calc(100% + .65rem);
-      right: 0;
-      z-index: 10;
-      display: grid;
-      width: 170px;
-      padding: .45rem;
-      border: 1.5px solid var(--accent);
-      border-radius: 8px;
-      background: var(--bg);
-      box-shadow: 0 16px 34px var(--shadow);
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-8px);
-      transition: opacity .18s ease, transform .18s ease;
-    }
-
-    .lang-picker.open .lang-dropdown {
-      opacity: 1;
-      pointer-events: auto;
-      transform: translateY(0);
-    }
-
-    .lang-opt {
-      border: 0;
-      border-radius: 6px;
-      padding: .6rem .7rem;
-      background: transparent;
-      color: var(--text);
-      font: 700 .86rem/1.1 Inter, "Segoe UI", Arial, sans-serif;
-      text-align: left;
-    }
-
-    .lang-opt:hover,
-    .lang-opt.active {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
-    main {
-      display: grid;
-      place-items: center;
-      padding: 0 clamp(1.15rem, 5vw, 4rem) 1rem;
-      text-align: center;
-    }
-
-    .hero {
-      display: grid;
-      justify-items: center;
-      width: min(980px, 100%);
-      gap: clamp(1rem, 3vh, 1.8rem);
-    }
-
-    .michito {
-      width: min(300px, 58vw);
-      max-height: 34vh;
-      object-fit: contain;
-      filter: drop-shadow(0 22px 34px var(--shadow));
-      transform: translateY(18px) scale(.96);
-      opacity: 0;
-    }
-
-    .page.loaded .michito {
-      animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
-    }
-
-    .hero-text {
-      opacity: 0;
-      transform: translateY(18px);
-    }
-
-    .page.loaded .hero-text {
-      animation: fadeUp .58s .52s ease forwards;
-    }
-
-    .hero-role {
-      margin: 0 0 .45rem;
-      color: var(--muted);
-      font: 700 clamp(.78rem, 2vw, .95rem)/1.25 Inter, "Segoe UI", Arial, sans-serif;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      position: relative;
-      display: inline-block;
-      margin: 0;
-      font-family: "Space Grotesk", Inter, "Segoe UI", Arial, sans-serif;
-      font-size: clamp(2.7rem, 9vw, 6.6rem);
-      font-weight: 900;
-      line-height: .9;
-      letter-spacing: 0;
-    }
-
-    h1::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -.12em;
-      width: 0;
-      height: .08em;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .page.loaded h1::after {
-      animation: lineGrow .55s .95s cubic-bezier(.22, 1, .36, 1) forwards;
-    }
-
-    .rotating-wrap {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .35rem;
-      margin-top: 1rem;
-      color: var(--muted);
-      font: 600 clamp(.95rem, 2.4vw, 1.2rem)/1.35 Inter, "Segoe UI", Arial, sans-serif;
-    }
-
-    .rotating-text {
-      min-width: 13ch;
-      color: var(--accent);
-      text-align: left;
-    }
-
-    .rotating-text::after {
-      content: "|";
-      margin-left: .12rem;
-      animation: blink .7s infinite;
-    }
-
-    .main-nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: clamp(.75rem, 2vw, 1.1rem);
-      opacity: 0;
-      transform: translateY(16px);
-    }
-
-    .page.loaded .main-nav {
-      animation: fadeUp .55s .72s ease forwards;
-    }
-
-    .nav-link {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: .45rem;
-      min-height: 44px;
-      color: var(--accent);
-      font: 800 clamp(1.1rem, 3vw, 1.55rem)/1 "Space Grotesk", Inter, "Segoe UI", Arial, sans-serif;
-      text-decoration: none;
-    }
-
-    .nav-link::after {
-      content: "";
-      position: absolute;
-      left: 1.15em;
-      bottom: .2rem;
-      width: 0;
-      height: 2px;
-      border-radius: 999px;
-      background: currentColor;
-      transition: width .22s ease;
-    }
-
-    .nav-link:hover::after {
-      width: calc(100% - 1.15em);
-    }
-
-    footer {
-      display: grid;
-      gap: .75rem;
-      justify-items: center;
-      padding: 1rem clamp(1rem, 4vw, 2rem) 1.4rem;
-    }
-
-    .social {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: .65rem;
-      opacity: 0;
-    }
-
-    .page.loaded .social {
-      animation: fadeUp .5s .88s ease forwards;
-    }
-
-    .social a {
-      display: grid;
-      place-items: center;
-      min-width: 42px;
-      height: 42px;
-      border: 1.5px solid var(--line);
-      border-radius: 50%;
-      color: var(--accent);
-      font-size: .72rem;
-      font-weight: 900;
-      text-decoration: none;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
-    }
-
-    .social a:hover {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: var(--bg);
-      transform: translateY(-4px);
-    }
-
-    .copy {
-      color: var(--muted);
-      font-size: .82rem;
-      opacity: 0;
-    }
-
-    .page.loaded .copy {
-      animation: fadeUp .5s 1s ease forwards;
-    }
-
-    @keyframes charReveal {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes loadBar {
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes floatIn {
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes lineGrow {
-      to {
-        width: 100%;
-      }
-    }
-
-    @keyframes blink {
-      50% {
-        opacity: 0;
-      }
-    }
-
-    @media (max-width: 720px) {
-      body {
-        cursor: auto;
-        overflow: auto;
-      }
-
-      button,
-      a {
-        cursor: pointer;
-      }
-
-      #cursor {
-        display: none;
-      }
-
-      header {
-        align-items: flex-start;
-      }
-
-      .logo-text {
-        display: none;
-      }
-
-      .header-right {
-        gap: .5rem;
-      }
-
-      .pill-button {
-        padding-inline: .72rem;
-      }
-
-      main {
-        min-height: 68vh;
-      }
-
-      .main-nav {
-        flex-direction: column;
-      }
-
-      .rotating-text {
-        min-width: auto;
-        text-align: center;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Paola Herrera | Diseño Gráfico</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
+
+    <style>
+        :root {
+            --bg: #ffd93d;
+            --bg-soft: #ffe875;
+            --text: #1e1e1e;
+            --muted: #525252;
+            --accent: #1e1e1e;
+            --line: rgba(30, 30, 30, .22);
+            --shadow: rgba(30, 30, 30, .18);
+            --cursor: #1e1e1e;
+            --primary: #FFD700;
+        }
+
+        body.dark-mode {
+            --bg: #0b0b0b;
+            --bg-soft: #161616;
+            --text: #ffd93d;
+            --muted: #c9bb68;
+            --accent: #ffd93d;
+            --line: rgba(255, 217, 61, .28);
+            --shadow: rgba(255, 217, 61, .12);
+            --cursor: #ffd93d;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
+            margin: 0;
+        }
+
+        body {
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 20% 15%, var(--bg-soft), transparent 28rem),
+                linear-gradient(135deg, var(--bg), var(--bg));
+            color: var(--text);
+            cursor: none;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            transition: background .35s ease, color .35s ease;
+        }
+
+        button,
+        a {
+            cursor: none;
+        }
+
+        #cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 50;
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: var(--cursor);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform .12s ease, opacity .2s ease, background .2s ease;
+            mix-blend-mode: multiply;
+        }
+
+        body.dark-mode #cursor {
+            mix-blend-mode: normal;
+        }
+
+        #cursor.grow {
+            opacity: .35;
+            transform: translate(-50%, -50%) scale(4);
+        }
+
+        #particleCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .42;
+            pointer-events: none;
+        }
+
+        .loader-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 30;
+            display: grid;
+            place-items: center;
+            gap: 1.25rem;
+            align-content: center;
+            background: var(--bg);
+            transition: opacity .45s ease, visibility .45s ease;
+        }
+
+        .loader-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-name {
+            overflow: hidden;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-size: clamp(2.1rem, 8vw, 5rem);
+            font-weight: 800;
+            line-height: .95;
+        }
+
+        .loader-name span {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: charReveal .12s ease forwards;
+        }
+
+        .loader-bar-wrap {
+            width: min(220px, 48vw);
+            height: 3px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: var(--line);
+        }
+
+        .loader-bar {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: var(--accent);
+            animation: loadBar 1s ease forwards;
+        }
+
+        .page {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity .45s ease;
+        }
+
+        .page.loaded {
+            opacity: 1;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 5vw, 3.5rem);
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: .75rem;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 65px;
+            width: auto;
+            display: block;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(0.97);
+            opacity: 0.9;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        .lang-picker {
+            position: relative;
+        }
+
+        .pill-button,
+        .theme-toggle {
+            min-height: 40px;
+            border: 1.5px solid var(--accent);
+            background: transparent;
+            color: var(--accent);
+            font: 800 .78rem/1 'Inter', system-ui, sans-serif;
+            transition: transform .2s ease, background .2s ease, color .2s ease;
+        }
+
+        .pill-button {
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            padding: .65rem .9rem;
+            border-radius: 999px;
+            letter-spacing: .08em;
+        }
+
+        .theme-toggle {
+            width: 40px;
+            border-radius: 50%;
+            font-size: 1rem;
+        }
+
+        .pill-button:hover,
+        .theme-toggle:hover,
+        .pill-button[aria-expanded="true"] {
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-2px);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + .65rem);
+            right: 0;
+            z-index: 10;
+            display: grid;
+            width: 170px;
+            padding: .45rem;
+            border: 1.5px solid var(--accent);
+            border-radius: 8px;
+            background: var(--bg);
+            box-shadow: 0 16px 34px var(--shadow);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-8px);
+            transition: opacity .18s ease, transform .18s ease;
+        }
+
+        .lang-picker.open .lang-dropdown {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .lang-opt {
+            border: 0;
+            border-radius: 6px;
+            padding: .6rem .7rem;
+            background: transparent;
+            color: var(--text);
+            font: 700 .86rem/1.1 'Inter', system-ui, sans-serif;
+            text-align: left;
+        }
+
+        .lang-opt:hover,
+        .lang-opt.active {
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        main {
+            display: grid;
+            place-items: center;
+            padding: 0 clamp(1.15rem, 5vw, 4rem) 1rem;
+            text-align: center;
+        }
+
+        .hero {
+            display: grid;
+            justify-items: center;
+            width: min(980px, 100%);
+            gap: clamp(1rem, 3vh, 1.8rem);
+        }
+
+        .michito {
+            width: min(300px, 58vw);
+            max-height: 34vh;
+            object-fit: contain;
+            filter: drop-shadow(0 22px 34px var(--shadow));
+            transform: translateY(18px) scale(.96);
+            opacity: 0;
+        }
+
+        .page.loaded .michito {
+            animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        .hero-text {
+            opacity: 0;
+            transform: translateY(18px);
+        }
+
+        .page.loaded .hero-text {
+            animation: fadeUp .58s .52s ease forwards;
+        }
+
+        .hero-role {
+            margin: 0 0 .45rem;
+            color: var(--muted);
+            font: 700 clamp(.78rem, 2vw, .95rem)/1.25 'Inter', system-ui, sans-serif;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: clamp(2.7rem, 9vw, 6.6rem);
+            font-weight: 900;
+            line-height: .9;
+            letter-spacing: 0;
+        }
+
+        h1::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -.12em;
+            width: 0;
+            height: .08em;
+            border-radius: 999px;
+            background: var(--accent);
+        }
+
+        .page.loaded h1::after {
+            animation: lineGrow .55s .95s cubic-bezier(.22, 1, .36, 1) forwards;
+        }
+
+        .rotating-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: .35rem;
+            margin-top: 1rem;
+            color: var(--muted);
+            font: 600 clamp(.95rem, 2.4vw, 1.2rem)/1.35 'Inter', system-ui, sans-serif;
+        }
+
+        .rotating-text {
+            min-width: 13ch;
+            color: var(--accent);
+            text-align: left;
+        }
+
+        .rotating-text::after {
+            content: "|";
+            margin-left: .12rem;
+            animation: blink .7s infinite;
+        }
+
+        .main-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: clamp(.75rem, 2vw, 1.1rem);
+            opacity: 0;
+            transform: translateY(16px);
+        }
+
+        .page.loaded .main-nav {
+            animation: fadeUp .55s .72s ease forwards;
+        }
+
+        .nav-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: .45rem;
+            min-height: 44px;
+            color: var(--accent);
+            font: 800 clamp(1.1rem, 3vw, 1.55rem)/1 'Inter', system-ui, sans-serif;
+            text-decoration: none;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 1.15em;
+            bottom: .2rem;
+            width: 0;
+            height: 2px;
+            border-radius: 999px;
+            background: currentColor;
+            transition: width .22s ease;
+        }
+
+        .nav-link:hover::after {
+            width: calc(100% - 1.15em);
+        }
+
+        /* FOOTER CORREGIDO CON ÍCONOS FLAT */
+        footer {
+            display: grid;
+            gap: .75rem;
+            justify-items: center;
+            padding: 1rem clamp(1rem, 4vw, 2rem) 1.4rem;
+        }
+
+        .social {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            opacity: 0;
+        }
+
+        .page.loaded .social {
+            animation: fadeUp .5s .88s ease forwards;
+        }
+
+        .social a {
+            display: grid;
+            place-items: center;
+            width: 50px;
+            height: 50px;
+            border: 1.5px solid var(--line);
+            border-radius: 50%;
+            color: var(--accent);
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+        }
+
+        .social a:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: var(--bg);
+            transform: translateY(-4px);
+        }
+
+        .copy {
+            color: var(--muted);
+            font-size: .82rem;
+            opacity: 0;
+            text-decoration: none;
+        }
+
+        .page.loaded .copy {
+            animation: fadeUp .5s 1s ease forwards;
+        }
+
+        @keyframes charReveal {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes loadBar {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes floatIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes lineGrow {
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 720px) {
+            body {
+                cursor: auto;
+                overflow: auto;
+            }
+
+            button,
+            a {
+                cursor: pointer;
+            }
+
+            #cursor {
+                display: none;
+            }
+
+            header {
+                align-items: flex-start;
+            }
+
+            .logo img {
+                height: 45px;
+            }
+
+            .header-right {
+                gap: .5rem;
+            }
+
+            .pill-button {
+                padding-inline: .72rem;
+            }
+
+            main {
+                min-height: 68vh;
+            }
+
+            .main-nav {
+                flex-direction: column;
+            }
+
+            .rotating-text {
+                min-width: auto;
+                text-align: center;
+            }
+
+            .social a {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="cursor" aria-hidden="true"></div>
-  <canvas id="particleCanvas" aria-hidden="true"></canvas>
+    <div id="cursor" aria-hidden="true"></div>
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-  <div class="loader-screen" id="loaderScreen">
-    <div class="loader-name" id="loaderName" aria-label="Paola Herrera"></div>
-    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-  </div>
+    <div class="loader-screen" id="loaderScreen">
+        <div class="loader-name" id="loaderName" aria-label="Paola Herrera"></div>
+        <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+    </div>
 
-  <div class="page" id="mainPage">
-    <header>
-      <a class="logo" href="./index.html" aria-label="Inicio">
-        <span class="logo-mark">PH</span>
-        <span class="logo-text">
-          <span>Paola Herrera</span>
-          <span>Diseño gráfico</span>
-        </span>
-      </a>
+    <div class="page" id="mainPage">
+        <header>
+            <a class="logo" href="./index.html" aria-label="Inicio">
+                <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito Diseñador">
+            </a>
 
-      <div class="header-right">
-        <div class="lang-picker" id="langPicker">
-          <button class="pill-button" id="langTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
-            <span id="langCurrent">ES</span>
-            <span aria-hidden="true">v</span>
-          </button>
-          <div class="lang-dropdown" id="langDropdown" role="menu">
-            <button class="lang-opt active" type="button" data-lang="es">Español</button>
-            <button class="lang-opt" type="button" data-lang="en">English</button>
-            <button class="lang-opt" type="button" data-lang="fr">Français</button>
-            <button class="lang-opt" type="button" data-lang="pt">Português</button>
-          </div>
-        </div>
+            <div class="header-right">
+                <div class="lang-picker" id="langPicker">
+                    <button class="pill-button" id="langTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
+                        <span id="langCurrent">ES</span>
+                        <span aria-hidden="true">▼</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown" role="menu">
+                        <button class="lang-opt active" type="button" data-lang="es">Español</button>
+                        <button class="lang-opt" type="button" data-lang="en">English</button>
+                        <button class="lang-opt" type="button" data-lang="fr">Français</button>
+                        <button class="lang-opt" type="button" data-lang="pt">Português</button>
+                    </div>
+                </div>
 
-        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">☾</button>
-      </div>
-    </header>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">☾</button>
+            </div>
+        </header>
 
-    <main>
-      <section class="hero" aria-labelledby="heroTitle">
-        <img class="michito" src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Michito diseñador">
+        <main>
+            <section class="hero" aria-labelledby="heroTitle">
+                <img class="michito" src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Michito diseñador">
 
-        <div class="hero-text">
-          <p class="hero-role" data-i18n="role">Diseñadora gráfica y creativa</p>
-          <h1 id="heroTitle">Paola Herrera</h1>
-          <div class="rotating-wrap">
-            <span data-i18n="specialist">Especialista en</span>
-            <span class="rotating-text" id="rotatingText"></span>
-          </div>
-        </div>
+                <div class="hero-text">
+                    <p class="hero-role" data-i18n="role">Diseñadora gráfica y creativa</p>
+                    <h1 id="heroTitle">Paola Herrera</h1>
+                    <div class="rotating-wrap">
+                        <span data-i18n="specialist">Especialista en</span>
+                        <span class="rotating-text" id="rotatingText"></span>
+                    </div>
+                </div>
 
-        <nav class="main-nav" aria-label="Navegación principal">
-          <a href="about.html" class="nav-link" data-i18n="navAbout"><span aria-hidden="true">→</span> Sobre mí</a>
-          <a href="portfolio.html" class="nav-link" data-i18n="navPortfolio"><span aria-hidden="true">→</span> Portafolio</a>
-          <a href="contact.html" class="nav-link" data-i18n="navContact"><span aria-hidden="true">→</span> Contacto</a>
-        </nav>
-      </section>
-    </main>
+                <nav class="main-nav" aria-label="Navegación principal">
+                    <a href="about.html" class="nav-link" data-i18n="navAbout"><span aria-hidden="true">&gt;</span> Sobre mí</a>
+                    <a href="portfolio.html" class="nav-link" data-i18n="navPortfolio"><span aria-hidden="true">&gt;</span> Portafolio</a>
+                    <a href="contact.html" class="nav-link" data-i18n="navContact"><span aria-hidden="true">&gt;</span> Contacto</a>
+                </nav>
+            </section>
+        </main>
 
-    <footer>
-      <div class="social" aria-label="Redes sociales">
-        <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub">GH</a>
-        <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble">DR</a>
-        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn">IN</a>
-        <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook">FB</a>
-        <a href="mailto:sapichaan@gmail.com" aria-label="Email">@</a>
-      </div>
-      <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
-    </footer>
-  </div>
+        <footer>
+            <div class="social" aria-label="Redes sociales">
+                <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            </div>
+            <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
+        </footer>
+    </div>
 
-  <script>
-    const translations = {
-      es: {
-        current: "ES",
-        role: "Diseñadora gráfica y creativa",
-        specialist: "Especialista en",
-        words: ["branding", "ilustración", "social media", "diseño editorial"],
-        navAbout: "→ Sobre mí",
-        navPortfolio: "→ Portafolio",
-        navContact: "→ Contacto",
-        copy: "© 2026 | Diseñado por Paola Herrera Sol"
-      },
-      en: {
-        current: "EN",
-        role: "Graphic designer and creative",
-        specialist: "Specialist in",
-        words: ["branding", "illustration", "social media", "editorial design"],
-        navAbout: "→ About",
-        navPortfolio: "→ Portfolio",
-        navContact: "→ Contact",
-        copy: "© 2026 | Designed by Paola Herrera Sol"
-      },
-      fr: {
-        current: "FR",
-        role: "Graphiste et créative",
-        specialist: "Spécialiste en",
-        words: ["branding", "illustration", "réseaux sociaux", "design éditorial"],
-        navAbout: "→ À propos",
-        navPortfolio: "→ Portfolio",
-        navContact: "→ Contact",
-        copy: "© 2026 | Conçu par Paola Herrera Sol"
-      },
-      pt: {
-        current: "PT",
-        role: "Designer gráfica e criativa",
-        specialist: "Especialista em",
-        words: ["branding", "ilustração", "social media", "design editorial"],
-        navAbout: "→ Sobre mim",
-        navPortfolio: "→ Portfólio",
-        navContact: "→ Contato",
-        copy: "© 2026 | Criado por Paola Herrera Sol"
-      }
-    };
-
-    const body = document.body;
-    const cursor = document.getElementById("cursor");
-    const loaderName = document.getElementById("loaderName");
-    const loaderScreen = document.getElementById("loaderScreen");
-    const mainPage = document.getElementById("mainPage");
-    const themeToggle = document.getElementById("themeToggle");
-    const langPicker = document.getElementById("langPicker");
-    const langTrigger = document.getElementById("langTrigger");
-    const langCurrent = document.getElementById("langCurrent");
-    const rotatingText = document.getElementById("rotatingText");
-    const langButtons = [...document.querySelectorAll(".lang-opt")];
-    const i18nNodes = [...document.querySelectorAll("[data-i18n]")];
-
-    let activeLang = localStorage.getItem("language") || "es";
-    let wordIndex = 0;
-    let charIndex = 0;
-    let deleting = false;
-    let typeTimer = 0;
-
-    function buildLoader() {
-      [..."Paola Herrera"].forEach((letter, index) => {
-        const span = document.createElement("span");
-        span.textContent = letter === " " ? "\u00A0" : letter;
-        span.style.animationDelay = `${index * .05}s`;
-        loaderName.appendChild(span);
-      });
-    }
-
-    function applyTheme() {
-      const dark = localStorage.getItem("theme") === "dark";
-      body.classList.toggle("dark-mode", dark);
-      themeToggle.textContent = dark ? "☀" : "☾";
-    }
-
-    function setLanguage(lang) {
-      activeLang = translations[lang] ? lang : "es";
-      const dictionary = translations[activeLang];
-      localStorage.setItem("language", activeLang);
-      document.documentElement.lang = activeLang;
-      langCurrent.textContent = dictionary.current;
-
-      i18nNodes.forEach((node) => {
-        const key = node.dataset.i18n;
-        if (dictionary[key]) node.textContent = dictionary[key];
-      });
-
-      langButtons.forEach((button) => {
-        button.classList.toggle("active", button.dataset.lang === activeLang);
-      });
-
-      wordIndex = 0;
-      charIndex = 0;
-      deleting = false;
-      clearTimeout(typeTimer);
-      typeWord();
-    }
-
-    function typeWord() {
-      const words = translations[activeLang].words;
-      const current = words[wordIndex % words.length];
-
-      if (deleting) {
-        charIndex -= 1;
-      } else {
-        charIndex += 1;
-      }
-
-      rotatingText.textContent = current.slice(0, charIndex);
-
-      if (!deleting && charIndex === current.length) {
-        deleting = true;
-        typeTimer = setTimeout(typeWord, 1100);
-        return;
-      }
-
-      if (deleting && charIndex === 0) {
-        deleting = false;
-        wordIndex += 1;
-      }
-
-      typeTimer = setTimeout(typeWord, deleting ? 45 : 80);
-    }
-
-    function initParticles() {
-      const canvas = document.getElementById("particleCanvas");
-      const ctx = canvas.getContext("2d");
-      const particles = [];
-      let width = 0;
-      let height = 0;
-
-      function resize() {
-        const ratio = window.devicePixelRatio || 1;
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = Math.floor(width * ratio);
-        canvas.height = Math.floor(height * ratio);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
-        ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-      }
-
-      function particleColor(alpha) {
-        return body.classList.contains("dark-mode")
-          ? `rgba(255, 217, 61, ${alpha})`
-          : `rgba(30, 30, 30, ${alpha})`;
-      }
-
-      class Particle {
-        constructor() {
-          this.x = Math.random() * width;
-          this.y = Math.random() * height;
-          this.radius = Math.random() * 2.4 + .7;
-          this.vx = (Math.random() - .5) * .35;
-          this.vy = (Math.random() - .5) * .35;
-          this.alpha = Math.random() * .16 + .05;
-        }
-
-        update() {
-          this.x += this.vx;
-          this.y += this.vy;
-          if (this.x < 0 || this.x > width) this.vx *= -1;
-          if (this.y < 0 || this.y > height) this.vy *= -1;
-        }
-
-        draw() {
-          ctx.beginPath();
-          ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-          ctx.fillStyle = particleColor(this.alpha);
-          ctx.fill();
-        }
-      }
-
-      function connect() {
-        for (let i = 0; i < particles.length; i += 1) {
-          for (let j = i + 1; j < particles.length; j += 1) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.hypot(dx, dy);
-            if (distance < 120) {
-              ctx.strokeStyle = particleColor((1 - distance / 120) * .08);
-              ctx.lineWidth = .8;
-              ctx.beginPath();
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
+    <script>
+        const translations = {
+            es: {
+                current: "ES",
+                role: "Diseñadora gráfica y creativa",
+                specialist: "Especialista en",
+                words: ["branding", "ilustración", "social media", "diseño editorial"],
+                navAbout: "> Sobre mí",
+                navPortfolio: "> Portafolio",
+                navContact: "> Contacto",
+                copy: "© 2026 | Diseñado por Paola Herrera Sol"
+            },
+            en: {
+                current: "EN",
+                role: "Graphic designer and creative",
+                specialist: "Specialist in",
+                words: ["branding", "illustration", "social media", "editorial design"],
+                navAbout: "> About",
+                navPortfolio: "> Portfolio",
+                navContact: "> Contact",
+                copy: "© 2026 | Designed by Paola Herrera Sol"
+            },
+            fr: {
+                current: "FR",
+                role: "Graphiste et créative",
+                specialist: "Spécialiste en",
+                words: ["branding", "illustration", "réseaux sociaux", "design éditorial"],
+                navAbout: "> À propos",
+                navPortfolio: "> Portfolio",
+                navContact: "> Contact",
+                copy: "© 2026 | Conçu par Paola Herrera Sol"
+            },
+            pt: {
+                current: "PT",
+                role: "Designer gráfica e criativa",
+                specialist: "Especialista em",
+                words: ["branding", "ilustração", "social media", "design editorial"],
+                navAbout: "> Sobre mim",
+                navPortfolio: "> Portfólio",
+                navContact: "> Contato",
+                copy: "© 2026 | Criado por Paola Herrera Sol"
             }
-          }
+        };
+
+        const body = document.body;
+        const cursor = document.getElementById("cursor");
+        const loaderName = document.getElementById("loaderName");
+        const loaderScreen = document.getElementById("loaderScreen");
+        const mainPage = document.getElementById("mainPage");
+        const themeToggle = document.getElementById("themeToggle");
+        const langPicker = document.getElementById("langPicker");
+        const langTrigger = document.getElementById("langTrigger");
+        const langCurrent = document.getElementById("langCurrent");
+        const rotatingText = document.getElementById("rotatingText");
+        const langButtons = [...document.querySelectorAll(".lang-opt")];
+        const i18nNodes = [...document.querySelectorAll("[data-i18n]")];
+
+        let activeLang = localStorage.getItem("language") || "es";
+        let wordIndex = 0;
+        let charIndex = 0;
+        let deleting = false;
+        let typeTimer = 0;
+
+        function buildLoader() {
+            [..."Paola Herrera"].forEach((letter, index) => {
+                const span = document.createElement("span");
+                span.textContent = letter === " " ? "\u00A0" : letter;
+                span.style.animationDelay = `${index * .05}s`;
+                loaderName.appendChild(span);
+            });
         }
-      }
 
-      function loop() {
-        ctx.clearRect(0, 0, width, height);
-        particles.forEach((particle) => {
-          particle.update();
-          particle.draw();
+        function applyTheme() {
+            const dark = localStorage.getItem("theme") === "dark";
+            body.classList.toggle("dark-mode", dark);
+            themeToggle.textContent = dark ? "☀" : "☾";
+        }
+
+        function setLanguage(lang) {
+            activeLang = translations[lang] ? lang : "es";
+            const dictionary = translations[activeLang];
+            localStorage.setItem("language", activeLang);
+            document.documentElement.lang = activeLang;
+            langCurrent.textContent = dictionary.current;
+
+            i18nNodes.forEach((node) => {
+                const key = node.dataset.i18n;
+                if (dictionary[key]) node.textContent = dictionary[key];
+            });
+
+            langButtons.forEach((button) => {
+                button.classList.toggle("active", button.dataset.lang === activeLang);
+            });
+
+            wordIndex = 0;
+            charIndex = 0;
+            deleting = false;
+            clearTimeout(typeTimer);
+            typeWord();
+        }
+
+        function typeWord() {
+            const words = translations[activeLang].words;
+            const current = words[wordIndex % words.length];
+
+            if (deleting) {
+                charIndex -= 1;
+            } else {
+                charIndex += 1;
+            }
+
+            rotatingText.textContent = current.slice(0, charIndex);
+
+            if (!deleting && charIndex === current.length) {
+                deleting = true;
+                typeTimer = setTimeout(typeWord, 1100);
+                return;
+            }
+
+            if (deleting && charIndex === 0) {
+                deleting = false;
+                wordIndex += 1;
+            }
+
+            typeTimer = setTimeout(typeWord, deleting ? 45 : 80);
+        }
+
+        function initParticles() {
+            const canvas = document.getElementById("particleCanvas");
+            const ctx = canvas.getContext("2d");
+            const particles = [];
+            let width = 0;
+            let height = 0;
+
+            function resize() {
+                const ratio = window.devicePixelRatio || 1;
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = Math.floor(width * ratio);
+                canvas.height = Math.floor(height * ratio);
+                canvas.style.width = `${width}px`;
+                canvas.style.height = `${height}px`;
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+            }
+
+            function particleColor(alpha) {
+                return body.classList.contains("dark-mode")
+                    ? `rgba(255, 217, 61, ${alpha})`
+                    : `rgba(30, 30, 30, ${alpha})`;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.radius = Math.random() * 2.4 + .7;
+                    this.vx = (Math.random() - .5) * .35;
+                    this.vy = (Math.random() - .5) * .35;
+                    this.alpha = Math.random() * .16 + .05;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = particleColor(this.alpha);
+                    ctx.fill();
+                }
+            }
+
+            function connect() {
+                for (let i = 0; i < particles.length; i += 1) {
+                    for (let j = i + 1; j < particles.length; j += 1) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.hypot(dx, dy);
+                        if (distance < 120) {
+                            ctx.strokeStyle = particleColor((1 - distance / 120) * .08);
+                            ctx.lineWidth = .8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function loop() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach((particle) => {
+                    particle.update();
+                    particle.draw();
+                });
+                connect();
+                requestAnimationFrame(loop);
+            }
+
+            resize();
+            for (let i = 0; i < 56; i += 1) particles.push(new Particle());
+            window.addEventListener("resize", resize);
+            loop();
+        }
+
+        buildLoader();
+        applyTheme();
+        setLanguage(activeLang);
+        initParticles();
+
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                loaderScreen.classList.add("hidden");
+                requestAnimationFrame(() => mainPage.classList.add("loaded"));
+            }, 900);
         });
-        connect();
-        requestAnimationFrame(loop);
-      }
 
-      resize();
-      for (let i = 0; i < 56; i += 1) particles.push(new Particle());
-      window.addEventListener("resize", resize);
-      loop();
-    }
+        themeToggle.addEventListener("click", () => {
+            const nextTheme = body.classList.contains("dark-mode") ? "light" : "dark";
+            localStorage.setItem("theme", nextTheme);
+            applyTheme();
+        });
 
-    buildLoader();
-    applyTheme();
-    setLanguage(activeLang);
-    initParticles();
+        langTrigger.addEventListener("click", () => {
+            const open = langPicker.classList.toggle("open");
+            langTrigger.setAttribute("aria-expanded", String(open));
+        });
 
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        loaderScreen.classList.add("hidden");
-        requestAnimationFrame(() => mainPage.classList.add("loaded"));
-      }, 900);
-    });
+        langButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                setLanguage(button.dataset.lang);
+                langPicker.classList.remove("open");
+                langTrigger.setAttribute("aria-expanded", "false");
+            });
+        });
 
-    themeToggle.addEventListener("click", () => {
-      const nextTheme = body.classList.contains("dark-mode") ? "light" : "dark";
-      localStorage.setItem("theme", nextTheme);
-      applyTheme();
-    });
+        document.addEventListener("click", (event) => {
+            if (!langPicker.contains(event.target)) {
+                langPicker.classList.remove("open");
+                langTrigger.setAttribute("aria-expanded", "false");
+            }
+        });
 
-    langTrigger.addEventListener("click", () => {
-      const open = langPicker.classList.toggle("open");
-      langTrigger.setAttribute("aria-expanded", String(open));
-    });
+        window.addEventListener("mousemove", (event) => {
+            cursor.style.left = `${event.clientX}px`;
+            cursor.style.top = `${event.clientY}px`;
+        });
 
-    langButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        setLanguage(button.dataset.lang);
-        langPicker.classList.remove("open");
-        langTrigger.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!langPicker.contains(event.target)) {
-        langPicker.classList.remove("open");
-        langTrigger.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    window.addEventListener("mousemove", (event) => {
-      cursor.style.left = `${event.clientX}px`;
-      cursor.style.top = `${event.clientY}px`;
-    });
-
-    document.querySelectorAll("a, button").forEach((item) => {
-      item.addEventListener("mouseenter", () => cursor.classList.add("grow"));
-      item.addEventListener("mouseleave", () => cursor.classList.remove("grow"));
-    });
-  </script>
+        document.querySelectorAll("a, button").forEach((item) => {
+            item.addEventListener("mouseenter", () => cursor.classList.add("grow"));
+            item.addEventListener("mouseleave", () => cursor.classList.remove("grow"));
+        });
+    </script>
 </body>
 </html>

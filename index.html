@@ -6,7 +6,7 @@
     <title>Paola Herrera Sol | Diseño Gráfico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Space+Grotesk:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- Favicon -->
@@ -283,25 +283,29 @@
             display: grid;
             justify-items: center;
             width: min(980px, 100%);
-            gap: clamp(1rem, 3vh, 1.8rem);
+            gap: clamp(0.8rem, 2vh, 1.5rem);
         }
 
+        /* GATO MÁS GRANDE Y DESTACADO */
         .hero-gato {
-            width: min(320px, 60vw);
-            max-height: 38vh;
+            width: min(450px, 75vw);
+            max-height: 50vh;
             object-fit: contain;
-            filter: drop-shadow(0 22px 34px var(--shadow));
+            filter: drop-shadow(0 25px 40px var(--shadow));
             transform: translateY(18px) scale(.96);
             opacity: 0;
+            z-index: 2;
         }
 
         .page.loaded .hero-gato {
             animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
         }
 
+        /* TEXTO MÁS PEQUEÑO Y SUTIL */
         .hero-text {
             opacity: 0;
             transform: translateY(18px);
+            z-index: 1;
         }
 
         .page.loaded .hero-text {
@@ -309,11 +313,12 @@
         }
 
         .hero-role {
-            margin: 0 0 .45rem;
+            margin: 0 0 .3rem;
             color: var(--muted);
-            font: 700 clamp(.78rem, 2vw, .95rem)/1.25 'Inter', system-ui, sans-serif;
+            font: 600 clamp(.65rem, 1.4vw, .8rem)/1.25 'Inter', system-ui, sans-serif;
             letter-spacing: .22em;
             text-transform: uppercase;
+            opacity: 0.7;
         }
 
         h1 {
@@ -321,10 +326,10 @@
             display: inline-block;
             margin: 0;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: clamp(2.7rem, 9vw, 6.6rem);
-            font-weight: 900;
+            font-size: clamp(2rem, 5vw, 3.8rem);
+            font-weight: 800;
             line-height: .9;
-            letter-spacing: 0;
+            letter-spacing: -0.5px;
             color: var(--accent);
         }
 
@@ -332,16 +337,18 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: .35rem;
-            margin-top: 1rem;
+            gap: .25rem;
+            margin-top: 0.5rem;
             color: var(--muted);
-            font: 600 clamp(.95rem, 2.4vw, 1.2rem)/1.35 'Inter', system-ui, sans-serif;
+            font: 500 clamp(.75rem, 1.6vw, 1rem)/1.35 'Inter', system-ui, sans-serif;
+            opacity: 0.8;
         }
 
         .rotating-text {
-            min-width: 13ch;
+            min-width: 12ch;
             color: var(--accent);
             text-align: left;
+            font-weight: 600;
         }
 
         .rotating-text::after {
@@ -350,13 +357,15 @@
             animation: blink .7s infinite;
         }
 
+        /* NAVEGACIÓN MÁS SUTIL */
         .main-nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: clamp(.75rem, 2vw, 1.1rem);
+            gap: clamp(0.6rem, 1.5vw, 0.9rem);
             opacity: 0;
             transform: translateY(16px);
+            margin-top: 0.2rem;
         }
 
         .page.loaded .main-nav {
@@ -367,18 +376,24 @@
             position: relative;
             display: inline-flex;
             align-items: center;
-            gap: .45rem;
-            min-height: 44px;
+            gap: .35rem;
+            min-height: 38px;
             color: var(--accent);
-            font: 800 clamp(1.1rem, 3vw, 1.55rem)/1 'Inter', system-ui, sans-serif;
+            font: 700 clamp(.9rem, 2vw, 1.2rem)/1 'Inter', system-ui, sans-serif;
             text-decoration: none;
+            opacity: 0.8;
+            transition: opacity .2s;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
         }
 
         .nav-link::after {
             content: "";
             position: absolute;
             left: 1.15em;
-            bottom: .2rem;
+            bottom: .15rem;
             width: 0;
             height: 2px;
             border-radius: 999px;
@@ -392,16 +407,16 @@
 
         footer {
             display: grid;
-            gap: .75rem;
+            gap: .6rem;
             justify-items: center;
-            padding: 1rem clamp(1rem, 4vw, 2rem) 1.4rem;
+            padding: 0.8rem clamp(1rem, 4vw, 2rem) 1.2rem;
         }
 
         .social {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1.2rem;
+            gap: 1rem;
             opacity: 0;
         }
 
@@ -412,14 +427,15 @@
         .social a {
             display: grid;
             place-items: center;
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border: 1.5px solid var(--line);
             border-radius: 50%;
             color: var(--accent);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             text-decoration: none;
             transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
+            opacity: 0.7;
         }
 
         .social a:hover {
@@ -427,11 +443,12 @@
             background: var(--accent);
             color: var(--bg);
             transform: translateY(-4px);
+            opacity: 1;
         }
 
         .copy {
             color: var(--muted);
-            font-size: .82rem;
+            font-size: .72rem;
             opacity: 0;
             text-decoration: none;
         }
@@ -510,6 +527,7 @@
 
             .main-nav {
                 flex-direction: column;
+                gap: 0.3rem;
             }
 
             .rotating-text {
@@ -518,14 +536,18 @@
             }
 
             .social a {
-                width: 44px;
-                height: 44px;
-                font-size: 1.1rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
             }
 
             .hero-gato {
-                width: min(220px, 50vw);
-                max-height: 28vh;
+                width: min(280px, 65vw);
+                max-height: 35vh;
+            }
+
+            h1 {
+                font-size: clamp(1.8rem, 6vw, 2.8rem);
             }
         }
 

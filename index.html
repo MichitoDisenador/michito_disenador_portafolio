@@ -293,21 +293,10 @@
             filter: drop-shadow(0 22px 34px var(--shadow));
             transform: translateY(18px) scale(.96);
             opacity: 0;
-            animation: floatGato 3s ease-in-out infinite;
         }
 
         .page.loaded .hero-gato {
-            animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards, floatGato 3s ease-in-out infinite;
-        }
-
-        @keyframes floatGato {
-            0%,
-            100% {
-                transform: translateY(0) scale(1);
-            }
-            50% {
-                transform: translateY(-10px) scale(1.02);
-            }
+            animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
         }
 
         .hero-text {

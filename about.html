@@ -4,58 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#FFD700">
-    <title>Sobre Mi | Paola Herrera</title>
+    <title>Sobre Mi | Paola Herrera Sol</title>
     
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     
     <style>
+        :root {
+            --bg: #0A0C10;
+            --bg-soft: #12151C;
+            --text: #F0F2F8;
+            --muted: #8E96A5;
+            --accent: #1e1e1e;
+            --gold: #FFD700;
+            --gold-soft: #FFDE4D;
+            --border: rgba(255, 215, 0, 0.12);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --cursor: #FFD700;
+            --card-bg: rgba(18, 21, 28, 0.6);
+            --hover-glow: rgba(255, 215, 0, 0.1);
+        }
+
+        body.light-mode {
+            --bg: #F9F7F2;
+            --bg-soft: #FFFFFF;
+            --text: #1A1E2C;
+            --muted: #6B7280;
+            --accent: #1A1E2C;
+            --border: rgba(212, 175, 55, 0.15);
+            --shadow: rgba(0, 0, 0, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --hover-glow: rgba(212, 175, 55, 0.08);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg: #05070A;
-            --surface: #0F1219;
-            --card-bg: rgba(15, 18, 25, 0.4);
-            --border: rgba(255, 215, 0, 0.08);
-            --gold: #FFD700;
-            --gold-soft: #FFDE4D;
-            --text-primary: #F0F2F8;
-            --text-secondary: #8E96A5;
-            --hover-glow: rgba(255, 215, 0, 0.15);
-            --radius-lg: 24px;
-            --radius-md: 16px;
-        }
-
-        body.light-mode {
-            --bg: #F9F7F2;
-            --surface: #FFFFFF;
-            --card-bg: rgba(255, 255, 255, 0.6);
-            --border: rgba(212, 175, 55, 0.15);
-            --text-primary: #1A1E2C;
-            --text-secondary: #6B7280;
-            --gold: #D4AF37;
-            --gold-soft: #EBC45E;
-            --hover-glow: rgba(212, 175, 55, 0.1);
+        html, body {
+            min-height: 100%;
+            margin: 0;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-primary);
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            transition: background-color 0.3s ease, color 0.2s ease;
+            overflow-x: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            transition: background-color 0.35s ease, color 0.35s ease;
         }
 
-        /* HEADER REGLAMENTARIO */
+        /* CURSOR PERSONALIZADO (igual que index) */
+        #cursor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 50;
+            width: 12px;
+            height: 12px;
+            border-radius: 999px;
+            background: var(--gold);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform .12s ease, opacity .2s ease, background .2s ease;
+            mix-blend-mode: difference;
+        }
+
+        body.light-mode #cursor {
+            mix-blend-mode: multiply;
+        }
+
+        #cursor.grow {
+            opacity: .35;
+            transform: translate(-50%, -50%) scale(4);
+        }
+
+        /* PARTÍCULAS (igual que index) */
+        #particleCanvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            opacity: .35;
+            pointer-events: none;
+        }
+
+        /* HEADER FIJO (mismo estilo que index) */
         .glass-header {
             position: fixed;
             top: 0;
@@ -65,28 +108,39 @@
             justify-content: space-between;
             align-items: center;
             padding: 1.2rem 2.5rem;
-            background: rgba(5, 7, 10, 0.7);
+            background: rgba(10, 12, 16, 0.75);
             backdrop-filter: blur(12px);
             z-index: 1100;
             border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
+
         body.light-mode .glass-header {
             background: rgba(249, 247, 242, 0.85);
         }
+
         .logo-area img {
             height: 70px;
             width: auto;
-            transition: transform 0.2s;
+            transition: transform 0.2s ease, opacity 0.2s ease;
         }
         .logo-area img:hover {
-            transform: scale(1.03);
+            transform: scale(0.97);
+            opacity: 0.9;
         }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .theme-toggle {
             background: none;
             border: none;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
-            color: var(--text-primary);
+            color: var(--text);
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -102,26 +156,25 @@
         }
 
         main {
-            max-width: 1120px;
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 140px 2rem 4rem;
+            padding: 130px 2rem 4rem;
         }
 
-        /* ANIMACIONES */
-        .fade-up {
+        /* SCROLL REVEAL (mismo que index) */
+        .scroll-reveal {
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(40px);
         }
-        .fade-up.visible {
+        .scroll-reveal.revealed {
             opacity: 1;
             transform: translateY(0);
         }
 
         /* SECCIONES */
-        section {
-            margin-bottom: 7.5rem;
-        }
         .section-subtitle {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -132,23 +185,25 @@
         }
         h2.section-title {
             font-size: 2rem;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 3rem;
             letter-spacing: -0.01em;
+            color: var(--text);
         }
 
-        /* HERO / ABOUT GRID (Efectos y tamaño de foto de mi diseño) */
+        /* HERO / ABOUT GRID */
         .about-grid {
             display: grid;
             grid-template-columns: 0.9fr 1.1fr;
-            gap: 5rem;
+            gap: 4rem;
             align-items: center;
+            margin-bottom: 5rem;
         }
         .image-frame {
             position: relative;
-            border-radius: var(--radius-lg);
+            border-radius: 24px;
             overflow: hidden;
-            background: #0A0D14;
+            background: var(--bg-soft);
         }
         .image-frame img {
             width: 100%;
@@ -156,26 +211,17 @@
             aspect-ratio: 4 / 5;
             object-fit: cover;
             filter: grayscale(100%) contrast(1.05) brightness(0.95);
-            mix-blend-mode: luminosity;
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .image-frame::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(5, 7, 10, 0.4), transparent);
-            pointer-events: none;
         }
         .image-frame:hover img {
             filter: grayscale(0%) contrast(1) brightness(1);
-            mix-blend-mode: normal;
             transform: scale(1.02);
         }
         .badge-years {
             position: absolute;
             bottom: 20px;
             right: 20px;
-            background: rgba(15, 18, 25, 0.65);
+            background: rgba(10, 12, 16, 0.7);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             color: var(--gold);
@@ -188,12 +234,12 @@
         }
 
         .about-text h1 {
-            font-size: 2.75rem;
-            font-weight: 600;
+            font-size: 2.8rem;
+            font-weight: 700;
             letter-spacing: -0.02em;
-            color: var(--text-primary);
+            color: var(--text);
             margin-bottom: 1rem;
-            line-height: 1.15;
+            line-height: 1.1;
         }
         .about-text .lead {
             font-size: 1.15rem;
@@ -202,12 +248,13 @@
             font-weight: 500;
         }
         .desc-text {
-            color: var(--text-secondary);
+            color: var(--muted);
             margin-bottom: 1.2rem;
             font-size: 0.95rem;
+            line-height: 1.7;
         }
-        
-        /* SKILL PILLS (Botones Brillantes) */
+
+        /* SKILL PILLS */
         .skill-pills {
             display: flex;
             flex-wrap: wrap;
@@ -221,7 +268,7 @@
             border-radius: 40px;
             font-size: 0.8rem;
             font-weight: 500;
-            color: var(--text-primary);
+            color: var(--text);
             transition: all 0.2s ease;
         }
         .skill-pills span:hover {
@@ -229,27 +276,27 @@
             border-color: var(--gold);
             color: var(--gold-soft);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
         }
 
-        /* ESPECIALIDADES CURADAS (Estilo minimalista de mi diseño, textos centrados) */
+        /* CARDS DE ESPECIALIDADES */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 4rem;
         }
         .spec-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            padding: 3rem 2rem;
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
             text-align: center;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .spec-card:hover {
             border-color: rgba(255, 215, 0, 0.3);
-            background: rgba(15, 18, 25, 0.6);
-            transform: translateY(-4px);
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
         .spec-icon {
             font-size: 1.8rem;
@@ -266,22 +313,22 @@
             transform: scale(1.1);
         }
         .spec-card h3 {
-            font-size: 1.25rem;
-            font-weight: 500;
+            font-size: 1.2rem;
+            font-weight: 600;
             margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
         }
         .spec-card p {
-            color: var(--text-secondary);
+            color: var(--muted);
             font-size: 0.9rem;
             line-height: 1.5;
         }
 
-        /* TIMELINE CONTEMPORÁNEO */
+        /* TIMELINE */
         .timeline-list {
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            margin-bottom: 4rem;
         }
         .timeline-row {
             display: grid;
@@ -298,79 +345,62 @@
         }
         .timeline-info h3 {
             font-size: 1.2rem;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 0.5rem;
+            color: var(--text);
         }
         .timeline-info p {
-            color: var(--text-secondary);
+            color: var(--muted);
             font-size: 0.9rem;
             margin-bottom: 0.75rem;
         }
         .timeline-info ul {
             padding-left: 1.1rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             font-size: 0.85rem;
         }
         .timeline-info li {
             margin: 0.3rem 0;
         }
 
-        /* COLABORACIONES / GRID DE CLIENTES */
+        /* CLIENTES */
         .clients-flex {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 2rem;
             align-items: center;
-            margin: 2.5rem 0;
+            margin: 2.5rem 0 4rem;
         }
         .client-logo {
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 1.5rem;
+            padding: 1rem;
         }
         .client-logo img {
             width: 100%;
             max-width: 140px;
             height: auto;
             object-fit: contain;
-            filter: grayscale(100%) opacity(0.5);
+            filter: grayscale(100%) opacity(0.4);
             transition: all 0.3s ease;
         }
         .client-logo:hover img {
             filter: grayscale(0%) opacity(1);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         body.light-mode .client-logo img {
-            filter: grayscale(100%) opacity(0.6) brightness(0.2);
+            filter: grayscale(100%) opacity(0.5) brightness(0.3);
         }
         body.light-mode .client-logo:hover img {
             filter: grayscale(0%) opacity(1) brightness(1);
         }
 
-        /* MÁS ALLÁ DEL DISEÑO (Estructura original estilizada, texto corregido sin vinilos) */
-        .studio-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 4rem;
-            align-items: center;
-        }
-        .studio-quote {
-            border-left: 2px solid var(--gold);
-            padding: 1rem 0 1rem 2rem;
-        }
-        .studio-quote p {
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text-primary);
-            line-height: 1.5;
-        }
-
-        /* FRASE DE BRENDA LAUREL (Reposicionada después de los clientes de mi versión previa) */
+        /* QUOTE */
         .quote-block {
             text-align: center;
             max-width: 760px;
-            margin: 8rem auto 4rem auto;
+            margin: 5rem auto 4rem;
             padding: 0 1rem;
         }
         .quote-block p {
@@ -378,7 +408,7 @@
             font-weight: 400;
             line-height: 1.4;
             letter-spacing: -0.01em;
-            color: var(--text-primary);
+            color: var(--text);
             margin-bottom: 0.75rem;
         }
         .quote-author {
@@ -389,21 +419,63 @@
             font-weight: 600;
         }
 
-        /* CTA FINAL */
+        /* MÁS ALLÁ DEL DISEÑO */
+        .studio-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 4rem;
+            align-items: center;
+            margin: 4rem 0;
+        }
+        .studio-quote {
+            border-left: 2px solid var(--gold);
+            padding: 1rem 0 1rem 2rem;
+        }
+        .studio-quote p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* BOTÓN DESCARGAR CURRÍCULUM */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--gold);
+            color: #0A0C10;
+            padding: 0.8rem 1.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-top: 1rem;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-download:hover {
+            background: var(--gold-soft);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.25);
+        }
+
+        /* CTA */
         .cta-minimal {
             text-align: center;
             max-width: 550px;
-            margin: 7rem auto 5rem;
+            margin: 5rem auto 4rem;
         }
         .cta-minimal h3 {
             font-size: 1.75rem;
-            font-weight: 500;
+            font-weight: 600;
             margin: 1rem 0;
             letter-spacing: -0.01em;
         }
         .btn-solid {
             background: var(--gold);
-            color: #05070A;
+            color: #0A0C10;
             padding: 0.75rem 1.75rem;
             border-radius: 40px;
             font-weight: 600;
@@ -415,7 +487,7 @@
         }
         .btn-solid:hover {
             background: var(--gold-soft);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
         .btn-outline {
             display: inline-block;
@@ -432,17 +504,17 @@
         }
         .btn-outline:hover {
             background: rgba(255, 215, 0, 0.05);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
-        /* FOOTER CON BARRA DORADA SUTIL (0.5px / 1px) */
+        /* FOOTER CON BARRA DORADA */
         .copyright {
             text-align: center;
             font-size: 0.8rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             padding: 3rem 0 1.5rem;
-            border-top: 1px solid rgba(255, 215, 0, 0.3); /* Barra dorada sutil y elegante */
-            margin-top: 5rem;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            margin-top: 4rem;
         }
         .social-footer {
             display: flex;
@@ -451,14 +523,14 @@
             margin-bottom: 1.5rem;
         }
         .social-footer a {
-            color: var(--text-secondary);
+            color: var(--muted);
             font-size: 1.35rem;
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
             display: inline-block;
         }
         .social-footer a:hover {
-            color: var(--gold); /* Enciende en oro */
-            transform: translateY(-4px); /* Animación limpia hacia arriba */
+            color: var(--gold);
+            transform: translateY(-4px);
         }
 
         /* RESPONSIVE */
@@ -472,198 +544,321 @@
             .clients-flex { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
             .about-text h1 { font-size: 2.2rem; }
             .quote-block p { font-size: 1.25rem; }
+            .glass-header { padding: 0.8rem 1.5rem; }
+            .logo-area img { height: 50px; }
+        }
+
+        @media (max-width: 480px) {
+            .clients-flex { grid-template-columns: 1fr; }
+            .cards-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
+    <div id="cursor" aria-hidden="true"></div>
+    <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-<header class="glass-header">
-    <div class="logo-area">
-        <a href="index.html">
-            <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito" onerror="this.src='https://placehold.co/160x56/1F222A/FFD700?text=MICHITO'">
-        </a>
-    </div>
-    <button class="theme-toggle" id="themeToggleBtn" aria-label="Modo claro/oscuro">
-        <i class="fas fa-moon"></i>
-    </button>
-</header>
-
-<main>
-    <section class="about-grid fade-up">
-        <div class="image-frame">
-            <img src="assets/about/DSC00262-Mejorado-NR.png" alt="Paola Herrera" onerror="this.src='https://placehold.co/600x750/10131C/FFD700?text=PAO'">
-            <div class="badge-years">+10 años de experiencia</div>
+    <header class="glass-header">
+        <div class="logo-area">
+            <a href="index.html">
+                <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito" onerror="this.src='https://placehold.co/160x56/1F222A/FFD700?text=MICHITO'">
+            </a>
         </div>
-        <div class="about-text">
-            <h1>Diseño con propósito<br>y personalidad ✦</h1>
-            <div class="lead">Branding, ilustración & creatividad estratégica</div>
-            <p class="desc-text">Soy Pao, diseñadora gráfica e ilustradora. Durante más de una década he ayudado a marcas a conectar visualmente con su audiencia a través de identidades memorables, diseño emocional y detalles que cuentan historias.</p>
-            <p class="desc-text">Me encanta fusionar técnicas tradicionales con lo digital, y sí, también uso inteligencia artificial como aliada para potenciar el proceso creativo, no para reemplazar la emoción humana.</p>
-            <div class="skill-pills">
-                <span>Branding</span><span>Ilustración</span><span>UI/UX</span><span>Motion Graphics</span><span>Photoshop</span><span>Illustrator</span><span>After Effects</span><span>Clip Studio</span><span>Klaviyo</span><span>Chat GPT</span><span>Gemini</span><span>Claude</span><span>Dirección creativa</span>
-            </div>
+        <div class="header-right">
+            <button class="theme-toggle" id="themeToggleBtn" aria-label="Modo claro/oscuro">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
-    </section>
+    </header>
 
-    <section class="specialties fade-up">
-        <div class="section-subtitle" style="text-align: center;">Core Capabilities</div>
-        <h2 class="section-title" style="text-align: center;">Especialidades</h2>
-        <div class="cards-grid">
-            <div class="spec-card">
-                <div class="spec-icon"><i class="fa-brands fa-figma"></i></div>
-                <h3>Identidad & Branding</h3>
-                <p>Construyo sistemas visuales sólidos, desde el naming hasta manuales de marca que aseguran coherencia en cualquier soporte.</p>
+    <main>
+        <!-- ABOUT HERO -->
+        <section class="about-grid scroll-reveal">
+            <div class="image-frame">
+                <img src="assets/about/DSC00262-Mejorado-NR.png" alt="Paola Herrera" onerror="this.src='https://placehold.co/600x750/10131C/FFD700?text=PAO'">
+                <div class="badge-years">+10 años de experiencia</div>
             </div>
-            <div class="spec-card">
-                <div class="spec-icon"><i class="fa-solid fa-pen-fancy"></i></div>
-                <h3>Ilustración digital</h3>
-                <p>Estilo fresco y versátil: ilustración infantil, retratos, arte conceptual y piezas únicas para campañas.</p>
-            </div>
-            <div class="spec-card">
-                <div class="spec-icon"><i class="fa-solid fa-chart-line"></i></div>
-                <h3>Estrategia visual</h3>
-                <p>Más allá de lo estético: cada color, tipografía y forma pensado para conectar con tu audiencia.</p>
-            </div>
-        </div>
-    </section>
+            <div class="about-text">
+                <h1>Diseño con propósito<br>y personalidad ✦</h1>
+                <div class="lead">Branding, ilustración & creatividad estratégica</div>
+                <p class="desc-text">Soy Pao, diseñadora gráfica e ilustradora. Durante más de una década he ayudado a marcas a conectar visualmente con su audiencia a través de identidades memorables, diseño emocional y detalles que cuentan historias.</p>
+                <p class="desc-text">Me encanta fusionar técnicas tradicionales con lo digital, y sí, también uso inteligencia artificial como aliada para potenciar el proceso creativo, no para reemplazar la emoción humana.</p>
+                
+                <!-- BOTÓN DESCARGAR CURRÍCULUM -->
+                <a href="#" class="btn-download" download>
+                    <i class="fas fa-file-pdf"></i> Descargar Curriculum
+                </a>
 
-    <section class="timeline-modern fade-up">
-        <div class="section-subtitle">Trayectoria</div>
-        <h2 class="section-title">Experiencia profesional</h2>
-        <div class="timeline-list">
-            <div class="timeline-row">
-                <div class="timeline-year">2020 — 2026</div>
-                <div class="timeline-info">
-                    <h3>Astros Marketing · Diseñadora Gráfica Digital y Social Media Designer</h3>
-                    <p>Desarrollo de proyectos visuales para marcas locales, campañas publicitarias y contenido digital de alto impacto.</p>
-                    <ul>
-                        <li>Branding.</li>
-                        <li>Creación de contenido gráfico para redes sociales (carruseles, reels visuales, anuncios, banners, mini animaciones).</li>
-                        <li>Desarrollo de líneas gráficas, identidades de marca y plantillas editables.</li>
-                        <li>Optimización visual para campañas pagadas (Meta Ads, TikTok Ads).</li>
-                        <li>Diseño de materiales digitales y piezas para marketing.</li>
-                        <li>Edición fotográfica, retoque y producción visual para campañas.</li>
-                        <li>Diseño de correos eléctronicos, Newsletter y flujos CRM</li>
-                    </ul>
+                <div class="skill-pills">
+                    <span>Branding</span><span>Ilustración</span><span>UI/UX</span><span>Motion Graphics</span>
+                    <span>Photoshop</span><span>Illustrator</span><span>After Effects</span><span>Clip Studio</span>
+                    <span>Klaviyo</span><span>Chat GPT</span><span>Gemini</span><span>Claude</span>
+                    <span>Dirección creativa</span>
                 </div>
             </div>
-            <div class="timeline-row">
-                <div class="timeline-year">2016 — Presente</div>
-                <div class="timeline-info">
-                    <h3>Michito Diseñador · Freelance senior</h3>
-                    <p>Proyectos de branding integral, ilustración personalizada y motion graphics para startups y agencias.</p>
-                    <ul>
-                        <li>Branding y Social Media para cuentas locales (carruseles, reels visuales, anuncios, banners, mini animaciones).</li>
-                        <li>Desarrollo de líneas gráficas, identidades de marca y plantillas editables.</li>
-                        <li>Optimización visual para campañas pagadas (Meta Ads, TikTok Ads).</li>
-                        <li>Diseño de materiales digitales y piezas para marketing.</li>
-                        <li>Edición fotográfica, retoque y producción visual para campañas.</li>
-                        <li>Producción de material publicitario visual (flyers, portadas, banners, mini videos).</li>
-                        <li>Ilustración digital y tradicional.</li>
-                        <li>Diseño web UI/UX.</li>
-                    </ul>
+        </section>
+
+        <!-- ESPECIALIDADES -->
+        <section class="scroll-reveal">
+            <div class="section-subtitle" style="text-align: center;">Core Capabilities</div>
+            <h2 class="section-title" style="text-align: center;">Especialidades</h2>
+            <div class="cards-grid">
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fa-solid fa-bezier-curve"></i></div>
+                    <h3>Identidad & Branding</h3>
+                    <p>Construyo sistemas visuales sólidos, desde el naming hasta manuales de marca que aseguran coherencia en cualquier soporte.</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fa-solid fa-pen-fancy"></i></div>
+                    <h3>Ilustración digital</h3>
+                    <p>Estilo fresco y versátil: ilustración infantil, retratos, arte conceptual y piezas únicas para campañas.</p>
+                </div>
+                <div class="spec-card">
+                    <div class="spec-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>Estrategia visual</h3>
+                    <p>Más allá de lo estético: cada color, tipografía y forma pensado para conectar con tu audiencia.</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="clients-section fade-up">
-        <div class="section-subtitle">Colaboraciones reales</div>
-        <h2 class="section-title">Marcas que confían en mí</h2>
-        <div class="clients-flex">
-            <div class="client-logo">
-                <img src="assets/Arcangel-Uriel-Bazar.png" alt="Arcangel Uriel" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Arcangel+Uriel'">
+        <!-- EXPERIENCIA -->
+        <section class="scroll-reveal">
+            <div class="section-subtitle">Trayectoria</div>
+            <h2 class="section-title">Experiencia profesional</h2>
+            <div class="timeline-list">
+                <div class="timeline-row">
+                    <div class="timeline-year">2020 — 2026</div>
+                    <div class="timeline-info">
+                        <h3>Astros Marketing · Diseñadora Gráfica Digital</h3>
+                        <p>Desarrollo de proyectos visuales para marcas locales, campañas publicitarias y contenido digital de alto impacto.</p>
+                        <ul>
+                            <li>Branding y creación de contenido gráfico para redes sociales.</li>
+                            <li>Desarrollo de líneas gráficas, identidades de marca y plantillas editables.</li>
+                            <li>Optimización visual para campañas pagadas (Meta Ads, TikTok Ads).</li>
+                            <li>Edición fotográfica, retoque y producción visual para campañas.</li>
+                            <li>Diseño de correos electrónicos, Newsletter y flujos CRM.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="timeline-row">
+                    <div class="timeline-year">2016 — Presente</div>
+                    <div class="timeline-info">
+                        <h3>Michito Diseñador · Freelance senior</h3>
+                        <p>Proyectos de branding integral, ilustración personalizada y motion graphics para startups y agencias.</p>
+                        <ul>
+                            <li>Branding y Social Media para cuentas locales.</li>
+                            <li>Diseño de materiales digitales y piezas para marketing.</li>
+                            <li>Ilustración digital y tradicional.</li>
+                            <li>Diseño web UI/UX.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="client-logo">
-                <img src="assets/MXSIG-Antonio.png" alt="MXSIG" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=MXSIG'">
+        </section>
+
+        <!-- CLIENTES -->
+        <section class="scroll-reveal">
+            <div class="section-subtitle">Colaboraciones reales</div>
+            <h2 class="section-title">Marcas que confían en mí</h2>
+            <div class="clients-flex">
+                <div class="client-logo">
+                    <img src="assets/Arcangel-Uriel-Bazar.png" alt="Arcangel Uriel" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Arcangel+Uriel'">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/MXSIG-Antonio.png" alt="MXSIG" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=MXSIG'">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/Astros-Marketing.png" alt="Astros Marketing" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Astros'">
+                </div>
+                <div class="client-logo">
+                    <img src="assets/AJ-DIGITAL-ART.png" alt="AJ DIGITAL ART" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=AJ+Digital+Art'">
+                </div>
             </div>
-            <div class="client-logo">
-                <img src="assets/Astros-Marketing.png" alt="Astros Marketing" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=Astros'">
+        </section>
+
+        <!-- QUOTE -->
+        <div class="quote-block scroll-reveal">
+            <p>“Un diseño no está terminado hasta que alguien lo usa.”</p>
+            <div class="quote-author">— Brenda Laurel</div>
+        </div>
+
+        <!-- MÁS ALLÁ DEL DISEÑO -->
+        <section class="studio-grid scroll-reveal">
+            <div>
+                <div class="section-subtitle">Inside the studio</div>
+                <h2 class="section-title" style="margin-bottom: 1.5rem;">Más allá del diseño</h2>
+                <p class="desc-text">Cuando me alejo de los píxeles y Figma, exploro universos narrativos complejos mediante la lectura de novelas de misterio, el análisis de composición o sumergiéndome en proyectos de ilustración experimental. Creo firmemente que la curiosidad multidisciplinaria alimenta la intuición y la sensibilidad visual necesarias para resolver problemas de diseño complejos.</p>
             </div>
-            <div class="client-logo">
-                <img src="assets/AJ-DIGITAL-ART.png" alt="AJ DIGITAL ART" onerror="this.src='https://placehold.co/140x60/1A1E2C/FFD700?text=AJ+Digital+Art'">
+            <div class="studio-quote">
+                <p>“La curiosidad nutre la mirada creativa y las ganas de experimentar.”</p>
             </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-minimal scroll-reveal">
+            <h3>¿Trabajamos juntos?</h3>
+            <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem;">Si tienes una idea, una marca o un proyecto que necesita identidad visual y estrategia creativa, estaré encantada de ayudarte a construirlo.</p>
+            <div>
+                <a href="portfolio.html" class="btn-solid">Ver portafolio</a>
+                <a href="contact.html" class="btn-outline">Contactar</a>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <div class="copyright">
+            <div class="social-footer">
+                <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>&copy; 2026 | Diseñado con ❤️ por <span style="color: var(--gold); font-weight: 500;">Paola Herrera Sol</span></p>
         </div>
-    </section>
+    </main>
 
-    <div class="quote-block fade-up">
-        <p>“Un diseño no está terminado hasta que alguien lo usa.”</p>
-        <div class="quote-author">— Brenda Laurel</div>
-    </div>
-
-    <section class="studio-grid fade-up">
-        <div>
-            <div class="section-subtitle">Inside the studio</div>
-            <h2 class="section-title" style="margin-bottom: 1.5rem;">Más allá del diseño</h2>
-            <p class="desc-text">Cuando me alejo de los píxeles y Figma, exploro universos narrativos complejos mediante la lectura de novelas de misterio, el análisis de composición o sumergiéndome en proyectos de ilustración experimental. Creo firmemente que la curiosidad multidisciplinaria alimenta la intuición y la sensibilidad visual necesarias para resolver problemas de diseño complejos.</p>
-        </div>
-        <div class="studio-quote">
-            <p>“La curiosidad nutre la mirada creativa y las ganas de experimentar.”</p>
-        </div>
-    </section>
-
-    <section class="cta-minimal fade-up">
-        <h3>Prueba mi trabajo sin riesgos</h3>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 2rem;">Hacemos una prueba real con el primer encargo. Si el borrador no te sirve, lo retrabajamos sin cargo. Tu único riesgo es dedicar 15 minutos a darme feedback.</p>
-        <div>
-            <a href="portfolio.html" class="btn-solid">Ver portafolio</a>
-            <a href="contact.html" class="btn-outline">Contactar</a>
-        </div>
-    </section>
-
-    <div class="copyright">
-        <div class="social-footer">
-            <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
-        </div>
-        <p>&copy; 2026 | Diseñado con ❤️ por <span style="color: var(--text-primary); font-weight: 500;">Paola Herrera Sol</span></p>
-    </div>
-</main>
-
-<script>
-    // Control Modo Claro/Oscuro
-    const themeBtn = document.getElementById('themeToggleBtn');
-    const bodyEl = document.body;
-
-    function updateThemeIcon() {
-        if(!themeBtn) return;
-        const icon = themeBtn.querySelector('i');
-        if(bodyEl.classList.contains('light-mode')) {
-            icon.className = 'fas fa-sun';
-        } else {
-            icon.className = 'fas fa-moon';
-        }
-    }
-
-    const storedTheme = localStorage.getItem('theme');
-    if(storedTheme === 'light') {
-        bodyEl.classList.add('light-mode');
-    }
-    updateThemeIcon();
-
-    if(themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            bodyEl.classList.toggle('light-mode');
-            localStorage.setItem('theme', bodyEl.classList.contains('light-mode') ? 'light' : 'dark');
-            updateThemeIcon();
+    <script>
+        // CURSOR PERSONALIZADO
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
         });
-    }
 
-    // Intersection Observer
-    const fadeElements = document.querySelectorAll('.fade-up');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+        document.querySelectorAll('a, button').forEach((el) => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+        });
+
+        // MODO CLARO/OSCURO
+        const themeBtn = document.getElementById('themeToggleBtn');
+        const bodyEl = document.body;
+
+        function updateThemeIcon() {
+            if(!themeBtn) return;
+            const icon = themeBtn.querySelector('i');
+            if(bodyEl.classList.contains('light-mode')) {
+                icon.className = 'fas fa-sun';
+            } else {
+                icon.className = 'fas fa-moon';
             }
+        }
+
+        const storedTheme = localStorage.getItem('theme');
+        if(storedTheme === 'light') {
+            bodyEl.classList.add('light-mode');
+        }
+        updateThemeIcon();
+
+        if(themeBtn) {
+            themeBtn.addEventListener('click', () => {
+                bodyEl.classList.toggle('light-mode');
+                localStorage.setItem('theme', bodyEl.classList.contains('light-mode') ? 'light' : 'dark');
+                updateThemeIcon();
+            });
+        }
+
+        // PARTÍCULAS (copiado del index)
+        (function initParticles() {
+            const canvas = document.getElementById('particleCanvas');
+            const ctx = canvas.getContext('2d');
+            const particles = [];
+            let width = 0, height = 0;
+
+            function resize() {
+                const ratio = window.devicePixelRatio || 1;
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = Math.floor(width * ratio);
+                canvas.height = Math.floor(height * ratio);
+                canvas.style.width = width + 'px';
+                canvas.style.height = height + 'px';
+                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
+            }
+
+            function particleColor(alpha) {
+                return bodyEl.classList.contains('light-mode')
+                    ? `rgba(26, 30, 44, ${alpha})`
+                    : `rgba(255, 215, 61, ${alpha})`;
+            }
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.radius = Math.random() * 2.4 + 0.7;
+                    this.vx = (Math.random() - 0.5) * 0.35;
+                    this.vy = (Math.random() - 0.5) * 0.35;
+                    this.alpha = Math.random() * 0.16 + 0.05;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+                    if (this.x < 0 || this.x > width) this.vx *= -1;
+                    if (this.y < 0 || this.y > height) this.vy *= -1;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = particleColor(this.alpha);
+                    ctx.fill();
+                }
+            }
+
+            function connect() {
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < 120) {
+                            ctx.strokeStyle = particleColor((1 - dist / 120) * 0.08);
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function loop() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => { p.update(); p.draw(); });
+                connect();
+                requestAnimationFrame(loop);
+            }
+
+            resize();
+            for (let i = 0; i < 56; i++) particles.push(new Particle());
+            window.addEventListener('resize', resize);
+            loop();
+        })();
+
+        // SCROLL REVEAL
+        const revealElements = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealElements.forEach(el => observer.observe(el));
+
+        // Asegurar que los elementos ya visibles al cargar se revelen
+        window.addEventListener('load', () => {
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if(rect.top < window.innerHeight - 100) {
+                    el.classList.add('revealed');
+                    observer.unobserve(el);
+                }
+            });
         });
-    }, { threshold: 0.1 });
-    
-    fadeElements.forEach(el => observer.observe(el));
-</script>
+    </script>
 </body>
 </html>

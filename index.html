@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Paola Herrera Sol | Diseño Gráfico</title>
+    <title>Sobre mí | Paola Herrera Sol | Diseño Gráfico</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@
         }
 
         body {
-            overflow: hidden;
+            overflow-x: hidden;
             background:
                 radial-gradient(circle at 20% 15%, var(--bg-soft), transparent 28rem),
                 linear-gradient(135deg, var(--bg), var(--bg));
@@ -97,54 +97,6 @@
             height: 100%;
             opacity: .42;
             pointer-events: none;
-        }
-
-        .loader-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 30;
-            display: grid;
-            place-items: center;
-            gap: 1.25rem;
-            align-content: center;
-            background: var(--bg);
-            transition: opacity .45s ease, visibility .45s ease;
-        }
-
-        .loader-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .loader-name {
-            overflow: hidden;
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            font-size: clamp(2.1rem, 8vw, 5rem);
-            font-weight: 800;
-            line-height: .95;
-        }
-
-        .loader-name span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(100%);
-            animation: charReveal .12s ease forwards;
-        }
-
-        .loader-bar-wrap {
-            width: min(220px, 48vw);
-            height: 3px;
-            overflow: hidden;
-            border-radius: 999px;
-            background: var(--line);
-        }
-
-        .loader-bar {
-            width: 0;
-            height: 100%;
-            border-radius: inherit;
-            background: var(--accent);
-            animation: loadBar 1s ease forwards;
         }
 
         .page {
@@ -275,89 +227,97 @@
         main {
             display: grid;
             place-items: center;
-            padding: 0 clamp(1.15rem, 5vw, 4rem) 1rem;
+            padding: 2rem clamp(1.15rem, 5vw, 4rem) 3rem;
             text-align: center;
         }
 
-        .hero {
+        .about-container {
             display: grid;
             justify-items: center;
-            width: min(980px, 100%);
-            gap: clamp(0.8rem, 2vh, 1.5rem);
+            width: min(840px, 100%);
+            gap: clamp(1.5rem, 4vh, 2.5rem);
         }
 
-        /* GATO MÁS GRANDE Y DESTACADO */
-        .hero-gato {
-            width: min(450px, 75vw);
-            max-height: 50vh;
-            object-fit: contain;
-            filter: drop-shadow(0 25px 40px var(--shadow));
-            transform: translateY(18px) scale(.96);
+        .about-avatar {
+            width: min(240px, 50vw);
+            height: min(240px, 50vw);
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            box-shadow: 0 20px 35px var(--shadow);
             opacity: 0;
-            z-index: 2;
+            transform: translateY(18px) scale(.96);
         }
 
-        .page.loaded .hero-gato {
+        .page.loaded .about-avatar {
             animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
         }
 
-        /* TEXTO MÁS PEQUEÑO Y SUTIL */
-        .hero-text {
+        .about-text-block {
             opacity: 0;
             transform: translateY(18px);
-            z-index: 1;
         }
 
-        .page.loaded .hero-text {
+        .page.loaded .about-text-block {
             animation: fadeUp .58s .52s ease forwards;
         }
 
-        .hero-role {
-            margin: 0 0 .3rem;
-            color: var(--muted);
-            font: 600 clamp(.65rem, 1.4vw, .8rem)/1.25 'Inter', system-ui, sans-serif;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            opacity: 0.7;
-        }
-
-        h1 {
-            position: relative;
-            display: inline-block;
-            margin: 0;
+        .about-title {
+            margin: 0 0 0.5rem 0;
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: clamp(2rem, 5vw, 3.8rem);
+            font-size: clamp(2rem, 5vw, 3.5rem);
             font-weight: 800;
-            line-height: .9;
+            line-height: .95;
             letter-spacing: -0.5px;
             color: var(--accent);
         }
 
-        .rotating-wrap {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: .25rem;
-            margin-top: 0.5rem;
+        .about-subtitle {
+            margin: 0 0 1.5rem 0;
             color: var(--muted);
-            font: 500 clamp(.75rem, 1.6vw, 1rem)/1.35 'Inter', system-ui, sans-serif;
+            font: 600 clamp(.7rem, 1.5vw, .85rem)/1.25 'Inter', system-ui, sans-serif;
+            letter-spacing: .22em;
+            text-transform: uppercase;
             opacity: 0.8;
         }
 
-        .rotating-text {
-            min-width: 12ch;
-            color: var(--accent);
+        .about-desc {
+            max-width: 680px;
+            margin: 0 auto 1.5rem auto;
+            color: var(--text);
+            font: 400 clamp(0.95rem, 1.8vw, 1.1rem)/1.6 'Inter', system-ui, sans-serif;
+            text-align: justify;
+        }
+
+        .about-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 1rem;
             text-align: left;
+        }
+
+        .detail-item {
+            border-left: 2px solid var(--line);
+            padding-left: 1rem;
+        }
+
+        .detail-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--muted);
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-val {
+            font-size: 0.95rem;
             font-weight: 600;
+            color: var(--accent);
         }
 
-        .rotating-text::after {
-            content: "|";
-            margin-left: .12rem;
-            animation: blink .7s infinite;
-        }
-
-        /* NAVEGACIÓN MÁS SUTIL */
         .main-nav {
             display: flex;
             flex-wrap: wrap;
@@ -365,7 +325,7 @@
             gap: clamp(0.6rem, 1.5vw, 0.9rem);
             opacity: 0;
             transform: translateY(16px);
-            margin-top: 0.2rem;
+            margin-top: 0.5rem;
         }
 
         .page.loaded .main-nav {
@@ -457,19 +417,6 @@
             animation: fadeUp .5s 1s ease forwards;
         }
 
-        @keyframes charReveal {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes loadBar {
-            to {
-                width: 100%;
-            }
-        }
-
         @keyframes floatIn {
             to {
                 opacity: 1;
@@ -481,12 +428,6 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
-            }
-        }
-
-        @keyframes blink {
-            50% {
-                opacity: 0;
             }
         }
 
@@ -522,17 +463,25 @@
             }
 
             main {
-                min-height: 68vh;
+                padding: 1.5rem 1.15rem 2rem;
+            }
+
+            .about-container {
+                gap: 1.5rem;
+            }
+
+            .about-desc {
+                text-align: left;
+            }
+
+            .about-details {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
 
             .main-nav {
                 flex-direction: column;
                 gap: 0.3rem;
-            }
-
-            .rotating-text {
-                min-width: auto;
-                text-align: center;
             }
 
             .social a {
@@ -541,13 +490,9 @@
                 font-size: 1rem;
             }
 
-            .hero-gato {
-                width: min(280px, 65vw);
-                max-height: 35vh;
-            }
-
-            h1 {
-                font-size: clamp(1.8rem, 6vw, 2.8rem);
+            .about-avatar {
+                width: min(180px, 45vw);
+                height: min(180px, 45vw);
             }
         }
 
@@ -566,11 +511,6 @@
 <body>
     <div id="cursor" aria-hidden="true"></div>
     <canvas id="particleCanvas" aria-hidden="true"></canvas>
-
-    <div class="loader-screen" id="loaderScreen">
-        <div class="loader-name" id="loaderName" aria-label="Paola Herrera Sol"></div>
-        <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-    </div>
 
     <div class="page" id="mainPage">
         <header>
@@ -597,20 +537,34 @@
         </header>
 
         <main>
-            <section class="hero" aria-labelledby="heroTitle">
-                <img class="hero-gato" src="assets/gato_animado.svg" alt="Gato animado">
+            <section class="about-container" aria-labelledby="aboutTitle">
+                <img class="about-avatar" src="assets/about/paola_photo.webp" alt="Paola Herrera Sol">
 
-                <div class="hero-text">
-                    <p class="hero-role" data-i18n="role">Diseñadora gráfica y creativa</p>
-                    <h1 id="heroTitle">Paola Herrera Sol</h1>
-                    <div class="rotating-wrap">
-                        <span data-i18n="specialist">Especialista en</span>
-                        <span class="rotating-text" id="rotatingText"></span>
+                <div class="about-text-block">
+                    <p class="about-subtitle" data-i18n="aboutSubtitle">Conóceme</p>
+                    <h1 id="aboutTitle" class="about-title">Paola Herrera Sol</h1>
+                    <p class="about-desc" data-i18n="aboutDesc">
+                        Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando meticulosamente cada trazo, composición y paleta tipográfica.
+                    </p>
+                    
+                    <div class="about-details">
+                        <div class="detail-item">
+                            <div class="detail-label" data-i18n="labelExp">Experiencia</div>
+                            <div class="detail-val" data-i18n="valExp">4+ Años en el sector</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label" data-i18n="labelLoc">Ubicación</div>
+                            <div class="detail-val" data-i18n="valLoc">México (Remoto)</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label" data-i18n="labelFocus">Enfoque</div>
+                            <div class="detail-val" data-i18n="valFocus">Identidad & Editorial</div>
+                        </div>
                     </div>
                 </div>
 
                 <nav class="main-nav" aria-label="Navegación principal">
-                    <a href="about.html" class="nav-link" data-i18n="navAbout"><span aria-hidden="true">&gt;</span> Sobre mí</a>
+                    <a href="index.html" class="nav-link" data-i18n="navHome"><span aria-hidden="true">&gt;</span> Inicio</a>
                     <a href="portfolio.html" class="nav-link" data-i18n="navPortfolio"><span aria-hidden="true">&gt;</span> Portafolio</a>
                     <a href="contact.html" class="nav-link" data-i18n="navContact"><span aria-hidden="true">&gt;</span> Contacto</a>
                 </nav>
@@ -633,260 +587,22 @@
         const translations = {
             es: {
                 current: "ES",
-                role: "Diseñadora gráfica y creativa",
-                specialist: "Especialista en",
-                words: ["branding", "ilustración", "social media", "diseño editorial"],
-                navAbout: "> Sobre mí",
+                aboutSubtitle: "Conóceme",
+                aboutDesc: "Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando meticulosamente cada trazo, composición y paleta tipográfica.",
+                labelExp: "Experiencia",
+                valExp: "4+ Años en el sector",
+                labelLoc: "Ubicación",
+                valLoc: "México (Remoto)",
+                labelFocus: "Enfoque",
+                valFocus: "Identidad & Editorial",
+                navHome: "> Inicio",
                 navPortfolio: "> Portafolio",
                 navContact: "> Contacto",
                 copy: "© 2026 | Diseñado por Paola Herrera Sol"
             },
             en: {
                 current: "EN",
-                role: "Graphic designer and creative",
-                specialist: "Specialist in",
-                words: ["branding", "illustration", "social media", "editorial design"],
-                navAbout: "> About",
-                navPortfolio: "> Portfolio",
-                navContact: "> Contact",
-                copy: "© 2026 | Designed by Paola Herrera Sol"
-            },
-            fr: {
-                current: "FR",
-                role: "Graphiste et créative",
-                specialist: "Spécialiste en",
-                words: ["branding", "illustration", "réseaux sociaux", "design éditorial"],
-                navAbout: "> À propos",
-                navPortfolio: "> Portfolio",
-                navContact: "> Contact",
-                copy: "© 2026 | Conçu par Paola Herrera Sol"
-            },
-            pt: {
-                current: "PT",
-                role: "Designer gráfica e criativa",
-                specialist: "Especialista em",
-                words: ["branding", "ilustração", "social media", "design editorial"],
-                navAbout: "> Sobre mim",
-                navPortfolio: "> Portfólio",
-                navContact: "> Contato",
-                copy: "© 2026 | Criado por Paola Herrera Sol"
-            }
-        };
-
-        const body = document.body;
-        const cursor = document.getElementById("cursor");
-        const loaderName = document.getElementById("loaderName");
-        const loaderScreen = document.getElementById("loaderScreen");
-        const mainPage = document.getElementById("mainPage");
-        const themeToggle = document.getElementById("themeToggle");
-        const langPicker = document.getElementById("langPicker");
-        const langTrigger = document.getElementById("langTrigger");
-        const langCurrent = document.getElementById("langCurrent");
-        const rotatingText = document.getElementById("rotatingText");
-        const langButtons = [...document.querySelectorAll(".lang-opt")];
-        const i18nNodes = [...document.querySelectorAll("[data-i18n]")];
-
-        let activeLang = localStorage.getItem("language") || "es";
-        let wordIndex = 0;
-        let charIndex = 0;
-        let deleting = false;
-        let typeTimer = 0;
-
-        function buildLoader() {
-            const name = "Paola Herrera Sol";
-            [...name].forEach((letter, index) => {
-                const span = document.createElement("span");
-                span.textContent = letter === " " ? "\u00A0" : letter;
-                span.style.animationDelay = `${index * .05}s`;
-                loaderName.appendChild(span);
-            });
-        }
-
-        function applyTheme() {
-            const dark = localStorage.getItem("theme") === "dark";
-            body.classList.toggle("dark-mode", dark);
-            themeToggle.textContent = dark ? "☀" : "☾";
-        }
-
-        function setLanguage(lang) {
-            activeLang = translations[lang] ? lang : "es";
-            const dictionary = translations[activeLang];
-            localStorage.setItem("language", activeLang);
-            document.documentElement.lang = activeLang;
-            langCurrent.textContent = dictionary.current;
-
-            i18nNodes.forEach((node) => {
-                const key = node.dataset.i18n;
-                if (dictionary[key]) node.textContent = dictionary[key];
-            });
-
-            langButtons.forEach((button) => {
-                button.classList.toggle("active", button.dataset.lang === activeLang);
-            });
-
-            wordIndex = 0;
-            charIndex = 0;
-            deleting = false;
-            clearTimeout(typeTimer);
-            typeWord();
-        }
-
-        function typeWord() {
-            const words = translations[activeLang].words;
-            const current = words[wordIndex % words.length];
-
-            if (deleting) {
-                charIndex -= 1;
-            } else {
-                charIndex += 1;
-            }
-
-            rotatingText.textContent = current.slice(0, charIndex);
-
-            if (!deleting && charIndex === current.length) {
-                deleting = true;
-                typeTimer = setTimeout(typeWord, 1100);
-                return;
-            }
-
-            if (deleting && charIndex === 0) {
-                deleting = false;
-                wordIndex += 1;
-            }
-
-            typeTimer = setTimeout(typeWord, deleting ? 45 : 80);
-        }
-
-        function initParticles() {
-            const canvas = document.getElementById("particleCanvas");
-            const ctx = canvas.getContext("2d");
-            const particles = [];
-            let width = 0;
-            let height = 0;
-
-            function resize() {
-                const ratio = window.devicePixelRatio || 1;
-                width = window.innerWidth;
-                height = window.innerHeight;
-                canvas.width = Math.floor(width * ratio);
-                canvas.height = Math.floor(height * ratio);
-                canvas.style.width = `${width}px`;
-                canvas.style.height = `${height}px`;
-                ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
-            }
-
-            function particleColor(alpha) {
-                return body.classList.contains("dark-mode")
-                    ? `rgba(255, 217, 61, ${alpha})`
-                    : `rgba(30, 30, 30, ${alpha})`;
-            }
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
-                    this.radius = Math.random() * 2.4 + .7;
-                    this.vx = (Math.random() - .5) * .35;
-                    this.vy = (Math.random() - .5) * .35;
-                    this.alpha = Math.random() * .16 + .05;
-                }
-
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-                    if (this.x < 0 || this.x > width) this.vx *= -1;
-                    if (this.y < 0 || this.y > height) this.vy *= -1;
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = particleColor(this.alpha);
-                    ctx.fill();
-                }
-            }
-
-            function connect() {
-                for (let i = 0; i < particles.length; i += 1) {
-                    for (let j = i + 1; j < particles.length; j += 1) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.hypot(dx, dy);
-                        if (distance < 120) {
-                            ctx.strokeStyle = particleColor((1 - distance / 120) * .08);
-                            ctx.lineWidth = .8;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-            }
-
-            function loop() {
-                ctx.clearRect(0, 0, width, height);
-                particles.forEach((particle) => {
-                    particle.update();
-                    particle.draw();
-                });
-                connect();
-                requestAnimationFrame(loop);
-            }
-
-            resize();
-            for (let i = 0; i < 56; i += 1) particles.push(new Particle());
-            window.addEventListener("resize", resize);
-            loop();
-        }
-
-        buildLoader();
-        applyTheme();
-        setLanguage(activeLang);
-        initParticles();
-
-        window.addEventListener("load", () => {
-            setTimeout(() => {
-                loaderScreen.classList.add("hidden");
-                requestAnimationFrame(() => mainPage.classList.add("loaded"));
-            }, 900);
-        });
-
-        themeToggle.addEventListener("click", () => {
-            const nextTheme = body.classList.contains("dark-mode") ? "light" : "dark";
-            localStorage.setItem("theme", nextTheme);
-            applyTheme();
-        });
-
-        langTrigger.addEventListener("click", () => {
-            const open = langPicker.classList.toggle("open");
-            langTrigger.setAttribute("aria-expanded", String(open));
-        });
-
-        langButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                setLanguage(button.dataset.lang);
-                langPicker.classList.remove("open");
-                langTrigger.setAttribute("aria-expanded", "false");
-            });
-        });
-
-        document.addEventListener("click", (event) => {
-            if (!langPicker.contains(event.target)) {
-                langPicker.classList.remove("open");
-                langTrigger.setAttribute("aria-expanded", "false");
-            }
-        });
-
-        window.addEventListener("mousemove", (event) => {
-            cursor.style.left = `${event.clientX}px`;
-            cursor.style.top = `${event.clientY}px`;
-        });
-
-        document.querySelectorAll("a, button").forEach((item) => {
-            item.addEventListener("mouseenter", () => cursor.classList.add("grow"));
-            item.addEventListener("mouseleave", () => cursor.classList.remove("grow"));
-        });
-    </script>
-</body>
-</html>
+                aboutSubtitle: "Get to know me",
+                aboutDesc: "I am a passionate graphic designer and creative focused on bringing unique and memorable visual identities to life. Through branding, illustration, and social media strategies, I translate abstract concepts into functional aesthetic solutions with a fresh and bold touch. I look to connect emotionally with audiences while meticulously taking care of every stroke, composition, and typographic palette.",
+                labelExp: "Experience",
+                valExp: "4+ Years

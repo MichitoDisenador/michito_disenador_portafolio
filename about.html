@@ -606,3 +606,273 @@
                 aboutDesc: "I am a passionate graphic designer and creative focused on bringing unique and memorable visual identities to life. Through branding, illustration, and social media strategies, I translate abstract concepts into functional aesthetic solutions with a fresh and bold touch. I look to connect emotionally with audiences while meticulously taking care of every stroke, composition, and typographic palette.",
                 labelExp: "Experience",
                 valExp: "4+ Years
+                valExp: "4+ Years in the industry",
+                labelLoc: "Location",
+                valLoc: "Mexico (Remote)",
+                labelFocus: "Focus",
+                valFocus: "Identity & Editorial",
+                navHome: "> Home",
+                navPortfolio: "> Portfolio",
+                navContact: "> Contact",
+                copy: "© 2026 | Designed by Paola Herrera Sol"
+            },
+            fr: {
+                current: "FR",
+                aboutSubtitle: "Découvrez-moi",
+                aboutDesc: "Je suis une graphiste et créative passionnée, dédiée à donner vie à des identités visuelles uniques et mémorables. À travers le branding, l'illustration et les stratégies de médias sociaux, je transforme des concepts abstraits en solutions esthétiques fonctionnelles avec une touche fraîche et audacieuse. Je cherche à créer un lien émotionnel avec les publics en soignant méticuleusement chaque trait, composition et palette typographique.",
+                labelExp: "Expérience",
+                valExp: "4+ Ans dans le secteur",
+                labelLoc: "Localisation",
+                valLoc: "Mexique (À distance)",
+                labelFocus: "Spécialité",
+                valFocus: "Identité & Édition",
+                navHome: "> Accueil",
+                navPortfolio: "> Portfolio",
+                navContact: "> Contact",
+                copy: "© 2026 | Conçu par Paola Herrera Sol"
+            },
+            pt: {
+                current: "PT",
+                aboutSubtitle: "Conheça-me",
+                aboutDesc: "Sou uma designer gráfica e criativa apaixonada, focada em dar vida a identidades visuais únicas e memoráveis. Através do branding, ilustração e estratégias de mídias sociais, traduzo conceitos abstratos em soluções estéticas funcionais com um toque fresco e ousado. Busco conectar emocionalmente com o público, cuidando meticulosamente de cada traço, composição e paleta tipográfica.",
+                labelExp: "Experiência",
+                valExp: "4+ Anos no setor",
+                labelLoc: "Localização",
+                valLoc: "México (Remoto)",
+                labelFocus: "Foco",
+                valFocus: "Identidade & Editorial",
+                navHome: "> Início",
+                navPortfolio: "> Portfólio",
+                navContact: "> Contato",
+                copy: "© 2026 | Projetado por Paola Herrera Sol"
+            }
+        };
+
+        let currentLang = 'es';
+
+        // --- Cursor personalizado ---
+        const cursor = document.getElementById('cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.classList.add('grow'));
+        document.addEventListener('mouseup', () => cursor.classList.remove('grow'));
+
+        // Ocultar cursor en móviles
+        if (window.matchMedia('(max-width: 720px)').matches) {
+            cursor.style.display = 'none';
+        }
+
+        // --- Partículas ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = null;
+        let mouseY = null;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.speedY = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                // Interacción con el mouse
+                if (mouseX !== null && mouseY !== null) {
+                    const dx = mouseX - this.x;
+                    const dy = mouseY - this.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        const force = (120 - dist) / 120 * 0.3;
+                        this.x -= dx * force;
+                        this.y -= dy * force;
+                    }
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(30, 30, 30, ${this.opacity})`;
+                ctx.fill();
+
+                // Modo oscuro: partículas más claras
+                if (document.body.classList.contains('dark-mode')) {
+                    ctx.fillStyle = `rgba(255, 217, 61, ${this.opacity * 0.7})`;
+                    ctx.fill();
+                }
+            }
+        }
+
+        // Inicializar partículas
+        const particleCount = Math.min(80, Math.floor(window.innerWidth * 0.08));
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        animateParticles();
+
+        // Mouse tracking para partículas
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        document.addEventListener('mouseleave', () => {
+            mouseX = null;
+            mouseY = null;
+        });
+
+        // --- Mostrar página ---
+        const mainPage = document.getElementById('mainPage');
+        setTimeout(() => {
+            mainPage.classList.add('loaded');
+        }, 200);
+
+        // --- Tema oscuro ---
+        const themeToggle = document.getElementById('themeToggle');
+        let darkMode = localStorage.getItem('darkMode') === 'true';
+
+        function applyTheme() {
+            if (darkMode) {
+                document.body.classList.add('dark-mode');
+                themeToggle.textContent = '☀';
+            } else {
+                document.body.classList.remove('dark-mode');
+                themeToggle.textContent = '☾';
+            }
+            localStorage.setItem('darkMode', darkMode);
+        }
+
+        applyTheme();
+
+        themeToggle.addEventListener('click', () => {
+            darkMode = !darkMode;
+            applyTheme();
+            // Re-aplicar color de partículas
+            particles.forEach(p => {
+                p.opacity = Math.random() * 0.4 + 0.1;
+            });
+        });
+
+        // --- Idioma ---
+        const langTrigger = document.getElementById('langTrigger');
+        const langDropdown = document.getElementById('langDropdown');
+        const langPicker = document.getElementById('langPicker');
+        const langCurrent = document.getElementById('langCurrent');
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Actualizar botón
+            langCurrent.textContent = t.current;
+
+            // Actualizar elementos
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key === 'navHome' || key === 'navPortfolio' || key === 'navContact') {
+                    el.innerHTML = t[key];
+                } else {
+                    el.textContent = t[key];
+                }
+            });
+
+            // Marcar opción activa
+            document.querySelectorAll('.lang-opt').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Cerrar dropdown
+            langPicker.classList.remove('open');
+            langTrigger.setAttribute('aria-expanded', 'false');
+
+            localStorage.setItem('lang', lang);
+        }
+
+        // Toggle dropdown
+        langTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isOpen = langPicker.classList.toggle('open');
+            langTrigger.setAttribute('aria-expanded', isOpen);
+        });
+
+        // Cerrar dropdown al hacer clic fuera
+        document.addEventListener('click', () => {
+            langPicker.classList.remove('open');
+            langTrigger.setAttribute('aria-expanded', 'false');
+        });
+
+        // Seleccionar idioma
+        document.querySelectorAll('.lang-opt').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                switchLanguage(btn.dataset.lang);
+            });
+        });
+
+        // --- Inicializar idioma guardado ---
+        const savedLang = localStorage.getItem('lang');
+        if (savedLang && translations[savedLang]) {
+            switchLanguage(savedLang);
+        } else {
+            // Inicializar con español
+            const t = translations.es;
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key === 'navHome' || key === 'navPortfolio' || key === 'navContact') {
+                    el.innerHTML = t[key];
+                } else {
+                    el.textContent = t[key];
+                }
+            });
+        }
+
+        // --- Prevenir scroll horizontal ---
+        document.body.style.overflowX = 'hidden';
+
+        // --- Ajuste para móviles ---
+        window.addEventListener('resize', () => {
+            if (window.innerWidth <= 720) {
+                document.body.style.overflow = 'auto';
+                if (cursor) cursor.style.display = 'none';
+            } else {
+                document.body.style.overflow = 'hidden';
+                if (cursor) cursor.style.display = 'block';
+            }
+        });
+
+        console.log('🚀 Paola Herrera Sol | Sobre mí');
+        console.log('✨ Conoce más sobre esta diseñadora creativa');
+    </script>
+</body>
+</html>

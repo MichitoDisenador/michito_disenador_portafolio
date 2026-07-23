@@ -606,7 +606,6 @@
                 aboutDesc: "I am a passionate graphic designer and creative focused on bringing unique and memorable visual identities to life. Through branding, illustration, and social media strategies, I translate abstract concepts into functional aesthetic solutions with a fresh and bold touch. I look to connect emotionally with audiences while meticulously taking care of every stroke, composition, and typographic palette.",
                 labelExp: "Experience",
                 valExp: "4+ Years
-                valExp: "4+ Years in the industry",
                 labelLoc: "Location",
                 valLoc: "Mexico (Remote)",
                 labelFocus: "Focus",
@@ -654,139 +653,160 @@
         const cursor = document.getElementById('cursor');
 
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+            if (cursor) {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            }
         });
 
-        document.addEventListener('mousedown', () => cursor.classList.add('grow'));
-        document.addEventListener('mouseup', () => cursor.classList.remove('grow'));
+        document.addEventListener('mousedown', () => {
+            if (cursor) cursor.classList.add('grow');
+        });
+        document.addEventListener('mouseup', () => {
+            if (cursor) cursor.classList.remove('grow');
+        });
 
         // Ocultar cursor en móviles
-        if (window.matchMedia('(max-width: 720px)').matches) {
+        if (window.matchMedia('(max-width: 720px)').matches && cursor) {
             cursor.style.display = 'none';
         }
 
         // --- Partículas ---
         const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
+        let ctx = null;
         let particles = [];
         let mouseX = null;
         let mouseY = null;
+        let animationId = null;
 
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
+        if (canvas) {
+            ctx = canvas.getContext('2d');
 
-        class Particle {
-            constructor() {
-                this.reset();
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.5 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.opacity = Math.random() * 0.4 + 0.1;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
 
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2.5 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
 
-                // Interacción con el mouse
-                if (mouseX !== null && mouseY !== null) {
-                    const dx = mouseX - this.x;
-                    const dy = mouseY - this.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 120) {
-                        const force = (120 - dist) / 120 * 0.3;
-                        this.x -= dx * force;
-                        this.y -= dy * force;
+                    if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+
+                    if (mouseX !== null && mouseY !== null) {
+                        const dx = mouseX - this.x;
+                        const dy = mouseY - this.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            const force = (120 - dist) / 120 * 0.3;
+                            this.x -= dx * force;
+                            this.y -= dy * force;
+                        }
+                    }
+                }
+                draw() {
+                    if (!ctx) return;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(30, 30, 30, ${this.opacity})`;
+                    ctx.fill();
+
+                    if (document.body.classList.contains('dark-mode')) {
+                        ctx.fillStyle = `rgba(255, 217, 61, ${this.opacity * 0.7})`;
+                        ctx.fill();
                     }
                 }
             }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(30, 30, 30, ${this.opacity})`;
-                ctx.fill();
 
-                // Modo oscuro: partículas más claras
-                if (document.body.classList.contains('dark-mode')) {
-                    ctx.fillStyle = `rgba(255, 217, 61, ${this.opacity * 0.7})`;
-                    ctx.fill();
-                }
+            const particleCount = Math.min(80, Math.floor(window.innerWidth * 0.08));
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
             }
-        }
 
-        // Inicializar partículas
-        const particleCount = Math.min(80, Math.floor(window.innerWidth * 0.08));
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
+            function animateParticles() {
+                if (!ctx) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                animationId = requestAnimationFrame(animateParticles);
+            }
 
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
+            animateParticles();
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
             });
-            requestAnimationFrame(animateParticles);
+            document.addEventListener('mouseleave', () => {
+                mouseX = null;
+                mouseY = null;
+            });
         }
-
-        animateParticles();
-
-        // Mouse tracking para partículas
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        document.addEventListener('mouseleave', () => {
-            mouseX = null;
-            mouseY = null;
-        });
 
         // --- Mostrar página ---
         const mainPage = document.getElementById('mainPage');
-        setTimeout(() => {
-            mainPage.classList.add('loaded');
-        }, 200);
+        if (mainPage) {
+            setTimeout(() => {
+                mainPage.classList.add('loaded');
+            }, 200);
+        }
 
         // --- Tema oscuro ---
         const themeToggle = document.getElementById('themeToggle');
-        let darkMode = localStorage.getItem('darkMode') === 'true';
+        let darkMode = false;
+
+        try {
+            darkMode = localStorage.getItem('darkMode') === 'true';
+        } catch (e) {
+            // Si localStorage no está disponible, usar valor por defecto
+        }
 
         function applyTheme() {
             if (darkMode) {
                 document.body.classList.add('dark-mode');
-                themeToggle.textContent = '☀';
+                if (themeToggle) themeToggle.textContent = '☀';
             } else {
                 document.body.classList.remove('dark-mode');
-                themeToggle.textContent = '☾';
+                if (themeToggle) themeToggle.textContent = '☾';
             }
-            localStorage.setItem('darkMode', darkMode);
+            try {
+                localStorage.setItem('darkMode', darkMode);
+            } catch (e) {
+                // Ignorar errores de localStorage
+            }
         }
 
         applyTheme();
 
-        themeToggle.addEventListener('click', () => {
-            darkMode = !darkMode;
-            applyTheme();
-            // Re-aplicar color de partículas
-            particles.forEach(p => {
-                p.opacity = Math.random() * 0.4 + 0.1;
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                darkMode = !darkMode;
+                applyTheme();
+                particles.forEach(p => {
+                    p.opacity = Math.random() * 0.4 + 0.1;
+                });
             });
-        });
+        }
 
         // --- Idioma ---
         const langTrigger = document.getElementById('langTrigger');
-        const langDropdown = document.getElementById('langDropdown');
         const langPicker = document.getElementById('langPicker');
         const langCurrent = document.getElementById('langCurrent');
 
@@ -794,10 +814,8 @@
             currentLang = lang;
             const t = translations[lang];
 
-            // Actualizar botón
-            langCurrent.textContent = t.current;
+            if (langCurrent) langCurrent.textContent = t.current;
 
-            // Actualizar elementos
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (key === 'navHome' || key === 'navPortfolio' || key === 'navContact') {
@@ -807,32 +825,42 @@
                 }
             });
 
-            // Marcar opción activa
             document.querySelectorAll('.lang-opt').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
 
-            // Cerrar dropdown
-            langPicker.classList.remove('open');
-            langTrigger.setAttribute('aria-expanded', 'false');
+            if (langPicker) {
+                langPicker.classList.remove('open');
+            }
+            if (langTrigger) {
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
 
-            localStorage.setItem('lang', lang);
+            try {
+                localStorage.setItem('lang', lang);
+            } catch (e) {
+                // Ignorar errores de localStorage
+            }
         }
 
-        // Toggle dropdown
-        langTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isOpen = langPicker.classList.toggle('open');
-            langTrigger.setAttribute('aria-expanded', isOpen);
-        });
+        if (langTrigger) {
+            langTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (!langPicker) return;
+                const isOpen = langPicker.classList.toggle('open');
+                langTrigger.setAttribute('aria-expanded', isOpen);
+            });
+        }
 
-        // Cerrar dropdown al hacer clic fuera
         document.addEventListener('click', () => {
-            langPicker.classList.remove('open');
-            langTrigger.setAttribute('aria-expanded', 'false');
+            if (langPicker) {
+                langPicker.classList.remove('open');
+            }
+            if (langTrigger) {
+                langTrigger.setAttribute('aria-expanded', 'false');
+            }
         });
 
-        // Seleccionar idioma
         document.querySelectorAll('.lang-opt').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -841,11 +869,16 @@
         });
 
         // --- Inicializar idioma guardado ---
-        const savedLang = localStorage.getItem('lang');
+        let savedLang = 'es';
+        try {
+            savedLang = localStorage.getItem('lang') || 'es';
+        } catch (e) {
+            // Ignorar errores de localStorage
+        }
+
         if (savedLang && translations[savedLang]) {
             switchLanguage(savedLang);
         } else {
-            // Inicializar con español
             const t = translations.es;
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
@@ -856,6 +889,16 @@
                 }
             });
         }
+
+        // --- Manejo de errores para imágenes ---
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('error', function() {
+                // Si la imagen no carga, no romper la página
+                console.warn('Imagen no encontrada:', this.src);
+                // Opcional: mostrar un placeholder o ocultar la imagen
+                this.style.display = 'none';
+            });
+        });
 
         // --- Prevenir scroll horizontal ---
         document.body.style.overflowX = 'hidden';

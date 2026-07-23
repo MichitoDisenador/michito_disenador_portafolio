@@ -3,91 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Sobre mí | Paola Herrera Sol | Diseño Gráfico</title>
+    <title>Paola Herrera Sol | CV Diseñadora Gráfica</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png">
 
     <style>
         :root {
-            --bg: #ffd93d;
-            --bg-soft: #ffe875;
-            --text: #1e1e1e;
-            --muted: #525252;
-            --accent: #1e1e1e;
-            --line: rgba(30, 30, 30, .22);
-            --shadow: rgba(30, 30, 30, .18);
-            --cursor: #1e1e1e;
-            --primary: #FFD700;
+            --bg: #f7f5f0;
+            --bg-soft: #f0ede5;
+            --text: #1a1a1a;
+            --muted: #5a5a5a;
+            --muted-light: #8a8a8a;
+            --accent: #1a2a3a;
+            --accent-light: #3a5a7a;
+            --line: rgba(26, 42, 58, .12);
+            --shadow: rgba(26, 42, 58, .08);
+            --cursor: #1a2a3a;
+            --card-bg: #ffffff;
+            --tag-bg: #e8e4dc;
+            --primary: #c0392b;
+            --primary-light: #e74c3c;
         }
 
         body.dark-mode {
-            --bg: #0b0b0b;
-            --bg-soft: #161616;
-            --text: #ffd93d;
-            --muted: #c9bb68;
-            --accent: #ffd93d;
-            --line: rgba(255, 217, 61, .28);
-            --shadow: rgba(255, 217, 61, .12);
-            --cursor: #ffd93d;
+            --bg: #0a0a0a;
+            --bg-soft: #141414;
+            --text: #e8e4dc;
+            --muted: #a8a49c;
+            --muted-light: #78746c;
+            --accent: #d4c9b8;
+            --accent-light: #c4b9a8;
+            --line: rgba(232, 228, 220, .15);
+            --shadow: rgba(232, 228, 220, .06);
+            --cursor: #d4c9b8;
+            --card-bg: #181818;
+            --tag-bg: #2a2a2a;
+            --primary: #e74c3c;
+            --primary-light: #ff6b5a;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        html,
-        body {
+        html, body {
             min-height: 100%;
             margin: 0;
+            scroll-behavior: smooth;
         }
 
         body {
             overflow-x: hidden;
-            background:
-                radial-gradient(circle at 20% 15%, var(--bg-soft), transparent 28rem),
-                linear-gradient(135deg, var(--bg), var(--bg));
+            background: var(--bg);
             color: var(--text);
             cursor: none;
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             transition: background .35s ease, color .35s ease;
+            line-height: 1.6;
         }
 
-        button,
-        a {
-            cursor: none;
-        }
+        button, a { cursor: none; }
 
         #cursor {
             position: fixed;
             left: 0;
             top: 0;
             z-index: 50;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             border-radius: 999px;
             background: var(--cursor);
             pointer-events: none;
             transform: translate(-50%, -50%);
             transition: transform .12s ease, opacity .2s ease, background .2s ease;
-            mix-blend-mode: multiply;
+            mix-blend-mode: difference;
         }
 
-        body.dark-mode #cursor {
-            mix-blend-mode: normal;
-        }
-
-        #cursor.grow {
-            opacity: .35;
-            transform: translate(-50%, -50%) scale(4);
-        }
+        body.dark-mode #cursor { mix-blend-mode: normal; }
+        #cursor.grow { opacity: .3; transform: translate(-50%, -50%) scale(5); }
 
         #particleCanvas {
             position: fixed;
@@ -95,7 +93,7 @@
             z-index: 0;
             width: 100%;
             height: 100%;
-            opacity: .42;
+            opacity: .25;
             pointer-events: none;
         }
 
@@ -108,268 +106,467 @@
             opacity: 0;
             transition: opacity .45s ease;
         }
+        .page.loaded { opacity: 1; }
 
-        .page.loaded {
-            opacity: 1;
-        }
-
+        /* HEADER */
         header {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 1rem;
-            padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 5vw, 3.5rem);
+            padding: clamp(0.8rem, 2vw, 1.5rem) clamp(1.5rem, 5vw, 4rem);
+            border-bottom: 1px solid var(--line);
+            background: rgba(247, 245, 240, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        body.dark-mode header {
+            background: rgba(10, 10, 10, 0.85);
         }
 
         .logo {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: .75rem;
             color: var(--text);
             text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
         .logo img {
-            height: 65px;
+            height: 38px;
             width: auto;
             display: block;
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-
-        .logo img:hover {
-            transform: scale(0.97);
-            opacity: 0.9;
+            border-radius: 50%;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: .75rem;
+            gap: .5rem;
         }
 
-        .lang-picker {
-            position: relative;
-        }
-
-        .pill-button,
-        .theme-toggle {
-            min-height: 40px;
-            border: 1.5px solid var(--accent);
+        .pill-button, .theme-toggle {
+            min-height: 36px;
+            border: 1.5px solid var(--line);
             background: transparent;
-            color: var(--accent);
-            font: 800 .78rem/1 'Inter', system-ui, sans-serif;
-            transition: transform .2s ease, background .2s ease, color .2s ease;
+            color: var(--text);
+            font: 600 .72rem/1 'Inter', sans-serif;
+            transition: all .2s ease;
         }
 
         .pill-button {
             display: inline-flex;
             align-items: center;
-            gap: .45rem;
-            padding: .65rem .9rem;
+            gap: .4rem;
+            padding: .4rem .8rem;
             border-radius: 999px;
-            letter-spacing: .08em;
+            letter-spacing: .05em;
         }
 
         .theme-toggle {
-            width: 40px;
+            width: 36px;
             border-radius: 50%;
-            font-size: 1rem;
+            font-size: .9rem;
+            display: grid;
+            place-items: center;
         }
 
-        .pill-button:hover,
-        .theme-toggle:hover,
-        .pill-button[aria-expanded="true"] {
+        .pill-button:hover, .theme-toggle:hover {
+            border-color: var(--accent);
             background: var(--accent);
             color: var(--bg);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
+        .lang-picker { position: relative; }
         .lang-dropdown {
             position: absolute;
-            top: calc(100% + .65rem);
+            top: calc(100% + .5rem);
             right: 0;
             z-index: 10;
             display: grid;
-            width: 170px;
-            padding: .45rem;
-            border: 1.5px solid var(--accent);
+            width: 150px;
+            padding: .4rem;
+            border: 1px solid var(--line);
             border-radius: 8px;
-            background: var(--bg);
-            box-shadow: 0 16px 34px var(--shadow);
+            background: var(--card-bg);
+            box-shadow: 0 12px 30px var(--shadow);
             opacity: 0;
             pointer-events: none;
-            transform: translateY(-8px);
-            transition: opacity .18s ease, transform .18s ease;
+            transform: translateY(-6px);
+            transition: all .18s ease;
         }
-
         .lang-picker.open .lang-dropdown {
             opacity: 1;
             pointer-events: auto;
             transform: translateY(0);
         }
-
         .lang-opt {
             border: 0;
             border-radius: 6px;
-            padding: .6rem .7rem;
+            padding: .5rem .7rem;
             background: transparent;
             color: var(--text);
-            font: 700 .86rem/1.1 'Inter', system-ui, sans-serif;
+            font: 600 .75rem/1.1 'Inter', sans-serif;
             text-align: left;
+            transition: all .15s ease;
         }
-
-        .lang-opt:hover,
-        .lang-opt.active {
+        .lang-opt:hover, .lang-opt.active {
             background: var(--accent);
             color: var(--bg);
         }
 
+        /* MAIN - CV */
         main {
+            position: relative;
+            z-index: 1;
+            padding: 2rem clamp(1.5rem, 5vw, 4rem) 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .cv-grid {
             display: grid;
-            place-items: center;
-            padding: 2rem clamp(1.15rem, 5vw, 4rem) 3rem;
+            grid-template-columns: 300px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* COLUMNA IZQUIERDA */
+        .profile-side {
+            position: sticky;
+            top: 90px;
+        }
+
+        .profile-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 4px 24px var(--shadow);
+            border: 1px solid var(--line);
             text-align: center;
         }
 
-        .about-container {
-            display: grid;
-            justify-items: center;
-            width: min(840px, 100%);
-            gap: clamp(1.5rem, 4vh, 2.5rem);
-        }
-
-        .about-avatar {
-            width: min(240px, 50vw);
-            height: min(240px, 50vw);
-            object-fit: cover;
+        .profile-avatar {
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
-            border: 2px solid var(--accent);
-            box-shadow: 0 20px 35px var(--shadow);
-            opacity: 0;
-            transform: translateY(18px) scale(.96);
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin: 0 auto 1rem;
+            display: block;
         }
 
-        .page.loaded .about-avatar {
-            animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
-        }
-
-        .about-text-block {
-            opacity: 0;
-            transform: translateY(18px);
-        }
-
-        .page.loaded .about-text-block {
-            animation: fadeUp .58s .52s ease forwards;
-        }
-
-        .about-title {
-            margin: 0 0 0.5rem 0;
-            font-family: 'Inter', system-ui, sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            line-height: .95;
-            letter-spacing: -0.5px;
-            color: var(--accent);
-        }
-
-        .about-subtitle {
-            margin: 0 0 1.5rem 0;
-            color: var(--muted);
-            font: 600 clamp(.7rem, 1.5vw, .85rem)/1.25 'Inter', system-ui, sans-serif;
-            letter-spacing: .22em;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
-
-        .about-desc {
-            max-width: 680px;
-            margin: 0 auto 1.5rem auto;
-            color: var(--text);
-            font: 400 clamp(0.95rem, 1.8vw, 1.1rem)/1.6 'Inter', system-ui, sans-serif;
-            text-align: justify;
-        }
-
-        .about-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            margin-top: 1rem;
-            text-align: left;
-        }
-
-        .detail-item {
-            border-left: 2px solid var(--line);
-            padding-left: 1rem;
-        }
-
-        .detail-label {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--muted);
+        .profile-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 0.25rem;
+            color: var(--accent);
+            margin-bottom: 0.1rem;
+            line-height: 1.2;
         }
 
-        .detail-val {
-            font-size: 0.95rem;
+        .profile-title {
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.8rem;
+        }
+
+        .profile-divider {
+            width: 40px;
+            height: 2px;
+            background: var(--primary);
+            margin: 0.6rem auto 1rem;
+        }
+
+        .profile-location {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+        }
+
+        .profile-phone {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 0.3rem;
+        }
+
+        .profile-email {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+        }
+
+        .profile-email a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .profile-email a:hover { color: var(--primary-light); }
+
+        .profile-bio {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
+            text-align: left;
+            padding: 0.8rem;
+            background: var(--bg-soft);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            margin: 1rem 0;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            padding: 0.4rem 0.6rem;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.82rem;
+            transition: all .2s;
+            border-radius: 6px;
+        }
+        .contact-link:hover {
+            background: var(--tag-bg);
+            color: var(--primary);
+        }
+        .contact-link i {
+            width: 20px;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.8rem;
+            justify-content: center;
+        }
+        .skill-tag {
+            background: var(--tag-bg);
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            border: 1px solid var(--line);
+        }
+
+        /* COLUMNA DERECHA */
+        .content-main {
+            display: grid;
+            gap: 1.8rem;
+        }
+
+        .cv-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.8rem 2rem;
+            border: 1px solid var(--line);
+            box-shadow: 0 4px 24px var(--shadow);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--accent);
         }
+        .section-header i {
+            color: var(--primary);
+            font-size: 1.1rem;
+            width: 24px;
+        }
+        .section-header::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--line);
+            margin-left: 0.5rem;
+        }
 
+        .experience-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .experience-item:last-child { border-bottom: none; }
+
+        .exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+        .exp-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text);
+        }
+        .exp-company {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+        .exp-date {
+            font-size: 0.75rem;
+            color: var(--muted-light);
+            font-weight: 500;
+            background: var(--tag-bg);
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+            white-space: nowrap;
+        }
+        .exp-desc {
+            font-size: 0.85rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-top: 0.3rem;
+            padding-left: 0.5rem;
+        }
+        .exp-desc li {
+            list-style: none;
+            position: relative;
+            padding-left: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+        .exp-desc li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        .exp-desc ul {
+            padding-left: 0;
+        }
+
+        /* Educación */
+        .edu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--line);
+        }
+        .edu-item:last-child { border-bottom: none; }
+        .edu-degree {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .edu-school {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+        .edu-year {
+            color: var(--muted-light);
+            font-size: 0.75rem;
+            background: var(--tag-bg);
+            padding: 0.1rem 0.6rem;
+            border-radius: 12px;
+        }
+
+        /* Idiomas y Certs en grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem 1.5rem;
+        }
+
+        .info-item {
+            padding: 0.3rem 0;
+        }
+        .info-item strong {
+            display: block;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+        .info-item span {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .cert-item {
+            padding: 0.3rem 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 0.85rem;
+            color: var(--muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+        .cert-item:last-child { border-bottom: none; }
+        .cert-name { color: var(--text); font-weight: 500; }
+        .cert-source { color: var(--muted-light); font-size: 0.75rem; }
+
+        /* Navegación */
         .main-nav {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: clamp(0.6rem, 1.5vw, 0.9rem);
-            opacity: 0;
-            transform: translateY(16px);
+            gap: 0.8rem;
             margin-top: 0.5rem;
-        }
-
-        .page.loaded .main-nav {
-            animation: fadeUp .55s .72s ease forwards;
+            padding-top: 1.2rem;
+            border-top: 1px solid var(--line);
         }
 
         .nav-link {
-            position: relative;
             display: inline-flex;
             align-items: center;
-            gap: .35rem;
-            min-height: 38px;
-            color: var(--accent);
-            font: 700 clamp(.9rem, 2vw, 1.2rem)/1 'Inter', system-ui, sans-serif;
+            gap: .3rem;
+            color: var(--muted);
+            font: 600 0.85rem/1 'Inter', sans-serif;
             text-decoration: none;
-            opacity: 0.8;
-            transition: opacity .2s;
+            transition: color .2s;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
         }
-
         .nav-link:hover {
-            opacity: 1;
+            color: var(--primary);
+            background: var(--tag-bg);
         }
 
-        .nav-link::after {
-            content: "";
-            position: absolute;
-            left: 1.15em;
-            bottom: .15rem;
-            width: 0;
-            height: 2px;
-            border-radius: 999px;
-            background: currentColor;
-            transition: width .22s ease;
-        }
-
-        .nav-link:hover::after {
-            width: calc(100% - 1.15em);
-        }
-
+        /* FOOTER */
         footer {
             display: grid;
             gap: .6rem;
             justify-items: center;
-            padding: 0.8rem clamp(1rem, 4vw, 2rem) 1.2rem;
+            padding: 1rem clamp(1rem, 4vw, 2rem) 1.5rem;
+            border-top: 1px solid var(--line);
+            margin-top: 0.5rem;
         }
 
         .social {
@@ -379,132 +576,74 @@
             gap: 1rem;
             opacity: 0;
         }
-
-        .page.loaded .social {
-            animation: fadeUp .5s .88s ease forwards;
-        }
+        .page.loaded .social { animation: fadeUp .5s .88s ease forwards; }
 
         .social a {
             display: grid;
             place-items: center;
-            width: 44px;
-            height: 44px;
-            border: 1.5px solid var(--line);
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            color: var(--accent);
-            font-size: 1.2rem;
+            color: var(--muted);
+            font-size: 1rem;
             text-decoration: none;
-            transition: transform .18s ease, border-color .18s ease, background .18s ease, color .18s ease;
-            opacity: 0.7;
+            transition: all .2s ease;
+            border: 1px solid var(--line);
         }
-
         .social a:hover {
-            border-color: var(--accent);
-            background: var(--accent);
-            color: var(--bg);
-            transform: translateY(-4px);
-            opacity: 1;
+            border-color: var(--primary);
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-3px);
         }
 
         .copy {
-            color: var(--muted);
-            font-size: .72rem;
+            color: var(--muted-light);
+            font-size: .7rem;
             opacity: 0;
-            text-decoration: none;
+            letter-spacing: 0.05em;
         }
+        .page.loaded .copy { animation: fadeUp .5s 1s ease forwards; }
 
-        .page.loaded .copy {
-            animation: fadeUp .5s 1s ease forwards;
-        }
-
-        @keyframes floatIn {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
+        /* ANIMACIONES */
         @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .cv-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
+            .profile-side { position: static; }
+            .profile-card { padding: 1.5rem; }
+            .profile-avatar { width: 110px; height: 110px; }
+            .info-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 720px) {
-            body {
-                cursor: auto;
-                overflow: auto;
-            }
+            body { cursor: auto; overflow: auto; }
+            button, a { cursor: pointer; }
+            #cursor { display: none; }
 
-            button,
-            a {
-                cursor: pointer;
-            }
+            header { padding: 0.6rem 1rem; flex-wrap: wrap; gap: 0.4rem; }
+            .logo img { height: 30px; }
+            .logo span { font-size: 0.85rem; }
+            .pill-button { padding: 0.3rem 0.6rem; font-size: 0.65rem; }
+            .theme-toggle { width: 32px; height: 32px; font-size: 0.8rem; }
 
-            #cursor {
-                display: none;
-            }
-
-            header {
-                align-items: flex-start;
-            }
-
-            .logo img {
-                height: 45px;
-            }
-
-            .header-right {
-                gap: .5rem;
-            }
-
-            .pill-button {
-                padding-inline: .72rem;
-            }
-
-            main {
-                padding: 1.5rem 1.15rem 2rem;
-            }
-
-            .about-container {
-                gap: 1.5rem;
-            }
-
-            .about-desc {
-                text-align: left;
-            }
-
-            .about-details {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .main-nav {
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-
-            .social a {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-
-            .about-avatar {
-                width: min(180px, 45vw);
-                height: min(180px, 45vw);
-            }
+            main { padding: 0.8rem; }
+            .cv-section { padding: 1rem; }
+            .exp-header { flex-direction: column; align-items: flex-start; }
+            .edu-item { flex-direction: column; align-items: flex-start; gap: 0.1rem; }
+            .main-nav { flex-direction: column; align-items: center; gap: 0.2rem; }
+            .social a { width: 34px; height: 34px; font-size: 0.85rem; }
+            .profile-bio { font-size: 0.82rem; padding: 0.6rem; }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                scroll-behavior: auto !important;
-                animation-duration: .01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: .01ms !important;
-            }
+            * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
         }
     </style>
 </head>
@@ -515,60 +654,224 @@
     <div class="page" id="mainPage">
         <header>
             <a class="logo" href="./index.html" aria-label="Inicio">
-                <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito Diseñador">
+                <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo" onerror="this.style.display='none'">
+                <span>Paola Herrera</span>
             </a>
 
             <div class="header-right">
                 <div class="lang-picker" id="langPicker">
-                    <button class="pill-button" id="langTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
+                    <button class="pill-button" id="langTrigger" type="button" aria-haspopup="true" aria-expanded="false">
                         <span id="langCurrent">ES</span>
                         <span aria-hidden="true">▼</span>
                     </button>
                     <div class="lang-dropdown" id="langDropdown" role="menu">
                         <button class="lang-opt active" type="button" data-lang="es">Español</button>
                         <button class="lang-opt" type="button" data-lang="en">English</button>
-                        <button class="lang-opt" type="button" data-lang="fr">Français</button>
-                        <button class="lang-opt" type="button" data-lang="pt">Português</button>
                     </div>
                 </div>
-
                 <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">☾</button>
             </div>
         </header>
 
         <main>
-            <section class="about-container" aria-labelledby="aboutTitle">
-                <img class="about-avatar" src="assets/about/paola_photo.webp" alt="Paola Herrera Sol">
+            <div class="cv-grid">
+                <!-- COLUMNA IZQUIERDA -->
+                <aside class="profile-side">
+                    <div class="profile-card">
+                        <img class="profile-avatar" src="assets/about/paola_photo.webp" alt="Paola Herrera Sol" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect width=%22200%22 height=%22200%22 fill=%22%23f0ede5%22/%3E%3Ctext x=%2250%22 y=%22115%22 font-size=%2290%22 fill=%22%231a2a3a%22 font-family=%22Arial%22%3E👩%3C/text%3E%3C/svg%3E'">
 
-                <div class="about-text-block">
-                    <p class="about-subtitle" data-i18n="aboutSubtitle">Conóceme</p>
-                    <h1 id="aboutTitle" class="about-title">Paola Herrera Sol</h1>
-                    <p class="about-desc" data-i18n="aboutDesc">
-                        Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando meticulosamente cada trazo, composición y paleta tipográfica.
-                    </p>
-                    
-                    <div class="about-details">
-                        <div class="detail-item">
-                            <div class="detail-label" data-i18n="labelExp">Experiencia</div>
-                            <div class="detail-val" data-i18n="valExp">4+ Años en el sector</div>
+                        <h1 class="profile-name">Paola Herrera Sol</h1>
+                        <p class="profile-title">Digital Graphic Designer &amp; Visual Marketing Specialist</p>
+                        <div class="profile-divider"></div>
+
+                        <div class="profile-location">
+                            <i class="fas fa-map-marker-alt" style="color: var(--primary);"></i>
+                            Tapachula, Chiapas, Mexico
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-label" data-i18n="labelLoc">Ubicación</div>
-                            <div class="detail-val" data-i18n="valLoc">México (Remoto)</div>
+                        <div class="profile-phone">
+                            <i class="fas fa-phone" style="color: var(--primary); margin-right: 0.4rem;"></i>
+                            +52 961 920 0890
                         </div>
-                        <div class="detail-item">
-                            <div class="detail-label" data-i18n="labelFocus">Enfoque</div>
-                            <div class="detail-val" data-i18n="valFocus">Identidad & Editorial</div>
+                        <div class="profile-email">
+                            <i class="fas fa-envelope" style="color: var(--primary); margin-right: 0.4rem;"></i>
+                            <a href="mailto:sapichaan@gmail.com">sapichaan@gmail.com</a>
+                        </div>
+
+                        <div class="profile-bio" data-i18n="profile">
+                            Digital Graphic Designer and Visual Marketing Specialist with experience translating complex marketing strategies into high-impact visual assets for B2B and corporate environments.
+                        </div>
+
+                        <div class="contact-links">
+                            <a href="#" target="_blank" class="contact-link">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                            <a href="#" target="_blank" class="contact-link">
+                                <i class="fas fa-briefcase"></i> Portafolio
+                            </a>
+                        </div>
+
+                        <div class="skill-tags">
+                            <span class="skill-tag">Branding</span>
+                            <span class="skill-tag">Visual Identity</span>
+                            <span class="skill-tag">Adobe CC</span>
+                            <span class="skill-tag">Figma</span>
+                            <span class="skill-tag">Shopify</span>
+                            <span class="skill-tag">Social Media</span>
+                            <span class="skill-tag">B2B</span>
+                            <span class="skill-tag">HTML/CSS</span>
                         </div>
                     </div>
-                </div>
+                </aside>
 
-                <nav class="main-nav" aria-label="Navegación principal">
-                    <a href="index.html" class="nav-link" data-i18n="navHome"><span aria-hidden="true">&gt;</span> Inicio</a>
-                    <a href="portfolio.html" class="nav-link" data-i18n="navPortfolio"><span aria-hidden="true">&gt;</span> Portafolio</a>
-                    <a href="contact.html" class="nav-link" data-i18n="navContact"><span aria-hidden="true">&gt;</span> Contacto</a>
-                </nav>
-            </section>
+                <!-- COLUMNA DERECHA -->
+                <div class="content-main">
+                    <!-- Experiencia -->
+                    <section class="cv-section">
+                        <div class="section-header">
+                            <i class="fas fa-briefcase"></i>
+                            <span data-i18n="expTitle">Professional Experience</span>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="exp-header">
+                                <span class="exp-title">Digital Graphic Designer &amp; Social Media Designer</span>
+                                <span class="exp-company">ASTROS MARKETING</span>
+                                <span class="exp-date">2020 – Present</span>
+                            </div>
+                            <div class="exp-desc">
+                                <ul>
+                                    <li data-i18n="exp1_1">Designed and produced marketing collateral including brochures, presentations, infographics, and sales materials for B2B clients.</li>
+                                    <li data-i18n="exp1_2">Developed visual identities and graphic systems aligned with brand guidelines for multiple campaigns and sectors.</li>
+                                    <li data-i18n="exp1_3">Created campaign assets optimized for digital channels (LinkedIn, web, email) to drive customer engagement and lead generation.</li>
+                                    <li data-i18n="exp1_4">Created visual content for digital marketing campaigns.</li>
+                                    <li data-i18n="exp1_5">Wrote copy for social media and promotional materials.</li>
+                                    <li data-i18n="exp1_6">Coordinated marketing assets across multiple communication channels.</li>
+                                    <li data-i18n="exp1_7">Worked with marketing teams to ensure brand consistency.</li>
+                                    <li data-i18n="exp1_8">Managed simultaneous creative projects under tight deadlines.</li>
+                                    <li data-i18n="exp1_9">Designed DTC brand assets and Shopify store visuals, including product imagery, collection pages, and promotional banners.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="experience-item">
+                            <div class="exp-header">
+                                <span class="exp-title">Freelance Graphic Designer</span>
+                                <span class="exp-company">Self-Employed</span>
+                                <span class="exp-date">2018 – Present</span>
+                            </div>
+                            <div class="exp-desc">
+                                <ul>
+                                    <li data-i18n="exp2_1">Developed branding and visual identity projects for entrepreneurs, small businesses, and corporate clients.</li>
+                                    <li data-i18n="exp2_2">Designed sales enablement collateral including solution brochures, case studies, proposals, and presentation decks.</li>
+                                    <li data-i18n="exp2_3">Created social media content, digital advertising, and promotional materials for diverse business sectors.</li>
+                                    <li data-i18n="exp2_4">Designed and optimized Shopify storefronts, including custom themes, product displays, and DTC-focused landing pages.</li>
+                                    <li data-i18n="exp2_5">Managed comprehensive project workflows, from client relations to final material delivery.</li>
+                                    <li data-i18n="exp2_6">Applied quality review processes to ensure consistency, effectiveness, and alignment with brand guidelines.</li>
+                                    <li data-i18n="exp2_7">Collaborated with cross-functional teams to adapt visual proposals across different communication needs.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Educación -->
+                    <section class="cv-section">
+                        <div class="section-header">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span data-i18n="eduTitle">Education</span>
+                        </div>
+
+                        <div class="edu-item">
+                            <div>
+                                <div class="edu-degree">Graphic Design Program</div>
+                                <div class="edu-school">Universidad Interamericana para el Desarrollo (UNID) — Tapachula Campus</div>
+                            </div>
+                            <span class="edu-year">Completed 2015</span>
+                        </div>
+                    </section>
+
+                    <!-- Technical Skills -->
+                    <section class="cv-section">
+                        <div class="section-header">
+                            <i class="fas fa-code"></i>
+                            <span data-i18n="skillsTitle">Technical Skills</span>
+                        </div>
+
+                        <div style="display: grid; gap: 0.8rem;">
+                            <div>
+                                <strong style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Design &amp; Branding</strong>
+                                <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem;" data-i18n="skillsDesign">
+                                    Visual identity, graphic systems, advertising design, editorial design, brand guidelines, sales enablement collateral (brochures, case studies, proposals, presentations), campaign asset development (digital, print, social media)
+                                </p>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Digital &amp; Marketing Tools</strong>
+                                <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem;" data-i18n="skillsTools">
+                                    Adobe Creative Cloud (Photoshop, Illustrator, InDesign, Lightroom, After Effects, Premiere Pro), Figma, Canva Pro, CapCut, HTML, CSS, JavaScript, GitHub, Shopify (theme customization, product displays, DTC landing pages), Mailchimp, Microsoft Office, Teams, VS Code
+                                </p>
+                            </div>
+                            <div>
+                                <strong style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Project Management</strong>
+                                <p style="color: var(--muted); font-size: 0.85rem; margin-top: 0.2rem;" data-i18n="skillsPM">
+                                    End-to-end project development, simultaneous project management, remote work, client communication, creative brief interpretation, cross-functional collaboration
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Idiomas y Certificaciones -->
+                    <section class="cv-section">
+                        <div class="section-header">
+                            <i class="fas fa-language"></i>
+                            <span data-i18n="langTitle">Languages &amp; Certifications</span>
+                        </div>
+
+                        <div style="display: grid; gap: 0.8rem;">
+                            <div>
+                                <strong style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Languages</strong>
+                                <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 0.3rem;">
+                                    <div>
+                                        <span style="font-weight: 600;">Spanish (Mexico)</span>
+                                        <span style="color: var(--muted); font-size: 0.85rem; display: block;">Native</span>
+                                    </div>
+                                    <div>
+                                        <span style="font-weight: 600;">English</span>
+                                        <span style="color: var(--muted); font-size: 0.85rem; display: block;">B2 Professional Working Proficiency</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <strong style="color: var(--primary); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">Courses &amp; Certifications</strong>
+                                <div style="margin-top: 0.3rem;">
+                                    <div class="cert-item">
+                                        <span><span class="cert-name">Visual Content Design for Social Media</span> — Domestika</span>
+                                        <span style="color: var(--muted-light); font-size: 0.7rem;">2025</span>
+                                    </div>
+                                    <div class="cert-item">
+                                        <span><span class="cert-name">Branding and Identity Design for Social Media</span> — Coursera</span>
+                                        <span style="color: var(--muted-light); font-size: 0.7rem;">2023</span>
+                                    </div>
+                                    <div class="cert-item">
+                                        <span><span class="cert-name">Design Strategies for Instagram and Facebook Ads</span> — Crehana</span>
+                                        <span style="color: var(--muted-light); font-size: 0.7rem;">2025</span>
+                                    </div>
+                                    <div class="cert-item">
+                                        <span><span class="cert-name">Meta Ads and Advertising Strategies for Social Media</span> — Crehana</span>
+                                        <span style="color: var(--muted-light); font-size: 0.7rem;">2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Navegación -->
+                    <nav class="main-nav" aria-label="Navegación principal">
+                        <a href="index.html" class="nav-link" data-i18n="navHome"><i class="fas fa-arrow-right" style="font-size: 0.6rem;"></i> Inicio</a>
+                        <a href="portfolio.html" class="nav-link" data-i18n="navPortfolio"><i class="fas fa-arrow-right" style="font-size: 0.6rem;"></i> Portafolio</a>
+                        <a href="contact.html" class="nav-link" data-i18n="navContact"><i class="fas fa-arrow-right" style="font-size: 0.6rem;"></i> Contacto</a>
+                    </nav>
+                </div>
+            </div>
         </main>
 
         <footer>
@@ -579,77 +882,79 @@
                 <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
-            <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
+            <div class="copy" data-i18n="copy">© 2026 | Designed by Paola Herrera Sol</div>
         </footer>
     </div>
 
     <script>
+        // TRADUCCIONES
         const translations = {
             es: {
                 current: "ES",
-                aboutSubtitle: "Conóceme",
-                aboutDesc: "Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando meticulosamente cada trazo, composición y paleta tipográfica.",
-                labelExp: "Experiencia",
-                valExp: "4+ Años en el sector",
-                labelLoc: "Ubicación",
-                valLoc: "México (Remoto)",
-                labelFocus: "Enfoque",
-                valFocus: "Identidad & Editorial",
-                navHome: "> Inicio",
-                navPortfolio: "> Portafolio",
-                navContact: "> Contacto",
+                profile: "Diseñadora Gráfica Digital y Especialista en Marketing Visual con experiencia traduciendo estrategias de marketing complejas en activos visuales de alto impacto para entornos B2B y corporativos.",
+                expTitle: "Experiencia Profesional",
+                exp1_1: "Diseñé y produje material de marketing incluyendo folletos, presentaciones, infografías y materiales de ventas para clientes B2B.",
+                exp1_2: "Desarrollé identidades visuales y sistemas gráficos alineados con guías de marca para múltiples campañas y sectores.",
+                exp1_3: "Creé activos de campaña optimizados para canales digitales (LinkedIn, web, email) para impulsar el engagement y la generación de leads.",
+                exp1_4: "Creé contenido visual para campañas de marketing digital.",
+                exp1_5: "Redacté copy para redes sociales y materiales promocionales.",
+                exp1_6: "Coordiné activos de marketing en múltiples canales de comunicación.",
+                exp1_7: "Trabajé con equipos de marketing para garantizar la consistencia de marca.",
+                exp1_8: "Gestioné proyectos creativos simultáneos bajo plazos ajustados.",
+                exp1_9: "Diseñé activos de marca DTC y visuales para Shopify, incluyendo imágenes de productos, páginas de colecciones y banners promocionales.",
+                exp2_1: "Desarrollé proyectos de branding e identidad visual para emprendedores, pequeñas empresas y clientes corporativos.",
+                exp2_2: "Diseñé materiales de habilitación de ventas incluyendo folletos de soluciones, casos de estudio, propuestas y decks de presentación.",
+                exp2_3: "Creé contenido para redes sociales, publicidad digital y materiales promocionales para diversos sectores empresariales.",
+                exp2_4: "Diseñé y optimicé tiendas Shopify, incluyendo temas personalizados, displays de productos y landing pages DTC.",
+                exp2_5: "Gestioné flujos de trabajo integrales de proyectos, desde relaciones con clientes hasta la entrega final.",
+                exp2_6: "Apliqué procesos de revisión de calidad para garantizar consistencia, efectividad y alineación con guías de marca.",
+                exp2_7: "Colaboré con equipos multifuncionales para adaptar propuestas visuales a diferentes necesidades de comunicación.",
+                eduTitle: "Educación",
+                skillsTitle: "Habilidades Técnicas",
+                skillsDesign: "Identidad visual, sistemas gráficos, diseño publicitario, diseño editorial, guías de marca, materiales de habilitación de ventas (folletos, casos de estudio, propuestas, presentaciones), desarrollo de activos de campaña (digital, impreso, redes sociales)",
+                skillsTools: "Adobe Creative Cloud (Photoshop, Illustrator, InDesign, Lightroom, After Effects, Premiere Pro), Figma, Canva Pro, CapCut, HTML, CSS, JavaScript, GitHub, Shopify (personalización de temas, displays de productos, landing pages DTC), Mailchimp, Microsoft Office, Teams, VS Code",
+                skillsPM: "Desarrollo de proyectos de extremo a extremo, gestión simultánea de proyectos, trabajo remoto, comunicación con clientes, interpretación de briefs creativos, colaboración multifuncional",
+                langTitle: "Idiomas y Certificaciones",
+                navHome: "Inicio",
+                navPortfolio: "Portafolio",
+                navContact: "Contacto",
                 copy: "© 2026 | Diseñado por Paola Herrera Sol"
             },
             en: {
                 current: "EN",
-                aboutSubtitle: "Get to know me",
-                aboutDesc: "I am a passionate graphic designer and creative focused on bringing unique and memorable visual identities to life. Through branding, illustration, and social media strategies, I translate abstract concepts into functional aesthetic solutions with a fresh and bold touch. I look to connect emotionally with audiences while meticulously taking care of every stroke, composition, and typographic palette.",
-                labelExp: "Experience",
-                valExp: "4+ Years in the industry",
-                labelLoc: "Location",
-                valLoc: "Mexico (Remote)",
-                labelFocus: "Focus",
-                valFocus: "Identity & Editorial",
-                navHome: "> Home",
-                navPortfolio: "> Portfolio",
-                navContact: "> Contact",
+                profile: "Digital Graphic Designer and Visual Marketing Specialist with experience translating complex marketing strategies into high-impact visual assets for B2B and corporate environments.",
+                expTitle: "Professional Experience",
+                exp1_1: "Designed and produced marketing collateral including brochures, presentations, infographics, and sales materials for B2B clients.",
+                exp1_2: "Developed visual identities and graphic systems aligned with brand guidelines for multiple campaigns and sectors.",
+                exp1_3: "Created campaign assets optimized for digital channels (LinkedIn, web, email) to drive customer engagement and lead generation.",
+                exp1_4: "Created visual content for digital marketing campaigns.",
+                exp1_5: "Wrote copy for social media and promotional materials.",
+                exp1_6: "Coordinated marketing assets across multiple communication channels.",
+                exp1_7: "Worked with marketing teams to ensure brand consistency.",
+                exp1_8: "Managed simultaneous creative projects under tight deadlines.",
+                exp1_9: "Designed DTC brand assets and Shopify store visuals, including product imagery, collection pages, and promotional banners.",
+                exp2_1: "Developed branding and visual identity projects for entrepreneurs, small businesses, and corporate clients.",
+                exp2_2: "Designed sales enablement collateral including solution brochures, case studies, proposals, and presentation decks.",
+                exp2_3: "Created social media content, digital advertising, and promotional materials for diverse business sectors.",
+                exp2_4: "Designed and optimized Shopify storefronts, including custom themes, product displays, and DTC-focused landing pages.",
+                exp2_5: "Managed comprehensive project workflows, from client relations to final material delivery.",
+                exp2_6: "Applied quality review processes to ensure consistency, effectiveness, and alignment with brand guidelines.",
+                exp2_7: "Collaborated with cross-functional teams to adapt visual proposals across different communication needs.",
+                eduTitle: "Education",
+                skillsTitle: "Technical Skills",
+                skillsDesign: "Visual identity, graphic systems, advertising design, editorial design, brand guidelines, sales enablement collateral (brochures, case studies, proposals, presentations), campaign asset development (digital, print, social media)",
+                skillsTools: "Adobe Creative Cloud (Photoshop, Illustrator, InDesign, Lightroom, After Effects, Premiere Pro), Figma, Canva Pro, CapCut, HTML, CSS, JavaScript, GitHub, Shopify (theme customization, product displays, DTC landing pages), Mailchimp, Microsoft Office, Teams, VS Code",
+                skillsPM: "End-to-end project development, simultaneous project management, remote work, client communication, creative brief interpretation, cross-functional collaboration",
+                langTitle: "Languages & Certifications",
+                navHome: "Home",
+                navPortfolio: "Portfolio",
+                navContact: "Contact",
                 copy: "© 2026 | Designed by Paola Herrera Sol"
-            },
-            fr: {
-                current: "FR",
-                aboutSubtitle: "Découvrez-moi",
-                aboutDesc: "Je suis une graphiste et créative passionnée, dédiée à donner vie à des identités visuelles uniques et mémorables. À travers le branding, l'illustration et les stratégies de médias sociaux, je transforme des concepts abstraits en solutions esthétiques fonctionnelles avec une touche fraîche et audacieuse. Je cherche à créer un lien émotionnel avec les publics en soignant méticuleusement chaque trait, composition et palette typographique.",
-                labelExp: "Expérience",
-                valExp: "4+ Ans dans le secteur",
-                labelLoc: "Localisation",
-                valLoc: "Mexique (À distance)",
-                labelFocus: "Spécialité",
-                valFocus: "Identité & Édition",
-                navHome: "> Accueil",
-                navPortfolio: "> Portfolio",
-                navContact: "> Contact",
-                copy: "© 2026 | Conçu par Paola Herrera Sol"
-            },
-            pt: {
-                current: "PT",
-                aboutSubtitle: "Conheça-me",
-                aboutDesc: "Sou uma designer gráfica e criativa apaixonada, focada em dar vida a identidades visuais únicas e memoráveis. Através do branding, ilustração e estratégias de mídias sociais, traduzo conceitos abstratos em soluções estéticas funcionais com um toque fresco e ousado. Busco conectar emocionalmente com o público, cuidando meticulosamente de cada traço, composição e paleta tipográfica.",
-                labelExp: "Experiência",
-                valExp: "4+ Anos no setor",
-                labelLoc: "Localização",
-                valLoc: "México (Remoto)",
-                labelFocus: "Foco",
-                valFocus: "Identidade & Editorial",
-                navHome: "> Início",
-                navPortfolio: "> Portfólio",
-                navContact: "> Contato",
-                copy: "© 2026 | Projetado por Paola Herrera Sol"
             }
         };
 
+        // --- JavaScript (cursor, partículas, tema, idioma) ---
         let currentLang = 'es';
-
-        // --- Cursor personalizado ---
         const cursor = document.getElementById('cursor');
 
         document.addEventListener('mousemove', (e) => {
@@ -659,19 +964,14 @@
             }
         });
 
-        document.addEventListener('mousedown', () => {
-            if (cursor) cursor.classList.add('grow');
-        });
-        document.addEventListener('mouseup', () => {
-            if (cursor) cursor.classList.remove('grow');
-        });
+        document.addEventListener('mousedown', () => { if (cursor) cursor.classList.add('grow'); });
+        document.addEventListener('mouseup', () => { if (cursor) cursor.classList.remove('grow'); });
 
-        // Ocultar cursor en móviles
         if (window.matchMedia('(max-width: 720px)').matches && cursor) {
             cursor.style.display = 'none';
         }
 
-        // --- Partículas ---
+        // Partículas
         const canvas = document.getElementById('particleCanvas');
         let ctx = null;
         let particles = [];
@@ -696,24 +996,22 @@
                 reset() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2.5 + 0.5;
-                    this.speedX = (Math.random() - 0.5) * 0.5;
-                    this.speedY = (Math.random() - 0.5) * 0.5;
-                    this.opacity = Math.random() * 0.4 + 0.1;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.3;
+                    this.speedY = (Math.random() - 0.5) * 0.3;
+                    this.opacity = Math.random() * 0.25 + 0.05;
                 }
                 update() {
                     this.x += this.speedX;
                     this.y += this.speedY;
-
                     if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
                     if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-
                     if (mouseX !== null && mouseY !== null) {
                         const dx = mouseX - this.x;
                         const dy = mouseY - this.y;
                         const dist = Math.sqrt(dx * dx + dy * dy);
                         if (dist < 120) {
-                            const force = (120 - dist) / 120 * 0.3;
+                            const force = (120 - dist) / 120 * 0.15;
                             this.x -= dx * force;
                             this.y -= dy * force;
                         }
@@ -723,17 +1021,16 @@
                     if (!ctx) return;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(30, 30, 30, ${this.opacity})`;
-                    ctx.fill();
-
                     if (document.body.classList.contains('dark-mode')) {
-                        ctx.fillStyle = `rgba(255, 217, 61, ${this.opacity * 0.7})`;
-                        ctx.fill();
+                        ctx.fillStyle = `rgba(212, 201, 184, ${this.opacity * 0.5})`;
+                    } else {
+                        ctx.fillStyle = `rgba(26, 42, 58, ${this.opacity})`;
                     }
+                    ctx.fill();
                 }
             }
 
-            const particleCount = Math.min(80, Math.floor(window.innerWidth * 0.08));
+            const particleCount = Math.min(50, Math.floor(window.innerWidth * 0.05));
             for (let i = 0; i < particleCount; i++) {
                 particles.push(new Particle());
             }
@@ -741,42 +1038,25 @@
             function animateParticles() {
                 if (!ctx) return;
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    p.update();
-                    p.draw();
-                });
+                particles.forEach(p => { p.update(); p.draw(); });
                 animationId = requestAnimationFrame(animateParticles);
             }
-
             animateParticles();
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-            });
-            document.addEventListener('mouseleave', () => {
-                mouseX = null;
-                mouseY = null;
-            });
+            document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+            document.addEventListener('mouseleave', () => { mouseX = null; mouseY = null; });
         }
 
-        // --- Mostrar página ---
+        // Mostrar página
         const mainPage = document.getElementById('mainPage');
         if (mainPage) {
-            setTimeout(() => {
-                mainPage.classList.add('loaded');
-            }, 200);
+            setTimeout(() => { mainPage.classList.add('loaded'); }, 200);
         }
 
-        // --- Tema oscuro ---
+        // Tema oscuro
         const themeToggle = document.getElementById('themeToggle');
         let darkMode = false;
-
-        try {
-            darkMode = localStorage.getItem('darkMode') === 'true';
-        } catch (e) {
-            // Si localStorage no está disponible, usar valor por defecto
-        }
+        try { darkMode = localStorage.getItem('darkMode') === 'true'; } catch(e) {}
 
         function applyTheme() {
             if (darkMode) {
@@ -786,26 +1066,21 @@
                 document.body.classList.remove('dark-mode');
                 if (themeToggle) themeToggle.textContent = '☾';
             }
-            try {
-                localStorage.setItem('darkMode', darkMode);
-            } catch (e) {
-                // Ignorar errores de localStorage
-            }
+            try { localStorage.setItem('darkMode', darkMode); } catch(e) {}
         }
-
         applyTheme();
 
         if (themeToggle) {
             themeToggle.addEventListener('click', () => {
                 darkMode = !darkMode;
                 applyTheme();
-                particles.forEach(p => {
-                    p.opacity = Math.random() * 0.4 + 0.1;
-                });
+                if (particles.length > 0) {
+                    particles.forEach(p => { p.opacity = Math.random() * 0.25 + 0.05; });
+                }
             });
         }
 
-        // --- Idioma ---
+        // Idioma
         const langTrigger = document.getElementById('langTrigger');
         const langPicker = document.getElementById('langPicker');
         const langCurrent = document.getElementById('langCurrent');
@@ -813,13 +1088,12 @@
         function switchLanguage(lang) {
             currentLang = lang;
             const t = translations[lang];
-
             if (langCurrent) langCurrent.textContent = t.current;
 
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (key === 'navHome' || key === 'navPortfolio' || key === 'navContact') {
-                    el.innerHTML = t[key];
+                    el.innerHTML = `<i class="fas fa-arrow-right" style="font-size: 0.6rem;"></i> ${t[key]}`;
                 } else {
                     el.textContent = t[key];
                 }
@@ -828,19 +1102,9 @@
             document.querySelectorAll('.lang-opt').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
-
-            if (langPicker) {
-                langPicker.classList.remove('open');
-            }
-            if (langTrigger) {
-                langTrigger.setAttribute('aria-expanded', 'false');
-            }
-
-            try {
-                localStorage.setItem('lang', lang);
-            } catch (e) {
-                // Ignorar errores de localStorage
-            }
+            if (langPicker) langPicker.classList.remove('open');
+            if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
+            try { localStorage.setItem('lang', lang); } catch(e) {}
         }
 
         if (langTrigger) {
@@ -853,12 +1117,8 @@
         }
 
         document.addEventListener('click', () => {
-            if (langPicker) {
-                langPicker.classList.remove('open');
-            }
-            if (langTrigger) {
-                langTrigger.setAttribute('aria-expanded', 'false');
-            }
+            if (langPicker) langPicker.classList.remove('open');
+            if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
         });
 
         document.querySelectorAll('.lang-opt').forEach(btn => {
@@ -868,14 +1128,8 @@
             });
         });
 
-        // --- Inicializar idioma guardado ---
         let savedLang = 'es';
-        try {
-            savedLang = localStorage.getItem('lang') || 'es';
-        } catch (e) {
-            // Ignorar errores de localStorage
-        }
-
+        try { savedLang = localStorage.getItem('lang') || 'es'; } catch(e) {}
         if (savedLang && translations[savedLang]) {
             switchLanguage(savedLang);
         } else {
@@ -883,27 +1137,14 @@
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (key === 'navHome' || key === 'navPortfolio' || key === 'navContact') {
-                    el.innerHTML = t[key];
+                    el.innerHTML = `<i class="fas fa-arrow-right" style="font-size: 0.6rem;"></i> ${t[key]}`;
                 } else {
                     el.textContent = t[key];
                 }
             });
         }
 
-        // --- Manejo de errores para imágenes ---
-        document.querySelectorAll('img').forEach(img => {
-            img.addEventListener('error', function() {
-                // Si la imagen no carga, no romper la página
-                console.warn('Imagen no encontrada:', this.src);
-                // Opcional: mostrar un placeholder o ocultar la imagen
-                this.style.display = 'none';
-            });
-        });
-
-        // --- Prevenir scroll horizontal ---
         document.body.style.overflowX = 'hidden';
-
-        // --- Ajuste para móviles ---
         window.addEventListener('resize', () => {
             if (window.innerWidth <= 720) {
                 document.body.style.overflow = 'auto';
@@ -914,9 +1155,7 @@
             }
         });
 
-        console.log('🚀 Paola Herrera Sol | Sobre mí');
-        console.log('✨ Conoce más sobre esta diseñadora creativa');
+        console.log('📄 CV | Paola Herrera Sol');
     </script>
 </body>
 </html>
-              

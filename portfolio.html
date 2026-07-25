@@ -142,6 +142,84 @@
             .sobre-mi-link {
                 font-size: 0.95rem;
             }
+                    /* ============================
+           SELECTOR DE IDIOMAS 
+        ============================ */
+        .lang-dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 1.2rem;
+        }
+
+        .lang-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .lang-btn i {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotar la flechita cuando se abre */
+        .lang-dropdown.active .lang-btn i {
+            transform: rotate(180deg);
+        }
+
+        .lang-menu {
+            position: absolute;
+            top: calc(100% + 15px);
+            right: 0;
+            background: #0A0C10; /* Fondo oscuro exacto al de la imagen */
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.15);
+            min-width: 130px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 1001;
+            overflow: hidden;
+        }
+
+        /* Mostrar el menú */
+        .lang-dropdown.active .lang-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-menu a {
+            display: block;
+            padding: 0.8rem 1.2rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .lang-menu a:hover {
+            background: rgba(255, 215, 0, 0.1);
+            color: var(--primary);
+        }
+            
         }
         .scroll-top {
             position: fixed;
@@ -586,7 +664,18 @@
         </a>
     </div>
     <div class="header-right">
-        <a href="about.html" class="sobre-mi-link">Sobre Mí</a>
+                <!-- INICIO DEL BOTÓN DE IDIOMAS -->
+        <div class="lang-dropdown">
+            <button class="lang-btn" id="langBtn">ES <i class="fas fa-chevron-down"></i></button>
+            <div class="lang-menu" id="langMenu">
+                <a href="#" data-lang="es">Español</a>
+                <a href="#" data-lang="en">English</a>
+                <a href="#" data-lang="fr">Français</a>
+                <a href="#" data-lang="pt">Português</a>
+            </div>
+        </div>
+        <!-- FIN DEL BOTÓN DE IDIOMAS -->
+        <a href="about.html" class="sobre-mi-link" data-i18n="nav_about">Sobre Mí</a>
         <a href="about.html" class="avatar-link">
             <img src="assets/Portafolio/paola-perfil.webp" alt="Paola Herrera" class="nav-avatar">
         </a>
@@ -598,7 +687,7 @@
     <!-- HERO -->
     <section class="hero fade-on-scroll">
         <div class="hero-content">
-            <h1>Portafolio</h1>
+            <h1 data-i18n="hero_title">Portafolio</h1>
             <div class="year-badge"><span>2026</span></div>
             <div style="margin-top: 1rem;"><div style="width: 40px; height: 2px; background: var(--primary); margin: 0 auto;"></div></div>
         </div>
@@ -639,7 +728,7 @@
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title">Anthmac</h2>
-                <div class="project-sub">Branding + Identidad Visual</div>
+                <div class="project-sub" data-i18n="proj_sub_brand">Branding + Identidad Visual</div>
                 <div class="tools-row">
                     <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
                     <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
@@ -655,7 +744,7 @@
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2>
-                <div class="project-sub">Campañas + Social Media</div>
+                <div class="project-sub" data-i18n="proj_sub_camp">Campañas + Social Media</div>
                 <div class="tools-row">
                     <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
                     <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
@@ -664,7 +753,7 @@
             <div class="full-width-image">
                 <img src="assets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=KRAFTOMEX-SM'">
             </div>
-            <div class="autor-note">
+            <div class="autor-note" data-i18n="autor_note">
                 📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
             </div>
         </div>
@@ -674,7 +763,7 @@
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title">Kennel</h2>
-                <div class="project-sub">Campañas + Social Media</div>
+                <div class="project-sub" data-i18n="proj_sub_camp">Campañas + Social Media</div>
                 <div class="tools-row">
                     <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
                     <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
@@ -683,7 +772,7 @@
             <div class="full-width-image">
                 <img src="assets/Portafolio/KENNEL-SM-ASTROS-PAOLA-19.png" alt="Kennel" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=KENNEL'">
             </div>
-            <div class="autor-note">
+            <div class="autor-note" data-i18n="autor_note">
                 📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
             </div>
         </div>
@@ -693,7 +782,7 @@
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title" style="color: var(--text-dark);">Arcángel Uriel</h2>
-                <div class="project-sub">Ilustración + Merch Design</div>
+                <div class="project-sub" data-i18n="proj_sub_illu">Ilustración + Merch Design</div>
                 <div class="tools-row">
                     <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
                     <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
@@ -705,13 +794,13 @@
             </div>
         </div>
     </section>
-
-    <!-- DESDE AQUÍ TODO OSCURO -->
+    
+        <!-- DESDE AQUÍ TODO OSCURO -->
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
             <div class="project-header">
-                <h2 class="project-title">Ilustraciones + Merch</h2>
-                <div class="project-sub">Exploración Visual · Arte Digital</div>
+                <h2 class="project-title" data-i18n="proj_title_merch">Ilustraciones + Merch</h2>
+                <div class="project-sub" data-i18n="proj_sub_exp">Exploración Visual · Arte Digital</div>
                 <div class="tools-row">
                     <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
                     <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
@@ -722,12 +811,13 @@
             </div>
         </div>
     </section>
- <!------------- VIDEO ------->
+    
+<!------------- VIDEO ------->
 <section class="project-section dark-bg fade-on-scroll">
     <div class="container">
         <div class="project-header">
             <h2 class="project-title"> Cinesthesia · Video Lab</h2>
-            <div class="project-sub">Cámara · Edición · Narrativa</div>
+            <div class="project-sub" data-i18n="proj_sub_video">Cámara · Edición · Narrativa</div>
         </div>
         
         <!-- Cuadrícula principal de videos -->
@@ -738,7 +828,7 @@
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/73RYmSDO5XI?si=maacdlge6fCWHUgM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
-                <div class="video-label">Operación de cámara</div>
+                <div class="video-label" data-i18n="video_cam">Operación de cámara</div>
             </div>
             
             <!-- Video 2: YouTube (Horizontal) -->
@@ -746,7 +836,7 @@
                 <div class="video-wrapper">
                     <iframe src="https://www.youtube.com/embed/pUmL2K3Kz08" title="YouTube video" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <div class="video-label">Animación con IA</div>
+                <div class="video-label" data-i18n="video_ai">Animación con IA</div>
             </div>
 
             <!-- Video 3: Reel de Facebook (Vertical) -->
@@ -754,50 +844,49 @@
                 <div class="video-wrapper">
                     <iframe src="https://www.facebook.com/plugins/video.php?height=800&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1222818959766155&show_text=false&width=450" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
                 </div>
-                <div class="video-label">Reel Facebook</div>
-            </div>
-
+                <div class="video-label" data-i18n="video_fb">Reel Facebook</div>
+         </div>
         </div> <!-- /video-grid-raw -->
-    </div> <!-- /container -->
+
+        </div> <!-- /container -->
 </section>
     
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title"> Email Design </h2>
-                <div class="project-sub">Newsletter · Email Marketing</div>
+                <div class="project-sub" data-i18n="proj_sub_email">Newsletter · Email Marketing</div>
             </div>
             <div class="email-mockup-showcase">
                 <div class="mockup-device mockup-phone">
                     <div class="device-screen">
                         <img src="https://placehold.co/400x700/F8F6F0/FFD700?text=Mobile+Email" alt="mobile">
                     </div>
-                    <div class="mockup-caption">📱 Vista Móvil</div>
+                    <div class="mockup-caption" data-i18n="mockup_mob">📱 Vista Móvil</div>
                 </div>
                 <div class="mockup-device mockup-tablet">
                     <div class="device-screen">
                         <img src="https://placehold.co/800x1000/F8F6F0/FFD700?text=Tablet+Email" alt="tablet">
                     </div>
-                    <div class="mockup-caption">📟 Tablet</div>
+                    <div class="mockup-caption" data-i18n="mockup_tab">📟 Tablet</div>
                 </div>
                 <div class="mockup-device mockup-desktop">
                     <div class="device-screen">
                         <img src="https://placehold.co/1200x800/F8F6F0/FFD700?text=Desktop+Email" alt="desktop">
                     </div>
-                    <div class="mockup-caption">🖥️ Escritorio</div>
+                    <div class="mockup-caption" data-i18n="mockup_desk">🖥️ Escritorio</div>
                 </div>
             </div>
-            <div class="autor-note">
+            <div class="autor-note" data-i18n="email_note">
              Mockups de campañas de email: diseño adaptativo para dispositivos.
             </div>
         </div>
     </section>
-
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
             <div class="project-header">
                 <h2 class="project-title">Fotografía & Motion</h2>
-                <div class="project-sub">Narrativa + Animación</div>
+                <div class="project-sub" data-i18n="proj_sub_photo">Narrativa + Animación</div>
             </div>
             <div class="photo-gallery">
                 <img src="assets/Portafolio/galeria/FOTO-1.gif" alt="foto1" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=1'">
@@ -815,8 +904,6 @@
             </div>
         </div>
     </section>
-</main>
-
 <footer>
     <div class="social-footer">
         <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
@@ -861,7 +948,147 @@
     }, observerOptions);
     
     fadeElements.forEach(el => observer.observe(el));
+    // ============================
+    // LOGICA Y TRADUCCIONES DE IDIOMA
+    // ============================
+    const translations = {
+        es: {
+            nav_about: "Sobre Mí",
+            hero_title: "Portafolio",
+            about_badge: "Senior Graphic Designer & Brand Designer",
+            about_text: "Diseñadora visual especializada en branding y comunicación cross-media. Desarrollo identidades y piezas visuales que conectan distintos formatos y plataformas: Digital, impreso, motion, social media y contenido audiovisual. Mi enfoque combina dirección de arte, narrativa visual e ilustración para construir marcas con personalidad y consistencia.",
+            about_btn: "Conoce más sobre mí <i class='fas fa-arrow-right'></i>",
+            skills_sub: "⟡ Habilidades Técnicas ⟡",
+            proj_sub_brand: "Branding + Identidad Visual",
+            autor_note: "📌 Nota de Autoría: Colaboración creativa",
+            proj_sub_camp: "Campañas + Social Media",
+            proj_sub_illu: "Ilustración + Merch Design",
+            proj_sub_exp: "Exploración Visual · Arte Digital",
+            proj_sub_video: "Cámara · Edición · Narrativa",
+            video_cam: "Operación de cámara",
+            video_ai: "Animación con IA",
+            video_fb: "Reel Facebook",
+            proj_sub_email: "Newsletter · Email Marketing",
+            mockup_mob: "📱 Vista Móvil",
+            mockup_tab: "📟 Tablet",
+            mockup_desk: "🖥️ Escritorio",
+            email_note: "Mockups de campañas de email: diseño adaptativo para dispositivos.",
+            proj_sub_photo: "Narrativa + Animación",
+            footer_text: "© 2026 | Diseñado con ❤️ por <span style='color: var(--primary);'>Paola Herrera Sol</span>"
+        },
+        en: {
+            nav_about: "About Me",
+            hero_title: "Portfolio",
+            about_badge: "Senior Graphic Designer & Brand Designer",
+            about_text: "Visual designer specialized in branding and cross-media communication. I develop identities and visual pieces that connect different formats and platforms: Digital, print, motion, social media, and audiovisual content. My approach combines art direction, visual narrative, and illustration to build brands with personality and consistency.",
+            about_btn: "Learn more about me <i class='fas fa-arrow-right'></i>",
+            skills_sub: "⟡ Technical Skills ⟡",
+            proj_sub_brand: "Branding + Visual Identity",
+            autor_note: "📌 Authorship Note: Creative collaboration with Eduardo Alfonso López.",
+            proj_sub_camp: "Campaigns + Social Media",
+            proj_sub_illu: "Illustration + Merch Design",
+            proj_title_merch: "Illustration + Merch",
+            proj_sub_exp: "Visual Exploration · Digital Art",
+            proj_sub_video: "Camera · Editing · Narrative",
+            video_cam: "Camera operation",
+            video_ai: "AI Animation",
+            video_fb: "Facebook Reel",
+            proj_sub_email: "Newsletter · Email Marketing",
+            mockup_mob: "📱 Mobile View",
+            mockup_tab: "📟 Tablet",
+            mockup_desk: "🖥️ Desktop",
+            email_note: "Email campaign mockups: responsive design for devices.",
+            proj_sub_photo: "Narrative + Animation",
+            footer_text: "© 2026 | Designed with ❤️ by <span style='color: var(--primary);'>Paola Herrera Sol</span>"
+        },
+        fr: {
+            nav_about: "À Propos",
+            hero_title: "Portefeuille",
+            about_badge: "Graphiste Senior & Designer de Marque",
+            about_text: "Designer visuelle spécialisée dans le branding et la communication cross-média. Je développe des identités et des pièces visuelles qui connectent différents formats et plateformes : Numérique, imprimé, motion, médias sociaux et contenu audiovisuel. Mon approche combine direction artistique, narration visuelle et illustration pour construire des marques avec personnalité et cohérence.",
+            about_btn: "En savoir plus sur moi <i class='fas fa-arrow-right'></i>",
+            skills_sub: "⟡ Compétences Techniques ⟡",
+            proj_sub_brand: "Branding + Identité Visuelle",
+            autor_note: "📌 Note d'auteur : Collaboration créative avec Eduardo Alfonso López.",
+            proj_sub_camp: "Campagnes + Médias Sociaux",
+            proj_sub_illu: "Illustrations + Merch Design",
+            proj_title_merch: "Illustrations + Merch",
+            proj_sub_exp: "Exploration Visuelle · Art Numérique",
+            proj_sub_video: "Caméra · Montage · Narration",
+            video_cam: "Opération de caméra",
+            video_ai: "Animation IA",
+            video_fb: "Reel Facebook",
+            proj_sub_email: "Newsletter · Email Marketing",
+            mockup_mob: "📱 Vue Mobile",
+            mockup_tab: "📟 Tablette",
+            mockup_desk: "🖥️ Bureau",
+            email_note: "Maquettes de campagnes d'e-mailing : design adaptatif pour appareils.",
+            proj_sub_photo: "Narration + Animation",
+            footer_text: "© 2026 | Conçu avec ❤️ par <span style='color: var(--primary);'>Paola Herrera Sol</span>"
+        },
+        pt: {
+            nav_about: "Sobre Mim",
+            hero_title: "Portfólio",
+            about_badge: "Designer Gráfica Sênior e Designer de Marcas",
+            about_text: "Designer visual especializada em branding e comunicação cross-media. Desenvolvo identidades e peças visuais que conectam diferentes formatos e plataformas: Digital, impresso, motion, redes sociais e conteúdo audiovisual. Minha abordagem combina direção de arte, narrativa visual e ilustração para construir marcas com personalidade e consistência.",
+            about_btn: "Saiba mais sobre mim <i class='fas fa-arrow-right'></i>",
+            skills_sub: "⟡ Habilidades Técnicas ⟡",
+            proj_sub_brand: "Branding + Identidade Visual",
+            autor_note: "📌 Nota de Autoria: Colaboração criativa com Eduardo Alfonso López.",
+            proj_sub_camp: "Campanhas + Redes Sociais",
+            proj_sub_illu: "Ilustração + Merch Design",
+            proj_title_merch: "Ilustrações + Merch",
+            proj_sub_exp: "Exploração Visual · Arte Digital",
+            proj_sub_video: "Câmera · Edição · Narrativa",
+            video_cam: "Operação de câmera",
+            video_ai: "Animação com IA",
+            video_fb: "Reel Facebook",
+            proj_sub_email: "Newsletter · Email Marketing",
+            mockup_mob: "📱 Vista Mobile",
+            mockup_tab: "📟 Tablet",
+            mockup_desk: "🖥️ Desktop",
+            email_note: "Mockups de campanhas de e-mail: design responsivo para dispositivos.",
+            proj_sub_photo: "Narrativa + Animação",
+            footer_text: "© 2026 | Desenhado com ❤️ por <span style='color: var(--primary);'>Paola Herrera Sol</span>"
+        }
+    };
+
+    const langDropdown = document.querySelector('.lang-dropdown');
+    const langBtn = document.getElementById('langBtn');
+    const langOptions = document.querySelectorAll('.lang-menu a');
+
+    // Abrir/Cerrar menú
+    langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        langDropdown.classList.toggle('active');
+    });
+
+    // Cerrar al hacer clic fuera
+    document.addEventListener('click', () => {
+        langDropdown.classList.remove('active');
+    });
+
+    // Cambiar texto según el idioma seleccionado
+    langOptions.forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.preventDefault();
+            const selectedLang = option.getAttribute('data-lang');
+            
+            // Actualiza las letras del botón (ES, EN, FR, PT)
+            langBtn.innerHTML = `${selectedLang.toUpperCase()} <i class="fas fa-chevron-down"></i>`;
+            
+            // Reemplaza el texto en toda la página
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[selectedLang][key]) {
+                    el.innerHTML = translations[selectedLang][key];
+                }
+            });
+        });
+    });
+
 </script>
+</main>
 </body>
-                </html>
+</html>
                                                                                                                                                                                                                                     

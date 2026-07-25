@@ -17,7 +17,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">.32,700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
@@ -45,11 +44,13 @@
             overflow-x: hidden;
         }
 
-        /* Fade al aparecer */
+        /* --- FADE ON SCROLL OPTIMIZADO --- */
         .fade-on-scroll {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.7s ease;
+            transform: translateY(16px);
+            will-change: opacity, transform;
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .fade-on-scroll.revealed {
             opacity: 1;
@@ -90,59 +91,59 @@
             align-items: center;
             gap: 1rem;
         }
-       .sobre-mi-link {
-    color: #b0c4d3;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.85rem;
-    transition: color 0.2s;
-    margin-right: 0.5rem;
-}
+        .sobre-mi-link {
+            color: #b0c4d3;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+            margin-right: 0.5rem;
+        }
 
-.sobre-mi-link:hover {
-    color: var(--primary);
-}
+        .sobre-mi-link:hover {
+            color: var(--primary);
+        }
 
-/* Avatar / Foto de perfil */
-.avatar-link {
-    display: block;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border: 2px solid var(--primary);
-    box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
-    margin-left: 0.5rem;
-}
+        /* Avatar / Foto de perfil */
+        .avatar-link {
+            display: block;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
+            margin-left: 0.5rem;
+        }
 
-.nav-avatar {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-    display: block;
-}
+        .nav-avatar {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
 
-.avatar-link:hover {
-    transform: scale(1.05);
-    border-color: var(--primary);
-    box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
-}
+        .avatar-link:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 0 16px rgba(255, 215, 0, 0.5);
+        }
 
-.avatar-link:hover .nav-avatar {
-    transform: scale(1.02);
-}
+        .avatar-link:hover .nav-avatar {
+            transform: scale(1.02);
+        }
 
-@media (min-width: 768px) {
-    .avatar-link {
-        width: 48px;
-        height: 48px;
-    }
-    .sobre-mi-link {
-        font-size: 0.95rem;
-    }
-}
+        @media (min-width: 768px) {
+            .avatar-link {
+                width: 48px;
+                height: 48px;
+            }
+            .sobre-mi-link {
+                font-size: 0.95rem;
+            }
+        }
         .scroll-top {
             position: fixed;
             bottom: 1.5rem;
@@ -198,7 +199,7 @@
         }
         body.light-mode .year-badge span { color: #1A1D24; }
 
-        /* SKILLS - LETRAS CON RESPLANDOR Y MOVIMIENTO */
+        /* SKILLS */
         .skills-glow-section {
             background: #0A0C10;
             margin: 1rem 0 2.5rem 0;
@@ -241,7 +242,7 @@
             margin-top: 1rem;
         }
 
-        /* SECCIONES PROYECTOS FULL WIDTH */
+        /* SECCIONES PROYECTOS */
         .project-section {
             padding: 3rem 0;
             transition: background-color 0.6s ease;
@@ -277,7 +278,6 @@
             .project-title { font-size: 3rem; }
         }
         
-        /* SUBTÍTULOS - MÁS OSCUROS EN FONDO CLARO */
         .project-sub {
             font-size: 0.8rem;
             text-transform: uppercase;
@@ -288,71 +288,6 @@
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
             color: #000000 !important;
-        }
-     
-        
-        /* SVG CON ANIMACIÓN HOVER - SUBEN 5px */
-        .tools-row {
-            display: flex;
-            gap: 0.8rem;
-            margin: 0.8rem 0 1rem;
-        }
-        .tools-row img {
-            width: 44px;
-            height: 44px;
-            transition: transform 0.2s ease;
-            filter: brightness(0) invert(1);
-        }
-        .tools-row img:hover {
-            transform: translateY(-5px);
-        }
-        .light-bg .tools-row img {
-            filter: brightness(0) saturate(100%) invert(0) !important;
-        }
-        .light-bg .tools-row img:hover {
-            transform: translateY(-5px);
-        }
-        
-        .full-width-image {
-            width: 100%;
-            margin: 1rem 0 2rem;
-        }
-        .full-width-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        
-        .photo-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 0.5rem;
-            margin: 2rem 0;
-        }
-        .photo-gallery img {
-            width: 100%;
-            height: 240px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-        .photo-gallery img:hover {
-            transform: scale(0.98);
-        }
-        
-        /* NOTAS DE AUTORÍA - FONDO NEGRO PURO */
-        .autor-note {
-            background: #000000;
-            padding: 1rem;
-            border-radius: 16px;
-            font-size: 0.75rem;
-            border-left: 3px solid var(--primary);
-            text-align: center;
-            margin-top: 1.5rem;
-            color: #E8E9F0;
-        }
-        body.light-mode .autor-note {
-            background: #1a1a1a;
-            color: #E8E9F0;
         }
 
         /* SOBRE MÍ */
@@ -439,104 +374,6 @@
         .about-btn:hover i {
             transform: translateX(4px);
         }
-        body.light-mode .about-btn {
-            background: #000;
-            color: #FFD700;
-        }
-
-        /* VIDEO GRID */
-/* La cuadrícula adaptativa */
-.video-grid-raw {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    align-items: start; /* Evita que los videos horizontales se estiren hacia abajo */
-    margin-top: 30px;
-}
-
-/* Tarjeta contenedora de cada video */
-.video-card {
-    display: flex;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.05); /* Un fondo sutil por si usas dark-bg */
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* responsive */
-.video-card.vertical {
-    max-width: 340px; 
-    justify-self: center;
-}
-
-/* proporción automática */
-.video-wrapper {
-    position: relative;
-    width: 100%;
-}
-
-/* Proporciones nativas usando CSS moderno */
-.horizontal .video-wrapper {
-    aspect-ratio: 16 / 9; /* Formato YouTube */
-}
-
-.vertical .video-wrapper {
-    aspect-ratio: 9 / 16; /* Formato Reel / TikTok */
-}
-
-/* Estilo para los iframes internos */
-.video-wrapper iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-}
-
-/* Las etiquetas de texto debajo de los videos */
-.video-label {
-    padding: 12px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    text-align: center;
-    color: #fff;
-}
-
-        /* EMAIL MOCKUPS */
-        .email-mockup-showcase {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        .mockup-device {
-            background: #1a1c22;
-            border-radius: 32px;
-            padding: 1rem;
-            box-shadow: 0 20px 35px rgba(0,0,0,0.3);
-        }
-        body.light-mode .mockup-device {
-            background: #ecece4;
-        }
-        .mockup-phone { width: 220px; }
-        .mockup-tablet { width: 340px; }
-        .mockup-desktop { width: 500px; }
-        .device-screen {
-            background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        .device-screen img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .mockup-caption {
-            text-align: center;
-            margin-top: 0.7rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--primary);
-        }
 
         /* SOCIAL + FOOTER */
         .social-footer {
@@ -559,7 +396,6 @@
             text-decoration: none;
             transition: transform 0.2s;
         }
-        body.light-mode .social-footer a { color: var(--text-dark); }
         .social-footer a:hover {
             color: var(--primary);
             transform: translateY(-5px);
@@ -571,15 +407,10 @@
             border-top: 1px solid rgba(255,215,0,0.2);
         }
         footer p { font-size: 0.75rem; color: var(--text-muted-light); }
-        body.light-mode footer p { color: var(--text-muted-light); }
-
-        @media (max-width: 768px) {
-            .mockup-desktop { width: 100%; max-width: 500px; }
-            .mockup-tablet { width: 280px; }
-        }
     </style>
 </head>
 <body>
+
 <header class="glass-header">
     <div class="logo-area">
         <a href="https://michitodisenador.github.io/michito_disenador_portafolio/index.html">
@@ -593,6 +424,7 @@
         </a>
     </div>
 </header>
+
 <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-arrow-up"></i></button>
 
 <main>
@@ -622,7 +454,7 @@
         </div>
     </div>
 
-    <!-- HABILIDADES - LETRAS EN MOVIMIENTO -->
+    <!-- HABILIDADES -->
     <div class="container">
         <div class="skills-glow-section fade-on-scroll">
             <div class="marquee-skills">
@@ -639,180 +471,8 @@
     <section class="project-section dark-bg fade-on-scroll">
         <div class="container">
             <div class="project-header">
-                <h2 class="project-title">Anthmac</h2>
-                <div class="project-sub">Branding + Identidad Visual</div>
-                <div class="tools-row">
-                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
-                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
-                </div>
-            </div>
-            <div class="full-width-image">
-                <img src="assets/Portafolio/ANTHMAC-15.png" alt="Anthmac" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=ANTHMAC'">
-            </div>
-        </div>
-    </section>
-
-    <section class="project-section light-bg fade-on-scroll">
-        <div class="container">
-            <div class="project-header">
-                <h2 class="project-title" style="color: var(--text-dark);">Kraftomex</h2>
-                <div class="project-sub">Campañas + Social Media</div>
-                <div class="tools-row">
-                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
-                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
-                </div>
-            </div>
-            <div class="full-width-image">
-                <img src="assets/Portafolio/KRAFTOMEX-SM-ASTROS-PAOLA.png" alt="Kraftomex" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=KRAFTOMEX-SM'">
-            </div>
-            <div class="autor-note">
-                📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
-            </div>
-        </div>
-    </section>
-
-    <section class="project-section dark-bg fade-on-scroll">
-        <div class="container">
-            <div class="project-header">
-                <h2 class="project-title">Kennel</h2>
-                <div class="project-sub">Campañas + Social Media</div>
-                <div class="tools-row">
-                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
-                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
-                </div>
-            </div>
-            <div class="full-width-image">
-                <img src="assets/Portafolio/KENNEL-SM-ASTROS-PAOLA-19.png" alt="Kennel" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=KENNEL'">
-            </div>
-            <div class="autor-note">
-                📌 Nota de Autoría: Colaboración creativa junto a Eduardo Alfonso López.
-            </div>
-        </div>
-    </section>
-
-    <section class="project-section light-bg fade-on-scroll">
-        <div class="container">
-            <div class="project-header">
-                <h2 class="project-title" style="color: var(--text-dark);">Arcángel Uriel</h2>
-                <div class="project-sub">Ilustración + Merch Design</div>
-                <div class="tools-row">
-                    <img src="assets/Portafolio/ilustrator.svg" alt="Illustrator" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ai'">
-                    <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
-                    <img src="assets/Portafolio/sketchbook-pro.svg" alt="Sketchbook" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Sketch'">
-                </div>
-            </div>
-            <div class="full-width-image">
-                <img src="assets/Portafolio/au-portafolio-2026-20.png" alt="Arcángel Uriel" onerror="this.src='https://placehold.co/1600x900/2C2F36/FFD700?text=Arcangel+Uriel'">
-            </div>
-        </div>
-    </section>
-
-    <!-- DESDE AQUÍ TODO OSCURO -->
-    <section class="project-section dark-bg fade-on-scroll">
-        <div class="container">
-            <div class="project-header">
-                <h2 class="project-title">Ilustraciones + Merch</h2>
-                <div class="project-sub">Exploración Visual · Arte Digital</div>
-                <div class="tools-row">
-                    <img src="assets/Portafolio/photoshop.svg" alt="Photoshop" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Ps'">
-                    <img src="assets/Portafolio/clip-estudio-paint.svg" alt="Clip Studio" onerror="this.src='https://placehold.co/36x36/FFD700/0A0C10?text=Clip'">
-                </div>
-            </div>
-            <div class="full-width-image">
-                <img src="assets/Portafolio/gatoyanime.png" alt="Ilustración" onerror="this.src='https://placehold.co/1600x900/1E2129/FFD700?text=Ilustraciones'">
-            </div>
-        </div>
-    </section>
- <!------------- VIDEO ------->
-<section class="project-section dark-bg fade-on-scroll">
-    <div class="container">
-        <div class="project-header">
-            <h2 class="project-title"> Cinesthesia · Video Lab</h2>
-            <div class="project-sub">Cámara · Edición · Narrativa</div>
-        </div>
-        
-        <!-- Cuadrícula principal de videos -->
-        <div class="video-grid-raw">
-            
-            <!-- Video 1: YouTube (Horizontal) -->
-            <div class="video-card horizontal">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/73RYmSDO5XI?si=maacdlge6fCWHUgM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                </div>
-                <div class="video-label">Operación de cámara</div>
-            </div>
-            
-            <!-- Video 2: YouTube (Horizontal) -->
-            <div class="video-card horizontal">
-                <div class="video-wrapper">
-                    <iframe src="https://www.youtube.com/embed/pUmL2K3Kz08" title="YouTube video" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div class="video-label">Animación con IA</div>
-            </div>
-
-            <!-- Video 3: Reel de Facebook (Vertical) -->
-            <div class="video-card vertical">
-                <div class="video-wrapper">
-                    <iframe src="https://www.facebook.com/plugins/video.php?height=800&href=https%3A%2F%2Fwww.facebook.com%2Freel%2F1222818959766155&show_text=false&width=450" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-                </div>
-                <div class="video-label">Reel Facebook</div>
-            </div>
-
-        </div> <!-- /video-grid-raw -->
-    </div> <!-- /container -->
-</section>
-    
-    <section class="project-section dark-bg fade-on-scroll">
-        <div class="container">
-            <div class="project-header">
-                <h2 class="project-title"> Email Design </h2>
-                <div class="project-sub">Newsletter · Email Marketing</div>
-            </div>
-            <div class="email-mockup-showcase">
-                <div class="mockup-device mockup-phone">
-                    <div class="device-screen">
-                        <img src="https://placehold.co/400x700/F8F6F0/FFD700?text=Mobile+Email" alt="mobile">
-                    </div>
-                    <div class="mockup-caption">📱 Vista Móvil</div>
-                </div>
-                <div class="mockup-device mockup-tablet">
-                    <div class="device-screen">
-                        <img src="https://placehold.co/800x1000/F8F6F0/FFD700?text=Tablet+Email" alt="tablet">
-                    </div>
-                    <div class="mockup-caption">📟 Tablet</div>
-                </div>
-                <div class="mockup-device mockup-desktop">
-                    <div class="device-screen">
-                        <img src="https://placehold.co/1200x800/F8F6F0/FFD700?text=Desktop+Email" alt="desktop">
-                    </div>
-                    <div class="mockup-caption">🖥️ Escritorio</div>
-                </div>
-            </div>
-            <div class="autor-note">
-             Mockups de campañas de email: diseño adaptativo para dispositivos.
-            </div>
-        </div>
-    </section>
-
-    <section class="project-section dark-bg fade-on-scroll">
-        <div class="container">
-            <div class="project-header">
-                <h2 class="project-title">Fotografía & Motion</h2>
-                <div class="project-sub">Narrativa + Animación</div>
-            </div>
-            <div class="photo-gallery">
-                <img src="assets/Portafolio/galeria/FOTO-1.gif" alt="foto1" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=1'">
-                <img src="assets/Portafolio/galeria/FOTO-2.png" alt="foto2" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=2'">
-                <img src="assets/Portafolio/galeria/FOTO-3.gif" alt="foto3" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=3'">
-                <img src="assets/Portafolio/galeria/FOTO-5.png" alt="foto5" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=4'">
-                <img src="assets/Portafolio/galeria/FOTO-4.gif" alt="foto4" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=5'">
-                <img src="assets/Portafolio/galeria/FOTO-8.png" alt="foto8" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=6'">
-                <img src="assets/Portafolio/galeria/FOTO-7-2.png" alt="foto7" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=7'">
-                <img src="assets/Portafolio/galeria/FOTO-6.gif" alt="foto6" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=8'">
-                <img src="assets/Portafolio/galeria/FOTO-9.gif" alt="foto9" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=9'">
-                <img src="assets/Portafolio/galeria/FOTO-10.png" alt="foto10" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=10'">
-                <img src="assets/Portafolio/galeria/FOTO-11.gif" alt="foto11" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=11'">
-                <img src="assets/Portafolio/galeria/FOTO-12.jpeg" alt="foto12" onerror="this.src='https://placehold.co/600x800/2C2F36/FFD700?text=12'">
+                <span class="project-sub">Proyectos Destacados</span>
+                <h2 class="project-title" style="margin-top: 0.5rem;">Trabajos Recientes</h2>
             </div>
         </div>
     </section>
@@ -820,39 +480,52 @@
 
 <footer>
     <div class="social-footer">
-        <a href="https://github.com/MichitoDisenador" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://dribbble.com/michitodisenador" target="_blank"><i class="fab fa-dribbble"></i></a>
-        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.facebook.com/michitodisenador" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="mailto:sapichaan@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" aria-label="Behance"><i class="fab fa-behance"></i></a>
+        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
     </div>
-    <p>© 2026 | Diseñado con ❤️ por <span style="color: var(--primary);">Paola Herrera Sol</span></p>
+    <p>© 2026 Paola Herrera Sol — Todos los derechos reservados.</p>
 </footer>
 
+<!-- SCRIPT DE INTERSECTION OBSERVER Y BOTÓN TOP -->
 <script>
-    // FORZAR MODO OSCURO SIEMPRE
-const body = document.body;
-body.classList.remove('light-mode');
-localStorage.setItem('theme', 'dark');
+document.addEventListener("DOMContentLoaded", () => {
+    // Manejo de animaciones fade-in al hacer scroll
+    const observerOptions = {
+        root: null,
+        rootMargin: "0px 0px -40px 0px", // Se activa justo antes de entrar completamente a pantalla
+        threshold: 0.1
+    };
 
-    // SCROLL TOP
-    const scrollBtn = document.getElementById('scrollTopBtn');
-    window.addEventListener('scroll', () => {
-        if(window.scrollY > 500) scrollBtn.classList.add('show');
-        else scrollBtn.classList.remove('show');
-    });
-    scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-    // FADE AL APARECER
-    const fadeElements = document.querySelectorAll('.fade-on-scroll');
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+            if (entry.isIntersecting) {
+                entry.target.classList.add("revealed");
+                observer.unobserve(entry.target); // Solo se anima una vez
             }
         });
-    }, { threshold: 0.1 });
-    fadeElements.forEach(el => observer.observe(el));
+    }, observerOptions);
+
+    const fadeElements = document.querySelectorAll(".fade-on-scroll");
+    fadeElements.forEach(el => revealObserver.observe(el));
+
+    // Botón Scroll to Top
+    const scrollTopBtn = document.getElementById("scrollTopBtn");
+    if (scrollTopBtn) {
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add("show");
+            } else {
+                scrollTopBtn.classList.remove("show");
+            }
+        });
+
+        scrollTopBtn.addEventListener("click", () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+});
 </script>
+
 </body>
+</html>

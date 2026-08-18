@@ -76,8 +76,6 @@
             transition: background .45s ease, color .35s;
             overflow-x: hidden;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             cursor: none;
         }
 
@@ -118,6 +116,18 @@
             pointer-events: none;
         }
         body.dark-mode #particleCanvas { opacity: .50; }
+
+        /* ===== PAGE - ESTRUCTURA IGUAL A ABOUT ===== */
+        .page {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity .45s ease;
+        }
+        .page.loaded { opacity: 1; }
 
         /* ===== HEADER - COPIADO EXACTAMENTE DE ABOUT ===== */
         header {
@@ -247,7 +257,6 @@
 
         /* ===== MAIN ===== */
         main {
-            flex: 1;
             padding-top: 80px;
             max-width: 880px;
             margin: 0 auto;
@@ -421,64 +430,6 @@
             .submit-btn { cursor: pointer; }
         }
 
-        /* ===== SOCIAL ICONS (sección extra, diferente al footer) ===== */
-        .contact-social {
-            display: flex;
-            justify-content: center;
-            gap: 1.2rem;
-            margin: 2rem 0 1.5rem;
-            flex-wrap: wrap;
-        }
-        @media (min-width: 480px) {
-            .contact-social { gap: 1.8rem; }
-        }
-        @media (min-width: 768px) {
-            .contact-social { gap: 2.5rem; margin: 3rem 0 2rem; }
-        }
-        .contact-social a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 1.3rem;
-            transition: all 0.3s ease;
-            background: rgba(184, 148, 60, 0.05);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1.5px solid var(--line);
-        }
-        @media (min-width: 480px) {
-            .contact-social a {
-                width: 55px;
-                height: 55px;
-                font-size: 1.5rem;
-            }
-        }
-        @media (min-width: 768px) {
-            .contact-social a {
-                width: 60px;
-                height: 60px;
-                font-size: 1.7rem;
-            }
-        }
-        .contact-social a:hover {
-            color: var(--gold);
-            transform: translateY(-4px) scale(1.05);
-            background: rgba(184, 148, 60, 0.12);
-            border-color: var(--gold);
-        }
-        body.dark-mode .contact-social a {
-            background: rgba(255, 217, 61, 0.05);
-            border-color: rgba(255, 217, 61, 0.15);
-        }
-        body.dark-mode .contact-social a:hover {
-            background: rgba(255, 217, 61, 0.15);
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
         /* ===== FOOTER - COPIADO EXACTAMENTE DE ABOUT ===== */
         footer {
             display: grid;
@@ -603,107 +554,99 @@
     <div id="cursor" aria-hidden="true"></div>
     <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
-    <!-- HEADER COPIADO EXACTAMENTE DE ABOUT -->
-    <header id="mainHeader">
-        <a class="logo" href="./index.html" aria-label="Inicio">
-            <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito Diseñador">
-        </a>
+    <div class="page" id="mainPage">
+        <!-- HEADER COPIADO EXACTAMENTE DE ABOUT -->
+        <header id="mainHeader">
+            <a class="logo" href="./index.html" aria-label="Inicio">
+                <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito Diseñador">
+            </a>
 
-        <div class="header-right">
-            <div class="lang-picker" id="langPicker">
-                <button class="pill-button" id="langTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
-                    <span id="langCurrent">ES</span>
-                    <span aria-hidden="true">▼</span>
-                </button>
-                <div class="lang-dropdown" id="langDropdown" role="menu">
-                    <button class="lang-opt active" type="button" data-lang="es">Español</button>
-                    <button class="lang-opt" type="button" data-lang="en">English</button>
-                    <button class="lang-opt" type="button" data-lang="fr">Français</button>
-                    <button class="lang-opt" type="button" data-lang="pt">Português</button>
+            <div class="header-right">
+                <div class="lang-picker" id="langPicker">
+                    <button class="pill-button" id="langTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Cambiar idioma">
+                        <span id="langCurrent">ES</span>
+                        <span aria-hidden="true">▼</span>
+                    </button>
+                    <div class="lang-dropdown" id="langDropdown" role="menu">
+                        <button class="lang-opt active" type="button" data-lang="es">Español</button>
+                        <button class="lang-opt" type="button" data-lang="en">English</button>
+                        <button class="lang-opt" type="button" data-lang="fr">Français</button>
+                        <button class="lang-opt" type="button" data-lang="pt">Português</button>
+                    </div>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">☾</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- HERO -->
+            <div class="scroll-reveal">
+                <div class="contact-hero">
+                    <h1>Hablemos de tu proyecto</h1>
+                    <p>¿Tienes una idea creativa? Completa el formulario y me pondré en contacto contigo en menos de 24 horas.</p>
                 </div>
             </div>
 
-            <button class="theme-toggle" id="themeToggle" type="button" aria-label="Cambiar tema">☾</button>
-        </div>
-    </header>
-
-    <main>
-        <!-- HERO -->
-        <div class="scroll-reveal">
-            <div class="contact-hero">
-                <h1>Hablemos de tu proyecto</h1>
-                <p>¿Tienes una idea creativa? Completa el formulario y me pondré en contacto contigo en menos de 24 horas.</p>
-            </div>
-        </div>
-
-        <!-- FORMULARIO -->
-        <div class="scroll-reveal">
-            <div class="contact-form">
-                <form id="contactForm" action="https://formspree.io/f/mnnvldov" method="POST">
-                    <div class="form-group">
-                        <label for="name">Nombre completo</label>
-                        <input type="text" id="name" name="name" class="form-control" required placeholder="Tu nombre">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email" class="form-control" required placeholder="tucorreo@ejemplo.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="phone">Teléfono</label>
-                        <div class="phone-group">
-                            <select id="countryCode" name="countryCode" class="form-control">
-                                <option value="+52">🇲🇽 +52</option>
-                                <option value="+1">🇺🇸 +1</option>
-                                <option value="+34">🇪🇸 +34</option>
-                                <option value="+54">🇦🇷 +54</option>
-                                <option value="+57">🇨🇴 +57</option>
-                                <option value="+56">🇨🇱 +56</option>
-                                <option value="+51">🇵🇪 +51</option>
-                                <option value="+33">🇫🇷 +33</option>
-                                <option value="+49">🇩🇪 +49</option>
-                                <option value="+44">🇬🇧 +44</option>
-                                <option value="+55">🇧🇷 +55</option>
-                            </select>
-                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="Número de teléfono">
+            <!-- FORMULARIO -->
+            <div class="scroll-reveal">
+                <div class="contact-form">
+                    <form id="contactForm" action="https://formspree.io/f/mnnvldov" method="POST">
+                        <div class="form-group">
+                            <label for="name">Nombre completo</label>
+                            <input type="text" id="name" name="name" class="form-control" required placeholder="Tu nombre">
                         </div>
-                        <span class="form-hint">Ej: 55 1234 5678</span>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="message">Mensaje</label>
-                        <textarea id="message" name="message" class="form-control" required placeholder="Cuéntame sobre tu proyecto..."></textarea>
-                    </div>
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email" class="form-control" required placeholder="tucorreo@ejemplo.com">
+                        </div>
 
-                    <button type="submit" class="submit-btn">Enviar mensaje</button>
-                </form>
+                        <div class="form-group">
+                            <label for="phone">Teléfono</label>
+                            <div class="phone-group">
+                                <select id="countryCode" name="countryCode" class="form-control">
+                                    <option value="+52">🇲🇽 +52</option>
+                                    <option value="+1">🇺🇸 +1</option>
+                                    <option value="+34">🇪🇸 +34</option>
+                                    <option value="+54">🇦🇷 +54</option>
+                                    <option value="+57">🇨🇴 +57</option>
+                                    <option value="+56">🇨🇱 +56</option>
+                                    <option value="+51">🇵🇪 +51</option>
+                                    <option value="+33">🇫🇷 +33</option>
+                                    <option value="+49">🇩🇪 +49</option>
+                                    <option value="+44">🇬🇧 +44</option>
+                                    <option value="+55">🇧🇷 +55</option>
+                                </select>
+                                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Número de teléfono">
+                            </div>
+                            <span class="form-hint">Ej: 55 1234 5678</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Mensaje</label>
+                            <textarea id="message" name="message" class="form-control" required placeholder="Cuéntame sobre tu proyecto..."></textarea>
+                        </div>
+
+                        <button type="submit" class="submit-btn">Enviar mensaje</button>
+                    </form>
+                </div>
             </div>
-        </div>
+            <!-- ELIMINADO: .contact-social -->
+        </main>
 
-        <!-- ICONOS SOCIALES -->
-        <div class="scroll-reveal">
-            <div class="contact-social">
-                <a href="https://github.com/MichitoDisenador" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noopener" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <!-- FOOTER COPIADO EXACTAMENTE DE ABOUT -->
+        <footer>
+            <div class="social" aria-label="Redes sociales">
+                <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+                <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
-        </div>
-    </main>
-
-    <!-- FOOTER COPIADO EXACTAMENTE DE ABOUT -->
-    <footer>
-        <div class="social" aria-label="Redes sociales">
-            <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-        </div>
-        <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
-    </footer>
+            <div class="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
+        </footer>
+    </div>
 
     <!-- POPUP DE ÉXITO -->
     <div id="successPopup">
@@ -780,6 +723,10 @@
             document.addEventListener('mouseleave', () => { mouseX = null; mouseY = null; });
         }
 
+        // ===== PAGE LOADED =====
+        const mainPage = document.getElementById('mainPage');
+        if (mainPage) setTimeout(() => mainPage.classList.add('loaded'), 200);
+
         // ===== DARK MODE =====
         const themeToggle = document.getElementById('themeToggle');
         let darkMode = false;
@@ -815,79 +762,6 @@
                 header.classList.remove('scrolled');
             }
         });
-
-        // ===== LANGUAGE =====
-        const translations = {
-            es: {
-                current: "ES",
-                copy: "© 2026 | Diseñado por Paola Herrera Sol"
-            },
-            en: {
-                current: "EN",
-                copy: "© 2026 | Designed by Paola Herrera Sol"
-            },
-            fr: {
-                current: "FR",
-                copy: "© 2026 | Conçu par Paola Herrera Sol"
-            },
-            pt: {
-                current: "PT",
-                copy: "© 2026 | Projetado por Paola Herrera Sol"
-            }
-        };
-
-        let currentLang = 'es';
-
-        const langTrigger = document.getElementById('langTrigger');
-        const langPicker = document.getElementById('langPicker');
-        const langCurrent = document.getElementById('langCurrent');
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            const t = translations[lang];
-            if (langCurrent) langCurrent.textContent = t.current;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.textContent = t[key] || el.textContent;
-            });
-            document.querySelectorAll('.lang-opt').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-            if (langPicker) langPicker.classList.remove('open');
-            if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
-            try { localStorage.setItem('lang', lang); } catch(e) {}
-        }
-
-        if (langTrigger) {
-            langTrigger.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (langPicker) langPicker.classList.toggle('open');
-                langTrigger.setAttribute('aria-expanded', langPicker?.classList.contains('open') || 'false');
-            });
-        }
-
-        document.addEventListener('click', () => {
-            if (langPicker) langPicker.classList.remove('open');
-            if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
-        });
-
-        document.querySelectorAll('.lang-opt').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                switchLanguage(btn.dataset.lang);
-            });
-        });
-
-        let savedLang = 'es';
-        try { savedLang = localStorage.getItem('lang') || 'es'; } catch(e) {}
-        if (savedLang && translations[savedLang]) switchLanguage(savedLang);
-        else {
-            const t = translations.es;
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.getAttribute('data-i18n');
-                el.textContent = t[key] || el.textContent;
-            });
-        }
 
         // ===== SCROLL REVEAL =====
         const revealItems = document.querySelectorAll('.scroll-reveal');

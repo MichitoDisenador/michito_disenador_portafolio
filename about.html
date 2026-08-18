@@ -686,9 +686,9 @@
           </ul>
         </div>
 
-        <!-- Acciones — CENTRADAS -->
+        <!-- Acciones — CENTRADAS con descarga inteligente -->
         <div class="action-links" style="margin-top: 0.5rem;">
-          <a href="#" class="action-link" data-i18n="downloadCV"><span class="chevron">&gt;</span>Descargar CV</a>
+          <a href="#" class="action-link" id="downloadCV" data-i18n="downloadCV"><span class="chevron">&gt;</span>Descargar CV</a>
           <a href="contact.html" class="action-link" data-i18n="contact"><span class="chevron">&gt;</span>Contacto</a>
           <a href="portfolio.html" class="action-link" data-i18n="portfolio"><span class="chevron">&gt;</span>Portafolio</a>
         </div>
@@ -1004,6 +1004,23 @@
         header.classList.remove('scrolled');
       }
     });
+
+    // ===== FUNCIÓN DE DESCARGA INTELIGENTE =====
+    const downloadBtn = document.getElementById('downloadCV');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        // URLs de los archivos
+        const urls = {
+          es: 'https://drive.google.com/uc?export=download&id=1g8TT8kInLOQ4lJMkJiTqBFpk3p64kxXy',
+          en: 'https://drive.google.com/uc?export=download&id=1hpDHAlRaklqhdKS4Mmp-vzJ9ZjahmEJc'
+        };
+        // Seleccionar URL según idioma actual
+        const url = urls[currentLang] || urls.es;
+        // Abrir en nueva pestaña para iniciar descarga
+        window.open(url, '_blank');
+      });
+    }
 
     // ===== SCROLL ANIMATIONS =====
     const presentationBlock = document.getElementById('presentationBlock');

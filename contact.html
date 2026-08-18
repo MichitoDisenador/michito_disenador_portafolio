@@ -583,8 +583,8 @@
             <!-- HERO -->
             <div class="scroll-reveal">
                 <div class="contact-hero">
-                    <h1>Hablemos de tu proyecto</h1>
-                    <p>¿Tienes una idea creativa? Completa el formulario y me pondré en contacto contigo en menos de 24 horas.</p>
+                    <h1 data-i18n="heroTitle">Hablemos de tu proyecto</h1>
+                    <p data-i18n="heroDesc">¿Tienes una idea creativa? Completa el formulario y me pondré en contacto contigo en menos de 24 horas.</p>
                 </div>
             </div>
 
@@ -593,17 +593,17 @@
                 <div class="contact-form">
                     <form id="contactForm" action="https://formspree.io/f/mnnvldov" method="POST">
                         <div class="form-group">
-                            <label for="name">Nombre completo</label>
+                            <label for="name" data-i18n="labelName">Nombre completo</label>
                             <input type="text" id="name" name="name" class="form-control" required placeholder="Tu nombre">
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Correo electrónico</label>
+                            <label for="email" data-i18n="labelEmail">Correo electrónico</label>
                             <input type="email" id="email" name="email" class="form-control" required placeholder="tucorreo@ejemplo.com">
                         </div>
 
                         <div class="form-group">
-                            <label for="phone">Teléfono</label>
+                            <label for="phone" data-i18n="labelPhone">Teléfono</label>
                             <div class="phone-group">
                                 <select id="countryCode" name="countryCode" class="form-control">
                                     <option value="+52">🇲🇽 +52</option>
@@ -620,19 +620,18 @@
                                 </select>
                                 <input type="tel" id="phone" name="phone" class="form-control" placeholder="Número de teléfono">
                             </div>
-                            <span class="form-hint">Ej: 55 1234 5678</span>
+                            <span class="form-hint" data-i18n="phoneHint">Ej: 55 1234 5678</span>
                         </div>
 
                         <div class="form-group">
-                            <label for="message">Mensaje</label>
+                            <label for="message" data-i18n="labelMessage">Mensaje</label>
                             <textarea id="message" name="message" class="form-control" required placeholder="Cuéntame sobre tu proyecto..."></textarea>
                         </div>
 
-                        <button type="submit" class="submit-btn">Enviar mensaje</button>
+                        <button type="submit" class="submit-btn" data-i18n="submitBtn">Enviar mensaje</button>
                     </form>
                 </div>
             </div>
-            <!-- ELIMINADO: .contact-social -->
         </main>
 
         <!-- FOOTER COPIADO EXACTAMENTE DE ABOUT -->
@@ -644,7 +643,7 @@
                 <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
             </div>
-            <div class="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
+            <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
         </footer>
     </div>
 
@@ -652,13 +651,79 @@
     <div id="successPopup">
         <div class="popup-content">
             <div class="check">✓</div>
-            <h3>¡Mensaje enviado!</h3>
-            <p>Gracias por contactarme. Te responderé en menos de 24 horas.</p>
-            <button class="close-btn" id="closePopupBtn">Cerrar</button>
+            <h3 data-i18n="popupTitle">¡Mensaje enviado!</h3>
+            <p data-i18n="popupDesc">Gracias por contactarme. Te responderé en menos de 24 horas.</p>
+            <button class="close-btn" id="closePopupBtn" data-i18n="popupClose">Cerrar</button>
         </div>
     </div>
 
     <script>
+        // ===== TRANSLATIONS COMPLETAS =====
+        const translations = {
+            es: {
+                current: "ES",
+                heroTitle: "Hablemos de tu proyecto",
+                heroDesc: "¿Tienes una idea creativa? Completa el formulario y me pondré en contacto contigo en menos de 24 horas.",
+                labelName: "Nombre completo",
+                labelEmail: "Correo electrónico",
+                labelPhone: "Teléfono",
+                phoneHint: "Ej: 55 1234 5678",
+                labelMessage: "Mensaje",
+                submitBtn: "Enviar mensaje",
+                popupTitle: "¡Mensaje enviado!",
+                popupDesc: "Gracias por contactarme. Te responderé en menos de 24 horas.",
+                popupClose: "Cerrar",
+                copy: "© 2026 | Diseñado por Paola Herrera Sol"
+            },
+            en: {
+                current: "EN",
+                heroTitle: "Let's talk about your project",
+                heroDesc: "Do you have a creative idea? Fill out the form and I'll get back to you within 24 hours.",
+                labelName: "Full name",
+                labelEmail: "Email address",
+                labelPhone: "Phone number",
+                phoneHint: "e.g., 55 1234 5678",
+                labelMessage: "Message",
+                submitBtn: "Send message",
+                popupTitle: "Message sent!",
+                popupDesc: "Thank you for contacting me. I'll respond within 24 hours.",
+                popupClose: "Close",
+                copy: "© 2026 | Designed by Paola Herrera Sol"
+            },
+            fr: {
+                current: "FR",
+                heroTitle: "Parlons de votre projet",
+                heroDesc: "Vous avez une idée créative ? Remplissez le formulaire et je vous répondrai dans les 24 heures.",
+                labelName: "Nom complet",
+                labelEmail: "Adresse e-mail",
+                labelPhone: "Téléphone",
+                phoneHint: "Ex: 55 1234 5678",
+                labelMessage: "Message",
+                submitBtn: "Envoyer le message",
+                popupTitle: "Message envoyé !",
+                popupDesc: "Merci de m'avoir contacté. Je vous répondrai dans les 24 heures.",
+                popupClose: "Fermer",
+                copy: "© 2026 | Conçu par Paola Herrera Sol"
+            },
+            pt: {
+                current: "PT",
+                heroTitle: "Vamos falar sobre o seu projeto",
+                heroDesc: "Tem uma ideia criativa? Preencha o formulário e entrarei em contato em menos de 24 horas.",
+                labelName: "Nome completo",
+                labelEmail: "E-mail",
+                labelPhone: "Telefone",
+                phoneHint: "Ex: 55 1234 5678",
+                labelMessage: "Mensagem",
+                submitBtn: "Enviar mensagem",
+                popupTitle: "Mensagem enviada!",
+                popupDesc: "Obrigada por me contactar. Responderei em menos de 24 horas.",
+                popupClose: "Fechar",
+                copy: "© 2026 | Projetado por Paola Herrera Sol"
+            }
+        };
+
+        let currentLang = 'es';
+
         // ===== CURSOR =====
         const cursor = document.getElementById('cursor');
         if (window.innerWidth > 720) {
@@ -762,6 +827,62 @@
                 header.classList.remove('scrolled');
             }
         });
+
+        // ===== LANGUAGE =====
+        const langTrigger = document.getElementById('langTrigger');
+        const langPicker = document.getElementById('langPicker');
+        const langCurrent = document.getElementById('langCurrent');
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+            if (!t) return;
+
+            if (langCurrent) langCurrent.textContent = t.current;
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (key && t[key] !== undefined) {
+                    el.textContent = t[key];
+                }
+            });
+
+            document.querySelectorAll('.lang-opt').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            if (langPicker) langPicker.classList.remove('open');
+            if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
+            try { localStorage.setItem('lang', lang); } catch(e) {}
+        }
+
+        if (langTrigger) {
+            langTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (langPicker) langPicker.classList.toggle('open');
+                langTrigger.setAttribute('aria-expanded', langPicker?.classList.contains('open') || 'false');
+            });
+        }
+
+        document.addEventListener('click', () => {
+            if (langPicker) langPicker.classList.remove('open');
+            if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
+        });
+
+        document.querySelectorAll('.lang-opt').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                switchLanguage(btn.dataset.lang);
+            });
+        });
+
+        let savedLang = 'es';
+        try { savedLang = localStorage.getItem('lang') || 'es'; } catch(e) {}
+        if (savedLang && translations[savedLang]) {
+            switchLanguage(savedLang);
+        } else {
+            switchLanguage('es');
+        }
 
         // ===== SCROLL REVEAL =====
         const revealItems = document.querySelectorAll('.scroll-reveal');

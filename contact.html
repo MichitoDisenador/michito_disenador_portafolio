@@ -421,34 +421,111 @@
             .submit-btn { cursor: pointer; }
         }
 
-  /* ===== FOOTER ===== */
-    footer {
-      display: grid; gap: .6rem; justify-items: center;
-      padding: 0.8rem clamp(1rem, 4vw, 2rem) 1.2rem;
-      margin-top: 1rem;
-    }
-    .social {
-      display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem;
-      opacity: 0;
-    }
-    .page.loaded .social { animation: fadeUp .5s .88s ease forwards; }
-    .social a {
-      display: grid; place-items: center;
-      width: 44px; height: 44px;
-      border: 1.5px solid var(--line); border-radius: 50%;
-      color: var(--gold); font-size: 1.2rem; text-decoration: none;
-      transition: transform .18s, border-color .18s, background .18s, color .18s;
-      opacity: 0.7;
-    }
-    .social a:hover {
-      border-color: var(--gold); background: var(--gold);
-      color: var(--bg); transform: translateY(-4px); opacity: 1;
-    }
-    .copy {
-      color: var(--muted); font-size: .72rem; opacity: 0; text-decoration: none;
-    }
-    .page.loaded .copy { animation: fadeUp .5s 1s ease forwards; }
+        /* ===== SOCIAL ICONS (sección extra, diferente al footer) ===== */
+        .contact-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2rem 0 1.5rem;
+            flex-wrap: wrap;
+        }
+        @media (min-width: 480px) {
+            .contact-social { gap: 1.8rem; }
+        }
+        @media (min-width: 768px) {
+            .contact-social { gap: 2.5rem; margin: 3rem 0 2rem; }
+        }
+        .contact-social a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            background: rgba(184, 148, 60, 0.05);
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1.5px solid var(--line);
+        }
+        @media (min-width: 480px) {
+            .contact-social a {
+                width: 55px;
+                height: 55px;
+                font-size: 1.5rem;
+            }
+        }
+        @media (min-width: 768px) {
+            .contact-social a {
+                width: 60px;
+                height: 60px;
+                font-size: 1.7rem;
+            }
+        }
+        .contact-social a:hover {
+            color: var(--gold);
+            transform: translateY(-4px) scale(1.05);
+            background: rgba(184, 148, 60, 0.12);
+            border-color: var(--gold);
+        }
+        body.dark-mode .contact-social a {
+            background: rgba(255, 217, 61, 0.05);
+            border-color: rgba(255, 217, 61, 0.15);
+        }
+        body.dark-mode .contact-social a:hover {
+            background: rgba(255, 217, 61, 0.15);
+            border-color: var(--gold);
+            color: var(--gold);
+        }
 
+        /* ===== FOOTER - COPIADO EXACTAMENTE DE ABOUT ===== */
+        footer {
+            display: grid;
+            gap: .6rem;
+            justify-items: center;
+            padding: 0.8rem clamp(1rem, 4vw, 2rem) 1.2rem;
+            margin-top: 1rem;
+        }
+        .social {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+        }
+        .page.loaded .social { animation: fadeUp .5s .88s ease forwards; }
+        .social a {
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border: 1.5px solid var(--line);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: transform .18s, border-color .18s, background .18s, color .18s;
+            opacity: 0.7;
+        }
+        .social a:hover {
+            border-color: var(--gold);
+            background: var(--gold);
+            color: var(--bg);
+            transform: translateY(-4px);
+            opacity: 1;
+        }
+        .copy {
+            color: var(--muted);
+            font-size: .72rem;
+            opacity: 0;
+            text-decoration: none;
+        }
+        .page.loaded .copy { animation: fadeUp .5s 1s ease forwards; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* ===== POPUP ===== */
         #successPopup {
@@ -616,15 +693,16 @@
         </div>
     </main>
 
-     <footer>
-      <div class="social" aria-label="Redes sociales">
-        <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-      </div>
-      <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
+    <!-- FOOTER COPIADO EXACTAMENTE DE ABOUT -->
+    <footer>
+        <div class="social" aria-label="Redes sociales">
+            <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+            <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
     </footer>
 
     <!-- POPUP DE ÉXITO -->

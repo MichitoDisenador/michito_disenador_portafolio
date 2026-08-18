@@ -29,6 +29,9 @@
       --timeline-dot: #b8943c;
       --timeline-line: rgba(184, 148, 60, 0.2);
       --card-bg: rgba(255, 252, 245, 0.7);
+      /* Header glass */
+      --header-bg: rgba(250, 248, 245, 0.65);
+      --header-border: rgba(184, 148, 60, 0.15);
     }
     body.dark-mode {
       --bg: #0b0b0b;
@@ -46,6 +49,8 @@
       --timeline-dot: #ffd93d;
       --timeline-line: rgba(255,217,61,0.2);
       --card-bg: rgba(20,20,20,0.7);
+      --header-bg: rgba(11, 11, 11, 0.75);
+      --header-border: rgba(255,217,61,0.15);
     }
     html, body { min-height: 100%; margin: 0; scroll-behavior: smooth; }
     body {
@@ -58,6 +63,7 @@
       cursor: none;
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       transition: background .45s ease, color .35s;
+      padding-top: 0;
     }
     button, a { cursor: none; }
 
@@ -95,35 +101,67 @@
     }
     .page.loaded { opacity: 1; }
 
-    /* ===== HEADER ===== */
+    /* ===== HEADER — FIJO, GLASS, TRANSPARENTE ===== */
     header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: clamp(1rem, 3vw, 2rem) clamp(1rem, 5vw, 3.5rem);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1rem, 5vw, 3.5rem);
       gap: 1rem;
-      position: relative; z-index: 5;
+      background: var(--header-bg);
+      backdrop-filter: blur(16px) saturate(1.2);
+      -webkit-backdrop-filter: blur(16px) saturate(1.2);
+      border-bottom: 1px solid var(--header-border);
+      transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+      box-shadow: 0 2px 30px rgba(0,0,0,0.04);
+    }
+    body.dark-mode header {
+      box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    }
+    header.scrolled {
+      background: var(--header-bg);
+      backdrop-filter: blur(20px) saturate(1.3);
+      -webkit-backdrop-filter: blur(20px) saturate(1.3);
+      border-bottom: 1px solid var(--header-border);
     }
     .logo {
       display: inline-flex; align-items: center; gap: .75rem;
       color: var(--text); text-decoration: none;
+      flex-shrink: 0;
     }
-    .logo img { height: 65px; width: auto; display: block; transition: transform .2s, opacity .2s; }
+    .logo img { 
+      height: 55px; 
+      width: auto; 
+      display: block; 
+      transition: transform .2s, opacity .2s;
+    }
     .logo img:hover { transform: scale(0.97); opacity: 0.9; }
-    .header-right { display: flex; align-items: center; gap: .75rem; }
+    .header-right { 
+      display: flex; 
+      align-items: center; 
+      gap: .75rem;
+      flex-shrink: 0;
+    }
 
     .pill-button, .theme-toggle {
-      min-height: 40px;
+      min-height: 38px;
       border: 1.5px solid var(--accent);
-      background: transparent;
+      background: rgba(255,255,255,0.08);
       color: var(--accent);
       font: 800 .78rem/1 'Inter', system-ui, sans-serif;
-      transition: transform .2s, background .2s, color .2s;
+      transition: transform .2s, background .2s, color .2s, border-color .2s;
     }
     .pill-button {
       display: inline-flex; align-items: center; gap: .45rem;
-      padding: .65rem .9rem; border-radius: 999px; letter-spacing: .08em;
+      padding: .55rem .85rem; border-radius: 999px; letter-spacing: .08em;
     }
     .theme-toggle {
-      width: 40px; border-radius: 50%; font-size: 1rem;
+      width: 38px; border-radius: 50%; font-size: 1rem;
     }
     .pill-button:hover, .theme-toggle:hover {
       background: var(--accent); color: var(--bg); transform: translateY(-2px);
@@ -154,7 +192,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 2rem;
+      margin-top: 0;
+      background: #1a1a2e;
     }
     .hero-bg {
       position: absolute;
@@ -165,6 +204,15 @@
       filter: brightness(0.70) saturate(1.1) contrast(1.05);
       transition: filter 0.4s;
     }
+    .hero-section .hero-fallback {
+      position: absolute;
+      inset: 0;
+      background: 
+        linear-gradient(135deg, #2d2d44 0%, #1a1a2e 40%, #2d2d44 100%);
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .hero-section .hero-fallback.active { opacity: 1; }
     body.dark-mode .hero-bg { filter: brightness(0.45) saturate(0.8); }
     .hero-overlay {
       position: relative;
@@ -177,7 +225,7 @@
       font-weight: 900;
       letter-spacing: -0.02em;
       color: white;
-      text-shadow: 0 8px 30px rgba(0,0,0,0.4);
+      text-shadow: 0 8px 30px rgba(0,0,0,0.5);
       animation: floatUp 1.2s cubic-bezier(0.22,1,0.36,1) forwards;
       opacity: 0;
       transform: translateY(40px);
@@ -191,6 +239,7 @@
       align-items: center;
       padding: 2rem clamp(2rem, 8vw, 6rem) 3rem;
       gap: 2.5rem;
+      margin-top: 0;
     }
     .cv-container {
       max-width: 880px;
@@ -404,13 +453,14 @@
       font-weight: 700;
     }
 
-    /* ===== ACTIONS ===== */
+    /* ===== ACTIONS — CENTRADOS ===== */
     .action-links {
       display: flex;
       flex-wrap: wrap;
       gap: 1.8rem 3rem;
-      justify-content: flex-start;
+      justify-content: center;
       padding: 0.5rem 0;
+      width: 100%;
     }
     .action-link {
       font-weight: 700;
@@ -467,10 +517,11 @@
       body { cursor: auto; overflow: auto; }
       button, a { cursor: pointer; }
       #cursor { display: none; }
-      header { align-items: flex-start; }
-      .logo img { height: 45px; }
+      header { padding: 0.6rem 1rem; }
+      .logo img { height: 40px; }
       .header-right { gap: .5rem; }
-      .pill-button { padding-inline: .72rem; }
+      .pill-button { padding-inline: .6rem; font-size: 0.7rem; min-height: 34px; }
+      .theme-toggle { width: 34px; min-height: 34px; font-size: 0.85rem; }
       .hero-section { height: 70vh; }
       .hero-title { font-size: clamp(2.4rem, 10vw, 4rem); }
       main { padding: 1.5rem 1.2rem 2rem; }
@@ -482,7 +533,11 @@
       .timeline-item::before { left: 12px; width: 12px; height: 12px; top: 1rem; }
       .timeline-item::after { left: 24px; width: 14px; top: 1.5rem; }
       .timeline-wrapper::before { left: 18px; }
-      .action-links { flex-direction: column; gap: 0.8rem; align-items: flex-start; }
+      .action-links { 
+        flex-direction: column; 
+        gap: 0.8rem; 
+        align-items: center; 
+      }
       .social a { width: 40px; height: 40px; font-size: 1rem; }
       .tools-wrap { gap: 0.4rem 0.5rem; }
       .tool-badge { font-size: 0.75rem; padding: 0.3rem 0.9rem; }
@@ -498,7 +553,8 @@
   <canvas id="particleCanvas" aria-hidden="true"></canvas>
 
   <div class="page" id="mainPage">
-    <header>
+    <!-- HEADER FIJO CON GLASS -->
+    <header id="mainHeader">
       <a class="logo" href="./index.html" aria-label="Inicio">
         <img src="assets/about/MICHITO_MEMBRETADA-04.webp" alt="Logo Michito Diseñador">
       </a>
@@ -520,7 +576,8 @@
 
     <!-- HERO -->
     <section class="hero-section">
-      <img class="hero-bg" src="https://www.lummi.ai/api/render/image/86abfdb9-56a2-41ac-a912-9d48a861a7be?token=eyJhbGciOiJIUzI1NiJ9.eyJpZHMiOlsiODZhYmZkYjktNTZhMi00MWFjLWE5MTItOWQ0OGE4NjFhN2JlIl0sInJlc29sdXRpb24iOiJtZWRpdW0iLCJyZW5kZXJTcGVjcyI6eyJlZmZlY3RzIjp7InJlZnJhbWUiOnt9fX0sInNob3VsZEF1dG9Eb3dubG9hZCI6ZmFsc2UsImp0aSI6IkxvRFpkaVZ5bDdaYUFjdER2UEZOVSIsImlhdCI6MTc4NzAwNjE1MCwiZXhwIjoxNzg3MDA2MjEwfQ.U15uG03P-o-ZSGHCA4tliQSkMgnE6R87acTMbFfkxzQ" alt="Paola Herrera Sol · diseño gráfico">
+      <img class="hero-bg" src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=1600&q=80" alt="Paola Herrera Sol · diseño gráfico" onerror="this.style.display='none'; document.querySelector('.hero-fallback').classList.add('active')">
+      <div class="hero-fallback"></div>
       <div class="hero-overlay">
         <h1 class="hero-title">&lt;¡Hola, Mundo!&gt;</h1>
       </div>
@@ -532,13 +589,13 @@
         <!-- PRESENTACIÓN -->
         <div class="presentation-block" id="presentationBlock">
           <div class="presentation-name">Paola Herrera Sol</div>
-          <div class="presentation-subtitle">Diseñadora gráfica e ilustradora.</div>
+          <div class="presentation-subtitle" data-i18n="subtitle">Diseñadora gráfica e ilustradora.</div>
         </div>
 
         <!-- Sobre mí -->
         <div class="cv-block" id="aboutBlock">
-          <h2>Sobre mí</h2>
-          <p>
+          <h2 data-i18n="aboutTitle">Sobre mí</h2>
+          <p data-i18n="aboutDesc">
             Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. 
             A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones 
             estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando 
@@ -548,7 +605,7 @@
 
         <!-- Herramientas -->
         <div class="cv-block" id="toolsBlock">
-          <h2>Herramientas</h2>
+          <h2 data-i18n="toolsTitle">Herramientas</h2>
           <div class="tools-wrap">
             <span class="tool-badge tool-adobe">Adobe Creative</span>
             <span class="tool-badge tool-illustrator">Illustrator</span>
@@ -569,25 +626,25 @@
 
         <!-- Habilidades -->
         <div class="cv-block" id="skillsBlock">
-          <h2>Habilidades</h2>
+          <h2 data-i18n="skillsTitle">Habilidades</h2>
           <ul class="skills-list">
-            <li>Branding e identidad visual</li>
-            <li>Diseño editorial y publicitario</li>
-            <li>Ilustración digital</li>
-            <li>Gestión de campañas Meta Ads / TikTok Ads</li>
-            <li>Edición fotográfica y retoque</li>
-            <li>Edición de video básico (Premiere, CapCut)</li>
-            <li>Diseño UI/UX (Figma)</li>
-            <li>Adaptación a formatos y lineamientos de marca</li>
-            <li>Estrategias de contenido para redes sociales</li>
-            <li>Diseño B2B y newsletters (Mailchimp)</li>
+            <li data-i18n="skill1">Branding e identidad visual</li>
+            <li data-i18n="skill2">Diseño editorial y publicitario</li>
+            <li data-i18n="skill3">Ilustración digital</li>
+            <li data-i18n="skill4">Gestión de campañas Meta Ads / TikTok Ads</li>
+            <li data-i18n="skill5">Edición fotográfica y retoque</li>
+            <li data-i18n="skill6">Edición de video básico (Premiere, CapCut)</li>
+            <li data-i18n="skill7">Diseño UI/UX (Figma)</li>
+            <li data-i18n="skill8">Adaptación a formatos y lineamientos de marca</li>
+            <li data-i18n="skill9">Estrategias de contenido para redes sociales</li>
+            <li data-i18n="skill10">Diseño B2B y newsletters (Mailchimp)</li>
           </ul>
         </div>
 
         <!-- Trasfondo -->
         <div class="cv-block" id="backgroundBlock">
-          <h2>Trasfondo</h2>
-          <p>
+          <h2 data-i18n="backgroundTitle">Trasfondo</h2>
+          <p data-i18n="backgroundDesc">
             Con más de 4 años de experiencia en el sector, he trabajado en agencia (ASTROS MARKETING) y como freelance, 
             desarrollando proyectos de branding, diseño digital y campañas publicitarias para marcas de diversos sectores. 
             Mi formación en la Universidad Interamericana para el Desarrollo (UNID) y mi constante actualización mediante 
@@ -597,43 +654,43 @@
 
         <!-- Línea de tiempo -->
         <div class="cv-block" id="timelineBlock">
-          <h2>Línea de tiempo</h2>
+          <h2 data-i18n="timelineTitle">Línea de tiempo</h2>
           <div class="timeline-wrapper">
             <div class="timeline-item" id="item1">
-              <span class="timeline-year">2020 — presente</span>
-              <div class="timeline-desc"><strong>ASTROS MARKETING</strong> — Diseñadora Gráfica Digital y Social Media Designer. Producción de contenido visual, campañas Meta/TikTok, líneas gráficas para marcas.</div>
+              <span class="timeline-year" data-i18n="year1">2020 — presente</span>
+              <div class="timeline-desc" data-i18n="desc1"><strong>ASTROS MARKETING</strong> — Diseñadora Gráfica Digital y Social Media Designer. Producción de contenido visual, campañas Meta/TikTok, líneas gráficas para marcas.</div>
             </div>
             <div class="timeline-item" id="item2">
-              <span class="timeline-year">2018 — presente</span>
-              <div class="timeline-desc"><strong>Freelance</strong> — Branding, identidad visual, diseño de contenido y publicidad para emprendedores y PYMES.</div>
+              <span class="timeline-year" data-i18n="year2">2018 — presente</span>
+              <div class="timeline-desc" data-i18n="desc2"><strong>Freelance</strong> — Branding, identidad visual, diseño de contenido y publicidad para emprendedores y PYMES.</div>
             </div>
             <div class="timeline-item" id="item3">
-              <span class="timeline-year">2014</span>
-              <div class="timeline-desc"><strong>SEFOTUR</strong> — Pasantía: adaptación de formatos en la Semana de Yucatán en México.</div>
+              <span class="timeline-year" data-i18n="year3">2014</span>
+              <div class="timeline-desc" data-i18n="desc3"><strong>SEFOTUR</strong> — Pasantía: adaptación de formatos en la Semana de Yucatán en México.</div>
             </div>
             <div class="timeline-item" id="item4">
-              <span class="timeline-year">2024 — 2026</span>
-              <div class="timeline-desc"><strong>Colaboraciones</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicidad), MXSIG (UI/UX), AJ Digital Art (fotografía y web).</div>
+              <span class="timeline-year" data-i18n="year4">2024 — 2026</span>
+              <div class="timeline-desc" data-i18n="desc4"><strong>Colaboraciones</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicidad), MXSIG (UI/UX), AJ Digital Art (fotografía y web).</div>
             </div>
           </div>
         </div>
 
         <!-- Cursos -->
         <div class="cv-block" id="coursesBlock">
-          <h2>Cursos</h2>
+          <h2 data-i18n="coursesTitle">Cursos</h2>
           <ul class="skills-list">
-            <li>Diseño de Contenido Visual para Redes Sociales — Domestika 2025</li>
-            <li>Branding y Diseño de Identidad para Redes Sociales — Coursera 2023</li>
-            <li>Estrategias de Diseño para Instagram y Facebook Ads — Crehana 2025</li>
-            <li>Meta Ads y Estrategias de Publicidad para Redes Sociales — Crehana 2024</li>
+            <li data-i18n="course1">Diseño de Contenido Visual para Redes Sociales — Domestika 2025</li>
+            <li data-i18n="course2">Branding y Diseño de Identidad para Redes Sociales — Coursera 2023</li>
+            <li data-i18n="course3">Estrategias de Diseño para Instagram y Facebook Ads — Crehana 2025</li>
+            <li data-i18n="course4">Meta Ads y Estrategias de Publicidad para Redes Sociales — Crehana 2024</li>
           </ul>
         </div>
 
-        <!-- Acciones -->
+        <!-- Acciones — CENTRADAS -->
         <div class="action-links" style="margin-top: 0.5rem;">
-          <a href="#" class="action-link"><span class="chevron">&gt;</span>Descargar CV</a>
-          <a href="contact.html" class="action-link"><span class="chevron">&gt;</span>Contacto</a>
-          <a href="portfolio.html" class="action-link"><span class="chevron">&gt;</span>Portafolio</a>
+          <a href="#" class="action-link" data-i18n="downloadCV"><span class="chevron">&gt;</span>Descargar CV</a>
+          <a href="contact.html" class="action-link" data-i18n="contact"><span class="chevron">&gt;</span>Contacto</a>
+          <a href="portfolio.html" class="action-link" data-i18n="portfolio"><span class="chevron">&gt;</span>Portafolio</a>
         </div>
       </div>
     </main>
@@ -651,22 +708,158 @@
   </div>
 
   <script>
-    // ===== TRANSLATIONS =====
+    // ===== TRANSLATIONS COMPLETAS =====
     const translations = {
       es: {
         current: "ES",
+        subtitle: "Diseñadora gráfica e ilustradora.",
+        aboutTitle: "Sobre mí",
+        aboutDesc: "Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando meticulosamente cada trazo, composición y paleta tipográfica.",
+        toolsTitle: "Herramientas",
+        skillsTitle: "Habilidades",
+        skill1: "Branding e identidad visual",
+        skill2: "Diseño editorial y publicitario",
+        skill3: "Ilustración digital",
+        skill4: "Gestión de campañas Meta Ads / TikTok Ads",
+        skill5: "Edición fotográfica y retoque",
+        skill6: "Edición de video básico (Premiere, CapCut)",
+        skill7: "Diseño UI/UX (Figma)",
+        skill8: "Adaptación a formatos y lineamientos de marca",
+        skill9: "Estrategias de contenido para redes sociales",
+        skill10: "Diseño B2B y newsletters (Mailchimp)",
+        backgroundTitle: "Trasfondo",
+        backgroundDesc: "Con más de 4 años de experiencia en el sector, he trabajado en agencia (ASTROS MARKETING) y como freelance, desarrollando proyectos de branding, diseño digital y campañas publicitarias para marcas de diversos sectores. Mi formación en la Universidad Interamericana para el Desarrollo (UNID) y mi constante actualización mediante cursos especializados me permiten abordar cada proyecto con una visión estratégica y creativa.",
+        timelineTitle: "Línea de tiempo",
+        year1: "2020 — presente",
+        desc1: "<strong>ASTROS MARKETING</strong> — Diseñadora Gráfica Digital y Social Media Designer. Producción de contenido visual, campañas Meta/TikTok, líneas gráficas para marcas.",
+        year2: "2018 — presente",
+        desc2: "<strong>Freelance</strong> — Branding, identidad visual, diseño de contenido y publicidad para emprendedores y PYMES.",
+        year3: "2014",
+        desc3: "<strong>SEFOTUR</strong> — Pasantía: adaptación de formatos en la Semana de Yucatán en México.",
+        year4: "2024 — 2026",
+        desc4: "<strong>Colaboraciones</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicidad), MXSIG (UI/UX), AJ Digital Art (fotografía y web).",
+        coursesTitle: "Cursos",
+        course1: "Diseño de Contenido Visual para Redes Sociales — Domestika 2025",
+        course2: "Branding y Diseño de Identidad para Redes Sociales — Coursera 2023",
+        course3: "Estrategias de Diseño para Instagram y Facebook Ads — Crehana 2025",
+        course4: "Meta Ads y Estrategias de Publicidad para Redes Sociales — Crehana 2024",
+        downloadCV: "> Descargar CV",
+        contact: "> Contacto",
+        portfolio: "> Portafolio",
         copy: "© 2026 | Diseñado por Paola Herrera Sol"
       },
       en: {
         current: "EN",
+        subtitle: "Graphic designer & illustrator.",
+        aboutTitle: "About me",
+        aboutDesc: "I am a passionate graphic designer and creative focused on bringing unique and memorable visual identities to life. Through branding, illustration and social media strategies, I translate abstract concepts into functional aesthetic solutions with a fresh and bold touch. I seek to connect emotionally with audiences while meticulously caring for every stroke, composition and typographic palette.",
+        toolsTitle: "Tools",
+        skillsTitle: "Skills",
+        skill1: "Branding & visual identity",
+        skill2: "Editorial & advertising design",
+        skill3: "Digital illustration",
+        skill4: "Meta Ads / TikTok Ads campaign management",
+        skill5: "Photo editing & retouching",
+        skill6: "Basic video editing (Premiere, CapCut)",
+        skill7: "UI/UX Design (Figma)",
+        skill8: "Format adaptation & brand guidelines",
+        skill9: "Social media content strategies",
+        skill10: "B2B design & newsletters (Mailchimp)",
+        backgroundTitle: "Background",
+        backgroundDesc: "With more than 4 years of experience in the sector, I have worked at an agency (ASTROS MARKETING) and as a freelancer, developing branding, digital design and advertising campaigns for brands in various sectors. My training at the Universidad Interamericana para el Desarrollo (UNID) and my constant updating through specialized courses allow me to approach each project with a strategic and creative vision.",
+        timelineTitle: "Timeline",
+        year1: "2020 — present",
+        desc1: "<strong>ASTROS MARKETING</strong> — Digital Graphic Designer and Social Media Designer. Production of visual content, Meta/TikTok campaigns, graphic lines for brands.",
+        year2: "2018 — present",
+        desc2: "<strong>Freelance</strong> — Branding, visual identity, content design and advertising for entrepreneurs and SMEs.",
+        year3: "2014",
+        desc3: "<strong>SEFOTUR</strong> — Internship: format adaptation at the Yucatán Week in Mexico.",
+        year4: "2024 — 2026",
+        desc4: "<strong>Collaborations</strong> — UTAC (6ta Milla Universitaria), UNIMAT (advertising), MXSIG (UI/UX), AJ Digital Art (photography and web).",
+        coursesTitle: "Courses",
+        course1: "Visual Content Design for Social Media — Domestika 2025",
+        course2: "Branding and Identity Design for Social Media — Coursera 2023",
+        course3: "Design Strategies for Instagram and Facebook Ads — Crehana 2025",
+        course4: "Meta Ads and Advertising Strategies for Social Media — Crehana 2024",
+        downloadCV: "> Download CV",
+        contact: "> Contact",
+        portfolio: "> Portfolio",
         copy: "© 2026 | Designed by Paola Herrera Sol"
       },
       fr: {
         current: "FR",
+        subtitle: "Graphiste & illustratrice.",
+        aboutTitle: "À propos de moi",
+        aboutDesc: "Je suis une graphiste et créative passionnée, dédiée à donner vie à des identités visuelles uniques et mémorables. À travers le branding, l'illustration et les stratégies de médias sociaux, je transforme des concepts abstraits en solutions esthétiques fonctionnelles avec une touche fraîche et audacieuse. Je cherche à créer un lien émotionnel avec les publics en soignant méticuleusement chaque trait, composition et palette typographique.",
+        toolsTitle: "Outils",
+        skillsTitle: "Compétences",
+        skill1: "Branding & identité visuelle",
+        skill2: "Design éditorial & publicitaire",
+        skill3: "Illustration numérique",
+        skill4: "Gestion de campagnes Meta Ads / TikTok Ads",
+        skill5: "Édition photo & retouche",
+        skill6: "Montage vidéo basique (Premiere, CapCut)",
+        skill7: "Design UI/UX (Figma)",
+        skill8: "Adaptation aux formats et chartes graphiques",
+        skill9: "Stratégies de contenu pour réseaux sociaux",
+        skill10: "Design B2B et newsletters (Mailchimp)",
+        backgroundTitle: "Parcours",
+        backgroundDesc: "Avec plus de 4 ans d'expérience dans le secteur, j'ai travaillé en agence (ASTROS MARKETING) et en freelance, développant des projets de branding, de design digital et de campagnes publicitaires pour des marques de divers secteurs. Ma formation à l'Universidad Interamericana para el Desarrollo (UNID) et ma mise à jour constante via des cours spécialisés me permettent d'aborder chaque projet avec une vision stratégique et créative.",
+        timelineTitle: "Chronologie",
+        year1: "2020 — présent",
+        desc1: "<strong>ASTROS MARKETING</strong> — Designer Graphique Digital et Social Media Designer. Production de contenu visuel, campagnes Meta/TikTok, lignes graphiques pour marques.",
+        year2: "2018 — présent",
+        desc2: "<strong>Freelance</strong> — Branding, identité visuelle, conception de contenu et publicité pour entrepreneurs et PME.",
+        year3: "2014",
+        desc3: "<strong>SEFOTUR</strong> — Stage : adaptation de formats à la Semaine du Yucatán au Mexique.",
+        year4: "2024 — 2026",
+        desc4: "<strong>Collaborations</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicité), MXSIG (UI/UX), AJ Digital Art (photographie et web).",
+        coursesTitle: "Formations",
+        course1: "Design de Contenu Visuel pour Réseaux Sociaux — Domestika 2025",
+        course2: "Branding et Design d'Identité pour Réseaux Sociaux — Coursera 2023",
+        course3: "Stratégies de Design pour Instagram et Facebook Ads — Crehana 2025",
+        course4: "Meta Ads et Stratégies Publicitaires pour Réseaux Sociaux — Crehana 2024",
+        downloadCV: "> Télécharger CV",
+        contact: "> Contact",
+        portfolio: "> Portfolio",
         copy: "© 2026 | Conçu par Paola Herrera Sol"
       },
       pt: {
         current: "PT",
+        subtitle: "Designer gráfica & ilustradora.",
+        aboutTitle: "Sobre mim",
+        aboutDesc: "Sou uma designer gráfica e criativa apaixonada, focada em dar vida a identidades visuais únicas e memoráveis. Através do branding, ilustração e estratégias de mídias sociais, traduzo conceitos abstratos em soluções estéticas funcionais com um toque fresco e ousado. Busco conectar emocionalmente com o público, cuidando meticulosamente de cada traço, composição e paleta tipográfica.",
+        toolsTitle: "Ferramentas",
+        skillsTitle: "Habilidades",
+        skill1: "Branding & identidade visual",
+        skill2: "Design editorial e publicitário",
+        skill3: "Ilustração digital",
+        skill4: "Gestão de campanhas Meta Ads / TikTok Ads",
+        skill5: "Edição fotográfica e retoque",
+        skill6: "Edição de vídeo básica (Premiere, CapCut)",
+        skill7: "Design UI/UX (Figma)",
+        skill8: "Adaptação a formatos e diretrizes de marca",
+        skill9: "Estratégias de conteúdo para redes sociais",
+        skill10: "Design B2B e newsletters (Mailchimp)",
+        backgroundTitle: "Formação",
+        backgroundDesc: "Com mais de 4 anos de experiência no setor, trabalhei em agência (ASTROS MARKETING) e como freelancer, desenvolvendo projetos de branding, design digital e campanhas publicitárias para marcas de diversos setores. Minha formação na Universidad Interamericana para el Desarrollo (UNID) e minha constante atualização através de cursos especializados me permitem abordar cada projeto com uma visão estratégica e criativa.",
+        timelineTitle: "Linha do tempo",
+        year1: "2020 — presente",
+        desc1: "<strong>ASTROS MARKETING</strong> — Designer Gráfica Digital e Social Media Designer. Produção de conteúdo visual, campanhas Meta/TikTok, linhas gráficas para marcas.",
+        year2: "2018 — presente",
+        desc2: "<strong>Freelance</strong> — Branding, identidade visual, design de conteúdo e publicidade para empreendedores e PMEs.",
+        year3: "2014",
+        desc3: "<strong>SEFOTUR</strong> — Estágio: adaptação de formatos na Semana de Yucatán no México.",
+        year4: "2024 — 2026",
+        desc4: "<strong>Colaborações</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicidade), MXSIG (UI/UX), AJ Digital Art (fotografia e web).",
+        coursesTitle: "Cursos",
+        course1: "Design de Conteúdo Visual para Redes Sociais — Domestika 2025",
+        course2: "Branding e Design de Identidade para Redes Sociais — Coursera 2023",
+        course3: "Estratégias de Design para Instagram e Facebook Ads — Crehana 2025",
+        course4: "Meta Ads e Estratégias de Publicidade para Redes Sociais — Crehana 2024",
+        downloadCV: "> Baixar CV",
+        contact: "> Contato",
+        portfolio: "> Portfólio",
         copy: "© 2026 | Projetado por Paola Herrera Sol"
       }
     };
@@ -750,19 +943,34 @@
     const langTrigger = document.getElementById('langTrigger');
     const langPicker = document.getElementById('langPicker');
     const langCurrent = document.getElementById('langCurrent');
+    
     function switchLanguage(lang) {
       currentLang = lang;
       const t = translations[lang];
+      if (!t) return;
+      
       if (langCurrent) langCurrent.textContent = t.current;
+      
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        el.textContent = t[key] || el.textContent;
+        if (key && t[key] !== undefined) {
+          if (key === 'desc1' || key === 'desc2' || key === 'desc3' || key === 'desc4') {
+            el.innerHTML = t[key];
+          } else {
+            el.textContent = t[key];
+          }
+        }
       });
-      document.querySelectorAll('.lang-opt').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+      
+      document.querySelectorAll('.lang-opt').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+      });
+      
       if (langPicker) langPicker.classList.remove('open');
       if (langTrigger) langTrigger.setAttribute('aria-expanded', 'false');
       try { localStorage.setItem('lang', lang); } catch(e) {}
     }
+
     if (langTrigger) {
       langTrigger.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -777,16 +985,25 @@
     document.querySelectorAll('.lang-opt').forEach(btn => {
       btn.addEventListener('click', (e) => { e.stopPropagation(); switchLanguage(btn.dataset.lang); });
     });
+    
     let savedLang = 'es';
     try { savedLang = localStorage.getItem('lang') || 'es'; } catch(e) {}
-    if (savedLang && translations[savedLang]) switchLanguage(savedLang);
-    else {
-      const t = translations.es;
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.textContent = t[key] || el.textContent;
-      });
+    if (savedLang && translations[savedLang]) {
+      switchLanguage(savedLang);
+    } else {
+      switchLanguage('es');
     }
+
+    // ===== HEADER SCROLL EFFECT =====
+    const header = document.getElementById('mainHeader');
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > 30) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
 
     // ===== SCROLL ANIMATIONS =====
     const presentationBlock = document.getElementById('presentationBlock');
@@ -826,7 +1043,12 @@
 
     // ===== IMAGE ERROR FALLBACK =====
     document.querySelectorAll('img').forEach(img => {
-      img.addEventListener('error', function() { this.style.display = 'none'; });
+      img.addEventListener('error', function() { 
+        console.warn('Imagen no encontrada:', this.src);
+        this.style.display = 'none';
+        const fallback = this.closest('.hero-section')?.querySelector('.hero-fallback');
+        if (fallback) fallback.classList.add('active');
+      });
     });
   </script>
 </body>

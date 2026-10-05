@@ -152,7 +152,9 @@
             z-index: 1;
             display: grid;
             grid-template-rows: auto 1fr auto;
-            min-height: 100vh;
+            height: 100dvh;
+            max-height: 100dvh;
+            overflow: hidden;
             opacity: 0;
             transition: opacity .45s ease;
         }
@@ -275,21 +277,25 @@
         main {
             display: grid;
             place-items: center;
+            min-height: 0;
             padding: 0 clamp(1.15rem, 5vw, 4rem) 1rem;
             text-align: center;
+            overflow: hidden;
         }
 
         .hero {
             display: grid;
             justify-items: center;
             width: min(980px, 100%);
-            gap: clamp(0.8rem, 2vh, 1.5rem);
+            gap: clamp(0.4rem, 1.2vh, 0.9rem);    
         }
 
         /* GATO MÁS GRANDE Y DESTACADO */
         .hero-gato {
-            width: min(450px, 75vw);
-            max-height: 50vh;
+            width: auto;
+            max-width: min(450px, 75vw);
+            height: auto;
+             max-height: 42vh;
             object-fit: contain;
             filter: drop-shadow(0 25px 40px var(--shadow));
             transform: translateY(18px) scale(.96);
@@ -299,8 +305,11 @@
 
         svg.hero-gato {
             display: block;
+            width: auto;
             height: auto;
-        }
+            max-width: min(450px, 75vw);
+            max-height: 42vh;
+}
 
         .page.loaded .hero-gato {
             animation: floatIn .72s .3s cubic-bezier(.22, 1, .36, 1) forwards;
@@ -546,9 +555,9 @@
                 font-size: 1rem;
             }
 
-            .hero-gato {
-                width: min(280px, 65vw);
-                max-height: 35vh;
+            .hero-gato, svg.hero-gato {
+                max-width: min(280px, 65vw);
+                max-height: 32vh;
             }
 
             h1 {

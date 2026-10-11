@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & ROOT ===== */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -512,6 +513,451 @@
 
     @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
 
+
+
+/* ===== PRESENTACIÓN CON FOTO ===== */
+.presentation-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.presentation-photo {
+  width: 180px;
+  height: 240px;              /* formato retrato */
+  border-radius: 16px;        /* esquinas suaves, no círculo */
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  box-shadow: 0 12px 40px var(--shadow);
+  background: var(--bg-soft);
+  display: grid;
+  place-items: center;
+}
+
+.presentation-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.presentation-photo .photo-fallback {
+  font-size: 3rem;
+  color: var(--gold);
+  opacity: 0.5;
+}
+
+@media (max-width: 720px) {
+  .presentation-photo {
+    width: 150px;
+    height: 200px;
+  }
+}
+
+/* ===== HERRAMIENTAS CON ICONOS ===== */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 columnas fijas */
+  gap: 1rem;
+  margin-top: 0.8rem;
+  max-width: 500px;
+}
+
+.tool-icon {
+  position: relative;
+  aspect-ratio: 1 / 1;                      /* cuadrado perfecto */
+  width: 100%;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  background: var(--card-bg);
+  border: 1.5px solid var(--line);
+  font-size: 2.2rem;                        /* íconos más grandes */
+  color: var(--gold);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, color 0.25s;
+}
+
+.tool-icon:hover {
+  transform: translateY(-4px) scale(1.06);
+  box-shadow: 0 10px 26px var(--shadow);
+}
+.tool-icon:hover::after {
+  content: attr(data-tool);
+  position: absolute;
+  bottom: -2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 5;
+}
+/* Colores de marca al hover */
+.tool-icon[data-tool="Illustrator"]:hover { color: #f47c20; border-color: #f47c20; }
+.tool-icon[data-tool="Photoshop"]:hover { color: #2d6bb8; border-color: #2d6bb8; }
+.tool-icon[data-tool="After Effects"]:hover { color: #7b2b8e; border-color: #7b2b8e; }
+.tool-icon[data-tool="Lightroom"]:hover { color: #4bb0e1; border-color: #4bb0e1; }
+.tool-icon[data-tool="Figma"]:hover { color: #2d9b4e; border-color: #2d9b4e; }
+.tool-icon[data-tool="HTML5"]:hover { color: #e44d26; border-color: #e44d26; }
+.tool-icon[data-tool="CSS3"]:hover { color: #264de4; border-color: #264de4; }
+.tool-icon[data-tool="JavaScript"]:hover { color: #f7df1e; border-color: #f7df1e; }
+.tool-icon[data-tool="VS Code"]:hover { color: #3e9ad7; border-color: #3e9ad7; }
+.tool-icon[data-tool="GitHub"]:hover { color: #333; border-color: #333; }
+.tool-icon[data-tool="Notion"]:hover { color: var(--text); border-color: var(--text); }
+.tool-icon[data-tool="Google"]:hover { color: #3c7dd6; border-color: #3c7dd6; }
+
+/* ===== MARCAS ===== */
+.brands-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);   /* 4 logos en una fila */
+  gap: 2rem 1.5rem;
+  margin-top: 1.5rem;
+  align-items: center;
+}
+
+.brand-item {
+  display: grid;
+  place-items: center;
+  padding: 0.5rem;
+  opacity: 0.55;                            /* sutil por defecto */
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.brand-item:hover {
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.brand-item img {
+  max-width: 100%;
+  max-height: 55px;                         /* altura uniforme para todos */
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+
+  /* 🎨 Color gris piedra (convierte cualquier logo a gris piedra) */
+  filter: grayscale(1) brightness(0) saturate(100%)
+          invert(56%) sepia(6%) saturate(500%)
+          hue-rotate(190deg) brightness(95%) contrast(85%);
+  transition: filter 0.35s ease;
+}
+
+/* Al hacer hover, el logo recupera su color original */
+.brand-item:hover img {
+  filter: none;
+}
+
+/* ===== HABILIDADES EN GRID CON BRILLO ===== */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.6rem;
+}
+.skill-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  background: var(--card-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 14px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text);
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.skill-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold);
+  box-shadow: 0 10px 24px var(--shadow);
+}
+.skill-card i {
+  font-size: 1.15rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+/* Animación de brillo aleatorio */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -75%;
+  width: 50%; height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  animation: shineSweep 6s infinite;
+  animation-delay: var(--shine-delay, 0s);
+}
+body.dark-mode .skill-card::before {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 217, 61, 0.28) 50%,
+    transparent 100%
+  );
+}
+@keyframes shineSweep {
+  0%, 70%, 100% { left: -75%; }
+  85% { left: 125%; }
+}
+
+/* ===== TRASFONDO CON GATO SVG ANIMADO ===== */
+.background-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;   /* más ancho para que se vea el gato */
+  gap: 2rem;
+  align-items: center;
+}
+
+.cat-svg-wrap {
+  width: 100%;
+  max-width: 220px;                    /* ✅ se comprime al tamaño del contenedor */
+  aspect-ratio: 323.19 / 202.38;       /* mantiene la proporción original */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cat-svg-anim {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+
+@media (max-width: 720px) {
+  .background-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .cat-svg-wrap {
+    max-width: 180px;
+  }
+}
+
+/* ===== TIMELINE CON MARCO CIRCULAR + GIF ===== */
+.timeline-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.2rem;
+  align-items: start;
+  padding-left: 58px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.timeline-thumb {
+  position: relative;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--gold);
+  box-shadow: 0 6px 20px var(--shadow);
+  background: var(--bg-soft);
+  display: grid;
+  place-items: center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
+  z-index: 3;
+}
+.timeline-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.timeline-thumb .thumb-static {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.6rem;
+  color: var(--gold);
+  opacity: 0.75;
+  transition: opacity 0.35s ease;
+}
+.timeline-item:hover .timeline-thumb {
+  transform: scale(1.12) rotate(-3deg);
+  box-shadow: 0 14px 34px var(--shadow);
+}
+.timeline-item:hover .timeline-thumb img { opacity: 1; }
+.timeline-item:hover .timeline-thumb .thumb-static { opacity: 0; }
+.timeline-body { padding-top: 0.4rem; }
+
+/* Ajuste: la línea base del timeline ahora va a la izquierda del thumb */
+.timeline-wrapper::before { left: 38px; }
+.timeline-item::before { left: 32px; top: 1.6rem; }
+.timeline-item::after { left: 46px; top: 2.25rem; }
+
+/* ===== CURSOS EN FILAS ===== */
+.courses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+.course-row {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--card-bg);
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.course-row:hover {
+  transform: translateX(6px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 22px var(--shadow);
+}
+.course-icon {
+  width: 40px; height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: var(--bg-soft);
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+.course-name {
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--text);
+  line-height: 1.35;
+}
+.course-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+.course-meta strong { color: var(--gold); }
+
+/* ===== CTA SECUNDARIO — SOLO TEXTO ===== */
+.cta-text-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2.5rem auto 0;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.cta-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, transform 0.2s, color 0.2s;
+}
+
+.cta-text-link:hover {
+  border-bottom-color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.cta-text-link .chevron {
+  font-weight: 900;
+  margin-right: 0.15rem;
+}
+
+.cta-secondary.ghost {
+  border-color: var(--line);
+  color: var(--muted);
+}
+.cta-secondary.ghost:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ===== GRACIAS ===== */
+.thanks-line {
+  text-align: center;
+  font-family: 'Dancing Script', cursive;   /* ✅ cursiva tipo firma */
+  font-size: clamp(2rem, 4vw, 3rem);        /* más grande para lucir */
+  font-weight: 700;
+  font-style: normal;                       /* ya es cursiva por la fuente */
+  color: var(--gold);
+  margin: 2rem 0 1.5rem;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+/* ===== RESPONSIVE AJUSTES ===== */
+@media (max-width: 720px) {
+  .presentation-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .presentation-photo { width: 150px; height: 150px; }
+  .background-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .cat-svg { width: 110px; height: 110px; }
+  .timeline-item {
+    grid-template-columns: 60px 1fr;
+    gap: 0.9rem;
+    padding-left: 44px;
+  }
+  .timeline-thumb { width: 60px; height: 60px; }
+  .timeline-thumb .thumb-static { font-size: 1.2rem; }
+  .timeline-wrapper::before { left: 26px; }
+  .timeline-item::before { left: 20px; top: 1.3rem; }
+  .timeline-item::after { left: 34px; top: 1.9rem; }
+  .course-row {
+    grid-template-columns: 40px 1fr;
+    gap: 0.7rem;
+  }
+  .course-meta {
+    grid-column: 2;
+    text-align: left;
+    margin-top: 0.15rem;
+  }
+  .skills-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .tool-icon { width: 46px; height: 46px; font-size: 1.35rem; }
+  .tools-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    max-width: 100%;
+  }
+  .tool-icon { font-size: 1.8rem; border-radius: 14px; }
+
+    .cta-text-row {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .cta-text-link {
+    font-size: 1rem;
+  }
+
+}
+
     /* ===== RESPONSIVE ===== */
     @media (max-width:720px) {
       body { cursor: auto; overflow: auto; }
@@ -542,6 +988,13 @@
       .tools-wrap { gap: 0.4rem 0.5rem; }
       .tool-badge { font-size: 0.75rem; padding: 0.3rem 0.9rem; }
       .timeline-year { font-size: 0.75rem; }
+        .brands-grid {
+    grid-template-columns: repeat(2, 1fr);   /* 2×2 en móvil */
+    gap: 1.5rem 1rem;
+  }
+        .brand-item img {
+    max-height: 42px;
+  }
     }
     @media (prefers-reduced-motion: reduce) {
       * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
@@ -584,128 +1037,337 @@
     </section>
 
     <main>
-      <div class="cv-container">
+  <div class="cv-container">
 
-        <!-- PRESENTACIÓN -->
-        <div class="presentation-block" id="presentationBlock">
+
+    <!-- PRESENTACIÓN CON FOTO -->
+    <div class="presentation-block" id="presentationBlock">
+      <div class="presentation-grid">
+        <div class="presentation-photo">
+  <img src="assets/Portafolio/paola-perfil.webp" alt="Paola Herrera Sol"
+       onerror="this.style.display='none'; this.nextElementSibling.style.display='grid'">
+  <span class="photo-fallback" style="display:none"><i class="fas fa-user-astronaut"></i></span>
+</div>
+        <div>
           <div class="presentation-name">Paola Herrera Sol</div>
           <div class="presentation-subtitle" data-i18n="subtitle">Diseñadora gráfica e ilustradora.</div>
-        </div>
-
-        <!-- Sobre mí -->
-        <div class="cv-block" id="aboutBlock">
-          <h2 data-i18n="aboutTitle">Sobre mí</h2>
-          <p data-i18n="aboutDesc">
-            Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables. 
-            A través del branding, la ilustración y estrategias de social media, traduzco conceptos abstractos en soluciones 
-            estéticas funcionales con un toque fresco y audaz. Busco conectar emocionalmente con las audiencias cuidando 
-            meticulosamente cada trazo, composición y paleta tipográfica.
+          <p class="presentation-bio" data-i18n="aboutDesc" style="margin-top:.8rem;">
+            Soy una apasionada diseñadora gráfica y creativa enfocada en dar vida a identidades visuales únicas y memorables.
           </p>
         </div>
-
-        <!-- Herramientas -->
-        <div class="cv-block" id="toolsBlock">
-          <h2 data-i18n="toolsTitle">Herramientas</h2>
-          <div class="tools-wrap">
-            <span class="tool-badge tool-adobe">Adobe Creative</span>
-            <span class="tool-badge tool-illustrator">Illustrator</span>
-            <span class="tool-badge tool-photoshop">Photoshop</span>
-            <span class="tool-badge tool-after">After Effects</span>
-            <span class="tool-badge tool-lightroom">Lightroom</span>
-            <span class="tool-badge tool-figma">Figma</span>
-            <span class="tool-badge tool-html">HTML</span>
-            <span class="tool-badge tool-css">CSS</span>
-            <span class="tool-badge tool-js">JavaScript</span>
-            <span class="tool-badge tool-vs">VS Code</span>
-            <span class="tool-badge tool-teams">Teams</span>
-            <span class="tool-badge tool-google">Google Workspace</span>
-            <span class="tool-badge tool-notion">Notion</span>
-            <span class="tool-badge tool-github">GitHub</span>
-          </div>
-        </div>
-
-        <!-- Habilidades -->
-        <div class="cv-block" id="skillsBlock">
-          <h2 data-i18n="skillsTitle">Habilidades</h2>
-          <ul class="skills-list">
-            <li data-i18n="skill1">Branding e identidad visual</li>
-            <li data-i18n="skill2">Diseño editorial y publicitario</li>
-            <li data-i18n="skill3">Ilustración digital</li>
-            <li data-i18n="skill4">Gestión de campañas Meta Ads / TikTok Ads</li>
-            <li data-i18n="skill5">Edición fotográfica y retoque</li>
-            <li data-i18n="skill6">Edición de video básico (Premiere, CapCut)</li>
-            <li data-i18n="skill7">Diseño UI/UX (Figma)</li>
-            <li data-i18n="skill8">Adaptación a formatos y lineamientos de marca</li>
-            <li data-i18n="skill9">Estrategias de contenido para redes sociales</li>
-            <li data-i18n="skill10">Diseño B2B y newsletters (Mailchimp)</li>
-          </ul>
-        </div>
-
-        <!-- Trasfondo -->
-        <div class="cv-block" id="backgroundBlock">
-          <h2 data-i18n="backgroundTitle">Trasfondo</h2>
-          <p data-i18n="backgroundDesc">
-            Con más de 4 años de experiencia en el sector, he trabajado en agencia (ASTROS MARKETING) y como freelance, 
-            desarrollando proyectos de branding, diseño digital y campañas publicitarias para marcas de diversos sectores. 
-            Mi formación en la Universidad Interamericana para el Desarrollo (UNID) y mi constante actualización mediante 
-            cursos especializados me permiten abordar cada proyecto con una visión estratégica y creativa.
-          </p>
-        </div>
-
-        <!-- Línea de tiempo -->
-        <div class="cv-block" id="timelineBlock">
-          <h2 data-i18n="timelineTitle">Línea de tiempo</h2>
-          <div class="timeline-wrapper">
-            <div class="timeline-item" id="item1">
-              <span class="timeline-year" data-i18n="year1">2020 — presente</span>
-              <div class="timeline-desc" data-i18n="desc1"><strong>ASTROS MARKETING</strong> — Diseñadora Gráfica Digital y Social Media Designer. Producción de contenido visual, campañas Meta/TikTok, líneas gráficas para marcas.</div>
-            </div>
-            <div class="timeline-item" id="item2">
-              <span class="timeline-year" data-i18n="year2">2018 — presente</span>
-              <div class="timeline-desc" data-i18n="desc2"><strong>Freelance</strong> — Branding, identidad visual, diseño de contenido y publicidad para emprendedores y PYMES.</div>
-            </div>
-            <div class="timeline-item" id="item3">
-              <span class="timeline-year" data-i18n="year3">2014</span>
-              <div class="timeline-desc" data-i18n="desc3"><strong>SEFOTUR</strong> — Pasantía: adaptación de formatos en la Semana de Yucatán en México.</div>
-            </div>
-            <div class="timeline-item" id="item4">
-              <span class="timeline-year" data-i18n="year4">2024 — 2026</span>
-              <div class="timeline-desc" data-i18n="desc4"><strong>Colaboraciones</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicidad), MXSIG (UI/UX), AJ Digital Art (fotografía y web).</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cursos -->
-        <div class="cv-block" id="coursesBlock">
-          <h2 data-i18n="coursesTitle">Cursos</h2>
-          <ul class="skills-list">
-            <li data-i18n="course1">Diseño de Contenido Visual para Redes Sociales — Domestika 2025</li>
-            <li data-i18n="course2">Branding y Diseño de Identidad para Redes Sociales — Coursera 2023</li>
-            <li data-i18n="course3">Estrategias de Diseño para Instagram y Facebook Ads — Crehana 2025</li>
-            <li data-i18n="course4">Meta Ads y Estrategias de Publicidad para Redes Sociales — Crehana 2024</li>
-          </ul>
-        </div>
-
-        <!-- Acciones — CENTRADAS con descarga inteligente -->
-        <div class="action-links" style="margin-top: 0.5rem;">
-          <a href="#" class="action-link" id="downloadCV" data-i18n="downloadCV"><span class="chevron">&gt;</span>Descargar CV</a>
-          <a href="contact.html" class="action-link" data-i18n="contact"><span class="chevron">&gt;</span>Contacto</a>
-          <a href="portfolio.html" class="action-link" data-i18n="portfolio"><span class="chevron">&gt;</span>Portafolio</a>
-        </div>
       </div>
-    </main>
+    </div>
 
-    <footer>
-      <div class="social" aria-label="Redes sociales">
-        <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-        <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
-        <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-        <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-        <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <!-- HERRAMIENTAS CON ICONOS -->
+    <div class="cv-block" id="toolsBlock">
+      <h2 data-i18n="toolsTitle">Herramientas</h2>
+      <div class="tools-grid">
+        <span class="tool-icon" data-tool="Illustrator"    title="Illustrator"><i class="fas fa-pen-nib"></i></span>
+        <span class="tool-icon" data-tool="Photoshop"      title="Photoshop"><i class="fas fa-image"></i></span>
+        <span class="tool-icon" data-tool="After Effects"  title="After Effects"><i class="fas fa-film"></i></span>
+        <span class="tool-icon" data-tool="Lightroom"      title="Lightroom"><i class="fas fa-camera-retro"></i></span>
+        <span class="tool-icon" data-tool="Figma"          title="Figma"><i class="fab fa-figma"></i></span>
+        <span class="tool-icon" data-tool="HTML5"          title="HTML5"><i class="fab fa-html5"></i></span>
+        <span class="tool-icon" data-tool="CSS3"           title="CSS3"><i class="fab fa-css3-alt"></i></span>
+        <span class="tool-icon" data-tool="JavaScript"     title="JavaScript"><i class="fab fa-js"></i></span>
+        <span class="tool-icon" data-tool="VS Code"        title="VS Code"><i class="fas fa-code"></i></span>
+        <span class="tool-icon" data-tool="GitHub"         title="GitHub"><i class="fab fa-github"></i></span>
+        <span class="tool-icon" data-tool="Notion"         title="Notion"><i class="fas fa-book-open"></i></span>
+        <span class="tool-icon" data-tool="Google"         title="Google Workspace"><i class="fab fa-google"></i></span>
       </div>
-      <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
-    </footer>
+    </div>
+
+    <!-- MARCAS -->
+<div class="cv-block" id="brandsBlock">
+  <h2 data-i18n="brandsTitle">Marcas que confían en mí</h2>
+  <div class="brands-grid">
+    <div class="brand-item" title="AJ Digital Art">
+      <img src="assets/AJ-DIGITAL-ART.png" alt="AJ Digital Art">
+    </div>
+    <div class="brand-item" title="Arcángel Uriel Bazar">
+      <img src="assets/Arcangel-Uriel-Bazar.png" alt="Arcángel Uriel Bazar">
+    </div>
+    <div class="brand-item" title="Astros Marketing">
+      <img src="assets/Astros-Marketing.png" alt="Astros Marketing">
+    </div>
+    <div class="brand-item" title="MX SIG">
+      <img src="assets/MXSIG-Antonio.png" alt="MX SIG">
+    </div>
   </div>
+</div>
+
+    <!-- HABILIDADES EN GRID -->
+    <div class="cv-block" id="skillsBlock">
+      <h2 data-i18n="skillsTitle">Habilidades</h2>
+      <div class="skills-grid" id="skillsGrid">
+        <!-- Generado por JS para asignar brillo aleatorio -->
+      </div>
+    </div>
+
+    <!-- TRASFONDO CON GATO -->
+    <div class="cv-block" id="backgroundBlock">
+      <h2 data-i18n="backgroundTitle">Trasfondo</h2>
+      <div class="background-grid">
+  <div class="cat-svg-wrap">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 323.19 202.38" class="cat-svg-anim">
+      <defs>
+  <style>
+    .cls-1 { fill: #2c2e30; }   /* negro original */
+    .cls-2 { fill: #fff; }      /* blanco original */
+    .cls-3 { fill: none; }      /* sin relleno */
+    .cls-4 { fill: #e8f4fc; }   /* celeste claro original */
+
+    #brazo_2, #pata_1, #pata_2, #raton, #brazo_1 {
+      transform-origin: center center;
+      transform-box: fill-box;
+    }
+
+    @keyframes brazo1Loop {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(-8deg); }
+      20%  { transform: rotate(0deg); }
+      30%  { transform: rotate(-8deg); }
+      40%  { transform: rotate(0deg); }
+      50%  { transform: rotate(35deg); }
+      85%  { transform: rotate(35deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes brazo2Loop {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(8deg); }
+      20%  { transform: rotate(0deg); }
+      30%  { transform: rotate(8deg); }
+      40%  { transform: rotate(0deg); }
+      50%  { transform: rotate(-12deg); }
+      85%  { transform: rotate(-12deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes pata1Loop {
+      0%   { transform: rotate(0deg) translateX(0px); }
+      10%  { transform: rotate(0.8deg) translateX(0.6px); }
+      20%  { transform: rotate(0deg) translateX(0px); }
+      30%  { transform: rotate(0.8deg) translateX(0.6px); }
+      40%  { transform: rotate(0deg) translateX(0px); }
+      50%  { transform: rotate(-12deg); }
+      85%  { transform: rotate(-12deg); }
+      100% { transform: rotate(0deg) translateX(0px); }
+    }
+    @keyframes pata2Loop {
+      0%   { transform: rotate(0deg); }
+      10%  { transform: rotate(-0.8deg); }
+      20%  { transform: rotate(0deg); }
+      30%  { transform: rotate(-0.8deg); }
+      40%  { transform: rotate(0deg); }
+      50%  { transform: rotate(4deg); }
+      85%  { transform: rotate(4deg); }
+      100% { transform: rotate(0deg); }
+    }
+    @keyframes ratonLoop {
+      0%   { transform: translate(0px, 0px) rotate(0deg); }
+      10%  { transform: translate(-0.8px, 0px) rotate(-1.2deg); }
+      20%  { transform: translate(0px, 0px) rotate(0deg); }
+      30%  { transform: translate(-0.8px, 0px) rotate(-1.2deg); }
+      40%  { transform: translate(0px, 0px) rotate(0deg); }
+      55%  { transform: translate(0px, -110px) rotate(0deg); }
+      70%  { transform: translate(0px, -110px) rotate(360deg); }
+      85%  { transform: translate(0px, -110px) rotate(360deg); }
+      100% { transform: translate(0px, 0px) rotate(360deg); }
+    }
+
+    #brazo_1 { animation: brazo1Loop 4s ease-in-out infinite; }
+    #brazo_2 { animation: brazo2Loop 4s ease-in-out infinite; }
+    #pata_1  { animation: pata1Loop  4s ease-in-out infinite; }
+    #pata_2  { animation: pata2Loop  4s ease-in-out infinite; }
+    #raton   { animation: ratonLoop  4s ease-in-out infinite; }
+  </style>
+</defs>
+
+      <g id="CUERPO">
+        <g>
+          <path class="cls-4" d="M185.27,30.6s27.21-17.5,65.43-2.29l33.63-4.97-14.98,21.49s20.63,25.73,23.54,58.89c0,0,22.93,16.85,25.07,23.88,0,0-6.98,1.83-21.07,4.28,0,0-7.7,1.49-13.17,11.62,0,0-34.85,43.72-161.73,31.79,0,0-77.96,4.49-79.8-75.56,0,0-8.02-65.45,69.4-67.83,5.25-.16,8.17.15,21,.08C146.26,31.91,165.24,31.59,185.27,30.6Z"/>
+          <path class="cls-2" d="M95.94,42.37c-.92.04-1.86.09-2.74.37-.97.31-1.82.89-2.66,1.45-8.23,5.5-16.95,10.28-26.01,14.29-2.51,1.1-5.12,2.21-6.97,4.22-1.38,1.49-3.22,3.66-4.93,2.55-.41-.26-.69-.69-.93-1.12-3.05-5.47-.42-12.62,4.09-16.96s10.51-6.69,16.06-9.59c7.7-4.05,15.38-9.5,24.07-9.16,3.52.14,6.91,1.24,10.32,2.09,4.36,1.1,8.82,1.8,13.3,2.11,2.77.19,7.54.28,8.67,3.52,1.29,3.69-2.28,4.61-5.02,4.92C114.22,42.07,104.96,41.94,95.94,42.37Z"/>
+          <path class="cls-2" d="M244.28,28.6c-1.59-.35-3.56-.66-4.56.61-.77.98-.5,2.46.28,3.42s1.94,1.52,3.07,2.01c5.79,2.55,12.11,4.54,18.37,3.61,3.42-.5,6.78-2.07,9.28-4.47,2.16-2.06,5.89-7.04,1.16-6.85-4.35.17-8.97,2.47-13.51,2.76S248.89,29.64,244.28,28.6Z"/>
+          <path class="cls-1" d="M163.92,182.36c-12.77,0-26.75-.63-42.05-2.06-4.22.18-37.2.76-60.97-21.17-15.11-13.94-23.08-33.81-23.7-59.07-.33-3.1-2.47-29.01,15.02-49.38,12.84-14.97,32.76-22.96,59.22-23.77,2.66-.08,4.75-.05,7.63,0,2.93.04,6.95.11,13.49.07,12.38-.06,31.22-.35,51.23-1.32,5.92-3.33,32.12-16.02,67.49-2.49l32.32-4.77c1.97-.29,3.93.62,4.98,2.31,1.05,1.7.99,3.86-.15,5.49l-12.92,18.54c5.48,7.74,19.14,29.35,22.14,56.28,7.08,5.33,22.88,17.83,25.1,25.12.39,1.3.24,2.71-.42,3.9-.66,1.18-1.78,2.05-3.1,2.4-.29.07-7.3,1.9-21.35,4.34-.61.16-5.77,1.71-9.76,9.09-.14.26-.31.51-.49.74C286.32,148.26,257.9,182.36,163.92,182.36ZM121.99,170.29c.15,0,.31.01.47.03,63.83,6,103.28-2.52,125.14-10.73,21.37-8.02,30.46-17.28,31.99-18.97,6.4-11.42,15.34-13.45,16.35-13.65,5.72-.99,10.26-1.88,13.62-2.59-4.31-4.46-11.84-10.9-19.63-16.63-1.16-.85-1.89-2.16-2.02-3.59-2.74-31.18-22.27-55.96-22.46-56.21-1.39-1.73-1.47-4.17-.2-5.98l8.36-11.99-22.18,3.28c-.87.13-1.76.02-2.58-.3-35.42-14.1-60.62,1.68-60.87,1.84-.74.48-1.59.75-2.46.79-20.65,1.03-40.17,1.32-52.9,1.39-6.66.04-10.73-.03-13.71-.08-2.85-.04-4.73-.07-7.16,0-23.49.72-40.94,7.52-51.87,20.21-15.38,17.83-12.75,41.78-12.72,42.02.01.15.03.32.03.48.52,22.51,7.39,40.04,20.43,52.11,21.72,20.1,53.76,18.59,54.09,18.58C121.8,170.3,121.89,170.29,121.99,170.29ZM185.27,30.6h.01H185.27Z"/>
+        </g>
+      </g>
+      <g id="LENTES">
+        <g>
+          <path class="cls-2" d="M226.12,5s26.52,36.46,13.17,61.95c0,0-32.31,7.45-39.65-12.73,0,0-17.42-33.48,23.85-39.44C223.49,14.78,221.66,5.86,226.12,5Z"/>
+          <path class="cls-1" d="M255.7,91.03l-10-.23c.25-10.66-9.71-20.1-9.82-20.19l6.8-7.33C243.23,63.78,256.05,75.82,255.7,91.03Z"/>
+          <path class="cls-2" d="M255.45,87.48s-37.26,13.94-21.17,48.34c0,0,9.08,18.41,46.38,5.1C280.66,140.92,289.23,120.12,255.45,87.48Z"/>
+          <path class="cls-1" d="M226.17,73.31c-11.21,0-25.8-2.95-31.12-17.1-1.17-2.38-7.73-16.91-1.2-29.64,4.1-8,12.25-13.34,24.26-15.91.03-2.34.47-4.99,1.87-7.1,1.24-1.85,3.04-3.05,5.2-3.47,1.9-.37,3.84.4,4.98,1.97,1.16,1.59,28.18,39.29,13.56,67.21-.68,1.29-1.89,2.22-3.31,2.55C239.81,71.96,233.76,73.31,226.17,73.31ZM227.82,17.27c-.08.14-.16.27-.25.39-.79,1.12-2.01,1.88-3.36,2.07-11.17,1.61-18.38,5.44-21.44,11.36-4.65,8.99,1.26,20.72,1.32,20.84.09.18.18.39.25.58,4.75,13.07,24.67,11.09,31.51,9.99C242.02,47.59,233.96,28.47,227.82,17.27Z"/>
+          <path class="cls-1" d="M256.54,150.75c-20.16,0-26.41-12.03-26.74-12.71-.02-.04-.03-.07-.05-.1-5.23-11.19-5.92-21.68-2.04-31.17,6.79-16.63,25.2-23.68,25.98-23.98,1.81-.67,3.84-.25,5.23,1.09,35.82,34.61,26.77,57.96,26.37,58.94-.54,1.31-1.61,2.33-2.95,2.81C271.91,149.35,263.42,150.75,256.54,150.75ZM238.75,133.57c.62,1.07,8.41,13.15,37.69,3.51.69-5.26.29-21.01-22.06-43.63-4.63,2.36-13.7,7.95-17.43,17.15C234.21,117.36,234.81,125.09,238.75,133.57Z"/>
+        </g>
+      </g>
+      <g id="brazo_2" data-name="brazo 2">
+        <g>
+          <path class="cls-4" d="M184.05,34.16s-23.21-35.19-47.89-10.51c0,0-12.64,21.1,6.01,29.35,0,0,5.99,3.02,20.72-8.17L184.05,34.16Z"/>
+          <path class="cls-2" d="M181.63,32.56c-.84,3.01,1.79,2.78-1.32,3.16s-6.23-.52-9.16-1.63c-3.28-1.23-6.46-2.71-9.52-4.42-1.69-.94-3.48-1.99-5.41-1.84-4.62.37-9.14,1.92-13.01,4.46-1.09.72-2.16,1.54-2.82,2.66-.75,1.28-.94,2.89-1.92,4-1.77,2.01-4.99,1.41-7.56.64-1.59-.47-3.41-1.17-3.88-2.76-.39-1.31.32-2.66,1.08-3.79,6.65-10.06,18.46-16.55,30.52-16.68,2.92.27,5.84.55,8.64,1.34,5.38,1.92,9.06,6.74,12.24,11.48,1.47,1.17,2.57,3.08,1.99,4.86"/>
+          <path class="cls-1" d="M145.27,58.78c-1.69,0-3.4-.39-5.24-1.26-11.25-5.32-14.3-12.94-14.89-18.4-.87-8.06,3.35-15.88,7.97-19.43,22.23-17.11,45.58-.07,54.82,11.32,1.74,2.15,1.41,5.29-.73,7.03-2.14,1.74-5.29,1.42-7.03-.73-.84-1.03-20.92-25.12-40.96-9.7-1.95,1.51-4.62,5.87-4.13,10.44.46,4.24,3.56,7.75,9.22,10.43,1.45.68,2.64.17,9.85-4.23,1.79-1.1,3.84-2.34,6.21-3.73,2.38-1.4,5.44-.6,6.84,1.78,1.4,2.38.6,5.44-1.78,6.84-2.32,1.36-4.31,2.58-6.05,3.64C153.64,56.28,149.53,58.78,145.27,58.78Z"/>
+        </g>
+      </g>
+      <g id="raton">
+        <g>
+          <path class="cls-1" d="M162.88,89.61c-2.57,0-4.75-1.97-4.97-4.58-.24-2.75,1.8-5.17,4.56-5.4,6.59-.56,8.93-2.21,9.24-3,.47-1.17-1.06-4.22-2.69-6.05-.26-.29-.5-.62-.68-.96-5.51-10.2-.56-17.9,4.11-20.58l4.99,8.67.1-.07c-1.15.75-2.71,2.61-.63,6.78,1.71,2.07,6.8,9.02,4.11,15.87-2.1,5.35-8.06,8.49-17.71,9.3Q163.1,89.61,162.88,89.61Z"/>
+          <path class="cls-2" d="M153.17,68.99s-11.92-8.96-31.49-4.07c0,0-36.84,4.88-28.43,25.99,2.44,6.14,9.78,15.9,45.15,16.82,7.36.19,22.99-2.74,23.03-18.35C161.43,89.38,161.12,73.06,153.17,68.99Z"/>
+          <path class="cls-1" d="M133.78,108.49c-4.25-13.38-3.71-43.79-3.69-45.07l5,.09c0,.31-.54,30.88,3.45,43.47L133.78,108.49Z"/>
+          <path class="cls-1" d="M133.2,86.09l-1.64-4.72c16.87-5.85,29.37-.15,29.9.1l-2.12,4.53C159.23,85.95,148.06,80.94,133.2,86.09Z"/>
+          <ellipse class="cls-1" cx="147.15" cy="82.96" rx="8.72" ry="5.38"/>
+          <path class="cls-1" d="M139.1,112.73q-.42,0-.83,0c-28.76-.75-44.54-7.09-49.67-19.97-2.37-5.96-2.09-11.72.82-16.68,7.13-12.18,27.8-15.58,31.32-16.07,19.75-4.84,32.67,3.08,35.05,4.71,9.99,5.49,10.6,22.61,10.64,24.57v.1c-.02,6.31-2.21,11.77-6.33,15.79C154.35,110.77,145.64,112.73,139.1,112.73ZM133.24,68.45c-3.09,0-6.54.37-10.35,1.32l-.55.11c-4.99.67-20.16,4.18-24.3,11.26-.84,1.44-1.78,3.83-.15,7.92,3.37,8.46,17.04,13.06,40.64,13.67,4.37.1,10.82-1.06,14.6-4.72,2.2-2.15,3.28-4.95,3.3-8.58-.13-5.39-1.97-14.16-5.54-15.99l-.38-.19-.32-.24C149.77,72.7,143.68,68.45,133.24,68.45Z"/>
+        </g>
+      </g>
+      <g id="muslo_1" data-name="muslo 1">
+        <g>
+          <path class="cls-4" d="M101.94,32.07s-31.47-18.82-52.58,29.54c0,0-5.4,32.46,43.06-1.03C92.42,60.58,115.21,40.38,101.94,32.07Z"/>
+          <path class="cls-2" d="M87.76,41.01c-3.55.72-7.1,1.7-10.19,3.58-5.02,3.04-8.37,8.12-12.12,12.64s-8.53,8.84-14.39,9.3c-2.49-3.61-.34-8.49,1.83-12.31,3.33-5.88,6.74-11.85,11.63-16.5,3.07-2.92,6.65-5.25,10.22-7.52,1.45-.92,2.92-1.84,4.52-2.44,2.26-.85,4.7-1.05,7.11-1.24,5.04-.39,10.41-.72,14.84,1.71,2.92,1.61,9.73,9.16,5.24,12.1-1.89,1.24-5.5-.03-7.51-.2C95.18,39.82,91.44,40.26,87.76,41.01Z"/>
+          <path class="cls-1" d="M49.36,66.62c-.67,0-1.35-.14-2-.42-2.53-1.11-3.68-4.05-2.58-6.59,7.79-17.85,18.45-29.24,31.68-33.85,16.83-5.86,31.37,1.69,31.98,2.01,2.43,1.3,3.36,4.33,2.06,6.77-1.29,2.43-4.31,3.36-6.74,2.07-.17-.09-11.52-5.82-24.14-1.36-10.43,3.69-19.07,13.23-25.67,28.36C53.13,65.49,51.29,66.62,49.36,66.62Z"/>
+        </g>
+      </g>
+      <g id="pata_1" data-name="pata 1">
+        <g>
+          <path class="cls-4" d="M49.36,61.61s-8.39-8.99-14.2-5.29c0,0-10.4-2.51,7.03,43.41C42.19,99.73,82.22,106.92,49.36,61.61Z"/>
+          <path class="cls-1" d="M37.68,105.53c-13.58-35.76-11.42-45.41-8.61-49.55,1.2-1.77,2.65-2.6,3.8-2.98,1.86-.94,3.96-1.18,6.13-.69,6.94,1.54,13.13,10.57,14.86,13.31l-8.45,5.35c-2.57-4.05-6.38-8.08-8.23-8.8-.49,2.24-1,11.24,9.85,39.82L37.68,105.53Z"/>
+        </g>
+      </g>
+      <g id="pata_2" data-name="pata 2">
+        <g>
+          <path class="cls-4" d="M124.75,175.55s-50.62,14.11-82.79-22.27c0,0-26.01-27.32,4.69-25.74C46.65,127.54,92.34,123.52,124.75,175.55Z"/>
+          <path class="cls-1" d="M101.31,183.32c-18.46,0-43.68-4.81-63.04-26.66-3.7-3.9-15.03-16.99-10.57-26.68,3.68-8.01,14.79-7.66,18.9-7.45,4.94-.31,49.95-1.72,82.39,50.37l3.53,5.67-6.43,1.79C125.15,180.62,115.12,183.32,101.31,183.32ZM44.18,132.48c-5.37,0-7.16,1.17-7.4,1.68-1,2.17,3.36,9.94,8.8,15.68l.12.13c22.86,25.85,56.39,24.26,70.76,22.11-12.04-17.09-26.85-28.91-44.1-35.16-14.37-5.21-25.18-4.4-25.29-4.4l-.33.03-.35-.02C45.6,132.49,44.86,132.48,44.18,132.48Z"/>
+        </g>
+      </g>
+      <g id="muslo_2" data-name="muslo 2">
+        <g>
+          <path class="cls-4" d="M116.48,129.13s-51.68-33.63-67.3,3.67c0,0,4.76,51.96,78.52,42.39C140.26,173.56,162.96,161.23,116.48,129.13Z"/>
+          <path class="cls-3" d="M116.48,129.13s-51.68-33.63-67.3,3.67c0,0,4.76,51.96,78.52,42.39C140.26,173.56,162.96,161.23,116.48,129.13Z"/>
+          <path class="cls-1" d="M107.13,182.89c-12.53,0-24.26-1.07-30.82-2.88-2.66-.73-4.23-3.48-3.49-6.14.73-2.67,3.48-4.23,6.14-3.5,9.86,2.71,39.41,3.9,58.45-.07,2.71-.57,5.36,1.17,5.92,3.87.56,2.7-1.17,5.35-3.88,5.92C130.12,182.03,118.31,182.89,107.13,182.89Z"/>
+          <path class="cls-2" d="M59.12,118.56c16.29-7.81,35.45-3.62,51.02,4.25,2.12.99,10.68,6.14,7.82,8.37-4.67,1.35-10.7-1.27-15.68-1.74-11.78-1.51-23.7-1.65-35.58-1.06-4.07.02-10.67,1.05-13.3-2.3-1.6-2.19,2.77-6.16,5.53-7.42L59.12,118.56Z"/>
+        </g>
+      </g>
+      <g id="ojo_1" data-name="ojo 1">
+        <circle class="cls-1" cx="221.88" cy="43.73" r="8.37"/>
+      </g>
+      <g id="ojo_2" data-name="ojo 2">
+        <circle class="cls-1" cx="253.37" cy="116.62" r="8.37"/>
+      </g>
+      <g id="nariz_y_boca" data-name="nariz y boca">
+        <path class="cls-1" d="M212.77,81.43c.07.11,2.04,1.37,2.16,1.4,3.6,1.07,3.57-5.47,6.91-5.21,1.26.1,6.45,11.15,3.26,13.09-1.48.89-5.05-2.03-6.42-1.91-1.62.13-3.17,3.43-2.35,5.04.46.89,6.42,2.69,3.14,5.89-2.95,2.89-8.23-1.42-9.26-4.45-1.08-3.17,1.33-7.26,1.1-7.57-.11-.13-2.22-.97-2.88-1.77-2.39-2.91-2.6-7.54-.3-10.55,1.33-1.76,5.1-1.44,5.73.88C214.3,77.87,212.01,80.15,212.77,81.43Z"/>
+      </g>
+      <g id="brazo_1" data-name="brazo 1">
+        <g>
+          <path class="cls-4" d="M201.39,120.57s-21.31-36.5-38.5-23.52c0,0-12.16,4.81-2.07,38.77L201.39,120.57Z"/>
+          <path class="cls-1" d="M160.81,140.99c-2.15,0-4.14-1.4-4.79-3.57-10.07-33.91.54-42.58,4.3-44.52,4.27-3.04,9.21-4.11,14.32-3.09,15.94,3.2,29.57,25.84,31.07,28.41,1.39,2.38.59,5.44-1.8,6.84-2.39,1.39-5.45.58-6.84-1.8-3.46-5.91-14.59-21.68-24.4-23.64-2.51-.5-4.66,0-6.77,1.59l-.86.65h-.19c-2.22,1.73-5.88,10.37.76,32.71.78,2.65-.72,5.43-3.37,6.22C161.76,140.93,161.28,140.99,160.81,140.99Z"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+  <p data-i18n="backgroundDesc">
+    Con más de 4 años de experiencia en el sector, he trabajado en agencia (ASTROS MARKETING) y como freelance…
+  </p>
+</div>
+
+    <!-- LÍNEA DE TIEMPO CON GIF -->
+    <div class="cv-block" id="timelineBlock">
+      <h2 data-i18n="timelineTitle">Línea de tiempo</h2>
+      <div class="timeline-wrapper">
+        <div class="timeline-item" id="item1">
+          <div class="timeline-thumb">
+            <span class="thumb-static"><i class="fas fa-bullhorn"></i></span>
+            <img src="assets/about/astros_marketing_trabajo.gif"alt="ASTROS Marketing" onerror="this.remove()">
+          </div>
+          <div class="timeline-body">
+            <span class="timeline-year" data-i18n="year1">2020 — presente</span>
+            <div class="timeline-desc" data-i18n="desc1"><strong>ASTROS MARKETING</strong> — …</div>
+          </div>
+        </div>
+        <div class="timeline-item" id="item2">
+          <div class="timeline-thumb">
+            <span class="thumb-static"><i class="fas fa-laptop-code"></i></span>
+            <img src="assets/about/paola_herrera_trabajo.gif" alt="Freelance" onerror="this.remove()">
+          </div>
+          <div class="timeline-body">
+            <span class="timeline-year" data-i18n="year2">2018 — presente</span>
+            <div class="timeline-desc" data-i18n="desc2"><strong>Freelance</strong> — …</div>
+          </div>
+        </div>
+        <div class="timeline-item" id="item3">
+          <div class="timeline-thumb">
+            <span class="thumb-static"><i class="fas fa-passport"></i></span>
+            <img src="assets/timeline/sefotur.gif" alt="SEFOTUR" onerror="this.remove()">
+          </div>
+          <div class="timeline-body">
+            <span class="timeline-year" data-i18n="year3">2014</span>
+            <div class="timeline-desc" data-i18n="desc3"><strong>SEFOTUR</strong> — …</div>
+          </div>
+        </div>
+        <div class="timeline-item" id="item4">
+          <div class="timeline-thumb">
+            <span class="thumb-static"><i class="fas fa-handshake"></i></span>
+            <img src="assets/timeline/colabs.gif" alt="Colaboraciones" onerror="this.remove()">
+          </div>
+          <div class="timeline-body">
+            <span class="timeline-year" data-i18n="year4">2024 — 2026</span>
+            <div class="timeline-desc" data-i18n="desc4"><strong>Colaboraciones</strong> — …</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CURSOS EN FILAS -->
+    <div class="cv-block" id="coursesBlock">
+      <h2 data-i18n="coursesTitle">Cursos</h2>
+      <div class="courses-list">
+        <div class="course-row">
+          <div class="course-icon"><i class="fas fa-graduation-cap"></i></div>
+          <div class="course-name" data-i18n="course1">Diseño de Contenido Visual para Redes Sociales</div>
+          <div class="course-meta"><strong>Domestika</strong> · 2025</div>
+        </div>
+        <div class="course-row">
+          <div class="course-icon"><i class="fas fa-award"></i></div>
+          <div class="course-name" data-i18n="course2">Branding y Diseño de Identidad para Redes Sociales</div>
+          <div class="course-meta"><strong>Coursera</strong> · 2023</div>
+        </div>
+        <div class="course-row">
+          <div class="course-icon"><i class="fas fa-bullseye"></i></div>
+          <div class="course-name" data-i18n="course3">Estrategias de Diseño para Instagram y Facebook Ads</div>
+          <div class="course-meta"><strong>Crehana</strong> · 2025</div>
+        </div>
+        <div class="course-row">
+          <div class="course-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="course-name" data-i18n="course4">Meta Ads y Estrategias de Publicidad para Redes Sociales</div>
+          <div class="course-meta"><strong>Crehana</strong> · 2024</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA SECUNDARIO -->
+    <div class="cta-text-row">
+
+       <a href="https://drive.google.com/file/d/1g8TT8kInLOQ4lJMkJiTqBFpk3p64kxXy/view?usp=sharing" id="downloadCV" class="cta-text-link" data-i18n="downloadCV">
+    <span class="chevron">&gt;</span> Descargar CV
+
+    <a href="contact.html" class="cta-text-link" data-i18n="contact">
+    <span class="chevron">&gt;</span> Contacto
+  </a>
+
+  <a href="portfolio.html" class="cta-text-link" data-i18n="portfolio">
+    <span class="chevron">&gt;</span> Portafolio
+  </a>
+</div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="thanks-line" data-i18n="thanks">Gracias por llegar hasta aquí ✦</div>
+  <div class="social" aria-label="Redes sociales">
+    <a href="https://github.com/MichitoDisenador" target="_blank" rel="noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://dribbble.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Dribbble"><i class="fab fa-dribbble"></i></a>
+    <a href="https://www.linkedin.com/in/michito-disenador/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://www.facebook.com/michitodisenador" target="_blank" rel="noreferrer" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+    <a href="mailto:sapichaan@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+  </div>
+  <div class="copy" data-i18n="copy">© 2026 | Diseñado por Paola Herrera Sol</div>
+</footer>
 
   <script>
     // ===== TRANSLATIONS COMPLETAS =====
@@ -745,9 +1407,13 @@
         course4: "Meta Ads y Estrategias de Publicidad para Redes Sociales — Crehana 2024",
         downloadCV: "> Descargar CV",
         contact: "> Contacto",
-        portfolio: "> Portafolio",
-        copy: "© 2026 | Diseñado por Paola Herrera Sol"
+        portfolio: "Portafolio",
+        copy: "© 2026 | Diseñado por Paola Herrera Sol",
+        headlineSub: "Portafolio creativo · Branding · Ilustración",
+        brandsTitle: "Marcas que confían en mí",
+        thanks: "Gracias por llegar hasta aquí ✦",
       },
+
       en: {
         current: "EN",
         subtitle: "Graphic designer & illustrator.",
@@ -784,8 +1450,12 @@
         downloadCV: "> Download CV",
         contact: "> Contact",
         portfolio: "> Portfolio",
-        copy: "© 2026 | Designed by Paola Herrera Sol"
+        copy: "© 2026 | Designed by Paola Herrera Sol",
+        headlineSub: "Creative portfolio · Branding · Illustration",
+        brandsTitle: "Brands that trust me",
+        thanks: "Thanks for making it this far ✦",
       },
+
       fr: {
         current: "FR",
         subtitle: "Graphiste & illustratrice.",
@@ -822,8 +1492,12 @@
         downloadCV: "> Télécharger CV",
         contact: "> Contact",
         portfolio: "> Portfolio",
-        copy: "© 2026 | Conçu par Paola Herrera Sol"
+        copy: "© 2026 | Conçu par Paola Herrera Sol",
+        headlineSub: "Portfolio créatif · Branding · Illustration",
+        brandsTitle: "Marques qui me font confiance",
+        thanks: "Merci d'être arrivé jusqu'ici ✦",
       },
+
       pt: {
         current: "PT",
         subtitle: "Designer gráfica & ilustradora.",
@@ -860,7 +1534,10 @@
         downloadCV: "> Baixar CV",
         contact: "> Contato",
         portfolio: "> Portfólio",
-        copy: "© 2026 | Projetado por Paola Herrera Sol"
+        copy: "© 2026 | Projetado por Paola Herrera Sol",
+        headlineSub: "Portfólio criativo · Branding · Ilustração",
+        brandsTitle: "Marcas que confiam em mim",
+        thanks: "Obrigada por chegar até aqui ✦",
       }
     };
 
@@ -1067,6 +1744,36 @@
         if (fallback) fallback.classList.add('active');
       });
     });
+
+// ===== GENERACIÓN DE HABILIDADES CON BRILLO ALEATORIO =====
+const skillsData = [
+  { icon: 'fa-palette',        key: 'skill1' },
+  { icon: 'fa-book-open',      key: 'skill2' },
+  { icon: 'fa-paintbrush',     key: 'skill3' },
+  { icon: 'fa-bullhorn',       key: 'skill4' },
+  { icon: 'fa-camera',         key: 'skill5' },
+  { icon: 'fa-video',          key: 'skill6' },
+  { icon: 'fa-object-group',   key: 'skill7' },
+  { icon: 'fa-ruler-combined', key: 'skill8' },
+  { icon: 'fa-hashtag',        key: 'skill9' },
+  { icon: 'fa-envelope-open-text', key: 'skill10' }
+];
+
+const skillsGrid = document.getElementById('skillsGrid');
+if (skillsGrid) {
+  skillsData.forEach((s, i) => {
+    const card = document.createElement('div');
+    card.className = 'skill-card';
+    // Brillo aleatorio entre 0 y 6 segundos
+    card.style.setProperty('--shine-delay', (Math.random() * 6).toFixed(2) + 's');
+    card.innerHTML = `<i class="fas ${s.icon}" aria-hidden="true"></i><span data-i18n="${s.key}"></span>`;
+    skillsGrid.appendChild(card);
+  });
+}
+
+// Después de generar, reaplica el idioma actual
+if (typeof switchLanguage === 'function') switchLanguage(currentLang);
+
   </script>
 </body>
 </html>

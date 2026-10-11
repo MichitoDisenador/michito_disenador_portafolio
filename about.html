@@ -454,6 +454,50 @@
       font-weight: 700;
     }
 
+    /* ===== LOGROS EN LA TIMELINE ===== */
+.timeline-achievements {
+  list-style: none;
+  padding: 0;
+  margin: 0.7rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.timeline-achievements li {
+  position: relative;
+  padding-left: 1.2rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--text);
+  opacity: 0.9;
+}
+
+.timeline-achievements li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--gold);
+  font-size: 0.9rem;
+  font-weight: 900;
+  line-height: 1.5;
+}
+
+/* Sutil animación de entrada escalonada */
+.timeline-item.visible .timeline-achievements li {
+  opacity: 0;
+  animation: fadeSlideIn 0.5s ease forwards;
+}
+.timeline-item.visible .timeline-achievements li:nth-child(1) { animation-delay: 0.3s; }
+.timeline-item.visible .timeline-achievements li:nth-child(2) { animation-delay: 0.45s; }
+.timeline-item.visible .timeline-achievements li:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(-6px); }
+  to   { opacity: 0.9; transform: translateX(0); }
+}
+
     /* ===== ACTIONS — CENTRADOS ===== */
     .action-links {
       display: flex;
@@ -955,6 +999,10 @@ body.dark-mode .skill-card::before {
   .cta-text-link {
     font-size: 1rem;
   }
+ .timeline-achievements li {
+    font-size: 0.85rem;
+    padding-left: 1rem;
+  }
 
 }
 
@@ -1269,47 +1317,79 @@ body.dark-mode .skill-card::before {
     <div class="cv-block" id="timelineBlock">
       <h2 data-i18n="timelineTitle">Línea de tiempo</h2>
       <div class="timeline-wrapper">
-        <div class="timeline-item" id="item1">
-          <div class="timeline-thumb">
-            <span class="thumb-static"><i class="fas fa-bullhorn"></i></span>
-            <img src="assets/about/astros_marketing_trabajo.gif"alt="ASTROS Marketing" onerror="this.remove()">
-          </div>
-          <div class="timeline-body">
-            <span class="timeline-year" data-i18n="year1">2020 — presente</span>
-            <div class="timeline-desc" data-i18n="desc1"><strong>ASTROS MARKETING</strong> — …</div>
-          </div>
-        </div>
-        <div class="timeline-item" id="item2">
-          <div class="timeline-thumb">
-            <span class="thumb-static"><i class="fas fa-laptop-code"></i></span>
-            <img src="assets/about/paola_herrera_trabajo.gif" alt="Freelance" onerror="this.remove()">
-          </div>
-          <div class="timeline-body">
-            <span class="timeline-year" data-i18n="year2">2018 — presente</span>
-            <div class="timeline-desc" data-i18n="desc2"><strong>Freelance</strong> — …</div>
-          </div>
-        </div>
-        <div class="timeline-item" id="item3">
-          <div class="timeline-thumb">
-            <span class="thumb-static"><i class="fas fa-passport"></i></span>
-            <img src="assets/timeline/sefotur.gif" alt="SEFOTUR" onerror="this.remove()">
-          </div>
-          <div class="timeline-body">
-            <span class="timeline-year" data-i18n="year3">2014</span>
-            <div class="timeline-desc" data-i18n="desc3"><strong>SEFOTUR</strong> — …</div>
-          </div>
-        </div>
-        <div class="timeline-item" id="item4">
-          <div class="timeline-thumb">
-            <span class="thumb-static"><i class="fas fa-handshake"></i></span>
-            <img src="assets/timeline/colabs.gif" alt="Colaboraciones" onerror="this.remove()">
-          </div>
-          <div class="timeline-body">
-            <span class="timeline-year" data-i18n="year4">2024 — 2026</span>
-            <div class="timeline-desc" data-i18n="desc4"><strong>Colaboraciones</strong> — …</div>
-          </div>
-        </div>
+
+  <!-- ITEM 1 — ASTROS MARKETING -->
+  <div class="timeline-item" id="item1">
+    <div class="timeline-thumb">
+      <span class="thumb-static"><i class="fas fa-bullhorn"></i></span>
+      <img src="assets/about/astros_marketing_trabajo.gif" alt="ASTROS Marketing" onerror="this.remove()">
+    </div>
+    <div class="timeline-body">
+      <span class="timeline-year" data-i18n="year1">2020 — presente</span>
+      <div class="timeline-desc" data-i18n="desc1">
+        <strong>ASTROS MARKETING</strong> — Diseñadora Gráfica Digital y Social Media Designer.
       </div>
+      <ul class="timeline-achievements">
+        <li data-i18n="ach1_1">Aumenté el engagement en campañas Meta y TikTok con contenido visual optimizado por formato.</li>
+        <li data-i18n="ach1_2">Optimicé la producción con plantillas reutilizables para stories, posts y ads.</li>
+        <li data-i18n="ach1_3">Mejoré el flujo de trabajo implementando herramientas de organización (Notion, Drive, calendarios editoriales).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ITEM 2 — FREELANCE -->
+  <div class="timeline-item" id="item2">
+    <div class="timeline-thumb">
+      <span class="thumb-static"><i class="fas fa-laptop-code"></i></span>
+      <img src="assets/about/paola_herrera_trabajo.gif" alt="Freelance" onerror="this.remove()">
+    </div>
+    <div class="timeline-body">
+      <span class="timeline-year" data-i18n="year2">2018 — presente</span>
+      <div class="timeline-desc" data-i18n="desc2">
+        <strong>Freelance</strong> — Branding, identidad visual, diseño de contenido y publicidad para emprendedores y PYMES.
+      </div>
+      <ul class="timeline-achievements">
+        <li data-i18n="ach2_1">Di a pequeños negocios una identidad visual sólida que los diferenció en mercados saturados.</li>
+        <li data-i18n="ach2_2">Convertí emprendimientos improvisados en marcas con personalidad, tono y sistema gráfico coherente.</li>
+        <li data-i18n="ach2_3">Aumenté su recordación y confianza del cliente al profesionalizar cada punto de contacto visual.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ITEM 3 — SEFOTUR -->
+  <div class="timeline-item" id="item3">
+    <div class="timeline-thumb">
+      <span class="thumb-static"><i class="fas fa-passport"></i></span>
+      <img src="assets/about/sefotur_trabajo.gif" alt="SEFOTUR" onerror="this.remove()">
+    </div>
+    <div class="timeline-body">
+      <span class="timeline-year" data-i18n="year3">2014</span>
+      <div class="timeline-desc" data-i18n="desc3">
+        <strong>SEFOTUR</strong> — Pasantía: adaptación de formatos en la Semana de Yucatán en México.
+      </div>
+      <ul class="timeline-achievements">
+        <li data-i18n="ach3_1">Serví como enlace de diseño entre SEFOTUR y el World Trade Center de la Ciudad de México.</li>
+        <li data-i18n="ach3_2">Adapté piezas gráficas desde Yucatán sin necesidad de contratar agencias externas.</li>
+        <li data-i18n="ach3_3">Cubrí las necesidades de diseño del evento en tiempo real, agilizando la comunicación entre sedes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ITEM 4 — COLABORACIONES -->
+  <div class="timeline-item" id="item4">
+    <div class="timeline-thumb">
+      <span class="thumb-static"><i class="fas fa-handshake"></i></span>
+      <img src="assets/about/colabs_trabajo.gif" alt="Colaboraciones" onerror="this.remove()">
+    </div>
+    <div class="timeline-body">
+      <span class="timeline-year" data-i18n="year4">2024 — 2026</span>
+      <div class="timeline-desc" data-i18n="desc4">
+        <strong>Colaboraciones</strong> — UTAC (6ta Milla Universitaria), UNIMAT (publicidad), MXSIG (UI/UX), AJ Digital Art (fotografía y web).
+      </div>
+    </div>
+  </div>
+
+</div>
     </div>
 
     <!-- CURSOS EN FILAS -->
@@ -1412,6 +1492,15 @@ body.dark-mode .skill-card::before {
         headlineSub: "Portafolio creativo · Branding · Ilustración",
         brandsTitle: "Marcas que confían en mí",
         thanks: "Gracias por llegar hasta aquí ✦",
+        ach1_1: "Aumenté el engagement en campañas Meta y TikTok con contenido visual optimizado por formato.",
+        ach1_2: "Optimicé la producción con plantillas reutilizables para stories, posts y ads.",
+        ach1_3: "Mejoré el flujo de trabajo implementando herramientas de organización (Notion, Drive, calendarios editoriales).",
+        ach2_1: "Di a pequeños negocios una identidad visual sólida que los diferenció en mercados saturados.",
+        ach2_2: "Convertí emprendimientos improvisados en marcas con personalidad, tono y sistema gráfico coherente.",
+        ach2_3: "Aumenté su recordación y confianza del cliente al profesionalizar cada punto de contacto visual.",
+        ach3_1: "Serví como enlace de diseño entre SEFOTUR y el World Trade Center de la Ciudad de México.",
+        ach3_2: "Adapté piezas gráficas desde Yucatán sin necesidad de contratar agencias externas.",
+        ach3_3: "Cubrí las necesidades de diseño del evento en tiempo real, agilizando la comunicación entre sedes.",
       },
 
       en: {
@@ -1454,6 +1543,15 @@ body.dark-mode .skill-card::before {
         headlineSub: "Creative portfolio · Branding · Illustration",
         brandsTitle: "Brands that trust me",
         thanks: "Thanks for making it this far ✦",
+        ach1_1: "Increased engagement in Meta and TikTok campaigns with format-optimized visual content.",
+        ach1_2: "Optimized production with reusable templates for stories, posts, and ads.",
+        ach1_3: "Improved workflow by implementing organizational tools (Notion, Drive, editorial calendars).",
+        ach2_1: "Gave small businesses a solid visual identity that set them apart in saturated markets.",
+        ach2_2: "Turned improvised ventures into brands with personality, tone, and a coherent graphic system.",
+        ach2_3: "Boosted their recall and client trust by professionalizing every visual touchpoint.",
+        ach3_1: "Served as the design liaison between SEFOTUR and the World Trade Center in Mexico City.",
+        ach3_2: "Adapted graphic pieces from Yucatán without needing to hire external agencies.",
+        ach3_3: "Covered the event's design needs in real time, streamlining communication between venues.",
       },
 
       fr: {
@@ -1496,6 +1594,15 @@ body.dark-mode .skill-card::before {
         headlineSub: "Portfolio créatif · Branding · Illustration",
         brandsTitle: "Marques qui me font confiance",
         thanks: "Merci d'être arrivé jusqu'ici ✦",
+        ach1_1: "J'ai augmenté l'engagement des campagnes Meta et TikTok avec du contenu visuel optimisé par format.",
+        ach1_2: "J'ai optimisé la production grâce à des templates réutilisables pour stories, posts et ads.",
+        ach1_3: "J'ai amélioré le flux de travail en implémentant des outils d'organisation (Notion, Drive, calendriers éditoriaux).",
+        ach2_1: "J'ai donné aux petites entreprises une identité visuelle solide qui les a démarquées sur des marchés saturés.",
+        ach2_2: "J'ai transformé des projets improvisés en marques avec personnalité, ton et système graphique cohérent.",
+        ach2_3: "J'ai renforcé leur mémorisation et la confiance des clients en professionnalisant chaque point de contact visuel.",
+        ach3_1: "J'ai servi de lien design entre SEFOTUR et le World Trade Center de Mexico.",
+        ach3_2: "J'ai adapté des pièces graphiques depuis le Yucatán sans recourir à des agences externes.",
+        ach3_3: "J'ai couvert les besoins design de l'événement en temps réel, fluidifiant la communication entre sites.",
       },
 
       pt: {
@@ -1538,6 +1645,15 @@ body.dark-mode .skill-card::before {
         headlineSub: "Portfólio criativo · Branding · Ilustração",
         brandsTitle: "Marcas que confiam em mim",
         thanks: "Obrigada por chegar até aqui ✦",
+        ach1_1: "Aumentei o engajamento em campanhas Meta e TikTok com conteúdo visual otimizado por formato.",
+        ach1_2: "Otimizei a produção com templates reutilizáveis para stories, posts e ads.",
+        ach1_3: "Melhorei o fluxo de trabalho implementando ferramentas de organização (Notion, Drive, calendários editoriais).",
+        ach2_1: "Dei a pequenos negócios uma identidade visual sólida que os destacou em mercados saturados.",
+        ach2_2: "Transformei empreendimentos improvisados em marcas com personalidade, tom e sistema gráfico coerente.",
+        ach2_3: "Aumentei a lembrança e a confiança dos clientes profissionalizando cada ponto de contato visual.",
+        ach3_1: "Atuei como elo de design entre a SEFOTUR e o World Trade Center da Cidade do México.",
+        ach3_2: "Adaptei peças gráficas de Yucatán sem precisar contratar agências externas.",
+        ach3_3: "Cobri as necessidades de design do evento em tempo real, agilizando a comunicação entre sedes.",
       }
     };
 
@@ -1631,11 +1747,15 @@ body.dark-mode .skill-card::before {
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (key && t[key] !== undefined) {
-          if (key === 'desc1' || key === 'desc2' || key === 'desc3' || key === 'desc4') {
-            el.innerHTML = t[key];
-          } else {
-            el.textContent = t[key];
-          }
+          const htmlKeys = ['desc1','desc2','desc3','desc4',
+                  'ach1_1','ach1_2','ach1_3',
+                  'ach2_1','ach2_2','ach2_3',
+                  'ach3_1','ach3_2','ach3_3'];
+if (htmlKeys.includes(key)) {
+  el.innerHTML = t[key];
+} else {
+  el.textContent = t[key];
+}
         }
       });
       

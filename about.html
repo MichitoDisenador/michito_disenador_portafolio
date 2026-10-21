@@ -520,6 +520,19 @@ body:not(.dark-mode) .tool-icon:hover .tool-svg {
 .tool-icon[data-tool="CSS3"]:hover .tool-svg {
   filter: invert(24%) sepia(90%) saturate(3000%) hue-rotate(225deg) brightness(90%) contrast(110%);
 }
+    /* Base del SVG */
+.tool-icon .tool-svg {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease, filter 0.4s ease; /* filter animado */
+}
+
+/* Hover base (escala) */
+.tool-icon:hover .tool-svg {
+  transform: scale(1.08);
+}
 
     /* ===== TIMELINE ===== */
     .timeline-wrapper {
@@ -1417,8 +1430,9 @@ body.dark-mode .skill-card::before {
       <span class="tool-icon" data-tool="JavaScript" title="JavaScript" style="--brand:#f7df1e">
         <i class="si si-javascript"></i>
       </span>
-      <span class="tool-icon" data-tool="VS Code" title="VS Code" style="--brand:#007acc">
-        <i class="si si-visualstudiocode"></i>
+ <span class="tool-icon" data-tool="Lightroom" title="Lightroom" style="--brand:#31a8ff">
+        <img src="assets/about/VISUALSTUDIO.svg" alt="Lightroom" class="tool-svg" onerror="this.style.display='none'">
+      </span>
       </span>
       <span class="tool-icon" data-tool="GitHub" title="GitHub" style="--brand:#8957e5">
         <i class="si si-github"></i>

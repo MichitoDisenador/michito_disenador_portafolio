@@ -474,6 +474,53 @@
   }
 }
 
+    /* ===== FILTROS DE COLOR PARA SVG (HOVER) ===== */
+
+/* Base: el SVG es negro, así que partimos de ahí */
+.tool-icon .tool-svg {
+  /* Un pequeño truco: en modo oscuro, si los SVG son negros, podrían perderse. 
+     Podemos hacer que en modo oscuro sean blancos por defecto. */
+}
+
+body.dark-mode .tool-icon .tool-svg {
+  filter: invert(1) brightness(2); /* Hace que el SVG negro se vea blanco en modo oscuro */
+}
+
+/* En Hover: forzamos el color de la marca */
+body:not(.dark-mode) .tool-icon:hover .tool-svg {
+  /* Por defecto en modo claro, si no tienen un filtro específico, se quedan negros */
+}
+
+/* Illustrator - Naranja (#ff9a00) */
+.tool-icon[data-tool="Illustrator"]:hover .tool-svg {
+  filter: invert(61%) sepia(93%) saturate(1500%) hue-rotate(360deg) brightness(103%) contrast(104%);
+}
+
+/* Photoshop - Azul claro (#31a8ff) */
+.tool-icon[data-tool="Photoshop"]:hover .tool-svg {
+  filter: invert(58%) sepia(50%) saturate(2500%) hue-rotate(175deg) brightness(102%) contrast(101%);
+}
+
+/* After Effects - Lila/Azul (#9999ff) */
+.tool-icon[data-tool="After Effects"]:hover .tool-svg {
+  filter: invert(65%) sepia(30%) saturate(1000%) hue-rotate(210deg) brightness(105%) contrast(102%);
+}
+
+/* Premiere Pro - Lila/Púrpura (#9999ff usualmente, o #ea77ff) */
+.tool-icon[data-tool="Premiere Pro"]:hover .tool-svg {
+  filter: invert(50%) sepia(50%) saturate(2000%) hue-rotate(260deg) brightness(105%) contrast(100%);
+}
+
+/* Lightroom - Azul Oscuro (#31a8ff o #001e36) */
+.tool-icon[data-tool="Lightroom"]:hover .tool-svg {
+  filter: invert(42%) sepia(90%) saturate(1800%) hue-rotate(185deg) brightness(100%) contrast(105%);
+}
+
+/* CSS3 - Azul (#264de4) */
+.tool-icon[data-tool="CSS3"]:hover .tool-svg {
+  filter: invert(24%) sepia(90%) saturate(3000%) hue-rotate(225deg) brightness(90%) contrast(110%);
+}
+
     /* ===== TIMELINE ===== */
     .timeline-wrapper {
       position: relative;

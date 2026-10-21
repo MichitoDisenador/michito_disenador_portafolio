@@ -810,7 +810,6 @@ body:not(.dark-mode) .tool-icon:hover .tool-svg {
   border-radius: 16px;
   background: var(--card-bg);
   border: 1.5px solid var(--line);
-  font-size: 1.6rem;
   color: var(--muted);
   cursor: none;
   overflow: visible;
@@ -822,7 +821,21 @@ body:not(.dark-mode) .tool-icon:hover .tool-svg {
     box-shadow 0.35s ease;
 }
 
-/* Ajuste específico para Simple Icons (fuente de íconos) */
+/* --- SVG (Adobe, CSS3, VS Code) --- */
+.tool-icon .tool-svg {
+  width: 55%;
+  height: 55%;
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease, filter 0.4s ease;
+}
+
+/* En modo oscuro, los SVG negros se ven blancos por defecto */
+body.dark-mode .tool-icon .tool-svg {
+  filter: invert(1) brightness(2);
+}
+
+/* --- Simple Icons (Figma, HTML5, JS, etc.) --- */
 .tool-icon .si {
   font-size: 1.8rem;
   line-height: 1;
@@ -831,7 +844,7 @@ body:not(.dark-mode) .tool-icon:hover .tool-svg {
   transition: color 0.3s ease;
 }
 
-/* Halo de marca detrás del ícono al hacer hover */
+/* --- Halo de marca detrás del ícono --- */
 .tool-icon::before {
   content: '';
   position: absolute;
@@ -844,7 +857,7 @@ body:not(.dark-mode) .tool-icon:hover .tool-svg {
   z-index: -1;
 }
 
-/* ===== TOOLTIP — ARRIBA, CON SOMBRA, SIN CORTARSE ===== */
+/* --- Tooltip --- */
 .tool-icon::after {
   content: attr(data-tool);
   position: absolute;
@@ -879,6 +892,46 @@ body:not(.dark-mode) .tool-icon:hover .tool-svg {
 .tool-icon:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+.tool-icon:hover .tool-svg {
+  transform: scale(1.08);
+}
+
+/* ===== FILTROS DE COLOR PARA SVG EN HOVER ===== */
+
+/* Illustrator - Naranja (#ff9a00) */
+.tool-icon[data-tool="Illustrator"]:hover .tool-svg {
+  filter: invert(61%) sepia(93%) saturate(1500%) hue-rotate(360deg) brightness(103%) contrast(104%);
+}
+
+/* Photoshop - Azul claro (#31a8ff) */
+.tool-icon[data-tool="Photoshop"]:hover .tool-svg {
+  filter: invert(58%) sepia(50%) saturate(2500%) hue-rotate(175deg) brightness(102%) contrast(101%);
+}
+
+/* After Effects - Lila/Azul (#9999ff) */
+.tool-icon[data-tool="After Effects"]:hover .tool-svg {
+  filter: invert(65%) sepia(30%) saturate(1000%) hue-rotate(210deg) brightness(105%) contrast(102%);
+}
+
+/* Premiere Pro - Lila/Púrpura (#ea77ff) */
+.tool-icon[data-tool="Premiere Pro"]:hover .tool-svg {
+  filter: invert(50%) sepia(50%) saturate(2000%) hue-rotate(260deg) brightness(105%) contrast(100%);
+}
+
+/* Lightroom - Azul (#31a8ff) */
+.tool-icon[data-tool="Lightroom"]:hover .tool-svg {
+  filter: invert(42%) sepia(90%) saturate(1800%) hue-rotate(185deg) brightness(100%) contrast(105%);
+}
+
+/* CSS3 - Azul (#264de4) */
+.tool-icon[data-tool="CSS3"]:hover .tool-svg {
+  filter: invert(24%) sepia(90%) saturate(3000%) hue-rotate(225deg) brightness(90%) contrast(110%);
+}
+
+/* VS Code - Azul oficial (#007acc) */
+.tool-icon[data-tool="VS Code"]:hover .tool-svg {
+  filter: invert(36%) sepia(91%) saturate(1739%) hue-rotate(188deg) brightness(93%) contrast(101%);
 }
 
 /* ===== AJUSTES POR COLOR DE MARCA (legibilidad) ===== */
@@ -925,6 +978,10 @@ body.dark-mode .tool-icon[data-tool="GitHub"]:hover {
   }
   .tool-icon .si {
     font-size: 1.4rem;
+  }
+  .tool-icon .tool-svg {
+    width: 50%;
+    height: 50%;
   }
   .tools-group-title {
     font-size: 0.72rem;
@@ -1432,7 +1489,6 @@ body.dark-mode .skill-card::before {
       </span>
  <span class="tool-icon" data-tool="Lightroom" title="Lightroom" style="--brand:#31a8ff">
         <img src="assets/about/VISUALSTUDIO.svg" alt="Lightroom" class="tool-svg" onerror="this.style.display='none'">
-      </span>
       </span>
       <span class="tool-icon" data-tool="GitHub" title="GitHub" style="--brand:#8957e5">
         <i class="si si-github"></i>

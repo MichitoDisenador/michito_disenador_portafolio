@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-icons-font@v16/font/simple-icons.min.css" type="text/css">
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
   <style>
     /* ===== RESET & ROOT ===== */
@@ -599,61 +600,168 @@
   }
 }
 
-/* ===== HERRAMIENTAS CON ICONOS ===== */
-.tools-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);   /* 4 columnas fijas */
-  gap: 1rem;
-  margin-top: 0.8rem;
-  max-width: 500px;
+/* ===== HERRAMIENTAS — SISTEMA POR CATEGORÍAS ===== */
+.tools-group {
+  margin-top: 1.6rem;
+}
+.tools-group:first-of-type {
+  margin-top: 0.6rem;
 }
 
+.tools-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.9rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px dashed var(--line);
+}
+.tools-group-title i {
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  gap: 0.9rem;
+}
+
+/* ===== TARJETA DE HERRAMIENTA ===== */
 .tool-icon {
   position: relative;
-  aspect-ratio: 1 / 1;                      /* cuadrado perfecto */
+  aspect-ratio: 1 / 1;
   width: 100%;
   display: grid;
   place-items: center;
-  border-radius: 18px;
+  border-radius: 16px;
   background: var(--card-bg);
   border: 1.5px solid var(--line);
-  font-size: 2.2rem;                        /* íconos más grandes */
-  color: var(--gold);
-  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s, color 0.25s;
+  font-size: 1.6rem;
+  color: var(--muted);
+  cursor: none;
+  overflow: visible;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.35s ease;
 }
 
-.tool-icon:hover {
-  transform: translateY(-4px) scale(1.06);
-  box-shadow: 0 10px 26px var(--shadow);
+/* Ajuste específico para Simple Icons (fuente de íconos) */
+.tool-icon .si {
+  font-size: 1.8rem;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  transition: color 0.3s ease;
 }
-.tool-icon:hover::after {
+
+/* Halo de marca detrás del ícono al hacer hover */
+.tool-icon::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 12px;
+  background: var(--brand, var(--gold));
+  opacity: 0;
+  filter: blur(14px);
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+/* ===== TOOLTIP — ARRIBA, CON SOMBRA, SIN CORTARSE ===== */
+.tool-icon::after {
   content: attr(data-tool);
   position: absolute;
-  bottom: -2.2rem;
+  bottom: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(4px);
   background: var(--text);
   color: var(--bg);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.3rem 0.6rem;
-  border-radius: 6px;
+  letter-spacing: 0.02em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
   white-space: nowrap;
-  z-index: 5;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
-/* Colores de marca al hover */
-.tool-icon[data-tool="Illustrator"]:hover { color: #f47c20; border-color: #f47c20; }
-.tool-icon[data-tool="Photoshop"]:hover { color: #2d6bb8; border-color: #2d6bb8; }
-.tool-icon[data-tool="After Effects"]:hover { color: #7b2b8e; border-color: #7b2b8e; }
-.tool-icon[data-tool="Lightroom"]:hover { color: #4bb0e1; border-color: #4bb0e1; }
-.tool-icon[data-tool="Figma"]:hover { color: #2d9b4e; border-color: #2d9b4e; }
-.tool-icon[data-tool="HTML5"]:hover { color: #e44d26; border-color: #e44d26; }
-.tool-icon[data-tool="CSS3"]:hover { color: #264de4; border-color: #264de4; }
-.tool-icon[data-tool="JavaScript"]:hover { color: #f7df1e; border-color: #f7df1e; }
-.tool-icon[data-tool="VS Code"]:hover { color: #3e9ad7; border-color: #3e9ad7; }
-.tool-icon[data-tool="GitHub"]:hover { color: #333; border-color: #333; }
-.tool-icon[data-tool="Notion"]:hover { color: var(--text); border-color: var(--text); }
-.tool-icon[data-tool="Google"]:hover { color: #3c7dd6; border-color: #3c7dd6; }
+
+/* ===== HOVER ===== */
+.tool-icon:hover {
+  transform: translateY(-5px) scale(1.06);
+  border-color: var(--brand, var(--gold));
+  color: var(--brand, var(--gold));
+  box-shadow: 0 12px 28px -8px var(--shadow);
+}
+.tool-icon:hover::before {
+  opacity: 0.28;
+}
+.tool-icon:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== AJUSTES POR COLOR DE MARCA (legibilidad) ===== */
+
+/* JavaScript: amarillo muy claro → tono más oscuro en modo claro */
+.tool-icon[data-tool="JavaScript"]:hover {
+  color: #b8a000;
+}
+body.dark-mode .tool-icon[data-tool="JavaScript"]:hover {
+  color: #f7df1e;
+}
+
+/* Notion: blanco puro → oscuro en modo claro, blanco en dark */
+.tool-icon[data-tool="Notion"] {
+  color: var(--text);
+}
+.tool-icon[data-tool="Notion"]:hover {
+  color: #000000;
+  border-color: #000000;
+}
+body.dark-mode .tool-icon[data-tool="Notion"]:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* GitHub: negro puro → usar morado oficial de la marca */
+.tool-icon[data-tool="GitHub"]:hover {
+  color: #8957e5;
+  border-color: #8957e5;
+}
+body.dark-mode .tool-icon[data-tool="GitHub"]:hover {
+  color: #a371f7;
+  border-color: #a371f7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 720px) {
+  .tools-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 0.7rem;
+  }
+  .tool-icon {
+    border-radius: 13px;
+  }
+  .tool-icon .si {
+    font-size: 1.4rem;
+  }
+  .tools-group-title {
+    font-size: 0.72rem;
+  }
+}
 
 /* ===== MARCAS ===== */
 .brands-grid {
@@ -1106,24 +1214,76 @@ body.dark-mode .skill-card::before {
       </div>
     </div>
 
-    <!-- HERRAMIENTAS CON ICONOS -->
-    <div class="cv-block" id="toolsBlock">
-      <h2 data-i18n="toolsTitle">Herramientas</h2>
-      <div class="tools-grid">
-        <span class="tool-icon" data-tool="Illustrator"    title="Illustrator"><i class="fas fa-pen-nib"></i></span>
-        <span class="tool-icon" data-tool="Photoshop"      title="Photoshop"><i class="fas fa-image"></i></span>
-        <span class="tool-icon" data-tool="After Effects"  title="After Effects"><i class="fas fa-film"></i></span>
-        <span class="tool-icon" data-tool="Lightroom"      title="Lightroom"><i class="fas fa-camera-retro"></i></span>
-        <span class="tool-icon" data-tool="Figma"          title="Figma"><i class="fab fa-figma"></i></span>
-        <span class="tool-icon" data-tool="HTML5"          title="HTML5"><i class="fab fa-html5"></i></span>
-        <span class="tool-icon" data-tool="CSS3"           title="CSS3"><i class="fab fa-css3-alt"></i></span>
-        <span class="tool-icon" data-tool="JavaScript"     title="JavaScript"><i class="fab fa-js"></i></span>
-        <span class="tool-icon" data-tool="VS Code"        title="VS Code"><i class="fas fa-code"></i></span>
-        <span class="tool-icon" data-tool="GitHub"         title="GitHub"><i class="fab fa-github"></i></span>
-        <span class="tool-icon" data-tool="Notion"         title="Notion"><i class="fas fa-book-open"></i></span>
-        <span class="tool-icon" data-tool="Google"         title="Google Workspace"><i class="fab fa-google"></i></span>
-      </div>
+<!-- HERRAMIENTAS CON ICONOS -->
+<div class="cv-block" id="toolsBlock">
+  <h2 data-i18n="toolsTitle">Herramientas</h2>
+
+  <!-- Grupo: Diseño -->
+  <div class="tools-group">
+    <h3 class="tools-group-title">
+      <i class="fas fa-palette" aria-hidden="true"></i>
+      <span data-i18n="toolsGroupDesign">Diseño &amp; Edición</span>
+    </h3>
+    <div class="tools-grid">
+      <span class="tool-icon" data-tool="Illustrator" title="Illustrator" style="--brand:#ff9a00">
+        <i class="si si-adobeillustrator"></i>
+      </span>
+      <span class="tool-icon" data-tool="Photoshop" title="Photoshop" style="--brand:#31a8ff">
+        <i class="si si-adobephotoshop"></i>
+      </span>
+      <span class="tool-icon" data-tool="After Effects" title="After Effects" style="--brand:#9999ff">
+        <i class="si si-adobeaftereffects"></i>
+      </span>
+      <span class="tool-icon" data-tool="Lightroom" title="Lightroom" style="--brand:#31a8ff">
+        <i class="si si-adobelightroom"></i>
+      </span>
+      <span class="tool-icon" data-tool="Figma" title="Figma" style="--brand:#f24e1e">
+        <i class="si si-figma"></i>
+      </span>
     </div>
+  </div>
+
+  <!-- Grupo: Código -->
+  <div class="tools-group">
+    <h3 class="tools-group-title">
+      <i class="fas fa-code" aria-hidden="true"></i>
+      <span data-i18n="toolsGroupCode">Desarrollo</span>
+    </h3>
+    <div class="tools-grid">
+      <span class="tool-icon" data-tool="HTML5" title="HTML5" style="--brand:#e44d26">
+        <i class="si si-html5"></i>
+      </span>
+      <span class="tool-icon" data-tool="CSS3" title="CSS3" style="--brand:#264de4">
+        <i class="si si-css3"></i>
+      </span>
+      <span class="tool-icon" data-tool="JavaScript" title="JavaScript" style="--brand:#f7df1e">
+        <i class="si si-javascript"></i>
+      </span>
+      <span class="tool-icon" data-tool="VS Code" title="VS Code" style="--brand:#007acc">
+        <i class="si si-visualstudiocode"></i>
+      </span>
+      <span class="tool-icon" data-tool="GitHub" title="GitHub" style="--brand:#8957e5">
+        <i class="si si-github"></i>
+      </span>
+    </div>
+  </div>
+
+  <!-- Grupo: Productividad -->
+  <div class="tools-group">
+    <h3 class="tools-group-title">
+      <i class="fas fa-briefcase" aria-hidden="true"></i>
+      <span data-i18n="toolsGroupProductivity">Productividad</span>
+    </h3>
+    <div class="tools-grid">
+      <span class="tool-icon" data-tool="Notion" title="Notion" style="--brand:#ffffff">
+        <i class="si si-notion"></i>
+      </span>
+      <span class="tool-icon" data-tool="Google Workspace" title="Google Workspace" style="--brand:#4285f4">
+        <i class="si si-google"></i>
+      </span>
+    </div>
+  </div>
+</div>
 
     <!-- MARCAS -->
 <div class="cv-block" id="brandsBlock">
@@ -1501,6 +1661,9 @@ body.dark-mode .skill-card::before {
         ach3_1: "Serví como enlace de diseño entre SEFOTUR y el World Trade Center de la Ciudad de México.",
         ach3_2: "Adapté piezas gráficas desde Yucatán sin necesidad de contratar agencias externas.",
         ach3_3: "Cubrí las necesidades de diseño del evento en tiempo real, agilizando la comunicación entre sedes.",
+        toolsGroupDesign: "Diseño & Edición",
+        toolsGroupCode: "Desarrollo",
+        toolsGroupProductivity: "Productividad",
       },
 
       en: {
@@ -1552,6 +1715,9 @@ body.dark-mode .skill-card::before {
         ach3_1: "Served as the design liaison between SEFOTUR and the World Trade Center in Mexico City.",
         ach3_2: "Adapted graphic pieces from Yucatán without needing to hire external agencies.",
         ach3_3: "Covered the event's design needs in real time, streamlining communication between venues.",
+        toolsGroupDesign: "Design & Editing",
+        toolsGroupCode: "Development",
+        toolsGroupProductivity: "Productivity",
       },
 
       fr: {
@@ -1603,6 +1769,9 @@ body.dark-mode .skill-card::before {
         ach3_1: "J'ai servi de lien design entre SEFOTUR et le World Trade Center de Mexico.",
         ach3_2: "J'ai adapté des pièces graphiques depuis le Yucatán sans recourir à des agences externes.",
         ach3_3: "J'ai couvert les besoins design de l'événement en temps réel, fluidifiant la communication entre sites.",
+        toolsGroupDesign: "Design & Édition",
+        toolsGroupCode: "Développement",
+        toolsGroupProductivity: "Productivité",
       },
 
       pt: {
@@ -1654,6 +1823,9 @@ body.dark-mode .skill-card::before {
         ach3_1: "Atuei como elo de design entre a SEFOTUR e o World Trade Center da Cidade do México.",
         ach3_2: "Adaptei peças gráficas de Yucatán sem precisar contratar agências externas.",
         ach3_3: "Cobri as necessidades de design do evento em tempo real, agilizando a comunicação entre sedes.",
+        toolsGroupDesign: "Design & Edição",
+        toolsGroupCode: "Desenvolvimento",
+        toolsGroupProductivity: "Produtividade",
       }
     };
 
